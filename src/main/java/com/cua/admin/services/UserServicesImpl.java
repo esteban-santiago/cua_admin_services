@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.repositories.services;
+package com.cua.admin.services;
 
 import com.cua.admin.entities.User;
 import com.cua.admin.repositories.UserRepository;
