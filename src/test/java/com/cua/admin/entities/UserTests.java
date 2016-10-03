@@ -1,4 +1,4 @@
-package com.cua.admin;
+package com.cua.admin.entities;
 
 import com.cua.admin.entities.User;
 import com.cua.admin.repositories.UserRepository;
@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 
 
-public class ApplicationTests {
+public class UserTests {
     @Autowired
     private UserRepository userService;
 
