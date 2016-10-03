@@ -7,6 +7,8 @@ package com.cua.admin.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id; 
 import javax.persistence.Table;
 
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 @SuppressWarnings("PersistenceUnitPresent")
 public class User implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String name;
     private String passwd;
@@ -76,7 +79,7 @@ public class User implements Serializable {
     
     @Override
     public String toString() {
-        return "Name: " + name + " Password: " + passwd;
+        return "id: " + id+ " Name: " + name + " Password: " + passwd;
     }
     
 }
