@@ -1,0 +1,24 @@
+## YAML Template.
+##jdbc:h2:mem:cua;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS "public";DB_CLOSE_DELAY=-1;
+##jdbc:postgresql://192.168.0.28:5432/cua_admin.dev
+##org.postgresql.Driver
+##
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:cua;DB_CLOSE_ON_EXIT=FALSE;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS "public";DB_CLOSE_DELAY=-1;
+    username: sa
+    password: 
+    tomcat:
+      test-on-borrow: true
+      test-while-idle: true
+      validation-query: SELECT 1;
+      max-idle: 35
+      min-idle: 10
+      time-between-eviction-runs-millis: 3000
+      initial-size: 10
+  http.encoding:
+    charset: UTF-8
+    enabled: true
+    force: true
