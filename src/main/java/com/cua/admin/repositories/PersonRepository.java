@@ -5,6 +5,7 @@
  */
 package com.cua.admin.repositories;
 
+import com.cua.admin.entities.Person;
 import com.cua.admin.entities.User;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
@@ -13,9 +14,8 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author esteban_santiago
  */
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface PersonRepository extends CrudRepository<Person, Integer> {
 
     List<User> findByName(String name);
-    List<User> findByPasswd(String passwd);
     User findById(Integer id);
 }

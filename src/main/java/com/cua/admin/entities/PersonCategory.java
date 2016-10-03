@@ -6,28 +6,30 @@
 package com.cua.admin.entities;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  *
  * @author esteban_santiago
  */
-
 @Entity
-@Table(name="person")
-public class Person implements Serializable {
+@Table(name="person_category")
+public class PersonCategory implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
-    private String name;
-    @OneToOne(cascade = CascadeType.ALL)
-    private PersonCategory category;
+    private String category;
+    
+    public PersonCategory() {
+    }
+    
+    public PersonCategory(String category) {
+        
+    }
 
     /**
      * @return the id
@@ -46,33 +48,14 @@ public class Person implements Serializable {
     /**
      * @return the category
      */
-    public PersonCategory getCategory() {
+    public String getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(PersonCategory category) {
+    public void setCategory(String category) {
         this.category = category;
-    }
-    
-    @Override
-    public String toString() {
-        return "id: " + id + " name: " + getName();
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 }

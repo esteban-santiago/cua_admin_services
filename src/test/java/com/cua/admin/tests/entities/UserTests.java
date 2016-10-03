@@ -1,5 +1,7 @@
 package com.cua.admin.tests.entities;
 
+import com.cua.admin.entities.Person;
+import com.cua.admin.entities.PersonCategory;
 import com.cua.admin.entities.User;
 import com.cua.admin.repositories.UserRepository;
 import junit.framework.Assert;
@@ -46,4 +48,10 @@ public class UserTests {
         }
     }
 
+    @Test
+    public void createPerson() {
+        Person member = new Person();
+        member.setCategory(new PersonCategory("Socio"));
+        
+    }
 }
