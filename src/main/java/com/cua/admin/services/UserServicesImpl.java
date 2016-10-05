@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserServicesImpl {
 	@Autowired
 	private UserRepository userService;
-	@RequestMapping(value = "/user", method = RequestMethod.GET,headers="Accept=application/json")
+	@RequestMapping(value = "/user", method = RequestMethod.GET, headers="Accept=application/json")
 	public User getUser(@RequestParam(value = "id",required = false, defaultValue = "100") Integer id) {
                 System.out.println("Llamado el metodo!!:  " + id);
 		User pp = userService.findByName("Esteban").get(0);

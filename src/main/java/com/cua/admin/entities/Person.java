@@ -7,10 +7,13 @@ package com.cua.admin.entities;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,6 +30,7 @@ public class Person implements Serializable {
     private Integer id;
     private String name;
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private PersonCategory category;
 
     /**
@@ -57,11 +61,6 @@ public class Person implements Serializable {
         this.category = category;
     }
     
-    @Override
-    public String toString() {
-        return "id: " + id + " name: " + getName();
-    }
-
     /**
      * @return the name
      */
@@ -74,5 +73,10 @@ public class Person implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+    
+    @Override
+    public String toString() {
+        return "id: " + id + " name: " + getName();
     }
 }
