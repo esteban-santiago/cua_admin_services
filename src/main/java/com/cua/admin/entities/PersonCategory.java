@@ -28,6 +28,7 @@ public class PersonCategory implements Serializable {
     }
     
     public PersonCategory(String category) {
+        this.category = category;
         
     }
 
@@ -57,5 +58,10 @@ public class PersonCategory implements Serializable {
      */
     public void setCategory(String category) {
         this.category = category;
+    }
+    
+    @Override
+    public String toString() {
+        return "id: " + id + ", category: " + category; 
     }
 }

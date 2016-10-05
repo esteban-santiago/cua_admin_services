@@ -26,7 +26,8 @@ public class PersonTests {
         
         //System.out.println(member.toString());
         
-        for(Person p : personService.findAll())
-            System.out.println(p.toString());
+        for(Person p : personService.findAll()) {
+            System.out.println(p.toString() + " : " + p.getCategory().toString());
+        }
     }
 }
