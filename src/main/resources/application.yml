@@ -25,3 +25,5 @@ spring:
   h2:
       console.enabled: true
       console.path: /h2-console
+  hibernate:
+      show_sql: true

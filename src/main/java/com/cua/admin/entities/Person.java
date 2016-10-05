@@ -29,7 +29,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE )
     private Integer id;
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private PersonCategory category;
 
