@@ -17,44 +17,36 @@ import javax.persistence.Table;
  * @author esteban_santiago
  */
 @Entity
-@Table(name="person_category")
-public class PersonCategory implements Serializable {
+@Table(name="nationality")
+public class Nationality implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private int id;
     private String description;
-    
-    public PersonCategory() {
-    }
-    
-    public PersonCategory(String description) {
-        this.description = description;
-        
-    }
 
     /**
      * @return the id
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * @return the category
+     * @return the description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * @param description the category to set
+     * @param description the description to set
      */
     public void setDescription(String description) {
         this.description = description;
@@ -62,6 +54,6 @@ public class PersonCategory implements Serializable {
     
     @Override
     public String toString() {
-        return "[id: " + id + ", category: " + description + "]"; 
+        return "[id: " + id + ", description: " + description + "]"; 
     }
 }
