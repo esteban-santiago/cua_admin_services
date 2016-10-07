@@ -6,10 +6,14 @@
 package com.cua.admin.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,24 +21,23 @@ import javax.persistence.Table;
  * @author esteban_santiago
  */
 @Entity
-@Table(name="users")
-@SuppressWarnings("PersistenceUnitPresent")
-public class User implements Serializable {
+@Table(name="employee_activity")
+public class EmployeeActivity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    private String name;
-    private String passwd;
+    private String description;
 
-    public User() {
+    public EmployeeActivity() {
         
     }
     
-    public User(String name, String passwd) {
-        this.name = name;
-        this.passwd = passwd;
-    }
     
+    public EmployeeActivity(String activity) {
+        this.description = activity;
+    }
+
+
     /**
      * @return the id
      */
@@ -50,36 +53,21 @@ public class User implements Serializable {
     }
 
     /**
-     * @return the name
+     * @return the description
      */
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * @param name the name to set
+     * @param description the description to set
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the passwd
-     */
-    public String getPasswd() {
-        return passwd;
-    }
-
-    /**
-     * @param passwd the passwd to set
-     */
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     @Override
     public String toString() {
-        return "[id: " + id + ", name: " + name + ", password: " + passwd + " ]";
-    }
-    
+        return "[id: " + id + ", description: " + description + "]"; 
+    }    
 }

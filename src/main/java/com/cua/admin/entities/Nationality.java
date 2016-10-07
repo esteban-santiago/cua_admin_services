@@ -24,6 +24,14 @@ public class Nationality implements Serializable {
     private int id;
     private String description;
 
+    public Nationality() {
+        
+    }
+    
+    public Nationality(String nationality) {
+        this.description = nationality;
+    }
+
     /**
      * @return the id
      */
