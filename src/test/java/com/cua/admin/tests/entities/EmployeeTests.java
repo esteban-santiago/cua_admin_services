@@ -31,11 +31,11 @@ public class EmployeeTests {
         mecanico.setCategory(category);
         employeeService.save(mecanico);
         
-/*        
-        Person member2 = new Person();
-        member2.setName("Socio 2");
-        member2.setCategory(category2);
-        personService.save(member2);
+        /*
+        Employee mecanico2 = new Employee();
+        mecanico2.setName("Mecanico 2");
+        mecanico2.setCategory(category);
+        employeeService.save(mecanico2);
         */
         //System.out.println(category);
         

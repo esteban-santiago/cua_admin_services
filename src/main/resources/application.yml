@@ -12,6 +12,13 @@ spring:
         ddl-auto: create
         default_schema: nextg
         id.new_generator_mappings: true
+        cache:
+            queries: false
+            use_second_level_cache: true
+            use_query_cache: false
+            region:
+                ##factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+                factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   datasource:
     url: jdbc:postgresql://192.168.0.28:5432/cua_admin.dev
     driver-class-name: org.postgresql.Driver
