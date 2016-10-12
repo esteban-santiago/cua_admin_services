@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author esteban_santiago
  */
 @Entity
-@Table(name="person_category")
+@Table(schema="nextg", name="person_category")
 public class PersonCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

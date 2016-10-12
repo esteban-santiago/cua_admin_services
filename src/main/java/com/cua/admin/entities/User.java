@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author esteban_santiago
  */
 @Entity
-@Table(name="users")
+@Table(schema="nextg", name="user")
 @SuppressWarnings("PersistenceUnitPresent")
 public class User implements Serializable {
     @Id

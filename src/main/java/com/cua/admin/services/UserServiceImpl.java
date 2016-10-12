@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/data")
-public class UserServicesImpl {
+public class UserServiceImpl {
 	@Autowired
 	private UserRepository userService;
 	@RequestMapping(value = "/user", method = RequestMethod.GET, headers="Accept=application/json")

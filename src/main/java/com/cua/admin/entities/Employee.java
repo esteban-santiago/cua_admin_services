@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author esteban_santiago
  */
 @Entity
-@Table(name="employee")
+@Table(schema="nextg", name="employee")
 public class Employee extends Person {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))

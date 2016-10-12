@@ -5,11 +5,22 @@
 ##
 
 spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+        ddl-auto: create
+        default_schema: nextg
+        id.new_generator_mappings: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:cua;DB_CLOSE_ON_EXIT=FALSE;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS "public";DB_CLOSE_DELAY=-1;
-    username: sa
-    password: 
+    url: jdbc:postgresql://192.168.0.28:5432/cua_admin.dev
+    driver-class-name: org.postgresql.Driver
+    username: admin
+    password: admin
+    ##driver-class-name: org.h2.Driver
+    ##url: jdbc:h2:mem:cua;DB_CLOSE_ON_EXIT=FALSE;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS "public";DB_CLOSE_DELAY=-1;
+    ##username: sa
+    ##password: 
   tomcat:
     test-on-borrow: true
     test-while-idle: true
@@ -25,5 +36,5 @@ spring:
   h2:
       console.enabled: true
       console.path: /h2-console
-  hibernate:
-      show_sql: true
+  ##hibernate:
+  ##    show_sql: true

@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -21,10 +22,11 @@ import javax.persistence.Table;
  * @author esteban_santiago
  */
 @Entity
-@Table(name="employee_activity")
+@Table(schema="nextg", name="employee_activity")
 public class EmployeeActivity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_activity_seq_gen" )
+    @SequenceGenerator(schema = "nextg", name="employee_activity_seq_gen",sequenceName="nextg.employee_activity_seq_gen")
     private int id;
     private String description;
 
