@@ -5,6 +5,7 @@
  */
 package com.cua.admin.entities;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(schema="nextg", name="address")
-public class Address {
+public class Address implements Serializable {
     @Id
     private Integer id;
     private String street;
