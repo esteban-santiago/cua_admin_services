@@ -19,6 +19,13 @@ import javax.persistence.Table;
 @Entity
 @Table(schema="nextg", name="address")
 public class Address {
+    @Id
+    private int id;
+    private String street;
+    private String zip;
+    private String city;
+    private String province;
+    private String country;
    
     public Address() {
         
