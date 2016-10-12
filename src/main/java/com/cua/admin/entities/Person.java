@@ -37,8 +37,15 @@ public class Person implements Serializable {
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private PersonCategory category;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
+    private Address address;
+    
+    
     public Person() {
     }
+    
+    
     /**
      * @return the id
      */
