@@ -16,6 +16,7 @@ import javax.persistence.Table;
  *
  * @author esteban_santiago
  */
+
 @Entity
 @Table(schema="nextg", name="user")
 @SuppressWarnings("PersistenceUnitPresent")
