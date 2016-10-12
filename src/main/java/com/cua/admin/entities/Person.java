@@ -59,7 +59,7 @@ public class Person implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
+ 
     /**
      * @return the category
      */
