@@ -37,6 +37,8 @@ public class Person implements Serializable {
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private PersonCategory category;
 
+    public Person() {
+    }
     /**
      * @return the id
      */

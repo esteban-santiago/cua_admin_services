@@ -27,7 +27,7 @@ public class EmployeeActivity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_activity_seq_gen" )
     @SequenceGenerator(schema = "nextg", name="employee_activity_seq_gen",sequenceName="nextg.employee_activity_seq_gen")
-    private int id;
+    private Integer id;
     private String description;
 
     public EmployeeActivity() {

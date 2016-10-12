@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class Nationality implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
     private String description;
 
     public Nationality() {

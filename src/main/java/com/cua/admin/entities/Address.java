@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Table(schema="nextg", name="address")
 public class Address {
     @Id
-    private int id;
+    private Integer id;
     private String street;
     private String zip;
     private String city;
@@ -30,5 +30,89 @@ public class Address {
    
     public Address() {
         
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the street
+     */
+    public String getStreet() {
+        return street;
+    }
+
+    /**
+     * @param street the street to set
+     */
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    /**
+     * @return the zip
+     */
+    public String getZip() {
+        return zip;
+    }
+
+    /**
+     * @param zip the zip to set
+     */
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    /**
+     * @return the city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * @param city the city to set
+     */
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    /**
+     * @return the province
+     */
+    public String getProvince() {
+        return province;
+    }
+
+    /**
+     * @param province the province to set
+     */
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
