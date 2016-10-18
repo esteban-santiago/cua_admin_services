@@ -20,7 +20,7 @@ spring:
                 ##factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
                 factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   datasource:
-    url: jdbc:postgresql://192.168.0.28:5432/cua_admin.dev
+    url: jdbc:postgresql://192.168.0.27:5432/cua_admin.dev
     driver-class-name: org.postgresql.Driver
     username: admin
     password: admin
