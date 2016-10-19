@@ -5,6 +5,7 @@ import com.cua.admin.entities.EmployeeActivity;
 import com.cua.admin.entities.Person;
 import com.cua.admin.entities.PersonCategory;
 import com.cua.admin.repositories.EmployeeRepository;
+import java.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class EmployeeTests {
         mecanico.setName("Mecanico 1");
         mecanico.setActivity(activity);
         mecanico.setCategory(category);
+        mecanico.setDateOfCreation(LocalDate.now());
         employeeService.save(mecanico);
         
         /*
