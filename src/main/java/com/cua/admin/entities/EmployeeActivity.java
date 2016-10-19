@@ -6,6 +6,7 @@
 package com.cua.admin.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -39,6 +40,10 @@ public class EmployeeActivity implements Serializable {
         this.description = activity;
     }
 
+    public EmployeeActivity(Integer id, String activity) {
+        this.id = id;
+        this.description = activity;
+    }
 
     /**
      * @return the id
@@ -71,5 +76,35 @@ public class EmployeeActivity implements Serializable {
     @Override
     public String toString() {
         return "EmployeeActivity = [id: " + id + ", description: " + description + "]"; 
-    }    
+    }   
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EmployeeActivity other = (EmployeeActivity) obj;
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

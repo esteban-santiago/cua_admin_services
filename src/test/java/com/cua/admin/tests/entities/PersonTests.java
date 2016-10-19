@@ -21,8 +21,8 @@ public class PersonTests {
     
     @Test
     public void createPerson() {
-        PersonCategory category = new PersonCategory("Socio");
-        PersonCategory category2 = new PersonCategory("Empleado");
+        PersonCategory category = new PersonCategory(1, "Socio");
+        PersonCategory category2 = new PersonCategory(2, "Empleado");
         
         Person member = new Person();
         member.setName("Socio 1");
@@ -31,7 +31,7 @@ public class PersonTests {
                 
         Person member2 = new Person();
         member2.setName("Socio 2");
-        member2.setCategory(category2);
+        member2.setCategory(category);
         personService.save(member2);
         
         //System.out.println(category);

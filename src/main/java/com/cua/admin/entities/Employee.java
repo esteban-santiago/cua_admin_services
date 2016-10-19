@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(schema="nextg", name="employee")
 public class Employee extends Person {
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne //(cascade = CascadeType.ALL)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
     private EmployeeActivity activity;
 

@@ -52,7 +52,7 @@ public class Person implements Serializable {
     //@JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private Address address;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne //(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private PersonCategory category;
 

@@ -23,8 +23,8 @@ public class EmployeeTests {
     
     @Test
     public void createEmployee() {
-        EmployeeActivity activity = new EmployeeActivity("Mecanico");
-        PersonCategory category = new PersonCategory(1, "Empleado");
+        EmployeeActivity activity = new EmployeeActivity(3, "Mecanico");
+        PersonCategory category = new PersonCategory(3, "Empleado");
         
         Employee mecanico = new Employee();
         mecanico.setName("Mecanico 1");
