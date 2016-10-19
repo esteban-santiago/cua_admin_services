@@ -24,7 +24,7 @@ public class EmployeeTests {
     @Test
     public void createEmployee() {
         EmployeeActivity activity = new EmployeeActivity("Mecanico");
-        PersonCategory category = new PersonCategory("Empleado");
+        PersonCategory category = new PersonCategory(1, "Empleado");
         
         Employee mecanico = new Employee();
         mecanico.setName("Mecanico 1");
@@ -33,12 +33,13 @@ public class EmployeeTests {
         mecanico.setDateOfCreation(LocalDate.now());
         employeeService.save(mecanico);
         
-        /*
+        
         Employee mecanico2 = new Employee();
         mecanico2.setName("Mecanico 2");
+        mecanico2.setActivity(activity);
         mecanico2.setCategory(category);
         employeeService.save(mecanico2);
-        */
+        
         //System.out.println(category);
         
         for(Employee e : employeeService.findAll()) {
