@@ -31,6 +31,9 @@ public class EmployeeTests {
         address.setStreet("Cramer 2222");
         address.setCity("Ciudad Autónoma de Buenos Aires");
         address.setZip("1418");
+        address.setProvince("Ciudad Autónoma de Buenos Aires");
+        address.setCountry("Argentina");
+        
         
         Employee mecanico = new Employee();
         mecanico.setName("Mecanico 1");

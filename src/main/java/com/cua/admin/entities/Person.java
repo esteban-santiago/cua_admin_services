@@ -51,8 +51,6 @@ public class Person implements Serializable {
     
     //@OneToMany(cascade = CascadeType.ALL)
     //@JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
-    //@ElementCollection
-    //@CollectionTable(schema="nextg", name="person_address", joinColumns = @JoinColumn(name="person_id"))
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false)
     private Set<Address> address = new HashSet<Address>();
