@@ -21,8 +21,8 @@ import javax.persistence.Table;
 @Table(schema="nextg", name="address")
 public class Address implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_address_seq_gen" )
-    @SequenceGenerator(schema = "nextg", name="person_address_seq_gen",sequenceName="nextg.person_address_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="address_seq_gen" )
+    @SequenceGenerator(schema = "nextg", name="address_seq_gen",sequenceName="nextg.address_seq_gen")
     private Integer id;
     private String street;
     private String zip;
