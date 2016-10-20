@@ -51,10 +51,14 @@ public class PersonTests {
         member2.setCategory(category);
         personService.save(member2);
         
-        //System.out.println(category);
-        
+        //System.out.println(category); 
+    }
+
+    @Test
+    public void findPerson() {
         for(Person p : personService.findAll()) {
+            Assert.notNull(p.getAddress());
             System.out.println(p.toString() + " : " + p.getCategory().toString());
-        }
+        }    
     }
 }
