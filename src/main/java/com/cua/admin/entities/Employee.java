@@ -5,11 +5,7 @@
  */
 package com.cua.admin.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,8 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(schema="nextg", name="employee")
 public class Employee extends Person {
-    @ManyToOne //(cascade = CascadeType.ALL)
-    @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
+    //@ManyToOne (cascade = CascadeType.ALL)
+    //@JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
     private EmployeeActivity activity;
 
     public Employee() {

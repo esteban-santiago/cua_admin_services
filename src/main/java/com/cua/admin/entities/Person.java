@@ -7,9 +7,12 @@ package com.cua.admin.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +24,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -39,7 +40,6 @@ public class Person implements Serializable {
     private Integer id;
     private String name;
     
-    //@Temporal(TemporalType.DATE)
     @Column
     private LocalDate dateOfCreation; //Fecha de Ingreso
     private LocalDate dateOfBirth; //Fecha de nacimiento
@@ -48,11 +48,16 @@ public class Person implements Serializable {
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
     private String identificationDocument; //Documento de identidad
+    
     //@OneToMany(cascade = CascadeType.ALL)
     //@JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
-    private Address address;
+    //@ElementCollection
+    //@CollectionTable(schema="nextg", name="person_address", joinColumns = @JoinColumn(name="person_id"))
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id", nullable = false)
+    private Set<Address> address = new HashSet<Address>();
     
-    @ManyToOne //(cascade = CascadeType.ALL)
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private PersonCategory category;
 
@@ -123,4 +128,19 @@ public class Person implements Serializable {
     public void setDateOfCreation(LocalDate dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
+
+    /**
+     * @return the address
+     */
+    public Set<Address> getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void addAddress(Address address) {
+        this.address.add(address);
+    }
+
 }

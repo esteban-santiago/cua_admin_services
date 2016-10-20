@@ -1,5 +1,6 @@
 package com.cua.admin.tests.entities;
 
+import com.cua.admin.entities.Address;
 import com.cua.admin.entities.Person;
 import com.cua.admin.entities.PersonCategory;
 import com.cua.admin.repositories.PersonRepository;
@@ -21,12 +22,28 @@ public class PersonTests {
     
     @Test
     public void createPerson() {
+        Address address = new Address();
+        address.setStreet("Av. Berlin 729");
+        address.setCity("Longchamps");
+        address.setZip("1854");
+        
+        Address address2 = new Address();
+        address2.setStreet("Pasaje Bélgica 837");
+        address2.setCity("Adrogué");
+        address2.setZip("1846");
+        
+        
+        
+        
+        
         PersonCategory category = new PersonCategory(1, "Socio");
         PersonCategory category2 = new PersonCategory(2, "Empleado");
         
         Person member = new Person();
         member.setName("Socio 1");
         member.setCategory(category);
+        member.addAddress(address);
+        member.addAddress(address2);
         personService.save(member);
                 
         Person member2 = new Person();

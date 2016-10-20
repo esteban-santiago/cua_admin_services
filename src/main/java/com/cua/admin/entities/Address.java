@@ -6,12 +6,11 @@
 package com.cua.admin.entities;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +21,8 @@ import javax.persistence.Table;
 @Table(schema="nextg", name="address")
 public class Address implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_address_seq_gen" )
+    @SequenceGenerator(schema = "nextg", name="person_address_seq_gen",sequenceName="nextg.person_address_seq_gen")
     private Integer id;
     private String street;
     private String zip;
