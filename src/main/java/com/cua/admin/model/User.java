@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.cua.admin.entities;
+package com.cua.admin.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -12,12 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id; 
 import javax.persistence.Table;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author esteban_santiago
  */
-
+@ToString
+@EqualsAndHashCode
 @Entity
 @Table(schema="nextg", name="user")
 @SuppressWarnings("PersistenceUnitPresent")
@@ -77,11 +80,5 @@ public class User implements Serializable {
      */
     public void setPasswd(String passwd) {
         this.passwd = passwd;
-    }
-    
-    @Override
-    public String toString() {
-        return "[id: " + id + ", name: " + name + ", password: " + passwd + " ]";
-    }
-    
+    }    
 }

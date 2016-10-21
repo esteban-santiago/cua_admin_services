@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.entities;
+package com.cua.admin.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -11,11 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author esteban_santiago
  */
+@ToString
+@EqualsAndHashCode
 @Entity
 @Table(schema="nextg", name="nationality")
 public class Nationality implements Serializable {
@@ -58,10 +62,5 @@ public class Nationality implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-    
-    @Override
-    public String toString() {
-        return "Nationality = [id: " + id + ", description: " + description + "]"; 
     }
 }

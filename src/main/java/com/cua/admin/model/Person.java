@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.entities;
+package com.cua.admin.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -24,12 +24,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author esteban_santiago
  */
-
+@ToString
+@EqualsAndHashCode
 @Entity
 @Table(schema="nextg", name="person")
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -106,11 +109,6 @@ public class Person implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-    
-    @Override
-    public String toString() {
-        return "id: " + id + " name: " + getName();
     }
 
     /**

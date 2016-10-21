@@ -1,8 +1,8 @@
 package com.cua.admin.tests.entities;
 
-import com.cua.admin.entities.Person;
-import com.cua.admin.entities.PersonCategory;
-import com.cua.admin.entities.User;
+import com.cua.admin.model.Person;
+import com.cua.admin.model.PersonCategory;
+import com.cua.admin.model.User;
 import com.cua.admin.repositories.UserRepository;
 import junit.framework.Assert;
 import org.junit.Test;

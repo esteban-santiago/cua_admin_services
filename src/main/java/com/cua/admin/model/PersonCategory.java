@@ -3,21 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.entities;
+package com.cua.admin.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
+
 
 /**
  *
  * @author esteban_santiago
  */
+@ToString
+@EqualsAndHashCode
+
 @Entity
 @Table(schema="nextg", name="person_category")
 public class PersonCategory implements Serializable {
@@ -65,39 +70,5 @@ public class PersonCategory implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-    
-    @Override
-    public String toString() {
-        return "[id: " + id + ", category: " + description + "]"; 
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.description);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PersonCategory other = (PersonCategory) obj;
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
     }
 }

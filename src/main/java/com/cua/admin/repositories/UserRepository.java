@@ -5,7 +5,7 @@
  */
 package com.cua.admin.repositories;
 
-import com.cua.admin.entities.User;
+import com.cua.admin.model.User;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 

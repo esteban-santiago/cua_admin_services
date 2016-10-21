@@ -3,15 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.entities;
+package com.cua.admin.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author esteban_santiago
  */
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(schema="nextg", name="employee")
 public class Employee extends Person {
