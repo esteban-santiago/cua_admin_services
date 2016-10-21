@@ -6,7 +6,6 @@
 package com.cua.admin.repositories;
 
 import com.cua.admin.model.Person;
-import com.cua.admin.model.User;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,6 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface PersonRepository extends CrudRepository<Person, Integer> {
 
-    List<User> findByName(String name);
-    User findById(Integer id);
+    List<Person> findByName(String name);
+    Person findById(Integer id);
 }

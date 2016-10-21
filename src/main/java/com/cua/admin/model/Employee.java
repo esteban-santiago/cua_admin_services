@@ -5,7 +5,12 @@
  */
 package com.cua.admin.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
@@ -19,8 +24,8 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(schema="nextg", name="employee")
 public class Employee extends Person {
-    //@ManyToOne (cascade = CascadeType.ALL)
-    //@JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
     private EmployeeActivity activity;
 
     public Employee() {

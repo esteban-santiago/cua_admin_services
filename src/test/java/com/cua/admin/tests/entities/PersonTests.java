@@ -3,6 +3,8 @@ package com.cua.admin.tests.entities;
 import com.cua.admin.model.Address;
 import com.cua.admin.model.Person;
 import com.cua.admin.model.PersonCategory;
+import com.cua.admin.repositories.EmployeeActivityRepository;
+import com.cua.admin.repositories.PersonCategoryRepository;
 import com.cua.admin.repositories.PersonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,19 @@ import org.springframework.util.Assert;
 public class PersonTests {
     @Autowired
     private PersonRepository personService;
+    @Autowired
+    private EmployeeActivityRepository employeeActivityRepository;
+    @Autowired
+    private PersonCategoryRepository personCategoryReposity;
+    
+
+    @Test
+    public void createPersonCategory() {
+        PersonCategory category = new PersonCategory("Socio");
+        personCategoryReposity.save(category);
+        PersonCategory category2 = new PersonCategory("Empleado");
+        personCategoryReposity.save(category2);
+    }
 
     
     @Test
@@ -32,12 +47,9 @@ public class PersonTests {
         address2.setCity("Adrogué");
         address2.setZip("1846");
         
-        
-        
-        
-        
-        PersonCategory category = new PersonCategory(1, "Socio");
-        PersonCategory category2 = new PersonCategory(2, "Empleado");
+        PersonCategory category = personCategoryReposity.findByDescription("Socio").get(0);
+        //System.out.println("Category:" + category);
+        //PersonCategory category2 = personCategoryReposity.findByDescription("Empleado").get(0);
         
         Person member = new Person();
         member.setName("Socio 1");
@@ -51,14 +63,10 @@ public class PersonTests {
         member2.setCategory(category);
         personService.save(member2);
         
-        //System.out.println(category); 
-    }
 
-    @Test
-    public void findPerson() {
         for(Person p : personService.findAll()) {
             Assert.notNull(p.getAddress());
-            System.out.println(p.toString() + " : " + p.getCategory().toString());
+            System.out.println(p.toString());
         }    
     }
 }

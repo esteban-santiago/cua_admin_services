@@ -22,6 +22,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.ToString;
@@ -47,18 +48,17 @@ public class Person implements Serializable {
     private LocalDate dateOfCreation; //Fecha de Ingreso
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
+    
     private String identificationDocument; //Documento de identidad
     
-    //@OneToMany(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false)
     private Set<Address> address = new HashSet<Address>();
     
-    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private PersonCategory category;
 
