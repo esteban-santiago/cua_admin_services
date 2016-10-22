@@ -1,7 +1,5 @@
 package com.cua.admin.tests.entities;
 
-import com.cua.admin.model.Person;
-import com.cua.admin.model.Category;
 import com.cua.admin.model.User;
 import com.cua.admin.repositories.UserRepository;
 import junit.framework.Assert;
@@ -17,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 public class UserTests {
     @Autowired
-    private UserRepository userService;
+    private UserRepository userRepository;
 
     @Test
     public void createUser() {
@@ -25,33 +23,24 @@ public class UserTests {
         //user.setId(0);
         user.setName("Esteban");
         user.setPasswd("passwd");
-        userService.save(user);
+        userRepository.save(user);
         
         User user2 = new User("esteban2", "password2");
-        userService.save(user2);
+        userRepository.save(user2);
         
         Assert.assertTrue("Correcto", user.getId()>0);
         Assert.assertTrue("Correcto", user2.getId()>0);
         
-        for (User u:userService.findAll()){
-            System.out.println(u.toString());
-        }
-
-        user.setName("pepe");
+        //user.setName("pepe");
         
-        for (User u:userService.findAll()){
+        for (User u:userRepository.findAll()){
             System.out.println(u.toString());
         }
 
-        for (User u:userService.findByPasswd("password2")){
+        userRepository.findByPasswd("password2").stream().forEach((u) -> {
             System.out.println(u.toString());
-        }
+        });
     }
 
-    @Test
-    public void createPerson() {
-        Person member = new Person();
-        member.setCategory(new Category("Socio"));
-        
-    }
+ 
 }

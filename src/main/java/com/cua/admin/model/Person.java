@@ -59,7 +59,7 @@ public class Person implements Serializable {
     private LocalDate dateOfCreation; //Fecha de Ingreso
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
     
@@ -148,6 +148,20 @@ public class Person implements Serializable {
      */
     public void addAddress(Address address) {
         this.address.add(address);
+    }
+
+    /**
+     * @return the nationality
+     */
+    public Nationality getNationality() {
+        return nationality;
+    }
+
+    /**
+     * @param nationality the nationality to set
+     */
+    public void setNationality(Nationality nationality) {
+        this.nationality = nationality;
     }
 
 }

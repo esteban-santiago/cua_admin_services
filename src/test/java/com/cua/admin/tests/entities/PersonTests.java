@@ -3,8 +3,7 @@ package com.cua.admin.tests.entities;
 import com.cua.admin.model.Address;
 import com.cua.admin.model.Person;
 import com.cua.admin.model.Category;
-import com.cua.admin.repositories.EmployeeActivityRepository;
-import com.cua.admin.repositories.PersonCategoryRepository;
+import com.cua.admin.model.Nationality;
 import com.cua.admin.repositories.PersonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
+import com.cua.admin.repositories.ActivityRepository;
+import com.cua.admin.repositories.CategoryRepository;
+import com.cua.admin.repositories.NationalityRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,17 +23,26 @@ public class PersonTests {
     @Autowired
     private PersonRepository personService;
     @Autowired
-    private EmployeeActivityRepository employeeActivityRepository;
+    private ActivityRepository activityRepository;
     @Autowired
-    private PersonCategoryRepository personCategoryReposity;
+    private CategoryRepository categoryReposity;
+    @Autowired
+    private NationalityRepository nationalityRepository;
     
-
+    @Test
+    public void createPersonNationality() {
+        Nationality argentinean = new Nationality("Argentina");
+        Nationality brazilian = new Nationality("Brasilera");
+        nationalityRepository.save(argentinean);
+        nationalityRepository.save(brazilian);
+    }
+    
     @Test
     public void createPersonCategory() {
         Category category = new Category("Socio");
-        personCategoryReposity.save(category);
+        categoryReposity.save(category);
         Category category2 = new Category("Empleado");
-        personCategoryReposity.save(category2);
+        categoryReposity.save(category2);
     }
 
     
@@ -47,20 +58,24 @@ public class PersonTests {
         address2.setCity("Adrogué");
         address2.setZip("1846");
         
-        Category category = personCategoryReposity.findByDescription("Socio").get(0);
-        //System.out.println("Category:" + category);
-        //PersonCategory category2 = personCategoryReposity.findByDescription("Empleado").get(0);
+        Category category = categoryReposity.findByDescription("Socio").get(0);
+        Nationality argentinean = nationalityRepository.findByDescription("Argentina").get(0);
+        Assert.notNull(argentinean);
+        Nationality brazilian = nationalityRepository.findByDescription("Brasilera").get(0);
+        Assert.notNull(brazilian);
         
         Person member = new Person();
         member.setName("Socio 1");
         member.setCategory(category);
         member.addAddress(address);
         member.addAddress(address2);
+        member.setNationality(argentinean);
         personService.save(member);
                 
         Person member2 = new Person();
         member2.setName("Socio 2");
         member2.setCategory(category);
+        member2.setNationality(brazilian);
         personService.save(member2);
         
 

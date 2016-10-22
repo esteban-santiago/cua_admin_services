@@ -14,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author esteban_santiago
  */
-public interface PersonCategoryRepository extends CrudRepository<Category, Integer> {
+public interface CategoryRepository extends CrudRepository<Category, Integer> {
 
     List<Category> findByDescription(String description);
     Category findById(Integer id);
