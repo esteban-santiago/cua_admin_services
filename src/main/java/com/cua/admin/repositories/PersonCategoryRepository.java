@@ -6,7 +6,7 @@
 package com.cua.admin.repositories;
 
 import com.cua.admin.model.Person;
-import com.cua.admin.model.PersonCategory;
+import com.cua.admin.model.Category;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
@@ -14,8 +14,8 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author esteban_santiago
  */
-public interface PersonCategoryRepository extends CrudRepository<PersonCategory, Integer> {
+public interface PersonCategoryRepository extends CrudRepository<Category, Integer> {
 
-    List<PersonCategory> findByDescription(String description);
-    PersonCategory findById(Integer id);
+    List<Category> findByDescription(String description);
+    Category findById(Integer id);
 }

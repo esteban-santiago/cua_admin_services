@@ -5,7 +5,7 @@
  */
 package com.cua.admin.repositories;
 
-import com.cua.admin.model.EmployeeActivity;
+import com.cua.admin.model.Activity;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,8 +13,8 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author esteban_santiago
  */
-public interface EmployeeActivityRepository extends CrudRepository<EmployeeActivity, Integer> {
+public interface EmployeeActivityRepository extends CrudRepository<Activity, Integer> {
 
-    List<EmployeeActivity> findByDescription(String description);
-    EmployeeActivity findById(Integer id);
+    List<Activity> findByDescription(String description);
+    Activity findById(Integer id);
 }

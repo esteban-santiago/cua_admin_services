@@ -2,8 +2,8 @@ package com.cua.admin.tests.entities;
 
 import com.cua.admin.model.Address;
 import com.cua.admin.model.Employee;
-import com.cua.admin.model.EmployeeActivity;
-import com.cua.admin.model.PersonCategory;
+import com.cua.admin.model.Activity;
+import com.cua.admin.model.Category;
 import com.cua.admin.repositories.EmployeeActivityRepository;
 import com.cua.admin.repositories.EmployeeRepository;
 import com.cua.admin.repositories.PersonCategoryRepository;
@@ -29,21 +29,21 @@ public class EmployeeTests {
     
     @Test
     public void createEmployeeActivity() {
-        EmployeeActivity activity = new EmployeeActivity("Mecanico");
+        Activity activity = new Activity("Mecanico");
         employeeActivityRepository.save(activity);
     }
 
     @Test
     public void createPersonCategory() {
-        PersonCategory category = new PersonCategory("Empleado");
+        Category category = new Category("Empleado");
         personCategoryReposity.save(category);
     }
     
     @Test
     public void createEmployee() {
-        EmployeeActivity activity = employeeActivityRepository.findByDescription("Mecanico").get(0);
+        Activity activity = employeeActivityRepository.findByDescription("Mecanico").get(0);
         Assert.notNull(activity);
-        PersonCategory category = personCategoryReposity.findByDescription("Empleado").get(0);
+        Category category = personCategoryReposity.findByDescription("Empleado").get(0);
         Assert.notNull(category);
 
         Address address = new Address();

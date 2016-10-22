@@ -60,7 +60,7 @@ public class Person implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
-    private PersonCategory category;
+    private Category category;
 
 
     
@@ -86,14 +86,14 @@ public class Person implements Serializable {
     /**
      * @return the category
      */
-    public PersonCategory getCategory() {
+    public Category getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(PersonCategory category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
     

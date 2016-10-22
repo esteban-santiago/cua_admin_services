@@ -58,8 +58,5 @@
             <goals>
                 <goal>test</goal>
             </goals>
-            <activatedProfiles>
-                <activatedProfile>dev</activatedProfile>
-            </activatedProfiles>
         </action>
     </actions>

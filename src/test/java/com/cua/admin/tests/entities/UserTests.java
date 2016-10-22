@@ -1,7 +1,7 @@
 package com.cua.admin.tests.entities;
 
 import com.cua.admin.model.Person;
-import com.cua.admin.model.PersonCategory;
+import com.cua.admin.model.Category;
 import com.cua.admin.model.User;
 import com.cua.admin.repositories.UserRepository;
 import junit.framework.Assert;
@@ -51,7 +51,7 @@ public class UserTests {
     @Test
     public void createPerson() {
         Person member = new Person();
-        member.setCategory(new PersonCategory("Socio"));
+        member.setCategory(new Category("Socio"));
         
     }
 }

@@ -6,6 +6,7 @@
 package com.cua.admin.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,33 +16,33 @@ import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
 
-
 /**
  *
  * @author esteban_santiago
  */
 @ToString
 @EqualsAndHashCode
-
 @Entity
-@Table(schema="nextg", name="person_category")
-public class PersonCategory implements Serializable {
+@Table(schema="nextg", name="activity")
+public class Activity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_category_seq_gen" )
-    @SequenceGenerator(schema = "nextg", name="person_category_seq_gen",sequenceName="nextg.person_category_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_activity_seq_gen" )
+    @SequenceGenerator(schema = "nextg", name="employee_activity_seq_gen",sequenceName="nextg.employee_activity_seq_gen")
     private Integer id;
     private String description;
-    
-    public PersonCategory() {
+
+    public Activity() {
+        
     }
     
-    public PersonCategory(String description) {
-        this.description = description;
+    
+    public Activity(String activity) {
+        this.description = activity;
     }
 
-    public PersonCategory(Integer id, String description) {
+    public Activity(Integer id, String activity) {
         this.id = id;
-        this.description = description;
+        this.description = activity;
     }
 
     /**
@@ -59,16 +60,16 @@ public class PersonCategory implements Serializable {
     }
 
     /**
-     * @return the category
+     * @return the description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * @param description the category to set
+     * @param description the description to set
      */
     public void setDescription(String description) {
         this.description = description;
-    }
+    }    
 }

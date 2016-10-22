@@ -6,7 +6,6 @@
 package com.cua.admin.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,33 +15,33 @@ import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
 
+
 /**
  *
  * @author esteban_santiago
  */
 @ToString
 @EqualsAndHashCode
+
 @Entity
-@Table(schema="nextg", name="employee_activity")
-public class EmployeeActivity implements Serializable {
+@Table(schema="nextg", name="category")
+public class Category implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_activity_seq_gen" )
-    @SequenceGenerator(schema = "nextg", name="employee_activity_seq_gen",sequenceName="nextg.employee_activity_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_category_seq_gen" )
+    @SequenceGenerator(schema = "nextg", name="person_category_seq_gen",sequenceName="nextg.person_category_seq_gen")
     private Integer id;
     private String description;
-
-    public EmployeeActivity() {
-        
+    
+    public Category() {
     }
     
-    
-    public EmployeeActivity(String activity) {
-        this.description = activity;
+    public Category(String description) {
+        this.description = description;
     }
 
-    public EmployeeActivity(Integer id, String activity) {
+    public Category(Integer id, String description) {
         this.id = id;
-        this.description = activity;
+        this.description = description;
     }
 
     /**
@@ -60,16 +59,16 @@ public class EmployeeActivity implements Serializable {
     }
 
     /**
-     * @return the description
+     * @return the category
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * @param description the description to set
+     * @param description the category to set
      */
     public void setDescription(String description) {
         this.description = description;
-    }    
+    }
 }

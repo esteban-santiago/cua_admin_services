@@ -11,6 +11,7 @@ spring:
     hibernate:
         ddl-auto: create
         default_schema: nextg
+        format_sql: true
         ##id.new_generator_mappings: true
         cache:
             queries: false

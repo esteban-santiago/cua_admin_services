@@ -26,7 +26,7 @@ import lombok.EqualsAndHashCode;
 public class Employee extends Person {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
-    private EmployeeActivity activity;
+    private Activity activity;
 
     public Employee() {
         
@@ -35,14 +35,14 @@ public class Employee extends Person {
     /**
      * @return the activity
      */
-    public EmployeeActivity getActivity() {
+    public Activity getActivity() {
         return activity;
     }
 
     /**
      * @param activity the activity to set
      */
-    public void setActivity(EmployeeActivity activity) {
+    public void setActivity(Activity activity) {
         this.activity = activity;
     }
 }

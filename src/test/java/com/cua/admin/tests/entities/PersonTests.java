@@ -2,7 +2,7 @@ package com.cua.admin.tests.entities;
 
 import com.cua.admin.model.Address;
 import com.cua.admin.model.Person;
-import com.cua.admin.model.PersonCategory;
+import com.cua.admin.model.Category;
 import com.cua.admin.repositories.EmployeeActivityRepository;
 import com.cua.admin.repositories.PersonCategoryRepository;
 import com.cua.admin.repositories.PersonRepository;
@@ -28,9 +28,9 @@ public class PersonTests {
 
     @Test
     public void createPersonCategory() {
-        PersonCategory category = new PersonCategory("Socio");
+        Category category = new Category("Socio");
         personCategoryReposity.save(category);
-        PersonCategory category2 = new PersonCategory("Empleado");
+        Category category2 = new Category("Empleado");
         personCategoryReposity.save(category2);
     }
 
@@ -47,7 +47,7 @@ public class PersonTests {
         address2.setCity("Adrogué");
         address2.setZip("1846");
         
-        PersonCategory category = personCategoryReposity.findByDescription("Socio").get(0);
+        Category category = personCategoryReposity.findByDescription("Socio").get(0);
         //System.out.println("Category:" + category);
         //PersonCategory category2 = personCategoryReposity.findByDescription("Empleado").get(0);
         
