@@ -164,4 +164,18 @@ public class Person implements Serializable {
         this.nationality = nationality;
     }
 
+    /**
+     * @return the dateOfBirth
+     */
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    /**
+     * @param dateOfBirth the dateOfBirth to set
+     */
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
 }

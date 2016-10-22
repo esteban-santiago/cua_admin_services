@@ -30,7 +30,7 @@ public class PersonTests {
     private NationalityRepository nationalityRepository;
     
     @Test
-    public void createPersonNationality() {
+    public void createNationality() {
         Nationality argentinean = new Nationality("Argentina");
         Nationality brazilian = new Nationality("Brasilera");
         nationalityRepository.save(argentinean);
@@ -38,7 +38,7 @@ public class PersonTests {
     }
     
     @Test
-    public void createPersonCategory() {
+    public void createCategory() {
         Category category = new Category("Socio");
         categoryReposity.save(category);
         Category category2 = new Category("Empleado");
