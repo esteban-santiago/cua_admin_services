@@ -27,6 +27,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  *
@@ -38,9 +40,18 @@ import lombok.EqualsAndHashCode;
 @Table(schema="nextg", name="person")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Person implements Serializable {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_seq" )
+    @GenericGenerator(
+        name = "person_seq", 
+        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
+        parameters = {
+            @org.hibernate.annotations.Parameter(
+                name = "sequence", 
+                value = "nextg.person_seq"
+            )
+         
+    })
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_seq_gen" )
-    @SequenceGenerator(schema = "nextg", name="person_seq_gen",sequenceName="nextg.person_seq_gen")
     private Integer id;
     private String name;
     

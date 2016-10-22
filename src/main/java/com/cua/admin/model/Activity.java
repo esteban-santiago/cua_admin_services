@@ -6,15 +6,14 @@
 package com.cua.admin.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -25,9 +24,19 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(schema="nextg", name="activity")
 public class Activity implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_activity_seq_gen" )
-    @SequenceGenerator(schema = "nextg", name="employee_activity_seq_gen",sequenceName="nextg.employee_activity_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="activity_seq" )
+    @GenericGenerator(
+        name = "activity_seq", 
+        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
+        parameters = {
+            @org.hibernate.annotations.Parameter(
+                name = "sequence", 
+                value = "nextg.activity_seq"
+            )
+         
+    })
+    
+    @Id    
     private Integer id;
     private String description;
 

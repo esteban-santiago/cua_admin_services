@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -25,8 +26,18 @@ import lombok.EqualsAndHashCode;
 @Table(schema="nextg", name="user")
 @SuppressWarnings("PersistenceUnitPresent")
 public class User implements Serializable {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="user_seq" )
+    @GenericGenerator(
+        name = "user_seq", 
+        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
+        parameters = {
+            @org.hibernate.annotations.Parameter(
+                name = "sequence", 
+                value = "nextg.user_seq"
+            )
+         
+    })
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
     private String passwd;

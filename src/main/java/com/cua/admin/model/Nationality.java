@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -23,8 +24,17 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(schema="nextg", name="nationality")
 public class Nationality implements Serializable {
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="nationality_seq" )
+    @GenericGenerator(
+        name = "nationality_seq", 
+        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
+        parameters = {
+            @org.hibernate.annotations.Parameter(
+                name = "sequence", 
+                value = "nextg.nationality_seq"
+            ) 
+    })
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String description;
 
