@@ -24,7 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
 @EqualsAndHashCode
 @Entity
 @Table(schema="nextg", name="user")
-@SuppressWarnings("PersistenceUnitPresent")
+@SuppressWarnings("ValidPrimaryTableName")
 public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="user_seq" )
     @GenericGenerator(
