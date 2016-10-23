@@ -22,10 +22,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -37,17 +37,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(schema="nextg", name="person")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Person implements Serializable {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_seq" )
-    @GenericGenerator(
-        name = "person_seq", 
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
-        parameters = {
-            @org.hibernate.annotations.Parameter(
-                name = "sequence", 
-                value = "nextg.person_seq"
-            )
-         
-    })
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_id_seq" )
+    @SequenceGenerator(name="person_id_seq", sequenceName="nextg.person_id_seq",allocationSize=1)
     @Id
     private Integer id;
     private String name;

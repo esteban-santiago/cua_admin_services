@@ -13,11 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -27,19 +26,9 @@ import org.hibernate.annotations.GenericGenerator;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(schema="nextg", name="employee")
-@PrimaryKeyJoinColumn(name="id")
+//@SequenceGenerator(name="employee_id_seq", sequenceName="nextg.employee_id_seq",allocationSize=1)    
 public class Employee extends Person {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_seq" )
-    @GenericGenerator(
-        name = "employee_seq", 
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
-        parameters = {
-            @org.hibernate.annotations.Parameter(
-                name = "sequence", 
-                value = "nextg.employee_seq"
-            )
-         
-    })
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_seq" )
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
