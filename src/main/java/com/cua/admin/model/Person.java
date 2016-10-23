@@ -35,7 +35,7 @@ import org.hibernate.annotations.GenericGenerator;
 @EqualsAndHashCode
 @Entity
 @Table(schema="nextg", name="person")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_seq" )
     @GenericGenerator(
@@ -63,7 +63,7 @@ public class Person implements Serializable {
     private String identificationDocument; //Documento de identidad
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "address_id_fk"))
     private Set<Address> address = new HashSet<>();
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -71,7 +71,7 @@ public class Person implements Serializable {
     private Category category;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "way_to_contact_id_fk"))
     private Set<WayToContact> wayToContact = new HashSet<>();
 
 

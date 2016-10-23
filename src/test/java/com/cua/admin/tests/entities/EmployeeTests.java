@@ -65,7 +65,7 @@ public class EmployeeTests {
         address.setCountry("Argentina");
         
         WayToContact mail = new WayToContact("M", "esteban.s@gmail.com");
-        WayToContact mail2 = new WayToContact("M", "esteban.san@gmail.com")
+        WayToContact mail2 = new WayToContact("M", "esteban.san@gmail.com");
         
         Employee mecanico = new Employee();
         mecanico.setName("Mecanico 1");
@@ -74,6 +74,8 @@ public class EmployeeTests {
         mecanico.setDateOfCreation(LocalDate.now());
         mecanico.setDateOfBirth(LocalDate.parse("1974-08-02"));
         mecanico.addAddress(address);
+        mecanico.addWayToContact(mail);
+        mecanico.addWayToContact(mail2);
         mecanico.setNationality(peruvian);
         employeeService.save(mecanico);
         
