@@ -53,11 +53,8 @@ public class EmployeeTests {
     @Test
     public void createEmployee() {
         Nationality peruvian = nationalityReposity.findByDescription("Peruana").get(0);
-        Assert.notNull(peruvian);
         Activity activity = activityRepository.findByDescription("Mecanico").get(0);
-        Assert.notNull(activity);
         Category category = categoryReposity.findByDescription("Empleado").get(0);
-        Assert.notNull(category);
 
         Address address = new Address();
         address.setStreet("Cramer 2222");
@@ -87,7 +84,7 @@ public class EmployeeTests {
         mecanico2.setNationality(peruvian);
         employeeService.save(mecanico2);
         
-        //System.out.println(category);
+        //System.out.println("hashCode: " + mecanico2.hashCode());
         
         for(Employee e : employeeService.findAll()) {
             System.out.println(e.toString() + " : " + e.getActivity().toString());
