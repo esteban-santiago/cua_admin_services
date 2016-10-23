@@ -27,7 +27,6 @@ public class UserServiceImpl {
 	public User getUser(@RequestParam(value = "id",required = false, defaultValue = "100") Integer id) {
                 System.out.println("Llamado el metodo!!:  " + id);
 		User pp = userService.findByName("Esteban").get(0);
-                //System.out.println("toString: " + userService.toString());
                 User p = new User("esteban","santiago");
                 p.setId(id);
                 System.out.println("Usuario: " + p.toString());
