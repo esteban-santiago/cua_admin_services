@@ -93,4 +93,13 @@ public class EmployeeTests {
             System.out.println(e.toString() + " : " + e.getActivity().toString());
         }
     }
+    
+    @Test
+    public void getEmployeesByNationality() {
+        Nationality peruvian = nationalityReposity.findById(2);
+        employeeService.findByNationality(peruvian).stream().forEach((e) -> {
+            System.out.println(e.toString());
+        });
+        
+    }
 }

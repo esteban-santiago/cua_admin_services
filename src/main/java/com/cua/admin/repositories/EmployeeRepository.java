@@ -6,6 +6,7 @@
 package com.cua.admin.repositories;
 
 import com.cua.admin.model.Employee;
+import com.cua.admin.model.Nationality;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,5 +17,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
 
     List<Employee> findByName(String name);
+    List<Employee> findByNationality(Nationality nationality);
     Employee findById(Integer id);
 }

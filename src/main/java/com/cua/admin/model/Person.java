@@ -73,9 +73,6 @@ public class Person implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "way_to_contact_id_fk"))
     private Set<WayToContact> wayToContact = new HashSet<>();
-
-
-    
     
     public Person() {
     }
