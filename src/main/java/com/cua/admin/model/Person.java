@@ -22,13 +22,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 /**
  *
@@ -67,11 +64,15 @@ public class Person implements Serializable {
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false)
-    private Set<Address> address = new HashSet<Address>();
+    private Set<Address> address = new HashSet<>();
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private Category category;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id", nullable = false)
+    private Set<WayToContact> wayToContact = new HashSet<>();
 
 
     
@@ -151,6 +152,14 @@ public class Person implements Serializable {
     }
 
     /**
+     * @param address the address to set
+     */
+    public void setAddress(Set<Address> address) {
+        this.address = address;
+    }
+    
+    
+    /**
      * @return the nationality
      */
     public Nationality getNationality() {
@@ -176,6 +185,27 @@ public class Person implements Serializable {
      */
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    /**
+     * @return the wayToContact
+     */
+    public Set<WayToContact> getWayToContact() {
+        return wayToContact;
+    }
+
+    /**
+     * @param wayToContact the wayToContact to set
+     */
+    public void addWayToContact(WayToContact wayToContact) {
+        this.wayToContact.add(wayToContact);
+    }
+
+    /**
+     * @param wayToContact the wayToContact to set
+     */
+    public void setWayToContact(Set<WayToContact> wayToContact) {
+        this.wayToContact = wayToContact;
     }
 
 }

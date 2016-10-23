@@ -5,6 +5,7 @@ import com.cua.admin.model.Employee;
 import com.cua.admin.model.Activity;
 import com.cua.admin.model.Category;
 import com.cua.admin.model.Nationality;
+import com.cua.admin.model.WayToContact;
 import com.cua.admin.repositories.EmployeeRepository;
 import java.time.LocalDate;
 import org.junit.Test;
@@ -63,6 +64,8 @@ public class EmployeeTests {
         address.setProvince("Ciudad Autónoma de Buenos Aires");
         address.setCountry("Argentina");
         
+        WayToContact mail = new WayToContact("M", "esteban.s@gmail.com");
+        WayToContact mail2 = new WayToContact("M", "esteban.san@gmail.com")
         
         Employee mecanico = new Employee();
         mecanico.setName("Mecanico 1");
@@ -83,9 +86,7 @@ public class EmployeeTests {
         mecanico2.setDateOfBirth(LocalDate.parse("1976-08-30"));
         mecanico2.setNationality(peruvian);
         employeeService.save(mecanico2);
-        
-        //System.out.println("hashCode: " + mecanico2.hashCode());
-        
+                
         for(Employee e : employeeService.findAll()) {
             System.out.println(e.toString() + " : " + e.getActivity().toString());
         }

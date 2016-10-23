@@ -40,6 +40,15 @@ public class WayToContact implements Serializable {
     private String typeOf;
     private String identificator;
 
+    public WayToContact() {
+        
+    }
+    
+    public WayToContact(String typeOf, String identificator) {
+        this.typeOf = typeOf;
+        this.identificator = identificator;
+    }
+    
     /**
      * @return the id
      */
