@@ -21,14 +21,16 @@ spring:
                 ##factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
                 factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   datasource:
-    ##url: jdbc:postgresql://192.168.0.27:5432/cua_admin.dev
-    ##driver-class-name: org.postgresql.Driver
-    ##username: admin
-    ##password: admin
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:cua;DB_CLOSE_ON_EXIT=TRUE;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS nextg;DB_CLOSE_DELAY=-1;
-    username: sa
-    password: 
+    ## PostgreSQL
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.0.27:5432/cua_admin.dev
+    username: admin
+    password: admin
+    ## H2
+    ##driver-class-name: org.h2.Driver
+    ##url: jdbc:h2:mem:cua;DB_CLOSE_ON_EXIT=TRUE;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS nextg;DB_CLOSE_DELAY=-1;
+    ##username: sa
+    ##password: 
   tomcat:
     test-on-borrow: true
     test-while-idle: true
