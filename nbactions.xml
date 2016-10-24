@@ -59,4 +59,11 @@
                 <goal>test</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-migrate</actionName>
+            <displayName>migrate</displayName>
+            <goals>
+                <goal>flyway:migrate</goal>
+            </goals>
+        </action>
     </actions>
