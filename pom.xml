@@ -94,7 +94,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <profiles>
-                        <profile>dev</profile>
+                        <profile>default</profile>
+                        <profile>qas</profile>
+                        <profile>prd</profile>
                     </profiles>
                 </configuration>
             </plugin>
