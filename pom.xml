@@ -46,23 +46,13 @@
             <artifactId>flyway-spring3-test</artifactId>
             <version>4.0.1</version>
         </dependency>
-
-
-
-
-        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        
-        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-
-            
-            
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -84,25 +74,12 @@
             <version>4.3.2.RELEASE</version>
             <type>jar</type>
         </dependency>
-        
-        <!-- -->
-        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
   
         </dependency>
-
-        <!-- -->
-        
-        
-        
-        
-        
-        
-        
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
