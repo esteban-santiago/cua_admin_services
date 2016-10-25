@@ -31,21 +31,21 @@ spring:
     ##url: jdbc:h2:mem:cua;DB_CLOSE_ON_EXIT=TRUE;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS nextg;DB_CLOSE_DELAY=-1;
     ##username: sa
     ##password: 
-  tomcat:
-    test-on-borrow: true
-    test-while-idle: true
-    validation-query: SELECT 1;
-    max-idle: 35
-    min-idle: 10
-    time-between-eviction-runs-millis: 3000
-    initial-size: 10
-  http.encoding:
-    charset: UTF-8
-    enabled: true
-    force: true
-  h2:
-      console.enabled: true
-      console.path: /h2-console
+    tomcat:
+        test-on-borrow: true
+        test-while-idle: true
+        validation-query: SELECT 1;
+        max-idle: 35
+        min-idle: 10
+        time-between-eviction-runs-millis: 3000
+        initial-size: 10
+    http.encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+    h2:
+        console.enabled: true
+        console.path: /h2-console
 endpoints:
     enabled: true
     ##No auth  protected 
