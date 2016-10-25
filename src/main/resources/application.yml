@@ -43,6 +43,11 @@ spring:
     charset: UTF-8
     enabled: true
     force: true
+  endpoints: 
+    ##No auth  protected 
+    shutdown.sensitive: false
+    ##Enable shutdown endpoint
+    shutdown.enabled: true
   h2:
       console.enabled: true
       console.path: /h2-console
