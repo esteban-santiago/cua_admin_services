@@ -47,7 +47,7 @@ spring:
       console.enabled: true
       console.path: /h2-console
 endpoints:
-    enabled: false
+    enabled: true
     ##No auth  protected 
     shutdown.sensitive: false
     ##Enable shutdown endpoint
