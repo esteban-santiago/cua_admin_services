@@ -23,7 +23,7 @@ spring:
   datasource:
     ## PostgreSQL
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.0.27:5432/cua_admin.dev
+    url: jdbc:postgresql://192.168.0.29:5432/cua_admin.dev
     username: admin
     password: admin
     ## H2
