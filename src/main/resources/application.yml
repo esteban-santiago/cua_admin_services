@@ -4,22 +4,22 @@
 ##org.postgresql.Driver
 ##
 
-spring:
-  jpa:
-    database: POSTGRESQL
-    show-sql: true
-    hibernate:
-        ddl-auto: create
-        default_schema: nextg
-        format_sql: true
+##spring:
+##  jpa:
+##    database: POSTGRESQL
+##    show-sql: true
+##    hibernate:
+##        ddl-auto: create
+##        default_schema: nextg
+##        format_sql: true
         ##id.new_generator_mappings: true
-        cache:
-            queries: false
-            use_second_level_cache: false
-            use_query_cache: false
-            region:
+##        cache:
+##            queries: false
+##            use_second_level_cache: false
+##            use_query_cache: false
+##            region:
                 ##factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-                factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+##                factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   ##datasource:
     ## PostgreSQL
     ##driver-class-name: org.postgresql.Driver
@@ -31,6 +31,7 @@ spring:
     ##url: jdbc:h2:mem:cua;DB_CLOSE_ON_EXIT=TRUE;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS nextg;DB_CLOSE_DELAY=-1;
     ##username: sa
     ##password: 
+ spring:
     tomcat:
         test-on-borrow: true
         test-while-idle: true
@@ -46,7 +47,7 @@ spring:
     h2:
         console.enabled: true
         console.path: /h2-console
-endpoints:
+    endpoints:
     enabled: true
     ##No auth  protected 
     shutdown.sensitive: false
@@ -56,6 +57,21 @@ endpoints:
 ---
 spring:
   profiles: default
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+        ddl-auto: create
+        ##default_schema: nextg
+        format_sql: true
+        ##id.new_generator_mappings: true
+        cache:
+            queries: false
+            use_second_level_cache: false
+            use_query_cache: false
+            region:
+                ##factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+                factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   datasource:
         ## PostgreSQL
     driver-class-name: org.postgresql.Driver
@@ -66,6 +82,21 @@ spring:
 ---
 spring:
   profiles: qas
+  jpa:
+    database: POSTGRESQL
+    ##show-sql: true
+    hibernate:
+        ddl-auto: validate
+        ##default_schema: nextg
+        format_sql: true
+        ##id.new_generator_mappings: true
+        cache:
+            queries: false
+            use_second_level_cache: false
+            use_query_cache: false
+            region:
+                ##factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+                factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   datasource:
         ## PostgreSQL
     driver-class-name: org.postgresql.Driver
@@ -76,6 +107,21 @@ spring:
 ---
 spring:
   profiles: prd
+  jpa:
+    database: POSTGRESQL
+    show-sql: false
+    hibernate:
+        ddl-auto: validate
+        ##default_schema: nextg
+        format_sql: false
+        ##id.new_generator_mappings: true
+        cache:
+            queries: false
+            use_second_level_cache: false
+            use_query_cache: false
+            region:
+                ##factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+                factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   datasource:
         ## PostgreSQL
     driver-class-name: org.postgresql.Driver

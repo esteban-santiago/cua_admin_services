@@ -5,8 +5,10 @@
  */
 package com.cua.admin.rest;
 
+import com.cua.admin.model.Employee;
 import com.cua.admin.model.Person;
 import com.cua.admin.model.User;
+import com.cua.admin.repositories.EmployeeRepository;
 import com.cua.admin.repositories.PersonRepository;
 import com.cua.admin.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class RestServiceLayer {
 	
         @Autowired
         private PersonRepository personRepository;
+
+        @Autowired
+        private EmployeeRepository employeeRepository;
         
     /**
      *
@@ -54,5 +59,9 @@ public class RestServiceLayer {
             return personRepository.findById(id);
         }
 
+    @RequestMapping(value = "/employee", method = RequestMethod.GET, headers="Accept=application/json")
+	public Employee getEmployee(@RequestParam(value = "id",required = false, defaultValue = "1") Integer id) {
+            return employeeRepository.findById(id);
+        }
 
 } 
