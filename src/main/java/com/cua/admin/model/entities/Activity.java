@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model;
+package com.cua.admin.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -22,28 +22,36 @@ import org.hibernate.annotations.GenericGenerator;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(schema="nextg", name="nationality")
-public class Nationality implements Serializable {
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="nationality_seq" )
+@Table(schema="nextg", name="activity")
+public class Activity implements Serializable {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="activity_seq" )
     @GenericGenerator(
-        name = "nationality_seq", 
+        name = "activity_seq", 
         strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
         parameters = {
             @org.hibernate.annotations.Parameter(
                 name = "sequence", 
-                value = "nextg.nationality_seq"
-            ) 
+                value = "nextg.activity_seq"
+            )
+         
     })
-    @Id
+    
+    @Id    
     private Integer id;
     private String description;
 
-    public Nationality() {
+    public Activity() {
         
     }
     
-    public Nationality(String nationality) {
-        this.description = nationality;
+    
+    public Activity(String activity) {
+        this.description = activity;
+    }
+
+    public Activity(Integer id, String activity) {
+        this.id = id;
+        this.description = activity;
     }
 
     /**
@@ -72,5 +80,5 @@ public class Nationality implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
+    }    
 }

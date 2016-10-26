@@ -5,7 +5,7 @@
  */
 package com.cua.admin.services;
 
-import com.cua.admin.model.User;
+import com.cua.admin.model.entities.User;
 import com.cua.admin.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

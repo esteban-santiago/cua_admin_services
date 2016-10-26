@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package com.cua.admin.model;
+package com.cua.admin.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
@@ -23,34 +22,30 @@ import org.hibernate.annotations.GenericGenerator;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(schema="nextg", name="user")
-@SuppressWarnings("ValidPrimaryTableName")
-public class User implements Serializable {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="user_seq" )
+@Table(schema="nextg", name="nationality")
+public class Nationality implements Serializable {
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="nationality_seq" )
     @GenericGenerator(
-        name = "user_seq", 
+        name = "nationality_seq", 
         strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
         parameters = {
             @org.hibernate.annotations.Parameter(
                 name = "sequence", 
-                value = "nextg.user_seq"
-            )
-         
+                value = "nextg.nationality_seq"
+            ) 
     })
     @Id
     private Integer id;
-    private String name;
-    private String passwd;
+    private String description;
 
-    public User() {
+    public Nationality() {
         
     }
     
-    public User(String name, String passwd) {
-        this.name = name;
-        this.passwd = passwd;
+    public Nationality(String nationality) {
+        this.description = nationality;
     }
-    
+
     /**
      * @return the id
      */
@@ -66,30 +61,16 @@ public class User implements Serializable {
     }
 
     /**
-     * @return the name
+     * @return the description
      */
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * @param name the name to set
+     * @param description the description to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    /**
-     * @return the passwd
-     */
-    public String getPasswd() {
-        return passwd;
-    }
-
-    /**
-     * @param passwd the passwd to set
-     */
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }    
 }

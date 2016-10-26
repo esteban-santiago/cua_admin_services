@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model;
+package com.cua.admin.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
+
 
 /**
  *
@@ -21,37 +23,34 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @ToString
 @EqualsAndHashCode
+
 @Entity
-@Table(schema="nextg", name="activity")
-public class Activity implements Serializable {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="activity_seq" )
+@Table(schema="nextg", name="category")
+public class Category implements Serializable {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="category_seq" )
     @GenericGenerator(
-        name = "activity_seq", 
+        name = "category_seq", 
         strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
         parameters = {
             @org.hibernate.annotations.Parameter(
                 name = "sequence", 
-                value = "nextg.activity_seq"
-            )
-         
+                value = "nextg.category_seq"
+            ) 
     })
-    
-    @Id    
+    @Id
     private Integer id;
     private String description;
-
-    public Activity() {
-        
+    
+    public Category() {
     }
     
-    
-    public Activity(String activity) {
-        this.description = activity;
+    public Category(String description) {
+        this.description = description;
     }
 
-    public Activity(Integer id, String activity) {
+    public Category(Integer id, String description) {
         this.id = id;
-        this.description = activity;
+        this.description = description;
     }
 
     /**
@@ -69,16 +68,16 @@ public class Activity implements Serializable {
     }
 
     /**
-     * @return the description
+     * @return the category
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * @param description the description to set
+     * @param description the category to set
      */
     public void setDescription(String description) {
         this.description = description;
-    }    
+    }
 }

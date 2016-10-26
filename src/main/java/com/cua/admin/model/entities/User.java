@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model;
+
+package com.cua.admin.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Id; 
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
-
 
 /**
  *
@@ -23,36 +22,35 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @ToString
 @EqualsAndHashCode
-
 @Entity
-@Table(schema="nextg", name="category")
-public class Category implements Serializable {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="category_seq" )
+@Table(schema="nextg", name="user")
+@SuppressWarnings("ValidPrimaryTableName")
+public class User implements Serializable {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="user_seq" )
     @GenericGenerator(
-        name = "category_seq", 
+        name = "user_seq", 
         strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
         parameters = {
             @org.hibernate.annotations.Parameter(
                 name = "sequence", 
-                value = "nextg.category_seq"
-            ) 
+                value = "nextg.user_seq"
+            )
+         
     })
     @Id
     private Integer id;
-    private String description;
-    
-    public Category() {
-    }
-    
-    public Category(String description) {
-        this.description = description;
-    }
+    private String name;
+    private String passwd;
 
-    public Category(Integer id, String description) {
-        this.id = id;
-        this.description = description;
+    public User() {
+        
     }
-
+    
+    public User(String name, String passwd) {
+        this.name = name;
+        this.passwd = passwd;
+    }
+    
     /**
      * @return the id
      */
@@ -68,16 +66,30 @@ public class Category implements Serializable {
     }
 
     /**
-     * @return the category
+     * @return the name
      */
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param description the category to set
+     * @param name the name to set
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    /**
+     * @return the passwd
+     */
+    public String getPasswd() {
+        return passwd;
+    }
+
+    /**
+     * @param passwd the passwd to set
+     */
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }    
 }

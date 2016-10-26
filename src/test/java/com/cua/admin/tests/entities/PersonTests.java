@@ -1,9 +1,9 @@
 package com.cua.admin.tests.entities;
 
-import com.cua.admin.model.Address;
-import com.cua.admin.model.Person;
-import com.cua.admin.model.Category;
-import com.cua.admin.model.Nationality;
+import com.cua.admin.model.entities.Address;
+import com.cua.admin.model.entities.Person;
+import com.cua.admin.model.entities.Category;
+import com.cua.admin.model.entities.Nationality;
 import com.cua.admin.repositories.PersonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
