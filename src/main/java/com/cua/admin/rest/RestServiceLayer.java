@@ -5,6 +5,7 @@
  */
 package com.cua.admin.rest;
 
+import com.cua.admin.model.Person;
 import com.cua.admin.model.User;
 import com.cua.admin.repositories.PersonRepository;
 import com.cua.admin.repositories.UserRepository;
@@ -28,7 +29,12 @@ public class RestServiceLayer {
         @Autowired
         private PersonRepository personRepository;
         
-        @RequestMapping(value = "/user", method = RequestMethod.GET, headers="Accept=application/json")
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/user", method = RequestMethod.GET, headers="Accept=application/json")
 	public User getUser(@RequestParam(value = "id",required = false, defaultValue = "100") Integer id) {
                 System.out.println("Llamado el metodo!!:  " + id);
 		User pp = userService.findByName("Esteban").get(0);
@@ -38,15 +44,15 @@ public class RestServiceLayer {
 		return pp;
 	}
 
-        @RequestMapping(value = "/person", method = RequestMethod.GET, headers="Accept=application/json")
-	public User getPerson(@RequestParam(value = "id",required = false, defaultValue = "100") Integer id) {
-                System.out.println("Llamado el metodo!!:  " + id);
-		User pp = userService.findByName("Esteban").get(0);
-                User p = new User("esteban","santiago");
-                p.setId(id);
-                System.out.println("Usuario: " + p.toString());
-		return pp;
-	}
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/person", method = RequestMethod.GET, headers="Accept=application/json")
+	public Person getPerson(@RequestParam(value = "id",required = false, defaultValue = "1") Integer id) {
+            return personRepository.findById(id);
+        }
 
 
 } 
