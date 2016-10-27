@@ -30,7 +30,7 @@ public class UnsecureRestServiceLayer {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/user", method = RequestMethod.GET, headers="Accept=application/json")
+    @RequestMapping(value = "/login", method = RequestMethod.GET, headers="Accept=application/json")
 	public User login(@RequestParam(value = "user",required = true) User user) {
 		User pp = userService.findByName("Esteban").get(0);
                 User p = new User("esteban","santiago");
