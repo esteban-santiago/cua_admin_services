@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/data")
-public class RestServiceLayer {
+@RequestMapping("/sapi")
+public class SecureRestServiceLayer {
 	@Autowired
 	private UserRepository userService;
 	
