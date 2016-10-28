@@ -53,7 +53,10 @@
     shutdown.sensitive: false
     ##Enable shutdown endpoint
     shutdown.enabled: true
-
+ security:
+    user:
+        password: password
+        
 ---
 spring:
   profiles: default
