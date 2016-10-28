@@ -29,7 +29,7 @@ public class SecurityCtxConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-            //.antMatchers(HttpMethod.GET, "/api/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/**").permitAll()
             .antMatchers(HttpMethod.GET, "/sapi/**").authenticated()
             .antMatchers(HttpMethod.POST, "/sapi/**").authenticated()
             .antMatchers(HttpMethod.PUT, "/sapi/**").authenticated()
