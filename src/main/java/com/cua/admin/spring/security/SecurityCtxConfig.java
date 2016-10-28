@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin;
+package com.cua.admin.spring.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
