@@ -23,8 +23,8 @@ public class SecurityCtxConfig extends WebSecurityConfigurerAdapter {
      * @param http
      * @throws Exception
      */
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
+    //@Override
+    public void reconfigure(HttpSecurity http) throws Exception {
      http.antMatcher("/api/login")
         .csrf().disable()
         .authorizeRequests()
