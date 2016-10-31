@@ -13,4 +13,18 @@ import java.util.Set;
  */
 public class AccountingPlan {
     private Set<Account> accounts;
+
+    /**
+     * @return the accounts
+     */
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    /**
+     * @param accounts the accounts to set
+     */
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
 }
