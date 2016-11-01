@@ -5,10 +5,23 @@
  */
 package com.cua.admin.model.flight;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 /**
  *
  * @author esteban_santiago
  */
-public class FlightRecord {
+@ToString
+@EqualsAndHashCode
+@Entity
+@Table(schema="nextg", name="flight_record")
+public class FlightRecord implements Serializable {
+    @Id
+    private Integer id;
     
 }

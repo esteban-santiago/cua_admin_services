@@ -43,7 +43,6 @@ public class Person implements Serializable {
     private Integer id;
     private String name;
     
-    @Column
     private LocalDate dateOfCreation; //Fecha de Ingreso
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
@@ -51,7 +50,7 @@ public class Person implements Serializable {
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
     
-    private String identificationDocument; //Documento de identidad
+    private String identityDocument; //Documento de identidad
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "address_id_fk"))

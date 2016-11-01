@@ -27,6 +27,7 @@ public class Account implements Serializable {
     private Integer firstOrderGrouper;
     private Integer secondOrderGrouper;
     private Integer thirdOrderGrouper;
+    private Integer fourthOrderGrouper;
     private String description;
 
     /**
@@ -97,6 +98,20 @@ public class Account implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the fourthOrderGrouper
+     */
+    public Integer getFourthOrderGrouper() {
+        return fourthOrderGrouper;
+    }
+
+    /**
+     * @param fourthOrderGrouper the fourthOrderGrouper to set
+     */
+    public void setFourthOrderGrouper(Integer fourthOrderGrouper) {
+        this.fourthOrderGrouper = fourthOrderGrouper;
     }
     
 }
