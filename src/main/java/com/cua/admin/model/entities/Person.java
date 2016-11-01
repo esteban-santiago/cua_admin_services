@@ -47,7 +47,7 @@ public class Person implements Serializable {
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "nationality_id_fk"))
+    @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "person_nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
     
     private String identityDocument; //Documento de identidad
