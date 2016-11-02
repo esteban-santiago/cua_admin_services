@@ -14,15 +14,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 import com.cua.admin.repositories.ActivityRepository;
 import com.cua.admin.repositories.CategoryRepository;
+import com.cua.admin.repositories.MemberRepository;
 import com.cua.admin.repositories.NationalityRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
 
-public class PersonTests {
+public class MemberTests {
     @Autowired
-    private PersonRepository personService;
+    private MemberRepository memberService;
     @Autowired
     private ActivityRepository activityRepository;
     @Autowired
@@ -65,22 +66,22 @@ public class PersonTests {
         Nationality brazilian = nationalityRepository.findByDescription("Brasilera").get(0);
         Assert.notNull(brazilian);
         
-        Person member = new Person();
+        Member member = new Member();
         member.setName("Socio 1");
         member.setCategory(category);
         member.addAddress(address);
         member.addAddress(address2);
         member.setNationality(argentinean);
-        personService.save(member);
+        memberService.save(member);
                 
-        Person member2 = new Person();
+        Member member2 = new Member();
         member2.setName("Socio 2");
         member2.setCategory(category);
         member2.setNationality(brazilian);
-        personService.save(member2);
+        memberService.save(member2);
         
 
-        for(Person p : personService.findAll()) {
+        for(Person p : memberService.findAll()) {
             Assert.notNull(p.getAddress());
             System.out.println(p.toString());
         }    

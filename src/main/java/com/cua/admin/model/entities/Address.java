@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
@@ -24,7 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(schema="nextg", name="address")
 public class Address implements Serializable {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="address_seq" )
+    /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="address_seq" )
     @GenericGenerator(
         name = "address_seq", 
         strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
@@ -33,7 +34,9 @@ public class Address implements Serializable {
                 name = "sequence", 
                 value = "nextg.address_seq"
             ) 
-    })
+    })*/
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="address_id_seq" )
+    @SequenceGenerator(name="address_id_seq", sequenceName="nextg.address_id_seq",allocationSize=1)
     @Id
     private Integer id;
     private String street;
