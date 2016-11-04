@@ -32,13 +32,13 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(schema="nextg", name="member")
+@Table(name="member")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 
 @SuppressWarnings("ValidPrimaryTableName")
 public class Member extends Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="member_id_seq" )
-    @SequenceGenerator(name="member_id_seq", sequenceName="nextg.member_id_seq",allocationSize=1)
+    @SequenceGenerator(name="member_id_seq", sequenceName="member_id_seq",allocationSize=1)
     @Id
     private Integer id;
 

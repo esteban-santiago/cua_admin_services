@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(schema="nextg", name="account")
+@Table(name="account")
 public class Account implements Serializable {
     @Id
     private Integer id;

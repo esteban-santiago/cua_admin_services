@@ -23,7 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(schema="nextg", name="address")
+@Table(name="address")
 public class Address implements Serializable {
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="address_seq" )
     @GenericGenerator(
@@ -32,11 +32,11 @@ public class Address implements Serializable {
         parameters = {
             @org.hibernate.annotations.Parameter(
                 name = "sequence", 
-                value = "nextg.address_seq"
+                value = "address_seq"
             ) 
     })*/
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="address_id_seq" )
-    @SequenceGenerator(name="address_id_seq", sequenceName="nextg.address_id_seq",allocationSize=1)
+    @SequenceGenerator(name="address_id_seq", sequenceName="address_id_seq",allocationSize=1)
     @Id
     private Integer id;
     private String street;

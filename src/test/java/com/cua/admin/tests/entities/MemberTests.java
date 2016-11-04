@@ -5,7 +5,6 @@ import com.cua.admin.model.entities.Person;
 import com.cua.admin.model.entities.Category;
 import com.cua.admin.model.entities.Member;
 import com.cua.admin.model.entities.Nationality;
-import com.cua.admin.repositories.PersonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +32,6 @@ public class MemberTests {
     
     @Test
     public void createNationality() {
-        Nationality argentinean = new Nationality("Argentina");
-        Nationality brazilian = new Nationality("Brasilera");
-        nationalityRepository.save(argentinean);
-        nationalityRepository.save(brazilian);
     }
     
     @Test

@@ -23,17 +23,17 @@ import org.hibernate.annotations.GenericGenerator;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(schema="nextg", name="user")
+@Table(name="users")
 @SuppressWarnings("ValidPrimaryTableName")
 public class User implements Serializable {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="user_seq" )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="users_seq" )
     @GenericGenerator(
-        name = "user_seq", 
+        name = "users_seq", 
         strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
         parameters = {
             @org.hibernate.annotations.Parameter(
                 name = "sequence", 
-                value = "nextg.user_seq"
+                value = "users_seq"
             )
          
     })

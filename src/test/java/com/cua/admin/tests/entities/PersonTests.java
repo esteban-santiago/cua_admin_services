@@ -30,13 +30,13 @@ public class PersonTests {
     @Autowired
     private NationalityRepository nationalityRepository;
     
-    @Test
-    public void createNationality() {
+    //@Test
+    /*public void createNationality() {
         Nationality argentinean = new Nationality("Argentina");
         Nationality brazilian = new Nationality("Brasilera");
         nationalityRepository.save(argentinean);
         nationalityRepository.save(brazilian);
-    }
+    }*/
     
     @Test
     public void createCategory() {

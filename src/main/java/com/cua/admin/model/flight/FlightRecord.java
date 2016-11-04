@@ -19,7 +19,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(schema="nextg", name="flight_record")
+@Table(name="flight_record")
 public class FlightRecord implements Serializable {
     @Id
     private Integer id;

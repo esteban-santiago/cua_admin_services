@@ -36,11 +36,11 @@ import lombok.EqualsAndHashCode;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(schema="nextg", name="person")
+@Table(name="person")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="person_id_seq" )
-    @SequenceGenerator(name="person_id_seq", sequenceName="nextg.person_id_seq",allocationSize=1)
+    @SequenceGenerator(name="person_id_seq", sequenceName="person_id_seq",allocationSize=1)
     @Id
     private Integer id;
     private String name;

@@ -25,8 +25,8 @@ import lombok.EqualsAndHashCode;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(schema="nextg", name="employee")
-//@SequenceGenerator(name="employee_id_seq", sequenceName="nextg.employee_id_seq",allocationSize=1)    
+@Table(name="employee")
+//@SequenceGenerator(name="employee_id_seq", sequenceName="employee_id_seq",allocationSize=1)    
 public class Employee extends Person {
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_seq" )
     
