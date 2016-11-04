@@ -8,12 +8,12 @@ package com.cua.admin.model.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  *
@@ -25,16 +25,16 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="way_to_contact")
 public class WayToContact implements Serializable {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="way_to_contact_seq" )
     @GenericGenerator(
-        name = "way_to_contact_seq", 
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
+        name = "SequenceGenerator",
+        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
         parameters = {
-            @org.hibernate.annotations.Parameter(
-                name = "sequence", 
-                value = "way_to_contact_seq"
-            ) 
-    })
+                @Parameter(name = "sequence_name", value = "way_to_contact_id_seq"),
+                @Parameter(name = "initial_value", value = "1000"),
+                @Parameter(name = "increment_size", value = "1")
+        }
+    )
+    @GeneratedValue(generator = "SequenceGenerator")    
     @Id
     private Integer id;
     private String typeOf;

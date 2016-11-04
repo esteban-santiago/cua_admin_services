@@ -15,6 +15,7 @@ import com.cua.admin.repositories.ActivityRepository;
 import com.cua.admin.repositories.CategoryRepository;
 import com.cua.admin.repositories.MemberRepository;
 import com.cua.admin.repositories.NationalityRepository;
+import org.junit.Before;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,8 +24,7 @@ import com.cua.admin.repositories.NationalityRepository;
 public class MemberTests {
     @Autowired
     private MemberRepository memberService;
-    @Autowired
-    private ActivityRepository activityRepository;
+
     @Autowired
     private CategoryRepository categoryReposity;
     @Autowired
@@ -32,6 +32,10 @@ public class MemberTests {
     
     @Test
     public void createNationality() {
+        Nationality ar = new Nationality("Argentina");
+        nationalityRepository.save(ar);
+        Nationality br = new Nationality("Brasilera");
+        nationalityRepository.save(br);
     }
     
     @Test
@@ -44,7 +48,7 @@ public class MemberTests {
 
     
     @Test
-    public void createPerson() {
+    public void createMember() {
         Address address = new Address();
         address.setStreet("Av. Berlin 729");
         address.setCity("Longchamps");
