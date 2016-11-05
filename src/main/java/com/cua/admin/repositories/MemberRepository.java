@@ -8,13 +8,13 @@ package com.cua.admin.repositories;
 import com.cua.admin.model.entities.Member;
 import com.cua.admin.model.entities.Nationality;
 import java.util.List;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author esteban_santiago
  */
-public interface MemberRepository extends CrudRepository<Member, Integer> {
+public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     List<Member> findByName(String name);
     List<Member> findByNationality(Nationality nationality);

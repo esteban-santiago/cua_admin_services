@@ -2,6 +2,7 @@ package com.cua.admin.tests.entities;
 
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.repositories.accounting.AccountRepository;
+import java.util.function.Consumer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class AccountingTests {
     @Test
     public void getMajorAccounts() {
         System.out.println("----------------Cuentas Mayores--------------");
-        accountRepository.findBySecondOrderGrouper(0).stream().forEach((account) -> {
-            System.out.println(account.getDescription());
+        accountRepository.findBySecondOrderGrouper(0).stream().forEach((Account account) -> {
+            System.out.println(account.toFormattedString() + " - " + account.getDescription());
         });
     }
 

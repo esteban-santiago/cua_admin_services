@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserTests {
     @Autowired
     private UserRepository userRepository;
+    
     @Autowired
     private UserService userService;
 

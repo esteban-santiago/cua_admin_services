@@ -7,13 +7,13 @@ package com.cua.admin.repositories;
 
 import com.cua.admin.model.entities.Activity;
 import java.util.List;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author esteban_santiago
  */
-public interface ActivityRepository extends CrudRepository<Activity, Integer> {
+public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
     List<Activity> findByDescription(String description);
     Activity findById(Integer id);

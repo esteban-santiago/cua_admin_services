@@ -7,13 +7,13 @@ package com.cua.admin.repositories;
 
 import com.cua.admin.model.entities.WayToContact;
 import java.util.List;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author esteban_santiago
  */
-public interface WayToContactRepository extends CrudRepository<WayToContact, Integer> {
+public interface WayToContactRepository extends JpaRepository<WayToContact, Integer> {
 
     List<WayToContact> findByIdentificator(String description);
     WayToContact findById(Integer id);

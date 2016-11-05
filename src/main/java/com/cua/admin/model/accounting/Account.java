@@ -114,4 +114,11 @@ public class Account implements Serializable {
         this.fourthOrderGrouper = fourthOrderGrouper;
     }
     
+    public String toFormattedString() {
+        return firstOrderGrouper + "/" +
+                secondOrderGrouper + "/" +
+                thirdOrderGrouper + "/" +
+                "0000" + fourthOrderGrouper;
+    }
+    
 }
