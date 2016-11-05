@@ -39,6 +39,7 @@ public class User implements Serializable {
     private Integer id;
     private String name;
     private String passwd;
+    private Boolean bloked;
 
     public User() {
         
@@ -90,4 +91,18 @@ public class User implements Serializable {
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }    
+
+    /**
+     * @return the bloked
+     */
+    public Boolean isBloked() {
+        return bloked;
+    }
+
+    /**
+     * @param bloked the bloked to set
+     */
+    public void setBloked(Boolean bloked) {
+        this.bloked = bloked;
+    }
 }
