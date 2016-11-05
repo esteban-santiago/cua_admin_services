@@ -2,18 +2,17 @@ package com.cua.admin.tests.entities;
 
 import com.cua.admin.model.entities.User;
 import com.cua.admin.repositories.UserRepository;
+import com.cua.admin.services.UserService;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
-@Profile("dev")
 public class UserTests {
     @Autowired
     private UserRepository userRepository;
@@ -41,6 +40,15 @@ public class UserTests {
         userRepository.findByPasswd("password2").stream().forEach((u) -> {
             System.out.println(u.toString());
         });
+    }
+    
+    @Test
+    public void lockUser() {
+        User user = userRepository.findByName("Esteban").get(0);
+        System.out.println("-----Bloqueo de usuario----");
+        UserService userService = new UserService();
+        userService.lock(user);
+
     }
 
  

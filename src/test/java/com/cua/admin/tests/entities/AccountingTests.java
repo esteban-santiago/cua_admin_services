@@ -11,15 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
-
 public class AccountingTests {
     @Autowired
-    private AccountRepository accountService;
+    private AccountRepository accountRepository;
     
     //@Test
     public void getAccounts() {
-        for(Account account : accountService.findAll()) {
+        for(Account account : accountRepository.findAll()) {
             System.out.println(account.getDescription());
         }
     }
@@ -27,7 +25,7 @@ public class AccountingTests {
     @Test
     public void getMajorAccounts() {
         System.out.println("----------------Cuentas Mayores--------------");
-        accountService.findBySecondOrderGrouper(0).stream().forEach((account) -> {
+        accountRepository.findBySecondOrderGrouper(0).stream().forEach((account) -> {
             System.out.println(account.getDescription());
         });
     }

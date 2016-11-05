@@ -15,16 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public class UserService {
-	@Autowired
-	private UserRepository userService;
+	
+        @Autowired
+	private UserRepository userRepository;
         
-	public User getUser(Integer id) {
-                System.out.println("Llamado el metodo!!:  " + id);
-		User pp = userService.findByName("Esteban").get(0);
-                //System.out.println("toString: " + userService.toString());
-                User p = new User("esteban","santiago");
-                p.setId(id);
-                System.out.println("Usuario: " + p.toString());
-		return pp;
-	}
+        public void lock(User user) {
+            user.setLocked(Boolean.TRUE);
+            userRepository.save(user);
+        }
+        
+        public void unlock(User user) {
+            user.setLocked(Boolean.FALSE);
+            userRepository.save(user);
+        }
 } 
