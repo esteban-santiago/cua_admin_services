@@ -16,8 +16,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserTests {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     @Test
+    public void lockUser() {
+        User user = userRepository.findByName("Esteban").get(0);
+        System.out.println("-----Bloqueo de usuario----");
+        userService.lock(user);
+    }
+
+        @Test
     public void createUser() {
         User user = new User();
         //user.setId(0);
@@ -40,14 +49,4 @@ public class UserTests {
             System.out.println(u.toString());
         });
     }
-    
-    @Test
-    public void lockUser() {
-        User user = userRepository.findByName("Esteban").get(0);
-        System.out.println("-----Bloqueo de usuario----");
-        UserService userService = new UserService();
-        userService.lock(user);
-    }
-
- 
 }
