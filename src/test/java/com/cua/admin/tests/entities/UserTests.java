@@ -32,10 +32,9 @@ public class UserTests {
         Assert.assertTrue("Correcto", user2.getId()>0);
         
         //user.setName("pepe");
-        
-        for (User u:userRepository.findAll()){
+        userRepository.findAll().stream().forEach((u) -> {
             System.out.println(u.toString());
-        }
+        });
 
         userRepository.findByPasswd("password2").stream().forEach((u) -> {
             System.out.println(u.toString());
@@ -48,7 +47,6 @@ public class UserTests {
         System.out.println("-----Bloqueo de usuario----");
         UserService userService = new UserService();
         userService.lock(user);
-
     }
 
  
