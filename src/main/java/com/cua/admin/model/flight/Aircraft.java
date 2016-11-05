@@ -19,24 +19,24 @@ import org.hibernate.annotations.Parameter;
  *
  * @author esteban_santiago
  */
-
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name="aircraft")
+@Table(name = "aircraft")
 public class Aircraft implements Serializable {
- @GenericGenerator(
-        name = "SequenceGenerator",
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-        parameters = {
+
+    @GenericGenerator(
+            name = "SequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
                 @Parameter(name = "sequence_name", value = "aircraft_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
-        }
+            }
     )
-    @GeneratedValue(generator = "SequenceGenerator")    
+    @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    private Integer id;   
+    private Integer id;
     private String registration; //Matrícula
     private String model; //Modelo
     private String status; //Status: Activo, Inactivo 

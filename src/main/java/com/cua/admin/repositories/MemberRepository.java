@@ -17,6 +17,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     List<Member> findByName(String name);
+
     List<Member> findByNationality(Nationality nationality);
+
     Member findById(Integer id);
 }

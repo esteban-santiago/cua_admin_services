@@ -17,25 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author esteban_santiago
  */
-
 @RestController
 @RequestMapping("/api")
 public class UnsecureRestServiceLayer {
-	@Autowired
-	private UserRepository userService;
-	
-        
+
+    @Autowired
+    private UserRepository userService;
+
     /**
      *
      * @param user
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET, headers="Accept=application/json")
-	public User login(@RequestParam(value = "user",required = true) User user) {
-		User pp = userService.findByName("Esteban").get(0);
-                User p = new User("esteban","santiago");
-                //p.setId(id);
-                System.out.println("Usuario: " + p.toString());
-		return pp;
-	}
-} 
+    @RequestMapping(value = "/login", method = RequestMethod.GET, headers = "Accept=application/json")
+    public User login(@RequestParam(value = "user", required = true) User user) {
+        User pp = userService.findByName("Esteban").get(0);
+        User p = new User("esteban", "santiago");
+        System.out.println("Usuario: " + p.toString());
+        return pp;
+    }
+}

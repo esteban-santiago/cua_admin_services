@@ -25,32 +25,30 @@ import org.hibernate.annotations.Parameter;
  *
  * @author esteban_santiago
  */
-
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name="member")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Table(name = "member")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 @SuppressWarnings("ValidPrimaryTableName")
 public class Member extends Person {
+
     @GenericGenerator(
-        name = "SequenceGenerator",
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-        parameters = {
+            name = "SequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
                 @Parameter(name = "sequence_name", value = "member_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
-        }
+            }
     )
-    @GeneratedValue(generator = "SequenceGenerator")    
+    @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "member_nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
-    
 
-    
 }

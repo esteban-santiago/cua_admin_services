@@ -28,16 +28,17 @@ public class SecurityCtxConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-            .authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/api/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/sapi/**").authenticated()
-            .antMatchers(HttpMethod.POST, "/sapi/**").authenticated()
-            .antMatchers(HttpMethod.PUT, "/sapi/**").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/sapi/**").authenticated()
-            .anyRequest().permitAll()
-            .and()
-            .httpBasic().and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/sapi/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/sapi/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/sapi/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/sapi/**").authenticated()
+                .anyRequest().permitAll()
+                .and()
+                .httpBasic().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
-    
+
 }

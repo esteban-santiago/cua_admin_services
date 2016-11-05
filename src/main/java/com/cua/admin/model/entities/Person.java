@@ -30,40 +30,40 @@ import org.hibernate.annotations.Parameter;
  *
  * @author esteban_santiago
  */
-
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name="person")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Table(name = "person")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person implements Serializable {
+
     @GenericGenerator(
-        name = "SequenceGenerator",
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-        parameters = {
+            name = "SequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
                 @Parameter(name = "sequence_name", value = "person_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
-        }
+            }
     )
-    @GeneratedValue(generator = "SequenceGenerator")    
+    @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
     private String name;
-    
+
     private LocalDate dateOfCreation; //Fecha de Ingreso
     private LocalDate dateOfBirth; //Fecha de nacimiento
-    
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "person_nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
-    
+
     private String identityDocument; //Documento de identidad
-    
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "address_id_fk"))
     private Set<Address> address = new HashSet<>();
-    
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private Category category;
@@ -71,11 +71,10 @@ public class Person implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "way_to_contact_id_fk"))
     private Set<WayToContact> wayToContact = new HashSet<>();
-    
+
     public Person() {
     }
-    
-    
+
     /**
      * @return the id
      */
@@ -89,7 +88,7 @@ public class Person implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
- 
+
     /**
      * @return the category
      */
@@ -103,7 +102,7 @@ public class Person implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
-    
+
     /**
      * @return the name
      */
@@ -152,8 +151,7 @@ public class Person implements Serializable {
     public void setAddress(Set<Address> address) {
         this.address = address;
     }
-    
-    
+
     /**
      * @return the nationality
      */

@@ -22,20 +22,19 @@ import lombok.EqualsAndHashCode;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name="employee")
+@Table(name = "employee")
 //@SequenceGenerator(name="employee_id_seq", sequenceName="employee_id_seq",allocationSize=1)    
 public class Employee extends Person {
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_seq" )
-    
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
     private Activity activity;
 
-    
     public Employee() {
-        
+
     }
-    
+
     /**
      * @return the activity
      */

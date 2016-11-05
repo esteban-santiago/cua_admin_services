@@ -9,20 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AccountingTests {
+
     @Autowired
     private AccountRepository accountRepository;
-    
+
     //@Test
     public void getAccounts() {
-        for(Account account : accountRepository.findAll()) {
+        for (Account account : accountRepository.findAll()) {
             System.out.println(account.getDescription());
         }
     }
-    
+
     @Test
     public void getMajorAccounts() {
         System.out.println("----------------Cuentas Mayores--------------");
@@ -31,5 +31,4 @@ public class AccountingTests {
         });
     }
 
-    
 }

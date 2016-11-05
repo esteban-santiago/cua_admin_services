@@ -22,18 +22,19 @@ import org.hibernate.annotations.Parameter;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name="address")
+@Table(name = "address")
 public class Address implements Serializable {
+
     @GenericGenerator(
-        name = "SequenceGenerator",
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-        parameters = {
+            name = "SequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
                 @Parameter(name = "sequence_name", value = "address_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
-        }
+            }
     )
-    @GeneratedValue(generator = "SequenceGenerator")    
+    @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
     private String street;
@@ -41,9 +42,9 @@ public class Address implements Serializable {
     private String city;
     private String province;
     private String country;
-   
+
     public Address() {
-        
+
     }
 
     /**

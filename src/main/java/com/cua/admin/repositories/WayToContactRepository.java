@@ -16,5 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface WayToContactRepository extends JpaRepository<WayToContact, Integer> {
 
     List<WayToContact> findByIdentificator(String description);
+
     WayToContact findById(Integer id);
 }

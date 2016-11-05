@@ -12,6 +12,7 @@ import java.util.Set;
  * @author esteban_santiago
  */
 public class AccountingPlan {
+
     private Set<Account> accounts;
 
     /**

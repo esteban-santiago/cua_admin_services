@@ -23,18 +23,19 @@ import org.hibernate.annotations.Parameter;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name="airfield")
+@Table(name = "airfield")
 public class Airfield implements Serializable {
+
     @GenericGenerator(
-        name = "SequenceGenerator",
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-        parameters = {
+            name = "SequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
                 @Parameter(name = "sequence_name", value = "airfield_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
-        }
+            }
     )
-    @GeneratedValue(generator = "SequenceGenerator")    
+    @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
     @Column(name = "identification_anac")
@@ -128,5 +129,5 @@ public class Airfield implements Serializable {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-    
+
 }

@@ -22,28 +22,28 @@ import org.hibernate.annotations.Parameter;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name="nationality")
+@Table(name = "nationality")
 public class Nationality implements Serializable {
+
     @GenericGenerator(
-        name = "SequenceGenerator",
-        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-        parameters = {
+            name = "SequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
                 @Parameter(name = "sequence_name", value = "nationality_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
-        }
+            }
     )
-    @GeneratedValue(generator = "SequenceGenerator")    
-
+    @GeneratedValue(generator = "SequenceGenerator")
 
     @Id
     private Integer id;
     private String description;
 
     public Nationality() {
-        
+
     }
-    
+
     public Nationality(String nationality) {
         this.description = nationality;
     }

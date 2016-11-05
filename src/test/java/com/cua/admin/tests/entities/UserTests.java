@@ -14,9 +14,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 
 public class UserTests {
+
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private UserService userService;
 
@@ -27,20 +28,20 @@ public class UserTests {
         userService.lock(user);
     }
 
-        @Test
+    @Test
     public void createUser() {
         User user = new User();
         //user.setId(0);
         user.setName("Esteban");
         user.setPasswd("passwd");
         userRepository.save(user);
-        
+
         User user2 = new User("esteban2", "password2");
         userRepository.save(user2);
-        
-        Assert.assertTrue("Correcto", user.getId()>0);
-        Assert.assertTrue("Correcto", user2.getId()>0);
-        
+
+        Assert.assertTrue("Correcto", user.getId() > 0);
+        Assert.assertTrue("Correcto", user2.getId() > 0);
+
         //user.setName("pepe");
         userRepository.findAll().stream().forEach((u) -> {
             System.out.println(u.toString());

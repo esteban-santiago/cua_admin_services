@@ -16,12 +16,12 @@ import lombok.EqualsAndHashCode;
  *
  * @author esteban_santiago
  */
-
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name="account")
+@Table(name = "account")
 public class Account implements Serializable {
+
     @Id
     private Integer id;
     private Integer firstOrderGrouper;
@@ -113,12 +113,12 @@ public class Account implements Serializable {
     public void setFourthOrderGrouper(Integer fourthOrderGrouper) {
         this.fourthOrderGrouper = fourthOrderGrouper;
     }
-    
+
     public String toFormattedString() {
-        return firstOrderGrouper + "/" +
-                secondOrderGrouper + "/" +
-                thirdOrderGrouper + "/" +
-                "0000" + fourthOrderGrouper;
+        return firstOrderGrouper + "/"
+                + secondOrderGrouper + "/"
+                + thirdOrderGrouper + "/"
+                + "0000" + fourthOrderGrouper;
     }
-    
+
 }

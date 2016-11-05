@@ -16,5 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
     List<Activity> findByDescription(String description);
+
     Activity findById(Integer id);
 }

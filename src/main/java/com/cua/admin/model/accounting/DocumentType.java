@@ -10,5 +10,5 @@ package com.cua.admin.model.accounting;
  * @author esteban_santiago
  */
 public class DocumentType {
-    
+
 }

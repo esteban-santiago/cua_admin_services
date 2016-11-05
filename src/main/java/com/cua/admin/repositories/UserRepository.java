@@ -6,10 +6,8 @@
 package com.cua.admin.repositories;
 
 import com.cua.admin.model.entities.User;
-import java.io.Serializable;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 /**
  *
@@ -18,6 +16,8 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByName(String name);
+
     List<User> findByPasswd(String passwd);
+
     User findById(Integer id);
 }

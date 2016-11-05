@@ -22,12 +22,18 @@ public class UserService {
         @Autowired
 	private UserRepository userRepository;
         
+        public void lock(Integer id) {
+            this.lock(userRepository.findById(id));
+        }
+
+        public void unlock(Integer id) {
+            this.unlock(userRepository.findById(id));
+        }
+
+
         public void lock(User user) {
             user.setLocked(Boolean.TRUE);
-            //if(userRepository == null) 
-            //    System.out.println("Es null");
-            //else
-                userRepository.save(user);
+            userRepository.save(user);
         }
         
         public void unlock(User user) {
