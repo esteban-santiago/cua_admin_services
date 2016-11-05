@@ -17,11 +17,20 @@ public class AccountingTests {
     @Autowired
     private AccountRepository accountService;
     
-    @Test
+    //@Test
     public void getAccounts() {
         for(Account account : accountService.findAll()) {
             System.out.println(account.getDescription());
         }
     }
+    
+    @Test
+    public void getMajorAccounts() {
+        System.out.println("----------------Cuentas Mayores--------------");
+        accountService.findBySecondOrderGrouper(0).stream().forEach((account) -> {
+            System.out.println(account.getDescription());
+        });
+    }
 
+    
 }
