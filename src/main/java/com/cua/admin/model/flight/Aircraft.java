@@ -6,9 +6,16 @@
 package com.cua.admin.model.flight;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
@@ -39,8 +46,15 @@ public class Aircraft implements Serializable {
     private Integer id;
     private String registration; //Matrícula
     private String model; //Modelo
-    private String status; //Status: Activo, Inactivo 
+    private String status; //Status: Activo, Inactivo
+    private String brand;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "aircraft_id", nullable = true, foreignKey = @ForeignKey(name = "aircraft_id_fk"))
+    private Set<AircraftInsurance> insurance = new HashSet<>();
+
+    
+    
     /**
      * @return the id
      */
@@ -95,5 +109,33 @@ public class Aircraft implements Serializable {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the insurance
+     */
+    public Set<AircraftInsurance> getInsurance() {
+        return insurance;
+    }
+
+    /**
+     * @param insurance the insurance to set
+     */
+    public void setInsurance(Set<AircraftInsurance> insurance) {
+        this.insurance = insurance;
+    }
+
+    /**
+     * @return the brand
+     */
+    public String getBrand() {
+        return brand;
+    }
+
+    /**
+     * @param brand the brand to set
+     */
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author esteban_santiago
  */
 
-@Service //Un tiro de aquellos
+@Service
 public class UserService {
         @Autowired
 	private UserRepository userRepository;
