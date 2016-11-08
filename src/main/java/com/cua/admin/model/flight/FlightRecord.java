@@ -25,4 +25,7 @@ public class FlightRecord implements Serializable {
     @Id
     private Integer id;
 
+    public FlightRecord() {
+        
+    }
 }

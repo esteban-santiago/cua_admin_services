@@ -10,5 +10,8 @@ package com.cua.admin.model.entities.geografical;
  * @author esteban_santiago
  */
 public class Province {
-
+    
+    public Province() {
+        
+    }
 }

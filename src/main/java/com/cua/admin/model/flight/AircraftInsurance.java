@@ -42,6 +42,11 @@ public class AircraftInsurance implements Serializable {
     private LocalDate validityFrom; //Fecha de validez desde
     private LocalDate validityTo; //Fecha de validez hasta
 
+    
+    public AircraftInsurance() {
+        
+    }
+    
     /**
      * @return the id
      */

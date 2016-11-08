@@ -11,4 +11,8 @@ package com.cua.admin.model.entities.geografical;
  */
 public class Country {
     
+    public Country() {
+        
+    }
+    
 }

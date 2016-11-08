@@ -53,7 +53,9 @@ public class Aircraft implements Serializable {
     @JoinColumn(name = "aircraft_id", nullable = true, foreignKey = @ForeignKey(name = "aircraft_id_fk"))
     private Set<AircraftInsurance> insurance = new HashSet<>();
 
-    
+    public  Aircraft() {
+        
+    }
     
     /**
      * @return the id

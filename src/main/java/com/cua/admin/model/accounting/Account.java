@@ -30,6 +30,10 @@ public class Account implements Serializable {
     private Integer fourthOrderGrouper;
     private String description;
 
+    public Account() {
+        
+    }
+    
     /**
      * @return the id
      */

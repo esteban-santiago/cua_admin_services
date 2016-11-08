@@ -38,8 +38,8 @@ public class Airfield implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
-    @Column(name = "identification_anac")
-    private String identificationANAC;
+    @Column(name = "identification_iata")
+    private String identificationIATA;
     @Column(name = "identification_oaci")
     private String identificationOACI;
     private String name;
@@ -61,17 +61,17 @@ public class Airfield implements Serializable {
     }
 
     /**
-     * @return the identificationANAC
+     * @return the identificationIATA
      */
-    public String getIdentificationANAC() {
-        return identificationANAC;
+    public String getIdentificationIATA() {
+        return identificationIATA;
     }
 
     /**
-     * @param identificationANAC the identificationANAC to set
+     * @param identificationIATA the identificationIATA to set
      */
-    public void setIdentificationANAC(String identificationANAC) {
-        this.identificationANAC = identificationANAC;
+    public void setIdentificationIATA(String identificationIATA) {
+        this.identificationIATA = identificationIATA;
     }
 
     /**

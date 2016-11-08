@@ -11,4 +11,7 @@ package com.cua.admin.model.flight;
  */
 public class FlightTrack {
     
+    public FlightTrack() {
+        
+    }
 }

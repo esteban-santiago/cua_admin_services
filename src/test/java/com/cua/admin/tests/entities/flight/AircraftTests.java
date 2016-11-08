@@ -2,6 +2,7 @@ package com.cua.admin.tests.entities.flight;
 
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.flight.Aircraft;
+import com.cua.admin.model.flight.AircraftInsurance;
 import com.cua.admin.repositories.flight.AircraftRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,8 @@ public class AircraftTests {
         c150.setModel("150");
         c150.setRegistration("LV-OEE");
         aircraftRepository.save(c150);
+        AircraftInsurance seguro = new AircraftInsurance();
+        
         
     }
 

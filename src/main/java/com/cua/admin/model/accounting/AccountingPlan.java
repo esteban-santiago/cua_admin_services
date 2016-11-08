@@ -15,6 +15,10 @@ public class AccountingPlan {
 
     private Set<Account> accounts;
 
+    public AccountingPlan() {
+        
+    }
+    
     /**
      * @return the accounts
      */

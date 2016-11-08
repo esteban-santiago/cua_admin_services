@@ -10,5 +10,8 @@ package com.cua.admin.model.entities.workshop;
  * @author esteban_santiago
  */
 public class Overhaul {
-    
+   
+    public Overhaul() {
+        
+    }
 }
