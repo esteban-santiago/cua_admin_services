@@ -36,8 +36,8 @@ public class AircraftInsurance implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
-    private String type;
-    private String document; //Número de póliza
+    private String type; //Tipo de cobertura
+    private String policy; //Número de póliza
     private String company; //Aseguradora
     private LocalDate validityFrom; //Fecha de validez desde
     private LocalDate validityTo; //Fecha de validez hasta
@@ -76,17 +76,17 @@ public class AircraftInsurance implements Serializable {
     }
 
     /**
-     * @return the document
+     * @return the policy
      */
-    public String getDocument() {
-        return document;
+    public String getPolicy() {
+        return policy;
     }
 
     /**
-     * @param document the document to set
+     * @param policy the policy to set
      */
-    public void setDocument(String document) {
-        this.document = document;
+    public void setPolicy(String policy) {
+        this.policy = policy;
     }
 
     /**
@@ -131,6 +131,12 @@ public class AircraftInsurance implements Serializable {
         this.validityTo = validityTo;
     }
     
+    public Boolean isInForce(LocalDate date) {
+        return date.isAfter(getValidityFrom()) && date.isBefore(getValidityTo());
+    }
     
+    public Boolean isInForce() {
+        return this.isInForce(LocalDate.now());
+    }
     
 }

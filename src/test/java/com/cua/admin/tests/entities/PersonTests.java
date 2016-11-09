@@ -77,9 +77,11 @@ public class PersonTests {
         member2.setNationality(brazilian);
         personService.save(member2);
 
-        for (Person p : personService.findAll()) {
+        personService.findAll().stream().map((p) -> {
             Assert.notNull(p.getAddress());
+            return p;
+        }).forEach((p) -> {
             System.out.println(p.toString());
-        }
+        });
     }
 }

@@ -6,6 +6,7 @@
 package com.cua.admin.model.flight;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -47,10 +48,10 @@ public class Aircraft implements Serializable {
     private String registration; //Matrícula
     private String model; //Modelo
     private String status; //Status: Activo, Inactivo
-    private String brand;
+    private String brand; //Marca
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "aircraft_id", nullable = true, foreignKey = @ForeignKey(name = "aircraft_id_fk"))
+    @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_id_fk"))
     private Set<AircraftInsurance> insurance = new HashSet<>();
 
     public  Aircraft() {
@@ -128,6 +129,13 @@ public class Aircraft implements Serializable {
     }
 
     /**
+     * @param insurance the insurance to set
+     */
+    public void setInsurance(AircraftInsurance insurance) {
+        this.insurance.add(insurance);
+    }    
+    
+    /**
      * @return the brand
      */
     public String getBrand() {
@@ -140,4 +148,18 @@ public class Aircraft implements Serializable {
     public void setBrand(String brand) {
         this.brand = brand;
     }
+    
+    
+    public Boolean hasAnInsurancePolicyInForce() {
+        return hasAnInsurancePolicyInForce(LocalDate.now());
+    }
+    
+    public Boolean hasAnInsurancePolicyInForce(LocalDate date) {
+        Boolean policyInForce = false;
+        for(AircraftInsurance aircrafItnsurance : getInsurance()) {
+            policyInForce = policyInForce || aircrafItnsurance.isInForce(date);
+        }
+        return policyInForce;
+    }
+    
 }
