@@ -26,6 +26,9 @@ public class Currency implements Serializable {
     private Integer id;
     private String name;
 
+    public Currency() {
+    }
+
     /**
      * @return the id
      */

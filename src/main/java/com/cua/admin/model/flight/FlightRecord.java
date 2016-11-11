@@ -5,7 +5,10 @@
  */
 package com.cua.admin.model.flight;
 
+import com.cua.admin.model.entities.Member;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -24,7 +27,23 @@ public class FlightRecord implements Serializable {
 
     @Id
     private Integer id;
-
+    private Member member;
+    private Aircraft aircraft;
+    private Member instructor;
+    private LocalDate startDate;
+    private LocalTime startTime;
+    private LocalDate endDate;
+    private LocalTime endTime;
+    private Integer landings;
+    //finalidad
+    //Carácter
+    //Tipo de vuelo
+    private Airfield origin;
+    private Airfield destiny;
+    private Float amountOfTime; 
+    private String status;
+    
+    
     public FlightRecord() {
         
     }
