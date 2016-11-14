@@ -6,10 +6,10 @@
 package com.cua.admin.rest;
 
 import com.cua.admin.model.entities.Employee;
-import com.cua.admin.model.entities.Person;
+import com.cua.admin.model.entities.Member;
 import com.cua.admin.model.entities.User;
 import com.cua.admin.repositories.EmployeeRepository;
-import com.cua.admin.repositories.PersonRepository;
+import com.cua.admin.repositories.MemberRepository;
 import com.cua.admin.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +29,7 @@ public class SecureRestServiceLayer {
     private UserRepository userService;
 
     @Autowired
-    private PersonRepository personRepository;
+    private MemberRepository memberRepository;
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -55,8 +55,8 @@ public class SecureRestServiceLayer {
      * @return
      */
     @RequestMapping(value = "/person", method = RequestMethod.GET, headers = "Accept=application/json")
-    public Person getPerson(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) {
-        return personRepository.findById(id);
+    public Member getPerson(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) {
+        return memberRepository.findById(id);
     }
 
     @RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")

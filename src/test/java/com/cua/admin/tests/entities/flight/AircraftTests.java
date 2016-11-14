@@ -43,7 +43,7 @@ public class AircraftTests {
     public void checkActiveInsurancePolicy() {
         Aircraft c150 = aircraftRepository.findByRegistration("LV-OEE").get(0);
         Assert.assertTrue("No Tiene póliza activa", c150.hasAnInsurancePolicyInForce());
-        Assert.assertFalse("True erroneo", c150.hasAnInsurancePolicyInForce(LocalDate.now().plus(7, ChronoUnit.MONTHS)));
+        Assert.assertTrue("True erroneo", c150.hasAnInsurancePolicyInForce(LocalDate.now().plus(5, ChronoUnit.MONTHS)));
         //System.out.println(c150);
     }
 

@@ -1,10 +1,9 @@
 package com.cua.admin.tests.entities;
 
 import com.cua.admin.model.entities.Address;
-import com.cua.admin.model.entities.Person;
 import com.cua.admin.model.entities.Category;
+import com.cua.admin.model.entities.Member;
 import com.cua.admin.model.entities.Nationality;
-import com.cua.admin.repositories.PersonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 import com.cua.admin.repositories.CategoryRepository;
+import com.cua.admin.repositories.MemberRepository;
 import com.cua.admin.repositories.NationalityRepository;
 
 @RunWith(SpringRunner.class)
@@ -20,7 +20,7 @@ import com.cua.admin.repositories.NationalityRepository;
 public class PersonTests {
 
     @Autowired
-    private PersonRepository personService;
+    private MemberRepository memberService;
     @Autowired
     private CategoryRepository categoryReposity;
     @Autowired
@@ -60,21 +60,21 @@ public class PersonTests {
         Nationality brazilian = nationalityRepository.findByDescription("Brasilera").get(0);
         Assert.notNull(brazilian);
 
-        Person member = new Person();
+        Member member = new Member();
         member.setName("Socio 1");
         member.setCategory(category);
         member.addAddress(address);
         member.addAddress(address2);
         member.setNationality(argentinean);
-        personService.save(member);
+        memberService.save(member);
 
-        Person member2 = new Person();
+        Member member2 = new Member();
         member2.setName("Socio 2");
         member2.setCategory(category);
         member2.setNationality(brazilian);
-        personService.save(member2);
+        memberService.save(member2);
 
-        personService.findAll().stream().map((p) -> {
+        memberService.findAll().stream().map((p) -> {
             Assert.notNull(p.getAddress());
             return p;
         }).forEach((p) -> {

@@ -1,9 +1,8 @@
 package com.cua.admin.tests.entities;
 
 import com.cua.admin.model.entities.Address;
-import com.cua.admin.model.entities.Person;
-import com.cua.admin.model.entities.Category;
 import com.cua.admin.model.entities.Member;
+import com.cua.admin.model.entities.Category;
 import com.cua.admin.model.entities.Nationality;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,7 +75,7 @@ public class MemberTests {
         member2.setNationality(brazilian);
         memberService.save(member2);
 
-        for (Person p : memberService.findAll()) {
+        for (Member p : memberService.findAll()) {
             Assert.notNull(p.getAddress());
             System.out.println(p.toString());
         }
