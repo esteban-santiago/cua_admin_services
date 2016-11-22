@@ -25,6 +25,6 @@ import lombok.EqualsAndHashCode;
 public class AccountingDocument implements Serializable {
     @Id
     private Integer id;
-    private Set<AccountingEntry> accountingEntry;
+    //private Set<AccountingEntry> accountingEntry;
     
 }

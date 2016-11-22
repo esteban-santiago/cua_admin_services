@@ -24,7 +24,7 @@ import lombok.ToString;
 public class Currency implements Serializable {
     @Id
     private Integer id;
-    private String name;
+    private String description;
 
     public Currency() {
     }
@@ -46,14 +46,14 @@ public class Currency implements Serializable {
     /**
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * @param name the name to set
+     * @param description
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
