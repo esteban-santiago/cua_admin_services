@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model.entities;
+package com.cua.admin.model.core;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -22,14 +22,14 @@ import org.hibernate.annotations.Parameter;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name = "activity")
-public class Activity implements Serializable {
+@Table(name = "users")
+public class User implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "activity_id_seq"),
+                @Parameter(name = "sequence_name", value = "users_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
             }
@@ -37,19 +37,17 @@ public class Activity implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
-    private String description;
+    private String name;
+    private String passwd;
+    private Boolean locked;
 
-    public Activity() {
+    public User() {
 
     }
 
-    public Activity(String activity) {
-        this.description = activity;
-    }
-
-    public Activity(Integer id, String activity) {
-        this.id = id;
-        this.description = activity;
+    public User(String name, String passwd) {
+        this.name = name;
+        this.passwd = passwd;
     }
 
     /**
@@ -67,16 +65,44 @@ public class Activity implements Serializable {
     }
 
     /**
-     * @return the description
+     * @return the name
      */
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param description the description to set
+     * @param name the name to set
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the passwd
+     */
+    public String getPasswd() {
+        return passwd;
+    }
+
+    /**
+     * @param passwd the passwd to set
+     */
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    /**
+     * @return the bloked
+     */
+    public Boolean isLocked() {
+        return locked;
+    }
+
+    /**
+     * @param locked
+     */
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
     }
 }

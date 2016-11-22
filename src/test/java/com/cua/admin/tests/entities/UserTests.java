@@ -1,6 +1,6 @@
 package com.cua.admin.tests.entities;
 
-import com.cua.admin.model.entities.User;
+import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.UserRepository;
 import com.cua.admin.services.UserService;
 import junit.framework.Assert;

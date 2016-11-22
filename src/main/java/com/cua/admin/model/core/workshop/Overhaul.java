@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model.accounting;
+package com.cua.admin.model.core.workshop;
 
 /**
  *
  * @author esteban_santiago
  */
-public class DocumentType {
-    
-    public DocumentType() {
+public class Overhaul {
+   
+    public Overhaul() {
         
     }
-
 }

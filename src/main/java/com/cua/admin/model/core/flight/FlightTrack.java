@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model.entities.geografical;
+package com.cua.admin.model.core.flight;
 
 /**
  *
  * @author esteban_santiago
  */
-public class City {
-    public City() {
+public class FlightTrack {
+    
+    public FlightTrack() {
         
     }
-
 }

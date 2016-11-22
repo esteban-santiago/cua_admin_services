@@ -1,6 +1,6 @@
 package com.cua.admin.tests.entities;
 
-import com.cua.admin.model.entities.Nationality;
+import com.cua.admin.model.core.Nationality;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

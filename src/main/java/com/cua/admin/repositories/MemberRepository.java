@@ -5,8 +5,8 @@
  */
 package com.cua.admin.repositories;
 
-import com.cua.admin.model.entities.Member;
-import com.cua.admin.model.entities.Nationality;
+import com.cua.admin.model.core.Member;
+import com.cua.admin.model.core.Nationality;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

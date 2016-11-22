@@ -1,9 +1,9 @@
 package com.cua.admin.tests.entities;
 
-import com.cua.admin.model.entities.Address;
-import com.cua.admin.model.entities.Member;
-import com.cua.admin.model.entities.Category;
-import com.cua.admin.model.entities.Nationality;
+import com.cua.admin.model.core.Address;
+import com.cua.admin.model.core.Member;
+import com.cua.admin.model.core.Category;
+import com.cua.admin.model.core.Nationality;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

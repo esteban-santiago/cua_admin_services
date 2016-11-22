@@ -5,7 +5,7 @@
  */
 package com.cua.admin.repositories;
 
-import com.cua.admin.model.entities.Activity;
+import com.cua.admin.model.core.Activity;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

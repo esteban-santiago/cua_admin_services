@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model.entities;
+package com.cua.admin.model.core;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -22,14 +22,14 @@ import org.hibernate.annotations.Parameter;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name = "way_to_contact")
-public class WayToContact implements Serializable {
+@Table(name = "activity")
+public class Activity implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "way_to_contact_id_seq"),
+                @Parameter(name = "sequence_name", value = "activity_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
             }
@@ -37,16 +37,19 @@ public class WayToContact implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
-    private String typeOf;
-    private String identificator;
+    private String description;
 
-    public WayToContact() {
+    public Activity() {
 
     }
 
-    public WayToContact(String typeOf, String identificator) {
-        this.typeOf = typeOf;
-        this.identificator = identificator;
+    public Activity(String activity) {
+        this.description = activity;
+    }
+
+    public Activity(Integer id, String activity) {
+        this.id = id;
+        this.description = activity;
     }
 
     /**
@@ -64,31 +67,16 @@ public class WayToContact implements Serializable {
     }
 
     /**
-     * @return the typeOf
+     * @return the description
      */
-    public String getTypeOf() {
-        return typeOf;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * @param typeOf the typeOf to set
+     * @param description the description to set
      */
-    public void setTypeOf(String typeOf) {
-        this.typeOf = typeOf;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    /**
-     * @return the identificator
-     */
-    public String getIdentificator() {
-        return identificator;
-    }
-
-    /**
-     * @param identificator the identificator to set
-     */
-    public void setIdentificator(String identificator) {
-        this.identificator = identificator;
-    }
-
 }

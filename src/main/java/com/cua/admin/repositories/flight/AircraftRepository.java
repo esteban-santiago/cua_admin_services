@@ -5,7 +5,7 @@
  */
 package com.cua.admin.repositories.flight;
 
-import com.cua.admin.model.flight.Aircraft;
+import com.cua.admin.model.core.flight.Aircraft;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

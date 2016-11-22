@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model.flight;
+package com.cua.admin.model.core.flight;
 
-import com.cua.admin.model.entities.Member;
+import com.cua.admin.model.core.Member;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,8 +1,8 @@
 package com.cua.admin.tests.entities.flight;
 
 import com.cua.admin.model.accounting.Account;
-import com.cua.admin.model.flight.Aircraft;
-import com.cua.admin.model.flight.AircraftInsurance;
+import com.cua.admin.model.core.flight.Aircraft;
+import com.cua.admin.model.core.flight.AircraftInsurance;
 import com.cua.admin.repositories.flight.AircraftRepository;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

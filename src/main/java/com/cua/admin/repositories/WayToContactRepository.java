@@ -5,7 +5,7 @@
  */
 package com.cua.admin.repositories;
 
-import com.cua.admin.model.entities.WayToContact;
+import com.cua.admin.model.core.WayToContact;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

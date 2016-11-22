@@ -1,11 +1,11 @@
 package com.cua.admin.tests.entities;
 
-import com.cua.admin.model.entities.Address;
-import com.cua.admin.model.entities.Employee;
-import com.cua.admin.model.entities.Activity;
-import com.cua.admin.model.entities.Category;
-import com.cua.admin.model.entities.Nationality;
-import com.cua.admin.model.entities.WayToContact;
+import com.cua.admin.model.core.Address;
+import com.cua.admin.model.core.Employee;
+import com.cua.admin.model.core.Activity;
+import com.cua.admin.model.core.Category;
+import com.cua.admin.model.core.Nationality;
+import com.cua.admin.model.core.WayToContact;
 import com.cua.admin.repositories.EmployeeRepository;
 import java.time.LocalDate;
 import org.junit.Test;

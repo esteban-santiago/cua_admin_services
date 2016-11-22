@@ -5,9 +5,9 @@
  */
 package com.cua.admin.rest;
 
-import com.cua.admin.model.entities.Employee;
-import com.cua.admin.model.entities.Member;
-import com.cua.admin.model.entities.User;
+import com.cua.admin.model.core.Employee;
+import com.cua.admin.model.core.Member;
+import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.EmployeeRepository;
 import com.cua.admin.repositories.MemberRepository;
 import com.cua.admin.repositories.UserRepository;

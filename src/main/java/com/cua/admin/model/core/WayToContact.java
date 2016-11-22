@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cua.admin.model.entities;
+package com.cua.admin.model.core;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.ToString;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -22,14 +22,14 @@ import org.hibernate.annotations.Parameter;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "way_to_contact")
+public class WayToContact implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "users_id_seq"),
+                @Parameter(name = "sequence_name", value = "way_to_contact_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
             }
@@ -37,17 +37,16 @@ public class User implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
-    private String name;
-    private String passwd;
-    private Boolean locked;
+    private String typeOf;
+    private String identificator;
 
-    public User() {
+    public WayToContact() {
 
     }
 
-    public User(String name, String passwd) {
-        this.name = name;
-        this.passwd = passwd;
+    public WayToContact(String typeOf, String identificator) {
+        this.typeOf = typeOf;
+        this.identificator = identificator;
     }
 
     /**
@@ -65,44 +64,31 @@ public class User implements Serializable {
     }
 
     /**
-     * @return the name
+     * @return the typeOf
      */
-    public String getName() {
-        return name;
+    public String getTypeOf() {
+        return typeOf;
     }
 
     /**
-     * @param name the name to set
+     * @param typeOf the typeOf to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setTypeOf(String typeOf) {
+        this.typeOf = typeOf;
     }
 
     /**
-     * @return the passwd
+     * @return the identificator
      */
-    public String getPasswd() {
-        return passwd;
+    public String getIdentificator() {
+        return identificator;
     }
 
     /**
-     * @param passwd the passwd to set
+     * @param identificator the identificator to set
      */
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setIdentificator(String identificator) {
+        this.identificator = identificator;
     }
 
-    /**
-     * @return the bloked
-     */
-    public Boolean isLocked() {
-        return locked;
-    }
-
-    /**
-     * @param locked
-     */
-    public void setLocked(Boolean locked) {
-        this.locked = locked;
-    }
 }
