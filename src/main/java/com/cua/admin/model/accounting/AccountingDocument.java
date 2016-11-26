@@ -5,6 +5,7 @@
  */
 package com.cua.admin.model.accounting;
 
+import com.cua.admin.model.accounting.items.AccountingItem;
 import com.cua.admin.model.core.User;
 import java.io.Serializable;
 import java.time.LocalDate;

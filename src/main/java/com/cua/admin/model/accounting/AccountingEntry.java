@@ -21,7 +21,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- *
+ * Lineas del asiento
  * @author esteban_santiago
  */
 @ToString
