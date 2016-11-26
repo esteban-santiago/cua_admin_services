@@ -1,4 +1,4 @@
-package com.cua.admin.tests.entities;
+package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.UserRepository;

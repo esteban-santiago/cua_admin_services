@@ -1,8 +1,8 @@
-package com.cua.admin.tests.entities;
+package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.Address;
-import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Category;
+import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Nationality;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +17,10 @@ import com.cua.admin.repositories.NationalityRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
-public class MemberTests {
+public class PersonTests {
 
     @Autowired
     private MemberRepository memberService;
-
     @Autowired
     private CategoryRepository categoryReposity;
     @Autowired
@@ -29,10 +28,10 @@ public class MemberTests {
 
     @Test
     public void createNationality() {
-        Nationality ar = new Nationality("Argentina");
-        nationalityRepository.save(ar);
-        Nationality br = new Nationality("Brasilera");
-        nationalityRepository.save(br);
+        Nationality argentinean = new Nationality("Argentina");
+        Nationality brazilian = new Nationality("Brasilera");
+        nationalityRepository.save(argentinean);
+        nationalityRepository.save(brazilian);
     }
 
     @Test
@@ -44,7 +43,7 @@ public class MemberTests {
     }
 
     @Test
-    public void createMember() {
+    public void createPerson() {
         Address address = new Address();
         address.setStreet("Av. Berlin 729");
         address.setCity("Longchamps");
@@ -75,9 +74,11 @@ public class MemberTests {
         member2.setNationality(brazilian);
         memberService.save(member2);
 
-        for (Member p : memberService.findAll()) {
+        memberService.findAll().stream().map((p) -> {
             Assert.notNull(p.getAddress());
+            return p;
+        }).forEach((p) -> {
             System.out.println(p.toString());
-        }
+        });
     }
 }

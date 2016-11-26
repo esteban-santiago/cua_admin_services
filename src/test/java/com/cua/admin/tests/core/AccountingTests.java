@@ -1,8 +1,9 @@
-package com.cua.admin.tests.entities;
+package com.cua.admin.tests.core;
 
 import com.cua.admin.model.accounting.Account;
+import com.cua.admin.model.accounting.documents.*;
 import com.cua.admin.repositories.accounting.AccountRepository;
-import java.util.function.Consumer;
+import com.cua.admin.repositories.accounting.documents.DocumentTypeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,11 @@ public class AccountingTests {
 
     @Autowired
     private AccountRepository accountRepository;
-
+    @Autowired
+    private DocumentTypeRepository documentTypeRepository;
+    
+    
+    
     //@Test
     public void getAccounts() {
         for (Account account : accountRepository.findAll()) {
@@ -29,6 +34,15 @@ public class AccountingTests {
         accountRepository.findBySecondOrderGrouper(0).stream().forEach((Account account) -> {
             System.out.println(account.toFormattedString() + " - " + account.getDescription());
         });
+    }
+    
+    @Test
+    public void createDocumentType() {
+        CreditNoteDocumentType creditNote = new CreditNoteDocumentType();
+        //creditNote.setId(1);
+        creditNote.setDocumentTypeId("NCE");
+        creditNote.setDescription("Nota de crédito");
+        documentTypeRepository.save(creditNote);
     }
 
 }

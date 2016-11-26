@@ -1,4 +1,4 @@
-package com.cua.admin.tests.entities.flight;
+package com.cua.admin.tests.core.flight;
 
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.core.flight.Aircraft;

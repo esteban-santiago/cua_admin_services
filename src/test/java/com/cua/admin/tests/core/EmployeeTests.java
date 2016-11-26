@@ -1,4 +1,4 @@
-package com.cua.admin.tests.entities;
+package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.Address;
 import com.cua.admin.model.core.Employee;

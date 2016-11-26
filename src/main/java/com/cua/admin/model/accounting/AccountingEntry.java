@@ -5,119 +5,34 @@
  */
 package com.cua.admin.model.accounting;
 
-import com.cua.admin.model.accounting.documents.DocumentType;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import java.util.Set;
 
 /**
  *
  * @author esteban_santiago
  */
-@ToString
-@EqualsAndHashCode
-@Entity
-@Table(name = "accounting_entry")
 public class AccountingEntry implements Serializable {
-
-    public AccountingEntry() {
-    }
-    @Id
-    private Integer id;
-    private LocalDate creationDate;
-    private LocalTime creationTime;
-    private String debit;
-    private String credit;
-    //private DocumentType documentType;
-    
-
-/*    
-Año fiscal
-Periodo Fiscal
-Descripción Asiento
-Debe
-Haber
-Tipo de documento
-Número de documento
-Moneda del documento
-Importe en moneda del documento
-Moneda local
-Importe en moneda local
-Cuenta contable
-*/
+    private Set<AccountingEntryLine> accountingEntryLine;
 
     /**
-     * @return the id
+     * @return the accountingEntryLine
      */
-    public Integer getId() {
-        return id;
+    public Set<AccountingEntryLine> getAccountingEntryLine() {
+        return accountingEntryLine;
     }
 
     /**
-     * @param id the id to set
+     * @param accountingEntryLine the accountingEntryLine to set
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAccountingEntryLine(Set<AccountingEntryLine> accountingEntryLine) {
+        this.accountingEntryLine = accountingEntryLine;
     }
 
     /**
-     * @return the creationDate
+     * @param accountingEntryLine the accountingEntryLine to set
      */
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * @param creationDate the creationDate to set
-     */
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    /**
-     * @return the creationTime
-     */
-    public LocalTime getCreationTime() {
-        return creationTime;
-    }
-
-    /**
-     * @param creationTime the creationTime to set
-     */
-    public void setCreationTime(LocalTime creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    /**
-     * @return the debit
-     */
-    public String getDebit() {
-        return debit;
-    }
-
-    /**
-     * @param debit the debit to set
-     */
-    public void setDebit(String debit) {
-        this.debit = debit;
-    }
-
-    /**
-     * @return the credit
-     */
-    public String getCredit() {
-        return credit;
-    }
-
-    /**
-     * @param credit the credit to set
-     */
-    public void setCredit(String credit) {
-        this.credit = credit;
-    }
+    public void addAccountingEntryLine(AccountingEntryLine accountingEntryLine) {
+        this.accountingEntryLine.add(accountingEntryLine);
+    }  
 }
