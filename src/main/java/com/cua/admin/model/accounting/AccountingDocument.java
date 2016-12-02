@@ -37,5 +37,103 @@ public class AccountingDocument implements Serializable {
 
 
     private Set<AccountingEntry> entry;
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the creationDate
+     */
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     * @param creationDate the creationDate to set
+     */
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /**
+     * @return the fiscalYear
+     */
+    public Integer getFiscalYear() {
+        return fiscalYear;
+    }
+
+    /**
+     * @param fiscalYear the fiscalYear to set
+     */
+    public void setFiscalYear(Integer fiscalYear) {
+        this.fiscalYear = fiscalYear;
+    }
+
+    /**
+     * @return the accountingItem
+     */
+    public AccountingItem getAccountingItem() {
+        return accountingItem;
+    }
+
+    /**
+     * @param accountingItem the accountingItem to set
+     */
+    public void setAccountingItem(AccountingItem accountingItem) {
+        this.accountingItem = accountingItem;
+    }
+
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * @return the entry
+     */
+    public Set<AccountingEntry> getEntry() {
+        return entry;
+    }
+
+    /**
+     * @param entry the entry to set
+     */
+    public void setEntry(Set<AccountingEntry> entry) {
+        this.entry = entry;
+    }
     
 }
