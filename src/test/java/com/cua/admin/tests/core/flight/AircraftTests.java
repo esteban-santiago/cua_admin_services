@@ -39,7 +39,7 @@ public class AircraftTests {
         aircraftRepository.save(c150); 
     }
     
-    @Test
+    //@Test
     public void checkActiveInsurancePolicy() {
         Aircraft c150 = aircraftRepository.findByRegistration("LV-OEE").get(0);
         Assert.assertTrue("No Tiene póliza activa", c150.hasAnInsurancePolicyInForce());

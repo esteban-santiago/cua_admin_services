@@ -63,9 +63,9 @@ public class MemberTests {
 
         Member member = new Member();
         member.setName("Socio 1");
-        member.setCategory(category);
-        member.addAddress(address);
-        member.addAddress(address2);
+        //member.setCategory(category);
+        //member.addAddress(address);
+        //member.addAddress(address2);
         member.setNationality(argentinean);
         memberService.save(member);
 

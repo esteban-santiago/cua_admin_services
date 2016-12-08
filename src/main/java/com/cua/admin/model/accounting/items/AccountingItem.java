@@ -49,5 +49,5 @@ public abstract class AccountingItem implements Serializable {
     //Número de documento contable	
     //Indicador Debe/Haber
     //Cuenta Contable
-    private User user; //Usuario    
+    private User _user; //Usuario    
 }

@@ -5,58 +5,45 @@
  */
 package com.cua.admin.model.accounting;
 
-import com.cua.admin.model.accounting.documents.CreditNoteDocumentType;
+import com.cua.admin.model.core.User;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 /**
- * Lineas del asiento
+ * Cabecera del asiento
  * @author esteban_santiago
+ * 
  */
+
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name = "accounting_entry")
+@Table(name = "accounting_entry_header")
 public class AccountingEntry implements Serializable {
-
-    public AccountingEntry() {
-    }
     @Id
     private Integer id;
+    private String description; //Descripción del asiento
     private LocalDate creationDate;
-    private LocalTime creationTime;
-    private String debit;
-    private String credit;
-    //@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    //@JoinColumn(name = "document_type_id", foreignKey = @ForeignKey(name = "accounting_entry_document_type_id_fk"))
-    //private CreditNoteDocumentType documentType;
-    
+    private Integer fiscalYear;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "accounting_document_id", foreignKey = @ForeignKey(name = "accounting_entry_id_fk"))
+    private Set<AccountingEntryItem> entry;    
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "accounting_entry_user_id_fk"))
+    private User user;
 
-/*    
-Año fiscal
-Periodo Fiscal
-Descripción Asiento
-Debe
-Haber
-Tipo de documento
-Número de documento
-Moneda del documento
-Importe en moneda del documento
-Moneda local
-Importe en moneda local
-Cuenta contable
-*/
 
     /**
      * @return the id
@@ -70,6 +57,20 @@ Cuenta contable
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -87,46 +88,46 @@ Cuenta contable
     }
 
     /**
-     * @return the creationTime
+     * @return the fiscalYear
      */
-    public LocalTime getCreationTime() {
-        return creationTime;
+    public Integer getFiscalYear() {
+        return fiscalYear;
     }
 
     /**
-     * @param creationTime the creationTime to set
+     * @param fiscalYear the fiscalYear to set
      */
-    public void setCreationTime(LocalTime creationTime) {
-        this.creationTime = creationTime;
+    public void setFiscalYear(Integer fiscalYear) {
+        this.fiscalYear = fiscalYear;
+    }
+
+
+    /**
+     * @return the entry
+     */
+    public Set<AccountingEntryItem> getEntry() {
+        return entry;
     }
 
     /**
-     * @return the debit
+     * @param entry the entry to set
      */
-    public String getDebit() {
-        return debit;
+    public void setEntry(Set<AccountingEntryItem> entry) {
+        this.entry = entry;
     }
 
     /**
-     * @param debit the debit to set
+     * @return the user
      */
-    public void setDebit(String debit) {
-        this.debit = debit;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * @return the credit
+     * @param user the user to set
      */
-    public String getCredit() {
-        return credit;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    /**
-     * @param credit the credit to set
-     */
-    public void setCredit(String credit) {
-        this.credit = credit;
-    }
-
     
 }

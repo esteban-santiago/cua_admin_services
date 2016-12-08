@@ -36,13 +36,17 @@ public class AccountingTests {
         });
     }
     
-    @Test
+    //@Test
     public void createDocumentType() {
         CreditNoteDocumentType creditNote = new CreditNoteDocumentType();
-        //creditNote.setId(1);
+        creditNote.setId(1);
         creditNote.setDocumentTypeId("NCE");
         creditNote.setDescription("Nota de crédito");
         documentTypeRepository.save(creditNote);
+    }
+    
+    public void createAccountingEntry() {
+        
     }
 
 }

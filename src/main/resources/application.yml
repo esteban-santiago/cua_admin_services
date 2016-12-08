@@ -62,7 +62,7 @@ spring:
   profiles: default
   jpa:
     database: POSTGRESQL
-    show-sql: false
+    show-sql: true
     hibernate:
         ddl-auto: update
         ##default_schema: nextg
