@@ -1,8 +1,10 @@
 package com.cua.admin.tests.core;
 
 import com.cua.admin.model.accounting.Account;
+import com.cua.admin.model.accounting.AccountingEntry;
 import com.cua.admin.model.accounting.documents.*;
 import com.cua.admin.repositories.accounting.AccountRepository;
+import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentTypeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,8 @@ public class AccountingTests {
     private AccountRepository accountRepository;
     @Autowired
     private DocumentTypeRepository documentTypeRepository;
+    @Autowired
+    private AccountingEntryRepository accountingEntryRepository;
     
     
     
@@ -46,6 +50,8 @@ public class AccountingTests {
     }
     
     public void createAccountingEntry() {
+        AccountingEntry entry = new  AccountingEntry();
+        
         
     }
 

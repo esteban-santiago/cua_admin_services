@@ -63,6 +63,7 @@ Importe en moneda local
 Cuenta contable
 */
 
+    
     /**
      * @return the id
      */

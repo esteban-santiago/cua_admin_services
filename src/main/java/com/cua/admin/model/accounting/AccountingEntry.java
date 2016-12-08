@@ -39,12 +39,16 @@ public class AccountingEntry implements Serializable {
     private Integer fiscalYear;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "accounting_document_id", foreignKey = @ForeignKey(name = "accounting_entry_id_fk"))
-    private Set<AccountingEntryItem> entry;    
+    private Set<AccountingEntryItem> entryItems;    
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "accounting_entry_user_id_fk"))
     private User user;
 
 
+    public AccountingEntry() {
+        
+    }
+    
     /**
      * @return the id
      */
@@ -101,21 +105,6 @@ public class AccountingEntry implements Serializable {
         this.fiscalYear = fiscalYear;
     }
 
-
-    /**
-     * @return the entry
-     */
-    public Set<AccountingEntryItem> getEntry() {
-        return entry;
-    }
-
-    /**
-     * @param entry the entry to set
-     */
-    public void setEntry(Set<AccountingEntryItem> entry) {
-        this.entry = entry;
-    }
-
     /**
      * @return the user
      */
@@ -129,5 +118,25 @@ public class AccountingEntry implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    /**
+     * @return the entryItems
+     */
+    public Set<AccountingEntryItem> getEntryItems() {
+        return entryItems;
+    }
+
+    /**
+     * @param entryItems the entryItems to set
+     */
+    public void setEntryItems(Set<AccountingEntryItem> entryItems) {
+        this.entryItems = entryItems;
+    }
     
+    /**
+     * @param entryItem
+     */
+    public void addEntryItem(AccountingEntryItem entryItem) {
+        this.entryItems.add(entryItem);
+    }
 }
