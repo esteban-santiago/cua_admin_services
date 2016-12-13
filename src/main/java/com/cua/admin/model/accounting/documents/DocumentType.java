@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -37,7 +36,8 @@ public abstract class DocumentType implements Serializable {
                 @Parameter(name = "increment_size", value = "1")
             }
     )
-    @GeneratedValue(generator = "SequenceGenerator")    @Id
+    @GeneratedValue(generator = "SequenceGenerator")    
+    @Id
     private Integer id;
     private String documentTypeId;
     private String description;    

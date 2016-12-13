@@ -2,6 +2,8 @@ package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.Address;
 import com.cua.admin.model.core.Category;
+import com.cua.admin.model.core.IdentityDocument;
+import com.cua.admin.model.core.IdentityDocumentType;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Nationality;
 import org.junit.Test;
@@ -72,6 +74,7 @@ public class PersonTests {
         member2.setName("Socio 2");
         member2.setCategory(category);
         member2.setNationality(brazilian);
+        member2.setIdentityDocument(new IdentityDocument(IdentityDocumentType.DNI, "24036873"));
         memberService.save(member2);
 
         memberService.findAll().stream().map((p) -> {
@@ -81,4 +84,16 @@ public class PersonTests {
             System.out.println(p.toString());
         });
     }
+    
+    /*@Test
+    public void testIdentityDocument() {
+        IdentityDocument dni = IdentityDocument.DNI;
+        dni.setNumber("24036873");
+        System.out.println("DNI.name(): " + dni.name());
+        System.out.println("DNI.number(): " + dni.getNumber());
+        System.out.println("DNI.ordinal(): " + dni.ordinal());
+        for (IdentityDocument value : IdentityDocument.values()) {
+            System.out.println(value.name());
+        }
+    }*/
 }

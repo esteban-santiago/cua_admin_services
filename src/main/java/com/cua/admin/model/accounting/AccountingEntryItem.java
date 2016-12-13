@@ -5,7 +5,6 @@
  */
 package com.cua.admin.model.accounting;
 
-import com.cua.admin.model.accounting.documents.CreditNoteDocumentType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,14 +12,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * Lineas del asiento
@@ -32,15 +32,23 @@ import lombok.ToString;
 @Table(name = "accounting_entry_item")
 public class AccountingEntryItem implements Serializable {
 
-    public AccountingEntryItem() {
-    }
+     @GenericGenerator(
+            name = "SequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                @Parameter(name = "sequence_name", value = "accounting_entry_item_id_seq"),
+                @Parameter(name = "initial_value", value = "1"),
+                @Parameter(name = "increment_size", value = "1")
+            }
+    )
+    @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
     private LocalDate creationDate;
     private LocalTime creationTime;
-    private String debit;
-    private String credit;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Float debit;
+    private Float credit;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "accounting_entry_item_account_id_fk"))
     private Account account;
     //@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -62,6 +70,9 @@ Moneda local
 Importe en moneda local
 Cuenta contable
 */
+
+    public AccountingEntryItem() {
+    }
 
     
     /**
@@ -107,30 +118,30 @@ Cuenta contable
     }
 
     /**
-     * @return the debit
+     * @return the account
      */
-    public String getDebit() {
-        return debit;
+    public Account getAccount() {
+        return account;
+    }
+
+    /**
+     * @param account the account to set
+     */
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     /**
      * @param debit the debit to set
      */
-    public void setDebit(String debit) {
+    public void setDebit(Float debit) {
         this.debit = debit;
-    }
-
-    /**
-     * @return the credit
-     */
-    public String getCredit() {
-        return credit;
     }
 
     /**
      * @param credit the credit to set
      */
-    public void setCredit(String credit) {
+    public void setCredit(Float credit) {
         this.credit = credit;
     }
 

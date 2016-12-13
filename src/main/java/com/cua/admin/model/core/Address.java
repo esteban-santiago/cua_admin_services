@@ -6,7 +6,6 @@
 package com.cua.admin.model.core;
 
 import java.io.Serializable;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,7 +22,6 @@ import org.hibernate.annotations.Parameter;
 @ToString
 @EqualsAndHashCode
 @Entity
-//@Embeddable
 @Table(name = "address")
 public class Address implements Serializable {
     

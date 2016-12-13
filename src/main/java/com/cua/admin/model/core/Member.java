@@ -12,6 +12,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
@@ -60,11 +63,11 @@ public class Member implements Serializable {
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "member_nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
 
-    private String identityDocument; //Documento de identidad
+    private IdentityDocument identityDocument; //Documento de identidad
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //@JoinTable(name = "member_address")
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "address_id_fk"))
-    //@ElementCollection @OrderColumn
     private Set<Address> address = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -202,6 +205,20 @@ public class Member implements Serializable {
      */
     public void setWayToContact(Set<WayToContact> wayToContact) {
         this.wayToContact = wayToContact;
+    }
+
+    /**
+     * @return the identityDocument
+     */
+    public IdentityDocument getIdentityDocument() {
+        return identityDocument;
+    }
+
+    /**
+     * @param identityDocument the identityDocument to set
+     */
+    public void setIdentityDocument(IdentityDocument identityDocument) {
+        this.identityDocument = identityDocument;
     }
 
 }

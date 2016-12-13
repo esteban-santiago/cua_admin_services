@@ -17,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -42,12 +44,12 @@ public abstract class AccountingItem implements Serializable {
     private Float accountabilityAmount; //Importe en moneda Contable
     private Currency accountabilityCurrency; //Moneda contable
     private LocalDate expirationDate; //Fecha de vencimiento
+    @ManyToOne
+    @JoinColumn(name="compensation_document_id")
     private AccountingItem compensationDocument; //(*) Documento de compensación
-    //(*) Tipo de documento de compensación
     private LocalDate compensationDate; //(*) Fecha de compensación
     private Member member; //Socio
     //Número de documento contable	
     //Indicador Debe/Haber
-    //Cuenta Contable
     private User _user; //Usuario    
 }

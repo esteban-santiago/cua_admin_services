@@ -40,24 +40,5 @@ public class CreditNoteDocumentType extends DocumentType {
     private String documentTypeId;
     private String description;
 */
-    //@Column(nullable = false, insertable=false, updatable=false,
-    //    columnDefinition = "integer DEFAULT nextval('my_sequence')")
-    //@Generated(GenerationTime.INSERT) // this is important
-    @Column(columnDefinition="serial")
-    private Integer sequencedNumber;    
-
-    /**
-     * @return the sequencedNumber
-     */
-    public Integer getSequencedNumber() {
-        return sequencedNumber;
-    }
-
-    /**
-     * @param sequencedNumber the sequencedNumber to set
-     */
-    public void setSequencedNumber(Integer sequencedNumber) {
-        this.sequencedNumber = sequencedNumber;
-    }
  
 }
