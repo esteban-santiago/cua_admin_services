@@ -7,7 +7,7 @@ import com.cua.admin.model.accounting.documents.*;
 import com.cua.admin.repositories.UserRepository;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
-import com.cua.admin.repositories.accounting.documents.DocumentTypeRepository;
+import com.cua.admin.repositories.accounting.documents.DocumentRepository;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class AccountingTests {
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
-    private DocumentTypeRepository documentTypeRepository;
+    private DocumentRepository documentRepository;
     @Autowired
     private AccountingEntryRepository accountingEntryRepository;
     @Autowired
@@ -45,14 +45,14 @@ public class AccountingTests {
         });
     }
     
-    //@Test
-    public void createDocumentType() {
-        CreditNoteDocumentType creditNote = new CreditNoteDocumentType();
-        creditNote.setId(1);
-        creditNote.setDocumentTypeId("NCE");
-        creditNote.setDescription("Nota de crédito");
-        documentTypeRepository.save(creditNote);
+    @Test
+    public void createCreditNoteIssued() {
+        Document nce = new CreditNoteIssuedDocument();
+        nce.setAccountabilityAmount(1544F);
+        nce.setAmount(1544F);
+        documentRepository.save(nce);
     }
+    
     
     @Test
     public void createAccountingEntry() {

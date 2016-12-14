@@ -56,7 +56,7 @@ public class Member implements Serializable {
     private Integer id;
     private String name;
 
-    private LocalDate dateOfCreation; //Fecha de Ingreso
+    private LocalDate dateOfCreation = LocalDate.now(); //Fecha de Alta
     private LocalDate dateOfBirth; //Fecha de nacimiento
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

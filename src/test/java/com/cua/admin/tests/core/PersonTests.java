@@ -74,15 +74,19 @@ public class PersonTests {
         member2.setName("Socio 2");
         member2.setCategory(category);
         member2.setNationality(brazilian);
-        member2.setIdentityDocument(new IdentityDocument(IdentityDocumentType.DNI, "24036873"));
+        member2.setIdentityDocument(new IdentityDocument(IdentityDocumentType.PASSPORT, "24036873"));
         memberService.save(member2);
 
+        for (IdentityDocumentType value: IdentityDocumentType.values())
+            System.out.println("value: " + value.getDescription());
+        
         memberService.findAll().stream().map((p) -> {
             Assert.notNull(p.getAddress());
             return p;
         }).forEach((p) -> {
             System.out.println(p.toString());
         });
+
     }
     
     /*@Test

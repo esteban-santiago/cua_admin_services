@@ -6,7 +6,6 @@
 package com.cua.admin.model.accounting.items;
 
 import com.cua.admin.model.accounting.Currency;
-import com.cua.admin.model.accounting.documents.DocumentType;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.User;
 import java.io.Serializable;
@@ -27,7 +26,7 @@ import org.hibernate.annotations.Parameter;
  * Partidas abiertas y compensadas
  * @author esteban_santiago
  */
-
+/*
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 @Table(name = "accounting_item")
@@ -52,4 +51,4 @@ public abstract class AccountingItem implements Serializable {
     //Número de documento contable	
     //Indicador Debe/Haber
     private User _user; //Usuario    
-}
+}*/

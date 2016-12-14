@@ -15,14 +15,14 @@ import org.springframework.data.repository.CrudRepository;
  * @author esteban_santiago
  * @param <T>
  */
-public interface DocumentTypeRepository<T extends DocumentType> extends CrudRepository<T, Integer> {
+public interface DocumentRepository<T extends Document> extends CrudRepository<T, Integer> {
 
     /**
      *
      * @param description
      * @return
      */
-    List<T> findByDescription(String description);
+    //List<T> findByDescription(String description);
 
     /**
      *
@@ -36,5 +36,5 @@ public interface DocumentTypeRepository<T extends DocumentType> extends CrudRepo
      * @param id
      * @return
      */
-    T findByDocumentTypeId(Integer id);
+    //T findByDocumentTypeId(Integer id);
 }
