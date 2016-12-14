@@ -20,6 +20,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
@@ -31,6 +32,7 @@ import org.hibernate.annotations.Parameter;
  */
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
+//@MappedSuperclass
 @Table(name = "accounting_item")
 @DiscriminatorColumn(name = "document_type_discriminator")
 public abstract class Document implements Serializable {
