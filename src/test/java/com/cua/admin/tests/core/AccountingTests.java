@@ -51,6 +51,12 @@ public class AccountingTests {
         nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
         documentRepository.save(nce);
+
+        Document fve = new FlightRecordIssuedDocument();
+        fve.setAccountabilityAmount(3544F);
+        fve.setAmount(3544F);
+        documentRepository.save(fve);
+
     }
     
     

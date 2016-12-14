@@ -50,8 +50,8 @@ public abstract class Document implements Serializable {
     private Long id; //Número de doc
     @Enumerated(EnumType.STRING)
     private DocumentType documentType; //Tipo de Documento
-    private LocalDate creationDate; //Fecha de documento
-    private LocalDate accountabilityDate; //Fecha de contabilización
+    private LocalDate creationDate = LocalDate.now(); //Fecha de documento
+    private LocalDate accountabilityDate = LocalDate.now(); //Fecha de contabilización
     private Float amount; //Importe en moneda del documento	
     @OneToOne
     @JoinColumn(name="currency_id")
@@ -60,7 +60,7 @@ public abstract class Document implements Serializable {
     @OneToOne
     @JoinColumn(name="accountability_currency_id")
     private Currency accountabilityCurrency; //Moneda contable
-    private LocalDate expirationDate; //Fecha de vencimiento
+    private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
     @OneToOne
     @JoinColumn(name="compensation_document_id")
     private Document compensationDocument; //(*) Documento de compensación
@@ -72,7 +72,7 @@ public abstract class Document implements Serializable {
     //Indicador Debe/Haber
     @OneToOne
     @JoinColumn(name="user_id")
-    private User _user; //Usuario    
+    private User user; //Usuario    
 
     /**
      * @return the id
@@ -246,14 +246,14 @@ public abstract class Document implements Serializable {
      * @return the _user
      */
     public User getUser() {
-        return _user;
+        return user;
     }
 
     /**
-     * @param _user the _user to set
+     * @param user
      */
-    public void setUser(User _user) {
-        this._user = _user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     

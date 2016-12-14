@@ -27,22 +27,20 @@ import org.hibernate.annotations.Parameter;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@DiscriminatorValue(value = "NCE")
-public class CreditNoteIssuedDocument extends Document implements Serializable {
+@DiscriminatorValue(value = "FVE")
+public class FlightRecordIssuedDocument extends Document implements Serializable {
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "document_credit_note_issued_id_seq"),
-                @Parameter(name = "initial_value", value = "8000"),
+                @Parameter(name = "sequence_name", value = "document_flight_record_issued_id_seq"),
+                @Parameter(name = "initial_value", value = "9000"),
                 @Parameter(name = "increment_size", value = "1")
             }
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Long id;
-    //private String documentTypeId;
-    //private String description;
 
     /**
      * @return the id
@@ -59,14 +57,4 @@ public class CreditNoteIssuedDocument extends Document implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    /**
-     * @param amount the amount to set
-     */
-    @Override
-    public void setAmount(Float amount) {
-        super.setAmount(amount * (-1));
-    }
-
- 
 }
