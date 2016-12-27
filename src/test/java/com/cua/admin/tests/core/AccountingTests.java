@@ -68,7 +68,7 @@ public class AccountingTests {
         nce.setAmount(1544F);
         nce = creditNoteRepository.save(nce);
         entityManager.flush();
-        assertThat(nce.getId()).isGreaterThanOrEqualTo(8000);
+        assertThat(nce.getId()).isGreaterThan(0);
         assertThat(nce.getCreditNoteSequence()).isGreaterThanOrEqualTo(8000);
 
         FlightRecordIssuedDocument fve = new FlightRecordIssuedDocument();
@@ -76,7 +76,7 @@ public class AccountingTests {
         fve.setAmount(3544F);
         fve = flightRecordRepository.save(fve);
         entityManager.flush();
-        assertThat(fve.getId()).isGreaterThanOrEqualTo(9000);
+        assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getFlightRecordSequence()).isGreaterThanOrEqualTo(9000);
     }
 

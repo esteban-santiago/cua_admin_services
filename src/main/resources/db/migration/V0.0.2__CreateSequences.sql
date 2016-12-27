@@ -1,0 +1,2 @@
+CREATE SEQUENCE document_credit_note_issued_id_seq START 8000;
+CREATE SEQUENCE document_flight_record_issued_id_seq START 9000;

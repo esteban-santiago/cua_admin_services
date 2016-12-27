@@ -25,7 +25,7 @@ public class CreditNoteIssuedDocument extends Document implements Serializable {
             unique = true,
             insertable = false,
             updatable = false,
-            columnDefinition = "BIGINT DEFAULT nextval('test_seq_1')"
+            columnDefinition = "BIGINT DEFAULT nextval('document_credit_note_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
     private Long creditNoteSequence;

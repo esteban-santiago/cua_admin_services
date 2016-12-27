@@ -25,7 +25,7 @@ public class FlightRecordIssuedDocument extends Document implements Serializable
             unique = true,
             insertable = false,
             updatable = false,
-            columnDefinition = "BIGINT DEFAULT nextval('test_seq_2')"
+            columnDefinition = "BIGINT DEFAULT nextval('document_flight_record_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
     private Long flightRecordSequence;

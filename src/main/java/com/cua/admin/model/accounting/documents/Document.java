@@ -23,8 +23,12 @@ public abstract class Document implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",
-            strategy = "com.cua.admin.model.accounting.documents.generators.DocumentSequenceGenerator",
-            parameters = {@Parameter(name = "sequence_name", value = "accounting_item_id_seq")}
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "accounting_item_id_seq"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
