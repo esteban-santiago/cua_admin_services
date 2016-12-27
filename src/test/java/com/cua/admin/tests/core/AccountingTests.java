@@ -4,25 +4,36 @@ import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntry;
 import com.cua.admin.model.accounting.AccountingEntryItem;
 import com.cua.admin.model.accounting.documents.CreditNoteIssuedDocument;
-import com.cua.admin.model.accounting.documents.Document;
 import com.cua.admin.model.accounting.documents.FlightRecordIssuedDocument;
 import com.cua.admin.repositories.UserRepository;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class AccountingTests extends SpringIntegrationTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+@ActiveProfiles("test")
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class AccountingTests {
 
     @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
-    private DocumentRepository documentRepository;
+    private DocumentRepository<FlightRecordIssuedDocument> flightRecordRepository;
+
+    @Autowired
+    private DocumentRepository<CreditNoteIssuedDocument> creditNoteRepository;
 
     @Autowired
     private AccountingEntryRepository accountingEntryRepository;
@@ -47,16 +58,17 @@ public class AccountingTests extends SpringIntegrationTest {
     
     @Test
     public void createCreditNoteIssued() {
-        Document nce = new CreditNoteIssuedDocument();
+        CreditNoteIssuedDocument nce = new CreditNoteIssuedDocument();
         nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
-        documentRepository.save(nce);
+        nce = creditNoteRepository.save(nce);
+        assertThat(nce.getId()).isGreaterThanOrEqualTo(8000);
 
-        Document fve = new FlightRecordIssuedDocument();
+        FlightRecordIssuedDocument fve = new FlightRecordIssuedDocument();
         fve.setAccountabilityAmount(3544F);
         fve.setAmount(3544F);
-        documentRepository.save(fve);
-
+        fve = flightRecordRepository.save(fve);
+        assertThat(fve.getId()).isGreaterThanOrEqualTo(9000);
     }
 
     @Test
