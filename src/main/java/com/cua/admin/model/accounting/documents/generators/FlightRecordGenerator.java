@@ -11,8 +11,8 @@ class FlightRecordGenerator extends SequenceStyleGenerator {
 
     @Override
     public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
-        params.setProperty("initial_value", "9000");
-        params.setProperty("sequence_name", "document_flight_record_issued_id_seq");
+        params.setProperty(INITIAL_PARAM, "9000");
+        params.setProperty(SEQUENCE_PARAM, "document_flight_record_issued_id_seq");
         super.configure(type, params, serviceRegistry);
     }
 }
