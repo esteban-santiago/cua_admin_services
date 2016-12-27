@@ -5,7 +5,6 @@
  */
 package com.cua.admin.model.accounting;
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +16,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "account")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Account implements Serializable {
 
     @Id
@@ -27,6 +26,7 @@ public class Account implements Serializable {
     private Integer secondOrderGrouper;
     private Integer thirdOrderGrouper;
     private Integer fourthOrderGrouper;
+
     private String description;
 
     public String toFormattedString() {

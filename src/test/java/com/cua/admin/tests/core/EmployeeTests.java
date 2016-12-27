@@ -1,33 +1,26 @@
 package com.cua.admin.tests.core;
 
-import com.cua.admin.model.core.Address;
-import com.cua.admin.model.core.Employee;
-import com.cua.admin.model.core.Activity;
-import com.cua.admin.model.core.Category;
-import com.cua.admin.model.core.Nationality;
-import com.cua.admin.model.core.WayToContact;
-import com.cua.admin.repositories.EmployeeRepository;
-import java.time.LocalDate;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import com.cua.admin.model.core.*;
 import com.cua.admin.repositories.ActivityRepository;
 import com.cua.admin.repositories.CategoryRepository;
+import com.cua.admin.repositories.EmployeeRepository;
 import com.cua.admin.repositories.NationalityRepository;
-import java.time.temporal.ChronoUnit;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class EmployeeTests {
+import java.time.LocalDate;
+
+public class EmployeeTests extends SpringIntegrationTest {
 
     @Autowired
     private EmployeeRepository employeeService;
+
     @Autowired
     private ActivityRepository activityRepository;
+
     @Autowired
     private CategoryRepository categoryReposity;
+
     @Autowired
     private NationalityRepository nationalityReposity;
 
@@ -81,22 +74,19 @@ public class EmployeeTests {
         mecanico2.setName("Mecanico 2");
         mecanico2.setActivity(activity);
         mecanico2.setCategory(category);
-        mecanico2.setDateOfCreation(LocalDate.now().plus(10, ChronoUnit.DAYS));
+        mecanico2.setDateOfCreation(LocalDate.now().plusDays(10));
         mecanico2.setDateOfBirth(LocalDate.parse("1976-08-30"));
         mecanico2.setNationality(peruvian);
         employeeService.save(mecanico2);
 
         for (Employee e : employeeService.findAll()) {
-            System.out.println(e.toString() + " : " + e.getActivity().toString());
+            System.out.println(e + " : " + e.getActivity());
         }
     }
 
     @Test
     public void getEmployeesByNationality() {
         Nationality peruvian = nationalityReposity.findById(2);
-        employeeService.findByNationality(peruvian).stream().forEach((e) -> {
-            System.out.println(e.toString());
-        });
-
+        employeeService.findByNationality(peruvian).forEach(System.out::println);
     }
 }

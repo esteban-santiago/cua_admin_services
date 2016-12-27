@@ -1,6 +1,5 @@
 package com.cua.admin.model.accounting;
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -19,7 +18,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "accounting_entry_item")
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class AccountingEntryItem implements Serializable {
 
      @GenericGenerator(

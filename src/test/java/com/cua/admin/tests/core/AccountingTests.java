@@ -11,29 +11,26 @@ import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class AccountingTests {
+public class AccountingTests extends SpringIntegrationTest {
 
     @Autowired
     private AccountRepository accountRepository;
+
     @Autowired
     private DocumentRepository documentRepository;
+
     @Autowired
     private AccountingEntryRepository accountingEntryRepository;
+
     @Autowired
     private UserRepository userRepository;
     
-    
-    //@Test
+    @Test
     public void getAccounts() {
         for (Account account : accountRepository.findAll()) {
             System.out.println(account.getDescription());
@@ -61,24 +58,21 @@ public class AccountingTests {
         documentRepository.save(fve);
 
     }
-    
-    
+
     @Test
     public void createAccountingEntry() {
         AccountingEntry entry = new  AccountingEntry();
-        entry.setCreationDate(LocalDate.now());
+        entry.setCreationDate(LocalDateTime.now());
         entry.setDescription("Asiento de prueba");
         entry.setFiscalYear(LocalDate.now().getYear());
         entry.setUser(userRepository.findById(1002));
         //accountingEntryRepository.save(entry);
         AccountingEntryItem item1 = new AccountingEntryItem();
         AccountingEntryItem item2 = new AccountingEntryItem();
-        item1.setCreationDate(LocalDate.now());
-        item1.setCreationTime(LocalTime.now());
+        item1.setCreationDate(LocalDateTime.now());
         item1.setAccount(accountRepository.findById(1700)); //Cuotas a cobrar
         item1.setCredit(350.00f);
-        item2.setCreationDate(LocalDate.now());
-        item2.setCreationTime(LocalTime.now());
+        item2.setCreationDate(LocalDateTime.now());
         item2.setAccount(accountRepository.findById(8800)); //Cuotas y servicios
         item2.setDebit(350.00f);
         entry.addEntryItem(item1);

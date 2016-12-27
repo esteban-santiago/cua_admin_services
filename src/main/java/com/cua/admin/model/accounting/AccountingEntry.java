@@ -1,7 +1,6 @@
 package com.cua.admin.model.accounting;
 
 import com.cua.admin.model.core.User;
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,16 +19,16 @@ import java.util.Set;
  */
 @Data
 @Entity
-@Table(name = "accounting_entry_header")
+@Table(name = "accounting_entry")
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class AccountingEntry implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "accounting_entry_header_id_seq"),
+                @Parameter(name = "sequence_name", value = "accounting_entry_id_seq"),
                 @Parameter(name = "initial_value", value = "1"),
                 @Parameter(name = "increment_size", value = "1")
             }
@@ -44,7 +43,7 @@ public class AccountingEntry implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "accounting_document_id", foreignKey = @ForeignKey(name = "accounting_entry_id_fk"))
-    private Set<AccountingEntryItem> entryItems = new HashSet<>();    
+    private Set<AccountingEntryItem> entryItems = new HashSet<>();
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "accounting_entry_user_id_fk"))

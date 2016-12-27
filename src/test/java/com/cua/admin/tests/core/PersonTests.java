@@ -5,15 +5,11 @@ import com.cua.admin.repositories.CategoryRepository;
 import com.cua.admin.repositories.MemberRepository;
 import com.cua.admin.repositories.NationalityRepository;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.Assert;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class PersonTests {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class PersonTests extends SpringIntegrationTest {
 
     @Autowired
     private MemberRepository memberService;
@@ -54,9 +50,9 @@ public class PersonTests {
 
         Category category = categoryReposity.findByDescription("Socio").get(0);
         Nationality argentinean = nationalityRepository.findByDescription("Argentina").get(0);
-        Assert.notNull(argentinean);
+        assertThat(argentinean).isNotNull();
         Nationality brazilian = nationalityRepository.findByDescription("Brasilera").get(0);
-        Assert.notNull(brazilian);
+        assertThat(brazilian).isNotNull();
 
         Member member = new Member();
         member.setName("Socio 1");
@@ -75,14 +71,10 @@ public class PersonTests {
 
         for (IdentityDocumentType value: IdentityDocumentType.values())
             System.out.println("value: " + value.getDescription());
-        
-        memberService.findAll().stream().map((p) -> {
-            Assert.notNull(p.getAddress());
-            return p;
-        }).forEach((p) -> {
-            System.out.println(p.toString());
-        });
 
+        assertThat(memberService.findAll())
+                .extracting("address")
+                .isNotNull();
     }
     
     /*@Test

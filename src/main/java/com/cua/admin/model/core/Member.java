@@ -3,6 +3,7 @@ package com.cua.admin.model.core;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,9 +29,12 @@ public class Member implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+
     private String name;
 
+    @CreatedDate
     private LocalDate dateOfCreation = LocalDate.now(); //Fecha de Alta
+
     private LocalDate dateOfBirth; //Fecha de nacimiento
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -51,5 +55,13 @@ public class Member implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "way_to_contact_id_fk"))
     private Set<WayToContact> wayToContact = new HashSet<>();
-    
+
+    public void addAddress(Address address) {
+        this.address.add(address);
+    }
+
+    public void addWayToContact(WayToContact wayToContact) {
+        this.wayToContact.add(wayToContact);
+    }
+
 }

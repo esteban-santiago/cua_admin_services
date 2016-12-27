@@ -1,22 +1,19 @@
 package com.cua.admin.tests.core.flight;
 
-import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.core.flight.Aircraft;
 import com.cua.admin.model.core.flight.AircraftInsurance;
 import com.cua.admin.repositories.flight.AircraftRepository;
+import com.cua.admin.tests.core.SpringIntegrationTest;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import java.util.Collections;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class AircraftTests {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class AircraftTests extends SpringIntegrationTest {
 
     @Autowired
     private AircraftRepository aircraftRepository;
@@ -35,16 +32,21 @@ public class AircraftTests {
         seguro.setType("Terceros Completo");
         seguro.setValidityFrom(LocalDate.now().minus(6, ChronoUnit.MONTHS));
         seguro.setValidityTo(LocalDate.now().plus(8, ChronoUnit.MONTHS));
-        c150.setInsurance(seguro);
+        c150.setInsurance(Collections.singleton(seguro));
         aircraftRepository.save(c150); 
     }
     
     //@Test
     public void checkActiveInsurancePolicy() {
         Aircraft c150 = aircraftRepository.findByRegistration("LV-OEE").get(0);
-        Assert.assertTrue("No Tiene póliza activa", c150.hasAnInsurancePolicyInForce());
-        Assert.assertTrue("True erroneo", c150.hasAnInsurancePolicyInForce(LocalDate.now().plus(5, ChronoUnit.MONTHS)));
-        //System.out.println(c150);
+
+        assertThat(c150.hasAnInsurancePolicyInForce())
+                .describedAs("No Tiene póliza activa")
+                .isTrue();
+
+        assertThat(c150.hasAnInsurancePolicyInForce(LocalDate.now().plusMonths(5)))
+                .describedAs("True erroneo")
+                .isTrue();
     }
 
 }
