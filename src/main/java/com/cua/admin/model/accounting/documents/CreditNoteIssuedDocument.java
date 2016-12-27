@@ -1,34 +1,26 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.accounting.documents;
 
-import java.io.Serializable;
-import javax.annotation.Generated;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-/**
- *
- * @author esteban_santiago
- */
-
+@Getter
+@Setter
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @DiscriminatorValue(value = "NCE")
 public class CreditNoteIssuedDocument extends Document implements Serializable {
+
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -45,22 +37,6 @@ public class CreditNoteIssuedDocument extends Document implements Serializable {
     //private String description;
 
     /**
-     * @return the id
-     */
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
      * @param amount the amount to set
      */
     @Override
@@ -68,5 +44,4 @@ public class CreditNoteIssuedDocument extends Document implements Serializable {
         super.setAmount(amount * (-1));
     }
 
- 
 }

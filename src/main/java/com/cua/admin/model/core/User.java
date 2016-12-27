@@ -1,26 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.core;
 
-import java.io.Serializable;
+import lombok.Data;
+import lombok.NonNull;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.ToString;
-import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import java.io.Serializable;
 
-/**
- *
- * @author esteban_santiago
- */
-@ToString
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -37,72 +28,13 @@ public class User implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+
+    @NonNull
     private String name;
+
+    @NonNull
     private String passwd;
+
     private Boolean locked;
 
-    public User() {
-
-    }
-
-    public User(String name, String passwd) {
-        this.name = name;
-        this.passwd = passwd;
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the passwd
-     */
-    public String getPasswd() {
-        return passwd;
-    }
-
-    /**
-     * @param passwd the passwd to set
-     */
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    /**
-     * @return the bloked
-     */
-    public Boolean isLocked() {
-        return locked;
-    }
-
-    /**
-     * @param locked
-     */
-    public void setLocked(Boolean locked) {
-        this.locked = locked;
-    }
 }

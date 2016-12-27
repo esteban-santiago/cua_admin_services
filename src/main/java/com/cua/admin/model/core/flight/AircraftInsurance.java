@@ -1,29 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.core.flight;
-import java.io.Serializable;
-import java.time.LocalDate;
+
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.ToString;
-import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-/**
- *
- * @author esteban_santiago
- */
-@ToString
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "aircraft_insurance")
 public class AircraftInsurance implements Serializable {
+
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -36,107 +28,19 @@ public class AircraftInsurance implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+
     private String type; //Tipo de cobertura
     private String policy; //Número de póliza
     private String company; //Aseguradora
     private LocalDate validityFrom; //Fecha de validez desde
     private LocalDate validityTo; //Fecha de validez hasta
 
-    
-    public AircraftInsurance() {
-        
-    }
-    
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * @return the policy
-     */
-    public String getPolicy() {
-        return policy;
-    }
-
-    /**
-     * @param policy the policy to set
-     */
-    public void setPolicy(String policy) {
-        this.policy = policy;
-    }
-
-    /**
-     * @return the company
-     */
-    public String getCompany() {
-        return company;
-    }
-
-    /**
-     * @param company the company to set
-     */
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    /**
-     * @return the validityFrom
-     */
-    public LocalDate getValidityFrom() {
-        return validityFrom;
-    }
-
-    /**
-     * @param validityFrom the validityFrom to set
-     */
-    public void setValidityFrom(LocalDate validityFrom) {
-        this.validityFrom = validityFrom;
-    }
-
-    /**
-     * @return the validityTo
-     */
-    public LocalDate getValidityTo() {
-        return validityTo;
-    }
-
-    /**
-     * @param validityTo the validityTo to set
-     */
-    public void setValidityTo(LocalDate validityTo) {
-        this.validityTo = validityTo;
-    }
-    
     public Boolean isInForce(LocalDate date) {
         return date.isAfter(getValidityFrom()) && date.isBefore(getValidityTo());
     }
     
     public Boolean isInForce() {
-        return this.isInForce(LocalDate.now());
+        return isInForce(LocalDate.now());
     }
     
 }

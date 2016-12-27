@@ -5,18 +5,12 @@
  */
 package com.cua.admin.utils;
 
-import java.sql.Date;
-import java.time.Instant;
-import java.time.LocalDate;
-//import java.util.Date;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
+import java.sql.Date;
+import java.time.LocalDate;
 
-/**
- *
- * @author esteban_santiago
- */
-
+//import java.util.Date;
 
 @Converter(autoApply = true)
 public class LocalDateConverter implements AttributeConverter<LocalDate, Date> {

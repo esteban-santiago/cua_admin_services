@@ -1,28 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.core;
 
-import java.io.Serializable;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import java.io.Serializable;
 
-/**
- *
- * @author esteban_santiago
- */
-@ToString
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "way_to_contact")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor
 public class WayToContact implements Serializable {
 
     @GenericGenerator(
@@ -37,58 +29,11 @@ public class WayToContact implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+
+    @NonNull
     private String typeOf;
+
+    @NonNull
     private String identificator;
-
-    public WayToContact() {
-
-    }
-
-    public WayToContact(String typeOf, String identificator) {
-        this.typeOf = typeOf;
-        this.identificator = identificator;
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the typeOf
-     */
-    public String getTypeOf() {
-        return typeOf;
-    }
-
-    /**
-     * @param typeOf the typeOf to set
-     */
-    public void setTypeOf(String typeOf) {
-        this.typeOf = typeOf;
-    }
-
-    /**
-     * @return the identificator
-     */
-    public String getIdentificator() {
-        return identificator;
-    }
-
-    /**
-     * @param identificator the identificator to set
-     */
-    public void setIdentificator(String identificator) {
-        this.identificator = identificator;
-    }
 
 }

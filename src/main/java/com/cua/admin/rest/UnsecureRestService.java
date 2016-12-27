@@ -7,28 +7,19 @@ package com.cua.admin.rest;
 
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author esteban_santiago
- */
 @RestController
 @RequestMapping("/api")
-public class UnsecureRestServiceLayer {
+@RequiredArgsConstructor
+public class UnsecureRestService {
 
-    @Autowired
-    private UserRepository userService;
+    private final UserRepository userService;
 
-    /**
-     *
-     * @param user
-     * @return
-     */
     @RequestMapping(value = "/login", method = RequestMethod.GET, headers = "Accept=application/json")
     public User login(@RequestParam(value = "user", required = true) User user) {
         User pp = userService.findByName("Esteban").get(0);

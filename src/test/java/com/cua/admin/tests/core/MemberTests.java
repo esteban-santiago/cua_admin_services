@@ -1,22 +1,23 @@
 package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.Address;
-import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Category;
+import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Nationality;
+import com.cua.admin.repositories.CategoryRepository;
+import com.cua.admin.repositories.MemberRepository;
+import com.cua.admin.repositories.NationalityRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
-import com.cua.admin.repositories.CategoryRepository;
-import com.cua.admin.repositories.MemberRepository;
-import com.cua.admin.repositories.NationalityRepository;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
 public class MemberTests {
 
     @Autowired

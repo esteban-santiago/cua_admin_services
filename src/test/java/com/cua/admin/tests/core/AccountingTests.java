@@ -3,18 +3,21 @@ package com.cua.admin.tests.core;
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntry;
 import com.cua.admin.model.accounting.AccountingEntryItem;
-import com.cua.admin.model.accounting.documents.*;
+import com.cua.admin.model.accounting.documents.CreditNoteIssuedDocument;
+import com.cua.admin.model.accounting.documents.Document;
+import com.cua.admin.model.accounting.documents.FlightRecordIssuedDocument;
 import com.cua.admin.repositories.UserRepository;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -40,7 +43,7 @@ public class AccountingTests {
     @Test
     public void getMajorAccounts() {
         System.out.println("----------------Cuentas Mayores--------------");
-        accountRepository.findBySecondOrderGrouper(0).stream().forEach((Account account) -> {
+        accountRepository.findBySecondOrderGrouper(0).forEach((Account account) -> {
             System.out.println(account.toFormattedString() + " - " + account.getDescription());
         });
     }

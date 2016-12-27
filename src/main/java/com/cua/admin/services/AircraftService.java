@@ -6,18 +6,13 @@
 package com.cua.admin.services;
 
 import com.cua.admin.repositories.flight.AircraftRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
-/**
- *
- * @author esteban_santiago
- */
-
 @Service
+@RequiredArgsConstructor
 public class AircraftService {
-        @Autowired
-        AircraftRepository aircraftRepository;
+
+    private final AircraftRepository aircraftRepository;
         
 } 
