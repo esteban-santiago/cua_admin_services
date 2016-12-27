@@ -42,11 +42,7 @@ public class Aircraft implements Serializable {
     }
     
     public Boolean hasAnInsurancePolicyInForce(LocalDate date) {
-        Boolean policyInForce = false;
-        for(AircraftInsurance aircraftInsurance : getInsurance()) {
-            policyInForce = policyInForce || aircraftInsurance.isInForce(date);
-        }
-        return policyInForce;
+        return getInsurance().stream().anyMatch(insurance -> insurance.isInForce(date));
     }
     
 }
