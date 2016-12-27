@@ -16,6 +16,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -40,6 +42,9 @@ public class AccountingTests {
 
     @Autowired
     private UserRepository userRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
     
     @Test
     public void getAccounts() {
@@ -62,13 +67,17 @@ public class AccountingTests {
         nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
         nce = creditNoteRepository.save(nce);
+        entityManager.flush();
         assertThat(nce.getId()).isGreaterThanOrEqualTo(8000);
+        assertThat(nce.getCreditNoteSequence()).isGreaterThanOrEqualTo(8000);
 
         FlightRecordIssuedDocument fve = new FlightRecordIssuedDocument();
         fve.setAccountabilityAmount(3544F);
         fve.setAmount(3544F);
         fve = flightRecordRepository.save(fve);
+        entityManager.flush();
         assertThat(fve.getId()).isGreaterThanOrEqualTo(9000);
+        assertThat(fve.getFlightRecordSequence()).isGreaterThanOrEqualTo(9000);
     }
 
     @Test
