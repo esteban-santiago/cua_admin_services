@@ -28,7 +28,7 @@ public class CreditNoteIssuedDocument extends Document implements Serializable {
             columnDefinition = "BIGINT DEFAULT nextval('document_credit_note_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
-    private Long creditNoteSequence;
+    private Long legalId;
 
     @Override
     public void setAmount(Float amount) {

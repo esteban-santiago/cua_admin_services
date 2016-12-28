@@ -34,6 +34,8 @@ public abstract class Document implements Serializable {
     @Id
     private Long id; //Número de doc
 
+    //private Long legalId;
+    
     @Enumerated(EnumType.STRING)
     private DocumentType documentType; //Tipo de Documento
 

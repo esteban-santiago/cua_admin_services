@@ -28,5 +28,5 @@ public class FlightRecordIssuedDocument extends Document implements Serializable
             columnDefinition = "BIGINT DEFAULT nextval('document_flight_record_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
-    private Long flightRecordSequence;
+    private Long legalId;
 }
