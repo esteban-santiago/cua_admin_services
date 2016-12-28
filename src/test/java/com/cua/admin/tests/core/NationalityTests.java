@@ -11,7 +11,6 @@ public class NationalityTests extends SpringIntegrationTest {
     @Autowired
     private NationalityRepository nationalityRepository;
 
-    @Before
     @Test
     public void createNationality() {
         Nationality peruvian = new Nationality("Peruana");

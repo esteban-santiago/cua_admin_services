@@ -68,6 +68,7 @@ public class AccountingTests {
         nce.setAmount(1544F);
         nce = creditNoteRepository.save(nce);
         entityManager.flush();
+        System.out.println(nce);
         assertThat(nce.getId()).isGreaterThan(0);
         assertThat(nce.getCreditNoteSequence()).isGreaterThanOrEqualTo(8000);
 
@@ -76,6 +77,7 @@ public class AccountingTests {
         fve.setAmount(3544F);
         fve = flightRecordRepository.save(fve);
         entityManager.flush();
+        System.out.println(fve);
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getFlightRecordSequence()).isGreaterThanOrEqualTo(9000);
     }
@@ -87,7 +89,7 @@ public class AccountingTests {
         entry.setDescription("Asiento de prueba");
         entry.setFiscalYear(LocalDate.now().getYear());
         entry.setUser(userRepository.findById(1002));
-        //accountingEntryRepository.save(entry);
+        accountingEntryRepository.save(entry);
         AccountingEntryItem item1 = new AccountingEntryItem();
         AccountingEntryItem item2 = new AccountingEntryItem();
         item1.setCreationDate(LocalDateTime.now());

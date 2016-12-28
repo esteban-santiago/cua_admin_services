@@ -6,6 +6,6 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   main:
     banner-mode: off

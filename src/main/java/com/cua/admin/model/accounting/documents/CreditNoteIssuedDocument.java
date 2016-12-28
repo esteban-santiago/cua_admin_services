@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @DiscriminatorValue(value = "NCE")
