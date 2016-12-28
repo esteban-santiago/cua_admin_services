@@ -30,7 +30,7 @@ import org.hibernate.annotations.Parameter;
 @DiscriminatorValue(value = "FVE")
 public class FlightRecordIssuedDocument extends Document implements Serializable {
     @GenericGenerator(
-            name = "SequenceGenerator",
+            name = "SequenceGenerator1",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                 @Parameter(name = "sequence_name", value = "document_flight_record_issued_id_seq"),
@@ -38,10 +38,14 @@ public class FlightRecordIssuedDocument extends Document implements Serializable
                 @Parameter(name = "increment_size", value = "1")
             }
     )
-    @GeneratedValue(generator = "SequenceGenerator")
+    @GeneratedValue(generator = "SequenceGenerator1")
     @Id
     private Long id;
 
+    public FlightRecordIssuedDocument() {
+        
+    }
+    
     /**
      * @return the id
      */

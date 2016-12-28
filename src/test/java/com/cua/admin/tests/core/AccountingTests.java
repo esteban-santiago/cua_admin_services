@@ -47,7 +47,7 @@ public class AccountingTests {
     
     @Test
     public void createCreditNoteIssued() {
-        Document nce = new CreditNoteIssuedDocument();
+        CreditNoteIssuedDocument nce = new CreditNoteIssuedDocument();
         nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
         documentRepository.save(nce);

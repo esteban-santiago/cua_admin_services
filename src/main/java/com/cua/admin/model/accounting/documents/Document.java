@@ -10,10 +10,12 @@ import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.User;
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -31,13 +33,13 @@ import org.hibernate.annotations.Parameter;
  * @author esteban_santiago
  */
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Entity
-//@MappedSuperclass
+//@Entity
+@MappedSuperclass
 @Table(name = "accounting_item")
 @DiscriminatorColumn(name = "document_type_discriminator")
 public abstract class Document implements Serializable {
     @GenericGenerator(
-            name = "SequenceGenerator",
+            name = "SequenceGeneratorAccountingItem",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                 @Parameter(name = "sequence_name", value = "accounting_item_id_seq"),
@@ -45,7 +47,7 @@ public abstract class Document implements Serializable {
                 @Parameter(name = "increment_size", value = "1")
             }
     )
-    @GeneratedValue(generator = "SequenceGenerator")    
+    @GeneratedValue(generator = "SequenceGeneratorAccountingItem")
     @Id
     private Long id; //Número de doc
     @Enumerated(EnumType.STRING)
@@ -53,19 +55,19 @@ public abstract class Document implements Serializable {
     private LocalDate creationDate = LocalDate.now(); //Fecha de documento
     private LocalDate accountabilityDate = LocalDate.now(); //Fecha de contabilización
     private Float amount; //Importe en moneda del documento	
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="currency_id")
     private Currency currency; //Moneda del documento
     private Float accountabilityAmount; //Importe en moneda Contable
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="accountability_currency_id")
     private Currency accountabilityCurrency; //Moneda contable
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="compensation_document_id")
     private Document compensationDocument; //(*) Documento de compensación
     private LocalDate compensationDate; //(*) Fecha de compensación
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="member_id")
     private Member member; //Socio
     //Número de documento contable	
@@ -77,16 +79,15 @@ public abstract class Document implements Serializable {
     /**
      * @return the id
      */
-    public Long getId() {
-        return id;
-    }
+    public abstract Long getId();
+        //return id;
 
     /**
      * @param id the id to set
      */
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public abstract void setId(Long id);
+        //this.id = id;
+  
 
     /**
      * @return the documentType
