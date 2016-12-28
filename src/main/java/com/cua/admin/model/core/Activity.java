@@ -1,28 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.core;
 
-import java.io.Serializable;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.ToString;
-import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import java.io.Serializable;
 
-/**
- *
- * @author esteban_santiago
- */
-@ToString
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "activity")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Activity implements Serializable {
 
     @GenericGenerator(
@@ -37,46 +30,8 @@ public class Activity implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+
+    @NonNull
     private String description;
 
-    public Activity() {
-
-    }
-
-    public Activity(String activity) {
-        this.description = activity;
-    }
-
-    public Activity(Integer id, String activity) {
-        this.id = id;
-        this.description = activity;
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

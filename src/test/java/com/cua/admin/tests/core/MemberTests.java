@@ -1,29 +1,25 @@
 package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.Address;
-import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Category;
+import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Nationality;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.Assert;
 import com.cua.admin.repositories.CategoryRepository;
 import com.cua.admin.repositories.MemberRepository;
 import com.cua.admin.repositories.NationalityRepository;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberTests {
+public class MemberTests extends SpringIntegrationTest {
 
     @Autowired
     private MemberRepository memberService;
 
     @Autowired
     private CategoryRepository categoryReposity;
+
     @Autowired
     private NationalityRepository nationalityRepository;
 
@@ -57,9 +53,9 @@ public class MemberTests {
 
         Category category = categoryReposity.findByDescription("Socio").get(0);
         Nationality argentinean = nationalityRepository.findByDescription("Argentina").get(0);
-        Assert.notNull(argentinean);
+        assertThat(argentinean).isNotNull();
         Nationality brazilian = nationalityRepository.findByDescription("Brasilera").get(0);
-        Assert.notNull(brazilian);
+        assertThat(brazilian).isNotNull();
 
         Member member = new Member();
         member.setName("Socio 1");
@@ -76,7 +72,7 @@ public class MemberTests {
         memberService.save(member2);
 
         for (Member p : memberService.findAll()) {
-            Assert.notNull(p.getAddress());
+            assertThat(p.getAddress()).isNotNull();
             System.out.println(p.toString());
         }
     }

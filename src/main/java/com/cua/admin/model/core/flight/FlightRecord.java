@@ -1,26 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.core.flight;
 
 import com.cua.admin.model.core.Member;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-/**
- *
- * @author esteban_santiago
- */
-@ToString
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "flight_record")
 public class FlightRecord implements Serializable {
@@ -43,8 +33,4 @@ public class FlightRecord implements Serializable {
     private Float amountOfTime; 
     private String status;
     
-    
-    public FlightRecord() {
-        
-    }
 }

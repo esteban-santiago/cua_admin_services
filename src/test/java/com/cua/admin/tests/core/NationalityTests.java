@@ -1,18 +1,12 @@
 package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.Nationality;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import com.cua.admin.repositories.NationalityRepository;
 import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-
-public class NationalityTests {
+public class NationalityTests extends SpringIntegrationTest {
 
     @Autowired
     private NationalityRepository nationalityRepository;

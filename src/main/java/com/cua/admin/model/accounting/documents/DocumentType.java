@@ -5,36 +5,19 @@
  */
 package com.cua.admin.model.accounting.documents;
 
-import javax.persistence.Embeddable;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-/**
- *
- * @author esteban_santiago
- */
+@Getter
+@RequiredArgsConstructor
 public enum DocumentType {
-    NCE("Nota de Crédito Emitida"), 
+
+    NCE("Nota de Crédito Emitida"),
     FVE("Ficha de Vuelo Emitida"), 
     OPE("Orden de Pago Emitida"), 
     CSE("Cuota Social Emitida"),
     RCE("Recibo Emitido");
 
-    private String description;
+    private final String description;
     
-       DocumentType(String description) {
-           this.description = description;
-       }
-
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }   
 }

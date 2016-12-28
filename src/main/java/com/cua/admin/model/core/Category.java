@@ -5,25 +5,22 @@
  */
 package com.cua.admin.model.core;
 
-import java.io.Serializable;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.ToString;
-import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import java.io.Serializable;
 
-/**
- *
- * @author esteban_santiago
- */
-@ToString
-@EqualsAndHashCode
-
+@Data
 @Entity
 @Table(name = "category")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Category implements Serializable {
 
     @GenericGenerator(
@@ -38,45 +35,8 @@ public class Category implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+
+    @NonNull
     private String description;
 
-    public Category() {
-    }
-
-    public Category(String description) {
-        this.description = description;
-    }
-
-    public Category(Integer id, String description) {
-        this.id = id;
-        this.description = description;
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the category
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description the category to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

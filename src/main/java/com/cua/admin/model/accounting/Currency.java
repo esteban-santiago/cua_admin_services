@@ -1,59 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.accounting;
 
-import java.io.Serializable;
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import java.io.Serializable;
 
-/**
- *
- * @author esteban_santiago
- */
-
-@ToString
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name = "currency")
 public class Currency implements Serializable {
+
     @Id
     private Integer id;
+
     private String description;
 
-    public Currency() {
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
