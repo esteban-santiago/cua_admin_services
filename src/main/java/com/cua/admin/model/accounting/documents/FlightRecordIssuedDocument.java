@@ -29,5 +29,4 @@ public class FlightRecordIssuedDocument extends Document implements Serializable
     )
     @Generated(GenerationTime.INSERT)
     private Long flightRecordSequence;
-
 }

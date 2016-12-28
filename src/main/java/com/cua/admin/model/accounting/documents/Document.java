@@ -15,14 +15,16 @@ import java.time.LocalDate;
 
 @Data
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+
 @Table(name = "accounting_item")
 @DiscriminatorColumn(name = "document_type_discriminator")
 public abstract class Document implements Serializable {
 
     @GenericGenerator(
-            name = "SequenceGenerator",
+            name = "SequenceGeneratorAccountingItem",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @Parameter(name = "sequence_name", value = "accounting_item_id_seq"),
@@ -30,7 +32,9 @@ public abstract class Document implements Serializable {
                     @Parameter(name = "increment_size", value = "1")
             }
     )
+
     @GeneratedValue(generator = "SequenceGenerator")
+
     @Id
     private Long id; //Número de doc
 
@@ -54,10 +58,12 @@ public abstract class Document implements Serializable {
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 
     @OneToOne
+
     @JoinColumn(name="compensation_document_id")
     private Document compensationDocument; //(*) Documento de compensación
 
     private LocalDate compensationDate; //(*) Fecha de compensación
+
 
     @OneToOne
     @JoinColumn(name="member_id")
@@ -67,7 +73,9 @@ public abstract class Document implements Serializable {
     //Indicador Debe/Haber
     @OneToOne
     @JoinColumn(name="user_id")
+
     private User user; //Usuario
+
 
     @CreatedDate
     private LocalDate creationDate = LocalDate.now(); //Fecha de documento
