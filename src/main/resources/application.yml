@@ -4,33 +4,6 @@
 ##org.postgresql.Driver
 ##
 
-##spring:
-##  jpa:
-##    database: POSTGRESQL
-##    show-sql: true
-##    hibernate:
-##        ddl-auto: create
-##        default_schema: nextg
-##        format_sql: true
-        ##id.new_generator_mappings: true
-##        cache:
-##            queries: false
-##            use_second_level_cache: false
-##            use_query_cache: false
-##            region:
-                ##factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-##                factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
-  ##datasource:
-    ## PostgreSQL
-    ##driver-class-name: org.postgresql.Driver
-    ##url: jdbc:postgresql://192.168.0.27:5432/cua_admin.dev
-    ##username: admin
-    ##password: admin
-    ## H2
-    ##driver-class-name: org.h2.Driver
-    ##url: jdbc:h2:mem:cua;DB_CLOSE_ON_EXIT=TRUE;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS nextg;DB_CLOSE_DELAY=-1;
-    ##username: sa
-    ##password: 
 spring:
   datasource:
     tomcat:
