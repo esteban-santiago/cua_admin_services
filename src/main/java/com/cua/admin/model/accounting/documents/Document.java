@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "accounting_item")
@@ -34,7 +34,7 @@ public abstract class Document implements Serializable {
     @Id
     private Long id; //Número de doc
 
-    //private Long legalId;
+    //protected Long legalId;
     
     @Enumerated(EnumType.STRING)
     private DocumentType documentType; //Tipo de Documento

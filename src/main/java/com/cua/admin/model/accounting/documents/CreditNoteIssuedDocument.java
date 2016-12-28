@@ -21,14 +21,17 @@ import java.io.Serializable;
 public class CreditNoteIssuedDocument extends Document implements Serializable {
 
     @Column(
+            name = "legalId",
             nullable = false,
-            unique = true,
+            unique = false,
             insertable = false,
             updatable = false,
             columnDefinition = "BIGINT DEFAULT nextval('document_credit_note_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
+    
     private Long legalId;
+    
 
     @Override
     public void setAmount(Float amount) {

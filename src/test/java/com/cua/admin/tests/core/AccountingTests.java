@@ -63,15 +63,6 @@ public class AccountingTests {
     
     @Test
     public void createCreditNoteIssued() {
-        CreditNoteIssuedDocument nce = new CreditNoteIssuedDocument();
-        nce.setAccountabilityAmount(1544F);
-        nce.setAmount(1544F);
-        creditNoteRepository.save(nce);
-        entityManager.flush();
-        System.out.println(nce);
-        assertThat(nce.getId()).isGreaterThan(0);
-        //assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
-
         FlightRecordIssuedDocument fve = new FlightRecordIssuedDocument();
         fve.setAccountabilityAmount(3544F);
         fve.setAmount(3544F);
@@ -80,6 +71,15 @@ public class AccountingTests {
         System.out.println(fve);
         assertThat(fve.getId()).isGreaterThan(0);
         //assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
+
+        CreditNoteIssuedDocument nce = new CreditNoteIssuedDocument();
+        nce.setAccountabilityAmount(1544F);
+        nce.setAmount(1544F);
+        creditNoteRepository.save(nce);
+        entityManager.flush();
+        System.out.println(nce);
+        assertThat(nce.getId()).isGreaterThan(0);
+        //assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
     }
 
     @Test

@@ -21,12 +21,14 @@ import java.io.Serializable;
 public class FlightRecordIssuedDocument extends Document implements Serializable {
 
     @Column(
+            name = "legalId",
             nullable = false,
-            unique = true,
+            unique = false,
             insertable = false,
             updatable = false,
             columnDefinition = "BIGINT DEFAULT nextval('document_flight_record_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
     private Long legalId;
+
 }
