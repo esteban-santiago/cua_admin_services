@@ -4,6 +4,7 @@ import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntry;
 import com.cua.admin.model.accounting.AccountingEntryItem;
 import com.cua.admin.model.accounting.documents.CreditNoteIssuedDocument;
+import com.cua.admin.model.accounting.documents.Document;
 import com.cua.admin.model.accounting.documents.FlightRecordIssuedDocument;
 import com.cua.admin.repositories.UserRepository;
 import com.cua.admin.repositories.accounting.AccountRepository;
@@ -30,12 +31,9 @@ public class AccountingTests {
 
     @Autowired
     private AccountRepository accountRepository;
-
+  
     @Autowired
-    private DocumentRepository<FlightRecordIssuedDocument> flightRecordRepository;
-
-    @Autowired
-    private DocumentRepository<CreditNoteIssuedDocument> creditNoteRepository;
+    private DocumentRepository<Document> documentRepository;
 
     @Autowired
     private AccountingEntryRepository accountingEntryRepository;
@@ -60,28 +58,36 @@ public class AccountingTests {
             System.out.println(account.toFormattedString() + " - " + account.getDescription());
         });
     }
-    
+      
     @Test
-    public void createCreditNoteIssued() {
+    public void createDocuments() {
         FlightRecordIssuedDocument fve = new FlightRecordIssuedDocument();
         fve.setAccountabilityAmount(3544F);
         fve.setAmount(3544F);
-        flightRecordRepository.save(fve);
+        documentRepository.save(fve);
         entityManager.flush();
         System.out.println(fve);
+        System.out.println(fve.getLegalId());
         assertThat(fve.getId()).isGreaterThan(0);
-        //assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
-
+        assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
+   
         CreditNoteIssuedDocument nce = new CreditNoteIssuedDocument();
         nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
-        creditNoteRepository.save(nce);
+        documentRepository.save(nce);
         entityManager.flush();
         System.out.println(nce);
+        System.out.println(nce.getLegalId());
         assertThat(nce.getId()).isGreaterThan(0);
-        //assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
+        assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
+   
+        System.out.println("--------Documentos---------");
+        for(Document document : documentRepository.findAll()){
+            System.out.println(document.getDocumentType() + " : " + document.getLegalId());
+        }
+    
     }
-
+    
     @Test
     public void createAccountingEntry() {
         AccountingEntry entry = new  AccountingEntry();
@@ -94,10 +100,10 @@ public class AccountingTests {
         AccountingEntryItem item2 = new AccountingEntryItem();
         item1.setCreationDate(LocalDateTime.now());
         item1.setAccount(accountRepository.findById(1700)); //Cuotas a cobrar
-        item1.setCredit(350.00f);
+        item1.setCredit(350.00F);
         item2.setCreationDate(LocalDateTime.now());
         item2.setAccount(accountRepository.findById(8800)); //Cuotas y servicios
-        item2.setDebit(350.00f);
+        item2.setDebit(350.00F);
         entry.addEntryItem(item1);
         entry.addEntryItem(item2);
         accountingEntryRepository.save(entry);

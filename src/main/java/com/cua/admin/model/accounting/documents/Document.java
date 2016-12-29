@@ -74,4 +74,6 @@ public abstract class Document implements Serializable {
     @CreatedDate
     private LocalDate creationDate = LocalDate.now(); //Fecha de documento
 
+    public abstract Long getLegalId();
+    
 }

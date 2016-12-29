@@ -32,7 +32,6 @@ public class CreditNoteIssuedDocument extends Document implements Serializable {
     
     private Long legalId;
     
-
     @Override
     public void setAmount(Float amount) {
         super.setAmount(amount * (-1));
