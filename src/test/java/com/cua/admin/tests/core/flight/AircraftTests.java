@@ -18,7 +18,7 @@ public class AircraftTests extends SpringIntegrationTest {
     @Autowired
     private AircraftRepository aircraftRepository;
 
-    @Test
+    //@Test
     public void create150() {
         Aircraft c150 = new Aircraft();
         c150.setBrand("Cessna");
@@ -36,8 +36,10 @@ public class AircraftTests extends SpringIntegrationTest {
         aircraftRepository.save(c150); 
     }
     
-    //@Test
+    @Test
     public void checkActiveInsurancePolicy() {
+        create150();
+        
         Aircraft c150 = aircraftRepository.findByRegistration("LV-OEE").get(0);
 
         assertThat(c150.hasAnInsurancePolicyInForce())

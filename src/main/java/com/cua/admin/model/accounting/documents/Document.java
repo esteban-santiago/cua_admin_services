@@ -17,8 +17,8 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "accounting_item")
-@DiscriminatorColumn(name = "document_type_discriminator")
+//@Table(name = "accounting_item")
+//@DiscriminatorColumn(name = "document_type_discriminator")
 public abstract class Document implements Serializable {
 
     @GenericGenerator(
@@ -33,8 +33,6 @@ public abstract class Document implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Long id; //Número de doc
-
-    //protected Long legalId;
     
     @Enumerated(EnumType.STRING)
     private DocumentType documentType; //Tipo de Documento

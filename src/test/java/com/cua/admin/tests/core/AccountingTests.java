@@ -11,11 +11,8 @@ import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,10 +21,10 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ActiveProfiles("test")
-@RunWith(SpringRunner.class)
+//@ActiveProfiles("test")
+//@RunWith(SpringRunner.class)
 @DataJpaTest
-public class AccountingTests {
+public class AccountingTests extends SpringIntegrationTest {
 
     @Autowired
     private AccountRepository accountRepository;
@@ -43,6 +40,8 @@ public class AccountingTests {
 
     @PersistenceContext
     private EntityManager entityManager;
+    
+    
     
     @Test
     public void getAccounts() {
@@ -67,7 +66,6 @@ public class AccountingTests {
         documentRepository.save(fve);
         entityManager.flush();
         System.out.println(fve);
-        System.out.println(fve.getLegalId());
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
    
@@ -77,7 +75,6 @@ public class AccountingTests {
         documentRepository.save(nce);
         entityManager.flush();
         System.out.println(nce);
-        System.out.println(nce.getLegalId());
         assertThat(nce.getId()).isGreaterThan(0);
         assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
    
