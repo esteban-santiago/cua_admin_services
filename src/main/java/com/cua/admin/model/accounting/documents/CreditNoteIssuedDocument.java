@@ -37,4 +37,7 @@ public class CreditNoteIssuedDocument extends Document implements Serializable {
         super.setAmount(amount * (-1));
     }
 
+    public CreditNoteIssuedDocument() {
+        setDocumentType(DocumentType.NCE);  
+    }
 }

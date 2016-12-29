@@ -31,4 +31,7 @@ public class FlightRecordIssuedDocument extends Document implements Serializable
     @Generated(GenerationTime.INSERT)
     private Long legalId;
 
+    public FlightRecordIssuedDocument() {
+        setDocumentType(DocumentType.FVE);  
+    }
 }
