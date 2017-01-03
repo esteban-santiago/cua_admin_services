@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Table(name = "way_to_contact")
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class WayToContact implements Serializable {
+public class ContactWay implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",

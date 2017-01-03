@@ -1,13 +1,13 @@
 package com.cua.admin.model.core.repositories;
 
-import com.cua.admin.model.core.WayToContact;
+import com.cua.admin.model.core.ContactWay;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface WayToContactRepository extends JpaRepository<WayToContact, Integer> {
+public interface WayToContactRepository extends JpaRepository<ContactWay, Integer> {
 
-    List<WayToContact> findByIdentificator(String description);
+    List<ContactWay> findByIdentificator(String description);
 
-    WayToContact findById(Integer id);
+    ContactWay findById(Integer id);
 }

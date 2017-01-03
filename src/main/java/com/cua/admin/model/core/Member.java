@@ -56,14 +56,14 @@ public class Member implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_way_to_contact_id_fk"))
-    private Set<WayToContact> wayToContact = new HashSet<>();
+    private Set<ContactWay> contactWay = new HashSet<>();
 
     public void addAddress(Address address) {
         this.address.add(address);
     }
 
-    public void addWayToContact(WayToContact wayToContact) {
-        this.wayToContact.add(wayToContact);
+    public void addWayToContact(ContactWay contactWay) {
+        this.contactWay.add(contactWay);
     }
 
 }
