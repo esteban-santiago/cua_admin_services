@@ -10,8 +10,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -44,7 +46,7 @@ public class FlightRecord implements Serializable {
     @OneToOne
     @JoinColumn(name = "airfield_destiny_id")
     private Airfield destiny;
-    private Float amountOfTime; 
+    //private Float amountOfTime; 
     private String status;
     
     public void addCrewMember(CrewMember crewMember) {
@@ -55,4 +57,16 @@ public class FlightRecord implements Serializable {
         this.crew.remove(crewMember);
     }
 
+    public Float getAmountOfHours() {
+        long minutes = ChronoUnit.MINUTES.between(startFlight, endFlight);
+        float amountOfHours = (int) (minutes / 60);
+        int rest = (int) minutes - ((int)amountOfHours * 60);
+        float final_result = (float) (((rest+(rest/8.26)+5)/7)/10);
+        float first = (float) (final_result * 100);
+        float second = ((int)first /100);
+        //float rest2 = ((((long) final_result * 100))/100);
+        amountOfHours = amountOfHours + second;
+        return amountOfHours;
+    }
+    
 }
