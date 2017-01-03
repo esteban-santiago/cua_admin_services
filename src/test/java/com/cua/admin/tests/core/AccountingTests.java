@@ -3,9 +3,9 @@ package com.cua.admin.tests.core;
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntry;
 import com.cua.admin.model.accounting.AccountingEntryItem;
-import com.cua.admin.model.accounting.documents.CreditNoteIssuedDocument;
+import com.cua.admin.model.accounting.documents.CreditNoteIssued;
 import com.cua.admin.model.accounting.documents.Document;
-import com.cua.admin.model.accounting.documents.FlightRecordIssuedDocument;
+import com.cua.admin.model.accounting.documents.FlightRecordIssued;
 import com.cua.admin.repositories.UserRepository;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
@@ -60,7 +60,7 @@ public class AccountingTests extends SpringIntegrationTest {
       
     @Test
     public void createDocuments() {
-        FlightRecordIssuedDocument fve = new FlightRecordIssuedDocument();
+        FlightRecordIssued fve = new FlightRecordIssued();
         fve.setAccountabilityAmount(3544F);
         fve.setAmount(3544F);
         documentRepository.save(fve);
@@ -69,7 +69,7 @@ public class AccountingTests extends SpringIntegrationTest {
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
    
-        CreditNoteIssuedDocument nce = new CreditNoteIssuedDocument();
+        CreditNoteIssued nce = new CreditNoteIssued();
         nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
         documentRepository.save(nce);

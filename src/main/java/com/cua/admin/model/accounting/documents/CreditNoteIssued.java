@@ -8,7 +8,6 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.io.Serializable;
 
@@ -17,15 +16,13 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@DiscriminatorValue(value = "NCE")
-public class CreditNoteIssuedDocument extends Document implements Serializable {
+public class CreditNoteIssued extends Document implements Serializable {
 
     @Column(
-            name = "legalId",
             nullable = false,
-            unique = false,
-            insertable = false,
-            updatable = false,
+            unique = true,
+            insertable = true,
+            updatable = true,
             columnDefinition = "BIGINT DEFAULT nextval('document_credit_note_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
@@ -37,7 +34,7 @@ public class CreditNoteIssuedDocument extends Document implements Serializable {
         super.setAmount(amount * (-1));
     }
 
-    public CreditNoteIssuedDocument() {
+    public CreditNoteIssued() {
         setDocumentType(DocumentType.NCE);  
     }
 }

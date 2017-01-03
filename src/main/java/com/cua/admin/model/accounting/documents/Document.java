@@ -17,15 +17,13 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-//@Table(name = "accounting_item")
-//@DiscriminatorColumn(name = "document_type_discriminator")
 public abstract class Document implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "accounting_item_id_seq"),
+                    @Parameter(name = "sequence_name", value = "accounting_documents_id_seq"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
