@@ -1,20 +1,19 @@
 package com.cua.admin.model.accounting;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
 
-@Data
-@Entity
-@Table(name = "currency")
-public class Currency implements Serializable {
+@Getter
+@RequiredArgsConstructor
 
-    @Id
-    private Integer id;
+public enum Currency {
+    
+    ARS("Pesos Argentinos"),
+    USD("Dólares Estadounidenses"),
+    BRL("Reales Brasileros "),
+    EUR("Euro");
 
-    private String description;
+    private final String description;
 
 }

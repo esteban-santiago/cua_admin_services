@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface CrewRepository extends JpaRepository<CrewMember, Integer> {
 
-    List<CrewMember> findByPilotRole(CrewMemberRole crewMemeberRole);
+    List<CrewMember> findByCrewMemberRole(CrewMemberRole crewMemeberRole);
     CrewMember findByMember(Member member);
-    CrewMember findByMemberAndRole(Member member, CrewMemberRole crewMemberRole);
+    CrewMember findByMemberAndCrewMemberRole(Member member, CrewMemberRole crewMemberRole);
   
 }

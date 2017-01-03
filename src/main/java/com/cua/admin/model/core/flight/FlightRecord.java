@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -17,7 +19,7 @@ public class FlightRecord implements Serializable {
 
     @Id
     private Integer id;
-    private Member member;
+    private Set<CrewMember> crew = new HashSet<>();;
     private Aircraft aircraft;
     private Member instructor;
     private LocalDate startDate;
@@ -33,4 +35,7 @@ public class FlightRecord implements Serializable {
     private Float amountOfTime; 
     private String status;
     
+    public void addCrewMember(CrewMember crewMember) {
+        this.crew.add(crewMember);
+    }
 }

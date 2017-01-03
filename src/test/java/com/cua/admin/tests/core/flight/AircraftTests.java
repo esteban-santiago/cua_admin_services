@@ -66,7 +66,7 @@ public class AircraftTests extends SpringIntegrationTest {
     public void createCrew() {
         CrewMember crew = new CrewMember();
         crew.setMember(memberRepository.findOne(1000));
-        crew.setPilotRole(CrewMemberRole.PIC);
+        crew.setCrewMemberRole(CrewMemberRole.PIC);
         crewRepository.save(crew);
         
     }

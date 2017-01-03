@@ -39,14 +39,12 @@ public abstract class Document implements Serializable {
 
     private Float amount; //Importe en moneda del documento
 
-    @OneToOne
-    @JoinColumn(name="currency_id")
+    @Enumerated(EnumType.STRING)
     private Currency currency; //Moneda del documento
 
     private Float accountabilityAmount; //Importe en moneda Contable
 
-    @OneToOne
-    @JoinColumn(name="accountability_currency_id")
+    @Enumerated(EnumType.STRING)
     private Currency accountabilityCurrency; //Moneda contable
 
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento

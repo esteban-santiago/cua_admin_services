@@ -3,6 +3,7 @@ package com.cua.admin.tests.core;
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntry;
 import com.cua.admin.model.accounting.AccountingEntryItem;
+import com.cua.admin.model.accounting.Currency;
 import com.cua.admin.model.accounting.documents.CreditNoteIssued;
 import com.cua.admin.model.accounting.documents.Document;
 import com.cua.admin.model.accounting.documents.FlightRecordIssued;
@@ -63,6 +64,7 @@ public class AccountingTests extends SpringIntegrationTest {
         FlightRecordIssued fve = new FlightRecordIssued();
         fve.setAccountabilityAmount(3544F);
         fve.setAmount(3544F);
+        fve.setCurrency(Currency.ARS);
         documentRepository.save(fve);
         entityManager.flush();
         System.out.println(fve);
@@ -72,6 +74,7 @@ public class AccountingTests extends SpringIntegrationTest {
         CreditNoteIssued nce = new CreditNoteIssued();
         nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
+        nce.setCurrency(Currency.ARS);
         documentRepository.save(nce);
         entityManager.flush();
         System.out.println(nce);

@@ -45,6 +45,6 @@ public class CrewMember implements Serializable {
     private Member member;
     @NonNull
     @Enumerated(EnumType.STRING)
-    private CrewMemberRole pilotRole;
+    private CrewMemberRole crewMemberRole;
     
 }
