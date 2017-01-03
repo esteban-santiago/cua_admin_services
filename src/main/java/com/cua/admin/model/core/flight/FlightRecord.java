@@ -12,7 +12,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Data
@@ -22,6 +26,8 @@ public class FlightRecord implements Serializable {
 
     @Id
     private Integer id;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "flight_record_id", nullable = false, foreignKey = @ForeignKey(name = "crew_member_id_fk"))
     private Set<CrewMember> crew = new HashSet<>();
     @OneToOne
     @JoinColumn(name = "aircraft_id")

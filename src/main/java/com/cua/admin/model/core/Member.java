@@ -47,7 +47,7 @@ public class Member implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     //@JoinTable(name = "member_address")
-    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "address_id_fk"))
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_address_id_fk"))
     private Set<Address> address = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -55,7 +55,7 @@ public class Member implements Serializable {
     private Category category;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "way_to_contact_id_fk"))
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_way_to_contact_id_fk"))
     private Set<WayToContact> wayToContact = new HashSet<>();
 
     public void addAddress(Address address) {
