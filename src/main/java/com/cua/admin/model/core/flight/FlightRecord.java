@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,17 +20,15 @@ public class FlightRecord implements Serializable {
 
     @Id
     private Integer id;
-    private Set<CrewMember> crew = new HashSet<>();;
+    private Set<CrewMember> crew = new HashSet<>();
     private Aircraft aircraft;
     private Member instructor;
-    private LocalDate startDate;
-    private LocalTime startTime;
-    private LocalDate endDate;
-    private LocalTime endTime;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private Integer landings;
-    //finalidad
-    //Carácter
-    //Tipo de vuelo
+    private FlightPurpose purpose;//Finalidad 
+    private FlightNature nature;//Carácter
+    private FlightType type;//Tipo de vuelo
     private Airfield origin;
     private Airfield destiny;
     private Float amountOfTime; 
