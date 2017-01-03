@@ -62,7 +62,7 @@ public class AircraftTests extends SpringIntegrationTest {
                 .isTrue();
     }
     
-    @Test
+    //@Test
     public void createCrew() {
         CrewMember crew = new CrewMember();
         crew.setMember(memberRepository.findOne(1000));

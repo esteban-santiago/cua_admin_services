@@ -24,29 +24,18 @@ public class EmployeeTests extends SpringIntegrationTest {
     @Autowired
     private NationalityRepository nationalityReposity;
 
-    @Test
-    public void createActivity() {
-        Activity activity = new Activity("Mecanico");
-        activityRepository.save(activity);
-    }
 
-    @Test
-    public void createCategory() {
-        Category category = new Category("Empleado");
-        categoryReposity.save(category);
-    }
-
-    @Test
-    public void createNationality() {
-        Nationality peruvian = new Nationality("Peruana");
-        nationalityReposity.save(peruvian);
-    }
 
     @Test
     public void createEmployee() {
-        Nationality peruvian = nationalityReposity.findByDescription("Peruana").get(0);
-        Activity activity = activityRepository.findByDescription("Mecanico").get(0);
-        Category category = categoryReposity.findByDescription("Empleado").get(0);
+        Nationality peruvian = new Nationality("Peruana");
+        nationalityReposity.save(peruvian);
+        
+        Activity activity = new Activity("Mecanico");
+        activityRepository.save(activity);
+        
+        Category category = new Category("Empleado");
+        categoryReposity.save(category);
 
         Address address = new Address();
         address.setStreet("Cramer 2222");
