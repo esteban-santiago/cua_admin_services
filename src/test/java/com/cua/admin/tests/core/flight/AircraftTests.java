@@ -2,8 +2,8 @@ package com.cua.admin.tests.core.flight;
 
 import com.cua.admin.model.core.flight.Aircraft;
 import com.cua.admin.model.core.flight.AircraftInsurance;
-import com.cua.admin.model.core.flight.Crew;
-import com.cua.admin.model.core.flight.PilotRole;
+import com.cua.admin.model.core.flight.CrewMember;
+import com.cua.admin.model.core.flight.CrewMemberRole;
 import com.cua.admin.model.core.repositories.MemberRepository;
 import com.cua.admin.repositories.flight.AircraftRepository;
 import com.cua.admin.repositories.flight.CrewRepository;
@@ -64,9 +64,9 @@ public class AircraftTests extends SpringIntegrationTest {
     
     @Test
     public void createCrew() {
-        Crew crew = new Crew();
+        CrewMember crew = new CrewMember();
         crew.setMember(memberRepository.findOne(1000));
-        crew.setPilotRole(PilotRole.PIC);
+        crew.setPilotRole(CrewMemberRole.PIC);
         crewRepository.save(crew);
         
     }

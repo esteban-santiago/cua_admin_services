@@ -24,15 +24,15 @@ import org.hibernate.annotations.Parameter;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "crew")
+@Table(name = "crew_member")
 @SuppressWarnings("ValidAttributes")
-public class Crew implements Serializable {
+public class CrewMember implements Serializable {
         @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "crew_id_seq"),
-                @Parameter(name = "initial_value", value = "1000"),
+                @Parameter(name = "sequence_name", value = "crew_member_id_seq"),
+                @Parameter(name = "initial_value", value = "1"),
                 @Parameter(name = "increment_size", value = "1")
             }
     )
@@ -45,6 +45,6 @@ public class Crew implements Serializable {
     private Member member;
     @NonNull
     @Enumerated(EnumType.STRING)
-    private PilotRole pilotRole;
+    private CrewMemberRole pilotRole;
     
 }

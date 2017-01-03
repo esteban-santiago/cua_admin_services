@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum PilotRole {
+public enum CrewMemberRole {
     PIC("Piloto al comando"),
     CIC("Copiloto al comando"),
     INST("Instructor"),
