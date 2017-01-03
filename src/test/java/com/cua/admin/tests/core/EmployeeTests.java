@@ -55,8 +55,8 @@ public class EmployeeTests extends SpringIntegrationTest {
         address.setProvince("Ciudad Autónoma de Buenos Aires");
         address.setCountry("Argentina");
 
-        WayToContact mail = new WayToContact("M", "esteban.s@gmail.com");
-        WayToContact mail2 = new WayToContact("M", "esteban.san@gmail.com");
+        ContactWay mail = new ContactWay("M", "esteban.s@gmail.com");
+        ContactWay mail2 = new ContactWay("M", "esteban.san@gmail.com");
 
         Employee mecanico = new Employee();
         mecanico.setName("Mecanico 1");
@@ -79,9 +79,9 @@ public class EmployeeTests extends SpringIntegrationTest {
         mecanico2.setNationality(peruvian);
         employeeService.save(mecanico2);
 
-        for (Employee e : employeeService.findAll()) {
+        employeeService.findAll().stream().forEach((e) -> {
             System.out.println(e + " : " + e.getActivity());
-        }
+        });
     }
 
     @Test

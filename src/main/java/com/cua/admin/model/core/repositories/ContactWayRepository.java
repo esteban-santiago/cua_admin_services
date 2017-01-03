@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface WayToContactRepository extends JpaRepository<ContactWay, Integer> {
+public interface ContactWayRepository extends JpaRepository<ContactWay, Integer> {
 
     List<ContactWay> findByIdentificator(String description);
 
