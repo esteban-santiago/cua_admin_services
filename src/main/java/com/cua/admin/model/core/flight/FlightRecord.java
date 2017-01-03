@@ -62,8 +62,8 @@ public class FlightRecord implements Serializable {
         float amountOfHours = (int) (minutes / 60);
         int rest = (int) minutes - ((int)amountOfHours * 60);
         float final_result = (float) (((rest+(rest/8.26)+5)/7)/10);
-        float first = (float) (final_result * 100);
-        float second = ((int)first /100);
+        //float first = (int) (final_result * 10);
+        float second = ((int) (final_result * 10) /10);
         //float rest2 = ((((long) final_result * 100))/100);
         amountOfHours = amountOfHours + second;
         return amountOfHours;
