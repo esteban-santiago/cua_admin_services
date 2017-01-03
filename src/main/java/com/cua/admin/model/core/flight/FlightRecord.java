@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Data
 @Entity
@@ -21,15 +23,20 @@ public class FlightRecord implements Serializable {
     @Id
     private Integer id;
     private Set<CrewMember> crew = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "aircraft_id")
     private Aircraft aircraft;
-    private Member instructor;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime startFlight;
+    private LocalDateTime endFlight;
     private Integer landings;
     private FlightPurpose purpose;//Finalidad 
     private FlightNature nature;//Carácter
     private FlightType type;//Tipo de vuelo
+    @OneToOne
+    @JoinColumn(name = "airfield_origin_id")
     private Airfield origin;
+    @OneToOne
+    @JoinColumn(name = "airfield_destiny_id")
     private Airfield destiny;
     private Float amountOfTime; 
     private String status;
@@ -37,4 +44,9 @@ public class FlightRecord implements Serializable {
     public void addCrewMember(CrewMember crewMember) {
         this.crew.add(crewMember);
     }
+
+    public void removeCrewMember(CrewMember crewMember) {
+        this.crew.remove(crewMember);
+    }
+
 }
