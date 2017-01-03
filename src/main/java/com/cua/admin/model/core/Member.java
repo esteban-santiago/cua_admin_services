@@ -10,9 +10,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "member")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Member implements Serializable {

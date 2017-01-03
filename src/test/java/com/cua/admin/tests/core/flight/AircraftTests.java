@@ -2,7 +2,11 @@ package com.cua.admin.tests.core.flight;
 
 import com.cua.admin.model.core.flight.Aircraft;
 import com.cua.admin.model.core.flight.AircraftInsurance;
+import com.cua.admin.model.core.flight.Crew;
+import com.cua.admin.model.core.flight.PilotRole;
+import com.cua.admin.model.core.repositories.MemberRepository;
 import com.cua.admin.repositories.flight.AircraftRepository;
+import com.cua.admin.repositories.flight.CrewRepository;
 import com.cua.admin.tests.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +21,15 @@ public class AircraftTests extends SpringIntegrationTest {
 
     @Autowired
     private AircraftRepository aircraftRepository;
+    
+    @Autowired
+    private MemberRepository memberRepository;
+    
+    @Autowired
+    private CrewRepository crewRepository;
+    
 
-    //@Test
+    @Test
     public void create150() {
         Aircraft c150 = new Aircraft();
         c150.setBrand("Cessna");
@@ -49,6 +60,15 @@ public class AircraftTests extends SpringIntegrationTest {
         assertThat(c150.hasAnInsurancePolicyInForce(LocalDate.now().plusMonths(5)))
                 .describedAs("True erroneo")
                 .isTrue();
+    }
+    
+    @Test
+    public void createCrew() {
+        Crew crew = new Crew();
+        crew.setMember(memberRepository.findOne(1000));
+        crew.setPilotRole(PilotRole.PIC);
+        crewRepository.save(crew);
+        
     }
 
 }

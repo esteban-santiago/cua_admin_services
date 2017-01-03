@@ -6,7 +6,7 @@
 package com.cua.admin.rest;
 
 import com.cua.admin.model.core.User;
-import com.cua.admin.repositories.UserRepository;
+import com.cua.admin.model.core.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

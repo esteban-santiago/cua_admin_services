@@ -1,7 +1,7 @@
 package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.Nationality;
-import com.cua.admin.repositories.NationalityRepository;
+import com.cua.admin.model.core.repositories.NationalityRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

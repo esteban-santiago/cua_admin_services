@@ -1,9 +1,9 @@
 package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.*;
-import com.cua.admin.repositories.CategoryRepository;
-import com.cua.admin.repositories.MemberRepository;
-import com.cua.admin.repositories.NationalityRepository;
+import com.cua.admin.model.core.repositories.CategoryRepository;
+import com.cua.admin.model.core.repositories.MemberRepository;
+import com.cua.admin.model.core.repositories.NationalityRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

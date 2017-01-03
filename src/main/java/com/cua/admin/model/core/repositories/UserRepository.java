@@ -1,4 +1,4 @@
-package com.cua.admin.repositories;
+package com.cua.admin.model.core.repositories;
 
 import com.cua.admin.model.core.User;
 import org.springframework.data.jpa.repository.JpaRepository;

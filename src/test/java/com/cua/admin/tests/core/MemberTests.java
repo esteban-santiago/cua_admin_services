@@ -4,9 +4,9 @@ import com.cua.admin.model.core.Address;
 import com.cua.admin.model.core.Category;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Nationality;
-import com.cua.admin.repositories.CategoryRepository;
-import com.cua.admin.repositories.MemberRepository;
-import com.cua.admin.repositories.NationalityRepository;
+import com.cua.admin.model.core.repositories.CategoryRepository;
+import com.cua.admin.model.core.repositories.MemberRepository;
+import com.cua.admin.model.core.repositories.NationalityRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
