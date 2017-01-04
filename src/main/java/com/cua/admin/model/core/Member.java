@@ -51,7 +51,7 @@ public class Member implements Serializable {
     private Set<Address> address = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "member_category_id_fk"))
     private Category category;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
