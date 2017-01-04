@@ -5,7 +5,7 @@ import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.User;
 import com.cua.admin.model.core.repositories.EmployeeRepository;
 import com.cua.admin.model.core.repositories.MemberRepository;
-import com.cua.admin.model.core.repositories.UserRepository;
+import com.cua.admin.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,22 +17,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SecureRestService {
 
-    private final UserRepository userService;
+    private final UserService userService;
     private final MemberRepository memberRepository;
     private final EmployeeRepository employeeRepository;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET, headers = "Accept=application/json")
-    public User getUser(@RequestParam(value = "id", required = false, defaultValue = "100") Integer id) {
-        System.out.println("Llamado el metodo!!:  " + id);
-        User pp = userService.findByName("Esteban").get(0);
-        User p = new User("esteban", "santiago");
-        p.setId(id);
-        System.out.println("Usuario: " + p.toString());
-        return pp;
+    public User getUser(@RequestParam(value = "id", required = false, defaultValue = "1") Integer id) {
+        return userService.get(id);
     }
 
-    @RequestMapping(value = "/person", method = RequestMethod.GET, headers = "Accept=application/json")
-    public Member getPerson(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) {
+    @RequestMapping(value = "/user/lock", method = RequestMethod.POST, headers = "Accept=application/json")
+    public void lockUser(@RequestParam(value = "id", required = false, defaultValue = "") Integer id) {
+        userService.lock(id);
+    }
+
+    @RequestMapping(value = "/user/unlock", method = RequestMethod.POST, headers = "Accept=application/json")
+    public void unlockUser(@RequestParam(value = "id", required = false, defaultValue = "") Integer id) {
+        userService.unlock(id);
+    }
+        
+    @RequestMapping(value = "/member", method = RequestMethod.GET, headers = "Accept=application/json")
+    public Member getMember(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) {
         return memberRepository.findById(id);
     }
 

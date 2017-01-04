@@ -21,36 +21,9 @@ public class AircraftTests extends SpringIntegrationTest {
 
     @Autowired
     private AircraftRepository aircraftRepository;
-    
-    @Autowired
-    private MemberRepository memberRepository;
-    
-    @Autowired
-    private CrewRepository crewRepository;
-    
-
+      
     @Test
-    public void create150() {
-        Aircraft c150 = new Aircraft();
-        c150.setBrand("Cessna");
-        c150.setModel("150");
-        c150.setRegistration("LV-OEE");
-        c150.setBrand("Cessna");
-        c150.setStatus("A");
-        AircraftInsurance seguro = new AircraftInsurance();
-        seguro.setCompany("Sancor");
-        seguro.setPolicy("ABC-4444224422");
-        seguro.setType("Terceros Completo");
-        seguro.setValidityFrom(LocalDate.now().minus(6, ChronoUnit.MONTHS));
-        seguro.setValidityTo(LocalDate.now().plus(8, ChronoUnit.MONTHS));
-        c150.setInsurance(Collections.singleton(seguro));
-        aircraftRepository.save(c150); 
-    }
-    
-    @Test
-    public void checkActiveInsurancePolicy() {
-        create150();
-        
+    public void checkActiveInsurancePolicy() {        
         Aircraft c150 = aircraftRepository.findByRegistration("LV-OEE").get(0);
 
         assertThat(c150.hasAnInsurancePolicyInForce())
@@ -61,14 +34,12 @@ public class AircraftTests extends SpringIntegrationTest {
                 .describedAs("True erroneo")
                 .isTrue();
     }
-    
-    //@Test
-    public void createCrew() {
-        CrewMember crew = new CrewMember();
-        crew.setMember(memberRepository.findOne(1000));
-        crew.setCrewMemberRole(CrewMemberRole.PIC);
-        crewRepository.save(crew);
-        
-    }
+
+    @Test
+    public void checkAircraftWithoutActiveInsurancePolicy() {
+        aircraftRepository.findAll().stream().filter(
+                    aircraft -> !aircraft.hasAnInsurancePolicyInForce()
+        ).forEach(aircraft -> System.out.println(aircraft.getRegistration()));
+    }        
 
 }

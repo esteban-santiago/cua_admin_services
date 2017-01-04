@@ -28,4 +28,18 @@ public class UserService {
         user.setLocked(Boolean.FALSE);
         userRepository.save(user);
     }
+
+    public User get(User user) {
+        return userRepository.findById(user.getId());
+    }
+
+    public User get(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+
 } 

@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "aircraft")
+@Table(name = "aircraft", uniqueConstraints = {@UniqueConstraint(columnNames = {"registration"})})
 public class Aircraft implements Serializable {
 
     @GenericGenerator(
@@ -30,7 +30,8 @@ public class Aircraft implements Serializable {
 
     private String registration; //Matrícula
     private String model; //Modelo
-    private String status; //Status: Activo, Inactivo
+    @Enumerated(EnumType.STRING)
+    private AircraftStatus status; //Status: Activo, Inactivo
     private String brand; //Marca
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

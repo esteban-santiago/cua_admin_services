@@ -2,23 +2,17 @@ package com.cua.admin.model.core.flight;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 @Data
 @Entity
@@ -48,13 +42,14 @@ public class FlightRecord implements Serializable {
     private FlightNature nature;//Carácter
     private FlightType type;//Tipo de vuelo
     @OneToOne
-    @JoinColumn(name = "airfield_origin_id")
+    @JoinColumn(name = "airfield_origin_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_origin_id_fk"))
     private Airfield origin;
     @OneToOne
-    @JoinColumn(name = "airfield_destiny_id")
+    @JoinColumn(name = "airfield_destiny_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_destiny_id_fk"))
     private Airfield destiny;
     //private Float amountOfTime; 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private FlightRecordStatus status = FlightRecordStatus.OPENED;
     
     public void addCrewMember(CrewMember crewMember) {
         this.crew.add(crewMember);

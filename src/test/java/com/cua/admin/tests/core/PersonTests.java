@@ -21,14 +21,6 @@ public class PersonTests extends SpringIntegrationTest {
     private NationalityRepository nationalityRepository;
 
     @Test
-    public void createNationality() {
-        Nationality argentinean = new Nationality("Argentina");
-        Nationality brazilian = new Nationality("Brasilera");
-        nationalityRepository.save(argentinean);
-        nationalityRepository.save(brazilian);
-    }
-
-    @Test
     public void createCategory() {
         Category category = new Category("Socio");
         categoryReposity.save(category);

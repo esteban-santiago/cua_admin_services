@@ -3,6 +3,7 @@ package com.cua.admin.tests.core.flight;
 import com.cua.admin.model.core.flight.CrewMember;
 import com.cua.admin.model.core.flight.CrewMemberRole;
 import com.cua.admin.model.core.flight.FlightRecord;
+import com.cua.admin.model.core.flight.FlightRecordStatus;
 import com.cua.admin.model.core.repositories.MemberRepository;
 import com.cua.admin.repositories.flight.AircraftRepository;
 import com.cua.admin.repositories.flight.CrewRepository;
@@ -39,9 +40,11 @@ public class FlightRecordTests extends SpringIntegrationTest {
         record.setStartFlight(LocalDateTime.now());
         record.setEndFlight(LocalDateTime.now().plusMinutes(70));
         System.out.println(record.getAmountOfHours());
-
+        record.setStatus(FlightRecordStatus.OPENED);
         flightRecordRepository.save(record);
-        crewRepository.save(crew);
+        System.out.println(record);
+        System.out.println(record.getCrew());
+        //crewRepository.save(crew);
     }
 
 }
