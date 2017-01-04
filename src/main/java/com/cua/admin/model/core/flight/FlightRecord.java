@@ -13,17 +13,28 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Data
 @Entity
 @Table(name = "flight_record")
 public class FlightRecord implements Serializable {
-
+    @GenericGenerator(
+            name = "SequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                @Parameter(name = "sequence_name", value = "flight_record_id_seq"),
+                @Parameter(name = "initial_value", value = "1"),
+                @Parameter(name = "increment_size", value = "1")
+    })
+    @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    private Integer id;
+    private Long id;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "flight_record_id", nullable = false, foreignKey = @ForeignKey(name = "crew_member_id_fk"))
     private Set<CrewMember> crew = new HashSet<>();
@@ -59,7 +70,7 @@ public class FlightRecord implements Serializable {
         int rest = (int) minutes - ((int)amountOfHours * 60);
         float final_result = (float) (((rest+(rest/8.26)+5)/7)/10);
         //float first = (int) (final_result * 10);
-        float second = ((int) (final_result * 10) /10);
+        float second = ((int) (final_result * 10)) /10;
         //float rest2 = ((((long) final_result * 100))/100);
         amountOfHours = amountOfHours + second;
         return amountOfHours;

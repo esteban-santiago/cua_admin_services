@@ -55,15 +55,16 @@ public class PersonTests extends SpringIntegrationTest {
         assertThat(brazilian).isNotNull();
 
         Member member = new Member();
-        member.setName("Socio 1");
+        member.setName("Persona 1");
         member.setCategory(category);
         member.addAddress(address);
         member.addAddress(address2);
         member.setNationality(argentinean);
+        member.setIdentityDocument(new IdentityDocument(IdentityDocumentType.DNI, "24036873"));
         memberService.save(member);
 
         Member member2 = new Member();
-        member2.setName("Socio 2");
+        member2.setName("Persona 2");
         member2.setCategory(category);
         member2.setNationality(brazilian);
         member2.setIdentityDocument(new IdentityDocument(IdentityDocumentType.PASSPORT, "24036873"));

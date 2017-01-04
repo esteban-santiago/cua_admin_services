@@ -21,9 +21,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.test.context.ActiveProfiles;
 
-//@ActiveProfiles("test")
-//@RunWith(SpringRunner.class)
+
 @DataJpaTest
 public class AccountingTests extends SpringIntegrationTest {
 

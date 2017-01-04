@@ -25,11 +25,11 @@ public class Airfield implements Serializable {
     @Id
     private Integer id;
 
-    @Column(name = "identification_iata")
-    private String identificationIATA;
+    @Column(name = "iata_code")
+    private String IATACode;
 
-    @Column(name = "identification_oaci")
-    private String identificationOACI;
+    @Column(name = "OACI_code")
+    private String OACICode;
 
     private String name;
     private String latitude;

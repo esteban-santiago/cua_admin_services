@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "way_to_contact")
+@Table(name = "contact_way")
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class ContactWay implements Serializable {

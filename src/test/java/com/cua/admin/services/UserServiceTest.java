@@ -35,7 +35,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void lock_byId() throws Exception {
+    public void lockById() throws Exception {
         // Given
         when(userRepository.findById(id)).thenReturn(user);
 
