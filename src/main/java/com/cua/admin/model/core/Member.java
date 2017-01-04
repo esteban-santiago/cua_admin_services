@@ -88,5 +88,14 @@ public class Member implements Serializable {
     public void addWayToContact(ContactWay contactWay) {
         this.contactWay.add(contactWay);
     }
+    
+    public void addRating(Rating rating) {
+        this.ratings.add(rating);
+    }
 
+    public void addRole(MemberRole role) {
+        this.roles.add(role);
+    }
+
+    
 }
