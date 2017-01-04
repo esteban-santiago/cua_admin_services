@@ -5,9 +5,12 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum IdentityDocumentType {
+public enum IdentityCardType {
 
-    DNI("DNI"), CUIL("CUIL"), CUIT("CUIT"), PASSPORT("Pasaporte");
+    DNI("DNI"), 
+    CUIL("CUIL"), 
+    CUIT("CUIT"), 
+    PASSPORT("Pasaporte");
     
     private final String description;
     

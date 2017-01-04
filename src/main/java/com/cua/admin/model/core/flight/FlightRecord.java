@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @Data
 @Entity
@@ -33,14 +34,14 @@ public class FlightRecord implements Serializable {
     @JoinColumn(name = "flight_record_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_member_id_fk"))
     private Set<CrewMember> crew = new HashSet<>();
     @OneToOne
-    @JoinColumn(name = "aircraft_id")
+    @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_aircraft_id_fk"))
     private Aircraft aircraft;
-    private LocalDateTime startFlight;
-    private LocalDateTime endFlight;
-    private Integer landings;
-    private FlightPurpose purpose;//Finalidad 
-    private FlightNature nature;//Carácter
-    private FlightType type;//Tipo de vuelo
+    private LocalDateTime startFlight = LocalDateTime.now();
+    private LocalDateTime endFlight = LocalDateTime.now();
+    private Integer landings = 0;
+    private FlightPurpose purpose = FlightPurpose.VP;//Finalidad 
+    private FlightNature nature = FlightNature.LDI;//Carácter
+    private FlightType type = FlightType.ENT;//Tipo de vuelo
     @OneToOne
     @JoinColumn(name = "airfield_origin_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_origin_id_fk"))
     private Airfield origin;

@@ -14,10 +14,10 @@ import java.io.Serializable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class IdentityDocument implements Serializable {
+public class IdentityCard implements Serializable {
 
     @Enumerated(EnumType.STRING)
-    private IdentityDocumentType identityDocumentType;
+    private IdentityCardType identityDocumentType;
 
     @NonNull
     private String identityDocumentNumber;

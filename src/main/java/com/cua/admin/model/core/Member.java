@@ -1,5 +1,6 @@
 package com.cua.admin.model.core;
 
+import com.cua.admin.model.core.flight.Rating;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -24,7 +25,7 @@ public class Member implements Serializable {
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                 @Parameter(name = "sequence_name", value = "member_id_seq"),
-                @Parameter(name = "initial_value", value = "1"),
+                @Parameter(name = "initial_value", value = "100"),
                 @Parameter(name = "increment_size", value = "1")
             }
     )
@@ -43,7 +44,7 @@ public class Member implements Serializable {
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "member_nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
 
-    private IdentityDocument identityDocument; //Documento de identidad
+    private IdentityCard identityCard; //Documento de identidad
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     //@JoinTable(name = "member_address")
@@ -58,6 +59,16 @@ public class Member implements Serializable {
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_way_to_contact_id_fk"))
     private Set<ContactWay> contactWay = new HashSet<>();
 
+    
+    @ElementCollection(fetch=FetchType.EAGER)
+    @JoinTable(
+            name="rating_types", // ref table.
+            joinColumns = {@JoinColumn(name="rating_id")}
+    )
+    @Column(name="rating_type_id")
+    private Set<Rating> ratings = new HashSet<>();
+    
+    
     public void addAddress(Address address) {
         this.address.add(address);
     }
