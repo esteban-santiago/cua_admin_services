@@ -11,7 +11,8 @@ public enum PaymentMethod {
     CREDIT_CARD("Tarjeta de Crédito"), 
     DEBIT_CARD("Tarjeta de Débito"), 
     CHECK("Cheque"),
-    MONEY_ACCOUNT("Cuenta Corriente $"),
+    BANK_ACCOUNT("Cuenta Corriente $"),
+    @Deprecated
     HOURS_ACCOUNT("Cuenta Corriente Hs");
     
     private final String description;

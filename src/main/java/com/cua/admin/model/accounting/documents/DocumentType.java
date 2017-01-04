@@ -7,11 +7,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum DocumentType {
 
-    NCE("Nota de Crédito Emitida"),
-    FVE("Ficha de Vuelo Emitida"), 
-    OPE("Orden de Pago Emitida"), 
-    CSE("Cuota Social Emitida"),
-    RCE("Recibo Emitido");
+    CNI("Nota de Crédito Emitida"), //Credit Note Issued
+    FRI("Ficha de Vuelo Emitida"),  //Flight Record Issued
+    POI("Orden de Pago Emitida"),  //Pay Order Issued
+    MFI("Cuota Social Emitida"), //Membership Fee Issued
+    RCI("Recibo Emitido"); //Receipt Issued
 
     private final String description;
     

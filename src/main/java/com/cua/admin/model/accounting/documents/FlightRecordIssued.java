@@ -29,6 +29,6 @@ public class FlightRecordIssued extends Document implements Serializable {
     private Long legalId;
 
     public FlightRecordIssued() {
-        setDocumentType(DocumentType.FVE);  
+        setDocumentType(DocumentType.FRI);  
     }
 }

@@ -35,6 +35,6 @@ public class CreditNoteIssued extends Document implements Serializable {
     }
 
     public CreditNoteIssued() {
-        setDocumentType(DocumentType.NCE);  
+        setDocumentType(DocumentType.CNI);  
     }
 }
