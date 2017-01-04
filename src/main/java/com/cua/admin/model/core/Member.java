@@ -12,10 +12,12 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Data
 @Entity
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "member")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Member implements Serializable {
@@ -59,15 +61,25 @@ public class Member implements Serializable {
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_way_to_contact_id_fk"))
     private Set<ContactWay> contactWay = new HashSet<>();
 
-    
     @ElementCollection(fetch=FetchType.EAGER)
     @JoinTable(
-            name="rating_types", // ref table.
-            joinColumns = {@JoinColumn(name="rating_id")}
+            name="member_rating_type", // ref table.
+            joinColumns = {@JoinColumn(name="member_id")}
     )
-    @Column(name="rating_type_id")
+    @Column(name="rating_id", nullable = false)
     private Set<Rating> ratings = new HashSet<>();
     
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status = MemberStatus.ACTIVE;
+
+    @ElementCollection(fetch=FetchType.EAGER)
+    @JoinTable(
+            name="member_role_type", // ref table.
+            joinColumns = {@JoinColumn(name="member_id")}
+    )
+    @Column(name="rol_id", nullable = false)
+    private Set<MemberRole> roles = new HashSet<>();
+
     
     public void addAddress(Address address) {
         this.address.add(address);

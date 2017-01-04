@@ -2,16 +2,18 @@ package com.cua.admin.tests.core;
 
 import com.cua.admin.model.core.Address;
 import com.cua.admin.model.core.Category;
+import com.cua.admin.model.core.IdentityCard;
+import com.cua.admin.model.core.IdentityCardType;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.Nationality;
 import com.cua.admin.model.core.flight.Rating;
 import com.cua.admin.model.core.repositories.CategoryRepository;
 import com.cua.admin.model.core.repositories.MemberRepository;
 import com.cua.admin.model.core.repositories.NationalityRepository;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class MemberTests extends SpringIntegrationTest {
 
@@ -36,13 +38,12 @@ public class MemberTests extends SpringIntegrationTest {
         address2.setCity("Adrogué");
         address2.setZip("1846");
 
-        //Category category = categoryReposity.findByDescription("Socio").get(0);
-
         Member member = new Member();
         member.setName("Socio 1");
         member.setCategory(categoryReposity.findById(1));
         member.addAddress(address);
         member.addAddress(address2);
+        member.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
         member.setNationality(nationalityRepository.findById(1));
         member.getRatings().add(Rating.IFR);
         member.getRatings().add(Rating.CROSSING);
@@ -52,10 +53,13 @@ public class MemberTests extends SpringIntegrationTest {
         member2.setName("Socio 2");
         member2.setCategory(categoryReposity.findById(1));
         member2.setNationality(nationalityRepository.findById(2));
+        member.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
         memberRepository.save(member2);
 
         memberRepository.findAll()
                 .stream().forEach(
                         aMember -> System.out.println(aMember));
+        
     }
+    
 }

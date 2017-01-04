@@ -13,7 +13,12 @@ import org.springframework.stereotype.Service;
 public class AircraftService {
 
     private final AircraftRepository aircraftRepository;
-        
+    
+    public Aircraft getAircraft(Integer id) {
+        return aircraftRepository.findById(id);
+    }
+
+    
     public Set<Aircraft> checkAircraftWithoutActiveInsurancePolicy() {
         return aircraftRepository.findAll().stream(
         ).filter(aircraft -> !aircraft.hasAnInsurancePolicyInForce()
