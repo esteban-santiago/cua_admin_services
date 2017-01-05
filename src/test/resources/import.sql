@@ -20,6 +20,10 @@ INSERT INTO category(id, description) VALUES (3,'Instructor');
 INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (1,'1974-08-02','2017-01-03','24036873','DNI','SANTIAGO, Esteban',1,1, 'ACTIVE');
 INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (2,'1989-01-27','2017-01-03','CC123331','PASSPORT','SANTIAGO, Pablo',1,2,'ACTIVE');
 
+--Medical Certifications
+INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (1,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',1);
+INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (2,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',2);
+
 --Aircrafts
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (1,'Cessna','152','LV-OEE','ACTIVE');
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (2,'Cessna','152','LV-AMS','ACTIVE');

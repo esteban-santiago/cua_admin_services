@@ -80,6 +80,10 @@ public class Member implements Serializable {
     @Column(name="rol_id", nullable = false)
     private Set<MemberRole> roles = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_medical_certification_id_fk"))
+    private Set<MedicalCertification> medicalCertifications = new HashSet<>();
+    
     
     public void addAddress(Address address) {
         this.address.add(address);
@@ -95,6 +99,10 @@ public class Member implements Serializable {
 
     public void addRole(MemberRole role) {
         this.roles.add(role);
+    }
+
+    public void addMedicalCertification(MedicalCertification medicalCertification) {
+        this.medicalCertifications.add(medicalCertification);
     }
 
     
