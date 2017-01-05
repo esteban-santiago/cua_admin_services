@@ -8,8 +8,6 @@ import javax.persistence.Enumerated;
 import java.io.Serializable;
 
 @Data
-//@Entity
-//@Table(name = "identity_document")
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
@@ -17,9 +15,9 @@ import java.io.Serializable;
 public class IdentityCard implements Serializable {
 
     @Enumerated(EnumType.STRING)
-    private IdentityCardType identityDocumentType;
+    private IdentityCardType identityCardType;
 
     @NonNull
-    private String identityDocumentNumber;
+    private String identityCardNumber;
 
 }

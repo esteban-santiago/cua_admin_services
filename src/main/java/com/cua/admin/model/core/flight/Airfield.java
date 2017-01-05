@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "airfield")
+
+@SuppressWarnings("ValidAttributes")
 public class Airfield implements Serializable {
 
     @GenericGenerator(
@@ -34,5 +36,8 @@ public class Airfield implements Serializable {
     private String name;
     private String latitude;
     private String longitude;
+    
+    @Enumerated(EnumType.STRING)
+    private AirfieldSize size;
 
 }

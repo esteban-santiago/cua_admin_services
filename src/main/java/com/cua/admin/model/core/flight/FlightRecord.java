@@ -39,15 +39,23 @@ public class FlightRecord implements Serializable {
     private LocalDateTime startFlight = LocalDateTime.now();
     private LocalDateTime endFlight = LocalDateTime.now();
     private Integer landings = 0;
+    
+    @Enumerated(EnumType.STRING)
     private FlightPurpose purpose = FlightPurpose.VP;//Finalidad 
+    
+    @Enumerated(EnumType.STRING)
     private FlightNature nature = FlightNature.LDI;//Carácter
+    
+    @Enumerated(EnumType.STRING)
     private FlightType type = FlightType.ENT;//Tipo de vuelo
+    
     @OneToOne
     @JoinColumn(name = "airfield_origin_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_origin_id_fk"))
     private Airfield origin;
     @OneToOne
     @JoinColumn(name = "airfield_destiny_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_destiny_id_fk"))
     private Airfield destiny;
+    
     //private Float amountOfTime; 
     @Enumerated(EnumType.STRING)
     private FlightRecordStatus status = FlightRecordStatus.OPENED;
