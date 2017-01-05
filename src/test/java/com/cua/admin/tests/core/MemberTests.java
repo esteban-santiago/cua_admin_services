@@ -55,7 +55,7 @@ public class MemberTests extends SpringIntegrationTest {
         member2.setName("Socio 2");
         member2.setCategory(categoryReposity.findById(1));
         member2.setNationality(nationalityRepository.findById(2));
-        member.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
+        member2.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
         memberRepository.save(member2);
 
         memberRepository.findAll()

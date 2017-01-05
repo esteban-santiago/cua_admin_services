@@ -17,8 +17,8 @@ INSERT INTO category(id, description) VALUES (2,'Empleado');
 INSERT INTO category(id, description) VALUES (3,'Instructor');
 
 --Members
-INSERT INTO member(id, date_of_birth,date_of_creation,identity_document_number,identity_document_type,name,category_id,nationality_id) VALUES (1,'1974-08-02','2017-01-03','24036873','DNI','SANTIAGO, Esteban',1,1);
-INSERT INTO member(id, date_of_birth,date_of_creation,identity_document_number,identity_document_type,name,category_id,nationality_id) VALUES (2,'1989-01-27','2017-01-03','CC123331','PASSPORT','SANTIAGO, Pablo',1,2);
+INSERT INTO member(id, date_of_birth,date_of_creation,identity_document_number,identity_document_type,name,category_id,nationality_id,status) VALUES (1,'1974-08-02','2017-01-03','24036873','DNI','SANTIAGO, Esteban',1,1, 'ACTIVE');
+INSERT INTO member(id, date_of_birth,date_of_creation,identity_document_number,identity_document_type,name,category_id,nationality_id,status) VALUES (2,'1989-01-27','2017-01-03','CC123331','PASSPORT','SANTIAGO, Pablo',1,2,'ACTIVE');
 
 --Aircrafts
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (1,'Cessna','152','LV-OEE','ACTIVE');
