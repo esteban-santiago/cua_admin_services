@@ -43,10 +43,12 @@ public abstract class Document implements Serializable {
 
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 
-    @OneToOne
-    @JoinColumn(name="compensation_document_id", foreignKey = @ForeignKey(name = "document_id_fk"))
-    private Document compensationDocument; //(*) Documento de compensación
+    //@OneToOne
+    //@JoinColumn(name="compensation_document_id", foreignKey = @ForeignKey(name = "document_id_fk"))
+    //private Document compensationDocument; //(*) Documento de compensación
 
+    private Long compensationDocument;
+    
     private LocalDate compensationDate; //(*) Fecha de compensación
 
     @OneToOne

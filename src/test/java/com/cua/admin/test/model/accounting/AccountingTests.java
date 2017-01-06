@@ -71,25 +71,23 @@ public class AccountingTests extends SpringIntegrationTest {
         fve.setCurrency(Currency.ARS);
         documentRepository.save(fve);
         entityManager.flush();
-        System.out.println(fve);
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
 
         ReceiptIssued rci = new ReceiptIssued();
         rci.setAmount(3544F);
         rci.setCurrency(Currency.ARS);
-        //rci.setCompensationDocument(rci);
+        rci.setCompensationDocument(rci.getId());
         rci.setCompensationDate(LocalDate.now());
         rci.setPaymentMethod(paymentMethodRepository.findById(1)); //Cash
         documentRepository.save(rci);
         entityManager.flush();
-        System.out.println(rci);
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
 
         //Compensando Ficha de vuelo
         fve.setCompensationDate(LocalDate.now());
-        fve.setCompensationDocument(rci);
+        fve.setCompensationDocument(rci.getId());
         documentRepository.save(fve);
         
         CreditNoteIssued nce = new CreditNoteIssued();
@@ -98,13 +96,12 @@ public class AccountingTests extends SpringIntegrationTest {
         nce.setPaymentMethod(paymentMethodRepository.findById(1));
         documentRepository.save(nce);
         entityManager.flush();
-        System.out.println(nce);
         assertThat(nce.getId()).isGreaterThan(0);
         assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
    
         System.out.println("--------Documentos---------");
         documentRepository.findAll().stream().forEach((document) -> {
-            System.out.println(document.getDocumentType().getDescription() + " : " + document.getLegalId());
+            System.out.println(document);
         });
     }
     
