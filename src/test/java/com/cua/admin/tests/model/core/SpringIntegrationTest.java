@@ -6,10 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@ActiveProfiles("local_test")
+@ActiveProfiles("local")
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
 public abstract class SpringIntegrationTest {
 
 }

@@ -36,17 +36,10 @@ public abstract class Document implements Serializable {
     @Enumerated(EnumType.STRING)
     private DocumentType documentType; //Tipo de Documento
 
-    private LocalDate accountabilityDate = LocalDate.now(); //Fecha de contabilización
-
     private Float amount; //Importe en moneda del documento
 
     @Enumerated(EnumType.STRING)
     private Currency currency; //Moneda del documento
-
-    private Float accountabilityAmount; //Importe en moneda Contable
-
-    @Enumerated(EnumType.STRING)
-    private Currency accountabilityCurrency; //Moneda contable
 
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 

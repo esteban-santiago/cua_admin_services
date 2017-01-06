@@ -36,4 +36,6 @@ INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,
 INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (3,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-11-03',3);
 --INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (4,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-11-03',4);
 
-
+--Payment Methods
+INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (1,0,'Efectivo',0,0,'CASH');
+INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (2,0.1,'VISA',0,0,'CREDIT_CARD');

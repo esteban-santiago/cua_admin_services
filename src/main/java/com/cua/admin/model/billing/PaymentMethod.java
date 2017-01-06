@@ -1,14 +1,7 @@
 package com.cua.admin.model.billing;
 
 import java.io.Serializable;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +28,7 @@ public class PaymentMethod implements Serializable {
     @Id
     private Integer id;
     private String description;
+    @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
     private Float discount;
     private Float charge;

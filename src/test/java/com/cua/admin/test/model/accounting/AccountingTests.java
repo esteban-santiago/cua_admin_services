@@ -7,12 +7,14 @@ import com.cua.admin.model.accounting.Currency;
 import com.cua.admin.model.accounting.documents.CreditNoteIssued;
 import com.cua.admin.model.accounting.documents.Document;
 import com.cua.admin.model.accounting.documents.FlightRecordIssued;
+import com.cua.admin.model.accounting.documents.ReceiptIssued;
 import com.cua.admin.model.billing.PaymentMethod;
 import com.cua.admin.model.billing.PaymentType;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
+import com.cua.admin.repositories.model.billing.PaymentMethodRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class AccountingTests extends SpringIntegrationTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PaymentMethodRepository paymentMethodRepository;
+        
     @PersistenceContext
     private EntityManager entityManager;
     
@@ -64,7 +69,6 @@ public class AccountingTests extends SpringIntegrationTest {
     @Test
     public void createDocuments() {
         FlightRecordIssued fve = new FlightRecordIssued();
-        fve.setAccountabilityAmount(3544F);
         fve.setAmount(3544F);
         fve.setCurrency(Currency.ARS);
         documentRepository.save(fve);
@@ -72,12 +76,28 @@ public class AccountingTests extends SpringIntegrationTest {
         System.out.println(fve);
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
-   
+
+        ReceiptIssued rci = new ReceiptIssued();
+        rci.setAmount(3544F);
+        rci.setCurrency(Currency.ARS);
+        //rci.setCompensationDocument(rci);
+        rci.setCompensationDate(LocalDate.now());
+        rci.setPaymentMethod(paymentMethodRepository.findById(1)); //Cash
+        documentRepository.save(rci);
+        entityManager.flush();
+        System.out.println(rci);
+        assertThat(fve.getId()).isGreaterThan(0);
+        assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
+
+        //Compensando Ficha de vuelo
+        fve.setCompensationDate(LocalDate.now());
+        fve.setCompensationDocument(rci);
+        documentRepository.save(fve);
+        
         CreditNoteIssued nce = new CreditNoteIssued();
-        nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
         nce.setCurrency(Currency.ARS);
-        nce.setPaymentMethod(new PaymentMethod(PaymentType.CASH));
+        nce.setPaymentMethod(paymentMethodRepository.findById(1));
         documentRepository.save(nce);
         entityManager.flush();
         System.out.println(nce);
@@ -85,9 +105,9 @@ public class AccountingTests extends SpringIntegrationTest {
         assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
    
         System.out.println("--------Documentos---------");
-        for(Document document : documentRepository.findAll()){
+        documentRepository.findAll().stream().forEach((document) -> {
             System.out.println(document.getDocumentType().getDescription() + " : " + document.getLegalId());
-        }
+        });
     
     }
     
