@@ -11,9 +11,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Rating {
     CROSSING("Travesía"),
-    PASSENGER("Transporte pasajeros"),
-    NIGTH_FLIGHT("Nocturno local"),
-    IFR("Vuelo instrumental");
+    PASSENGER("Transporte Pasajeros"),
+    NIGTH_FLIGHT("Nocturno Local"),
+    IFR("Vuelo Instrumental");
 
     private final String description;
 }
