@@ -1,4 +1,4 @@
-package com.cua.admin.model.core.repositories;
+package com.cua.admin.repositories.core;
 
 import com.cua.admin.model.core.Employee;
 import com.cua.admin.model.core.Nationality;

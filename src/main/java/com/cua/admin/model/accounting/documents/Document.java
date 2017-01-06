@@ -1,6 +1,7 @@
 package com.cua.admin.model.accounting.documents;
 
 import com.cua.admin.model.accounting.Currency;
+import com.cua.admin.model.billing.PaymentMethod;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.User;
 import lombok.Data;
@@ -58,6 +59,11 @@ public abstract class Document implements Serializable {
     @OneToOne
     @JoinColumn(name="member_id", foreignKey = @ForeignKey(name = "document_member_id_fk"))
     private Member member; //Socio
+
+
+    @OneToOne
+    @JoinColumn(name="payment_method_id", foreignKey = @ForeignKey(name = "document_payment_method_id_fk"))
+    private PaymentMethod paymentMethod; //Forma de pago
 
     //Número de documento contable
     //Indicador Debe/Haber

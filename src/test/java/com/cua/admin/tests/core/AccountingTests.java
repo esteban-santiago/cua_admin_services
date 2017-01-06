@@ -7,8 +7,10 @@ import com.cua.admin.model.accounting.Currency;
 import com.cua.admin.model.accounting.documents.CreditNoteIssued;
 import com.cua.admin.model.accounting.documents.Document;
 import com.cua.admin.model.accounting.documents.FlightRecordIssued;
-import com.cua.admin.model.core.repositories.UserRepository;
+import com.cua.admin.model.billing.PaymentMethod;
+import com.cua.admin.model.billing.PaymentType;
 import com.cua.admin.repositories.accounting.AccountRepository;
+import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
 import org.junit.Test;
@@ -21,7 +23,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import org.springframework.test.context.ActiveProfiles;
 
 
 @DataJpaTest
@@ -75,6 +76,7 @@ public class AccountingTests extends SpringIntegrationTest {
         nce.setAccountabilityAmount(1544F);
         nce.setAmount(1544F);
         nce.setCurrency(Currency.ARS);
+        nce.setPaymentMethod(new PaymentMethod(PaymentType.CASH));
         documentRepository.save(nce);
         entityManager.flush();
         System.out.println(nce);

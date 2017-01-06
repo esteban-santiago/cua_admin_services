@@ -8,18 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "payment_type", discriminatorType = DiscriminatorType.STRING)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "payment_type_del", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "payment_method")
-public abstract class PaymentMethod implements Serializable {
+public class PaymentMethod implements Serializable {
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -32,5 +34,13 @@ public abstract class PaymentMethod implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
-//    pr
+    private String description;
+    private PaymentType paymentType;
+    private Float discount;
+    private Float charge;
+    private Float fee;
+    
+    public PaymentMethod(PaymentType paymentType) {
+        this.paymentType = paymentType;
+    }
 }

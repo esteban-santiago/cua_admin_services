@@ -1,7 +1,7 @@
 package com.cua.admin.services;
 
 import com.cua.admin.model.core.User;
-import com.cua.admin.model.core.repositories.UserRepository;
+import com.cua.admin.repositories.core.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

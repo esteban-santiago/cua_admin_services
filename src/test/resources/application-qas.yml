@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.0.27:5432/cua_admin.dev
+    username: admin
+    password: admin
+  jpa:
+      show-sql: false
+      hibernate:
+        ddl-auto: create

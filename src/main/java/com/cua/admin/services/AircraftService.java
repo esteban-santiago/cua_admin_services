@@ -1,7 +1,7 @@
 package com.cua.admin.services;
 
 import com.cua.admin.model.core.flight.Aircraft;
-import com.cua.admin.repositories.flight.AircraftRepository;
+import com.cua.admin.repositories.core.flight.AircraftRepository;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
