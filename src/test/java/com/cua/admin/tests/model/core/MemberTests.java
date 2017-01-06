@@ -1,4 +1,4 @@
-package com.cua.admin.tests.core;
+package com.cua.admin.tests.model.core;
 
 import com.cua.admin.model.core.Address;
 import com.cua.admin.model.core.Category;

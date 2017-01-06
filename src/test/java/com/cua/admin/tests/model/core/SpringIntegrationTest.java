@@ -1,4 +1,4 @@
-package com.cua.admin.tests.core;
+package com.cua.admin.tests.model.core;
 
 import org.junit.runner.RunWith;
 //import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

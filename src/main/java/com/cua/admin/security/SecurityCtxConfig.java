@@ -1,4 +1,4 @@
-package com.cua.admin.spring.security;
+package com.cua.admin.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

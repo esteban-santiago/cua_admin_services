@@ -1,4 +1,4 @@
-package com.cua.admin.tests.core;
+package com.cua.admin.test.model.accounting;
 
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntry;
@@ -13,6 +13,7 @@ import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
+import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

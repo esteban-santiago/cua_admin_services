@@ -2,7 +2,7 @@ package com.cua.admin.rest;
 
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.core.UserRepository;
-import com.cua.admin.tests.core.SpringIntegrationTest;
+import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

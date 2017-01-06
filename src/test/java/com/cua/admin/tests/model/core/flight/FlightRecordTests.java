@@ -1,4 +1,4 @@
-package com.cua.admin.tests.core.flight;
+package com.cua.admin.tests.model.core.flight;
 
 import com.cua.admin.model.core.flight.CrewMember;
 import com.cua.admin.model.core.flight.CrewMemberRole;
@@ -8,7 +8,7 @@ import com.cua.admin.repositories.core.MemberRepository;
 import com.cua.admin.repositories.core.flight.AircraftRepository;
 import com.cua.admin.repositories.core.flight.CrewRepository;
 import com.cua.admin.repositories.core.flight.FlightRecordRepository;
-import com.cua.admin.tests.core.SpringIntegrationTest;
+import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import java.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
