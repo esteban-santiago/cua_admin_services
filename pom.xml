@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cua.admin</groupId>
-    <artifactId>cua-admin-services</artifactId>
+    <artifactId>cua_admin_services</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>cua-admin-services</name>
+    <name>cua_admin_services</name>
     <description>Administrador del CUA</description>
 
     <parent>
