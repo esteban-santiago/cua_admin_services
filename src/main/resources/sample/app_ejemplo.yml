@@ -20,7 +20,7 @@ info:
     component: Highlights Clipper
 
 server:
-  port: ${PORT:8080}
+  port: ${PORT:8081}
 
 endpoints:
   autoconfig.enabled: true
