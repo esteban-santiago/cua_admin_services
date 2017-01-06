@@ -8,8 +8,6 @@ import com.cua.admin.model.accounting.documents.CreditNoteIssued;
 import com.cua.admin.model.accounting.documents.Document;
 import com.cua.admin.model.accounting.documents.FlightRecordIssued;
 import com.cua.admin.model.accounting.documents.ReceiptIssued;
-import com.cua.admin.model.billing.PaymentMethod;
-import com.cua.admin.model.billing.PaymentType;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
@@ -108,7 +106,6 @@ public class AccountingTests extends SpringIntegrationTest {
         documentRepository.findAll().stream().forEach((document) -> {
             System.out.println(document.getDocumentType().getDescription() + " : " + document.getLegalId());
         });
-    
     }
     
     @Test
