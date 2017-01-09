@@ -6,8 +6,10 @@ import com.cua.admin.model.accounting.AccountingEntryItem;
 import com.cua.admin.model.accounting.Currency;
 import com.cua.admin.model.accounting.documents.CreditNoteIssued;
 import com.cua.admin.model.accounting.documents.Document;
+import com.cua.admin.model.accounting.documents.DocumentType;
 import com.cua.admin.model.accounting.documents.FlightRecordIssued;
 import com.cua.admin.model.accounting.documents.ReceiptIssued;
+import com.cua.admin.model.accounting.entries.TemplateEntry;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
@@ -26,7 +28,7 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@DataJpaTest
+//@DataJpaTest
 public class AccountingTests extends SpringIntegrationTest {
 
     @Autowired
@@ -46,9 +48,7 @@ public class AccountingTests extends SpringIntegrationTest {
         
     @PersistenceContext
     private EntityManager entityManager;
-    
-    
-    
+      
     @Test
     public void getAccounts() {
         for (Account account : accountRepository.findAll()) {
@@ -63,14 +63,19 @@ public class AccountingTests extends SpringIntegrationTest {
             System.out.println(account.toFormattedString() + " - " + account.getDescription());
         });
     }
-      
+    
+    @Test
+    public void createTemplateEntry() {
+        TemplateEntry entry = new TemplateEntry();
+        entry.setDocumentType(DocumentType.FRI);
+    }
+    
     @Test
     public void createDocuments() {
         FlightRecordIssued fve = new FlightRecordIssued();
         fve.setAmount(3544F);
         fve.setCurrency(Currency.ARS);
-        documentRepository.save(fve);
-        entityManager.flush();
+        documentRepository.saveAndFlush(fve);
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
 
@@ -80,8 +85,7 @@ public class AccountingTests extends SpringIntegrationTest {
         rci.setCompensationDocument(rci.getId());
         rci.setCompensationDate(LocalDate.now());
         rci.setPaymentMethod(paymentMethodRepository.findById(1)); //Cash
-        documentRepository.save(rci);
-        entityManager.flush();
+        documentRepository.saveAndFlush(rci);
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
 
@@ -94,8 +98,7 @@ public class AccountingTests extends SpringIntegrationTest {
         nce.setAmount(1544F);
         nce.setCurrency(Currency.ARS);
         nce.setPaymentMethod(paymentMethodRepository.findById(1));
-        documentRepository.save(nce);
-        entityManager.flush();
+        documentRepository.saveAndFlush(nce);
         assertThat(nce.getId()).isGreaterThan(0);
         assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
    

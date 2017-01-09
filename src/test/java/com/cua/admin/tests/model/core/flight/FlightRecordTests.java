@@ -32,11 +32,11 @@ public class FlightRecordTests extends SpringIntegrationTest {
     public void createFlightRecord() {
         CrewMember crew = new CrewMember();
         crew.setCrewMemberRole(CrewMemberRole.PIC);
-        crew.setMember(memberRepository.findById(1));
+        crew.setMember(memberRepository.findById(100));
         
         FlightRecord record = new FlightRecord();
         record.addCrewMember(crew);
-        record.setAircraft(aircraftRepository.findById(1));
+        record.setAircraft(aircraftRepository.findById(100));
         record.setStartFlight(LocalDateTime.now());
         record.setEndFlight(LocalDateTime.now().plusMinutes(70));
         System.out.println(record.getAmountOfHours());

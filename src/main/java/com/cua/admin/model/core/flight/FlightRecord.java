@@ -13,7 +13,6 @@ import java.time.temporal.ChronoUnit;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @Data
 @Entity
