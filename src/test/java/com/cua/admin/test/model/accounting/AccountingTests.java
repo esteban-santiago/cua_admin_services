@@ -10,10 +10,12 @@ import com.cua.admin.model.accounting.documents.DocumentType;
 import com.cua.admin.model.accounting.documents.FlightRecordIssued;
 import com.cua.admin.model.accounting.documents.ReceiptIssued;
 import com.cua.admin.model.accounting.entries.TemplateEntry;
+import com.cua.admin.model.billing.PaymentType;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
+import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
 import com.cua.admin.repositories.model.billing.PaymentMethodRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
@@ -45,29 +47,15 @@ public class AccountingTests extends SpringIntegrationTest {
 
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
-        
-    @PersistenceContext
-    private EntityManager entityManager;
-      
-    @Test
-    public void getAccounts() {
-        for (Account account : accountRepository.findAll()) {
-            System.out.println(account.getDescription());
-        }
-    }
-
-    @Test
-    public void getMajorAccounts() {
-        System.out.println("----------------Cuentas Mayores--------------");
-        accountRepository.findBySecondOrderGrouper(0).forEach((Account account) -> {
-            System.out.println(account.toFormattedString() + " - " + account.getDescription());
-        });
-    }
+     
+    @Autowired
+    private TemplateEntryRepository templateEntryRepository;
     
     @Test
-    public void createTemplateEntry() {
-        TemplateEntry entry = new TemplateEntry();
-        entry.setDocumentType(DocumentType.FRI);
+    public void getTemplateEntry() {
+        TemplateEntry entry = templateEntryRepository.findByDocumentType(DocumentType.FRI);
+        System.out.println(entry);
+        System.out.println(entry.getEntryLineByPaymentType(PaymentType.ACCOUNT));
     }
     
     @Test
@@ -106,6 +94,13 @@ public class AccountingTests extends SpringIntegrationTest {
         documentRepository.findAll().stream().forEach((document) -> {
             System.out.println(document);
         });
+    }
+    
+    @Test
+    public void createAutomaticAccountingEntry() {
+        Document document = documentRepository.findById(100L);
+        TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
+        System.out.println("---------Acá viene: -------\n" + entry.getAccountingEntry(document));
     }
     
     @Test
