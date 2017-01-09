@@ -100,7 +100,9 @@ public class AccountingTests extends SpringIntegrationTest {
     public void createAutomaticAccountingEntry() {
         Document document = documentRepository.findById(100L);
         TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
-        System.out.println("---------Acá viene: -------\n" + entry.getAccountingEntry(document));
+        AccountingEntry _entry = entry.getAccountingEntry(document);
+        accountingEntryRepository.save(_entry);
+        System.out.println("---------Acá viene: -------\n" + _entry);
     }
     
     @Test

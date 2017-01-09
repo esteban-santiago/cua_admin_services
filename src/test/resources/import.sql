@@ -66,7 +66,7 @@ INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_g
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(1100,1,1,2,0,'Bancos');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(1200,1,1,2,1,'Banco Provincia Caja de Ahorro U$S');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(1300,1,1,2,2,'Banco Provincia Cuenta Corriente U$S');
-INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(2100,1,1,3,5,'Banco Provincia Cuenta Corriente U$S');
+INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(2100,1,1,3,5,'Deudores por vuelos');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(8200,4,0,0,0,'Ingresos');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(8500,4,1,1,1,'Horas de vuelo');
 
@@ -75,4 +75,4 @@ INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'A
 
 --Template Entry Line
 INSERT INTO template_entry_line (id, credit, debit, payment_type, account_id, template_entry_id) VALUES(100, 1, 0, NULL,2100,100);
-INSERT INTO template_entry_line (id, credit, debit, payment_type, account_id, template_entry_id) VALUES(101, 0, -1, 'ACCOUNT',8500,100);
+INSERT INTO template_entry_line (id, credit, debit, payment_type, account_id, template_entry_id) VALUES(101, 0, 1, 'ACCOUNT',8500,100);
