@@ -5,10 +5,8 @@
  */
 package com.cua.admin.model.accounting.entries;
 
-import com.cua.admin.model.accounting.AccountingEntry;
-import com.cua.admin.model.accounting.AccountingEntryItem;
-import com.cua.admin.model.accounting.documents.Document;
-import com.cua.admin.model.accounting.documents.DocumentType;
+import com.cua.admin.model.accounting.*;
+import com.cua.admin.model.accounting.documents.*;
 import com.cua.admin.model.billing.PaymentType;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -59,19 +57,20 @@ public class TemplateEntry implements Serializable {
     }
     
     private Set<TemplateEntryLine> getCreditEntryLines() {
-        return entryLines.stream().filter(entryLine -> entryLine.getCredit()!= 0).
+        return entryLines.stream().filter(entryLine -> entryLine.
+                getAccountingEntryItemType().equals(AccountingEntryItemType.CREDIT)).
                 map(entryLine -> entryLine
                     ).collect(Collectors.toCollection(HashSet::new));
     }
 
     private Set<TemplateEntryLine> getDebitEntryLines() {
-        return entryLines.stream().filter(entryLine -> entryLine.getDebit()!= 0).
+        return entryLines.stream().filter(entryLine -> entryLine.
+                getAccountingEntryItemType().equals(AccountingEntryItemType.DEBIT)).
                 map(entryLine -> entryLine
                     ).collect(Collectors.toCollection(HashSet::new));
     }
 
     public Set<TemplateEntryLine> getEntryLineByPaymentType(PaymentType paymentType) {
-        //entryLines.stream().filter(!entryLine -> entryLine.getPaymentType().equals(null))
         return entryLines.stream().
                 filter(entryLine -> entryLine.getPaymentType() != null).
                 filter(entryLine -> entryLine.getPaymentType().equals(paymentType)).
@@ -83,11 +82,21 @@ public class TemplateEntry implements Serializable {
         entry.setCreationDate(LocalDateTime.now());
         entry.setDescription(this.description);
         entry.setFiscalYear(LocalDate.now().getYear());
-        entryLines.stream().forEach(entryLine -> {
+        
+        getCreditEntryLines().stream().forEach(entryLine -> {
             AccountingEntryItem item = new AccountingEntryItem();
             item.setAccount(entryLine.getAccount());
-            item.setCredit(entryLine.getCredit() * document.getAmount());
-            item.setDebit(entryLine.getDebit() * document.getAmount());
+            item.setItemType(AccountingEntryItemType.CREDIT);
+            item.setAmount(entryLine.getFactor()* document.getAmount());
+            item.setCurrency(document.getCurrency());
+            entry.addEntryItem(item);
+        });
+        getDebitEntryLines().stream().forEach(entryLine -> {
+            AccountingEntryItem item = new AccountingEntryItem();
+            item.setAccount(entryLine.getAccount());
+            item.setItemType(AccountingEntryItemType.DEBIT);
+            item.setAmount(entryLine.getFactor()* document.getAmount());
+            item.setCurrency(document.getCurrency());
             entry.addEntryItem(item);
         });
         return this.entry;

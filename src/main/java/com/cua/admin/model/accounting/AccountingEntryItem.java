@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "accounting_entry_item")
-@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 public class AccountingEntryItem implements Serializable {
      @GenericGenerator(
@@ -33,11 +32,13 @@ public class AccountingEntryItem implements Serializable {
     @Id
     private Integer id;
 
-    private Float debit;
-    private Float credit;
-
-    @CreatedDate
-    private LocalDateTime creationDate;
+    @Enumerated(EnumType.STRING)
+    private AccountingEntryItemType itemType;
+     
+    private Float amount;
+    
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "accounting_entry_item_account_id_fk"))

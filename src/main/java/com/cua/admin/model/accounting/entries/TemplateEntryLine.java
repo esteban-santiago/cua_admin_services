@@ -6,6 +6,7 @@
 package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.accounting.Account;
+import com.cua.admin.model.accounting.AccountingEntryItemType;
 import com.cua.admin.model.billing.PaymentType;
 import java.io.Serializable;
 import javax.persistence.*;
@@ -40,7 +41,9 @@ public class TemplateEntryLine implements Serializable {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
     
-    private Integer debit;
+    @Enumerated(EnumType.STRING)
+    private AccountingEntryItemType accountingEntryItemType;
     
-    private Integer credit;
+    private Integer factor;
+    
 }
