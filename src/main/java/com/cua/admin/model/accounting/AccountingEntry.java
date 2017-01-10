@@ -35,7 +35,7 @@ public class AccountingEntry implements Serializable {
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    private Integer id;
+    private Long id;
 
     private String description; //Descripción del asiento
 
