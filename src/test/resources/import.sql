@@ -74,5 +74,5 @@ INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_g
 INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'Asiento automatico de Ficha de Vuelo');
 
 --Template Entry Line
-INSERT INTO template_entry_line (id, credit, debit, payment_type, account_id, template_entry_id) VALUES(100, 1, 0, NULL,2100,100);
-INSERT INTO template_entry_line (id, credit, debit, payment_type, account_id, template_entry_id) VALUES(101, 0, 1, 'ACCOUNT',8500,100);
+INSERT INTO template_entry_line (id, accounting_entry_item_type, factor, payment_type, account_id, template_entry_id) VALUES(100, 'CREDIT', 1, NULL,2100,100);
+INSERT INTO template_entry_line (id, accounting_entry_item_type, factor, payment_type, account_id, template_entry_id) VALUES(101, 'DEBIT', 1, 'ACCOUNT',8500,100);

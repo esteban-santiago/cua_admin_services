@@ -3,6 +3,7 @@ package com.cua.admin.test.model.accounting;
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntry;
 import com.cua.admin.model.accounting.AccountingEntryItem;
+import com.cua.admin.model.accounting.AccountingEntryItemType;
 import com.cua.admin.model.accounting.Currency;
 import com.cua.admin.model.accounting.documents.CreditNoteIssued;
 import com.cua.admin.model.accounting.documents.Document;
@@ -115,12 +116,14 @@ public class AccountingTests extends SpringIntegrationTest {
         accountingEntryRepository.save(entry);
         AccountingEntryItem item1 = new AccountingEntryItem();
         AccountingEntryItem item2 = new AccountingEntryItem();
-        item1.setCreationDate(LocalDateTime.now());
+        //item1.setCreationDate(LocalDateTime.now());
         item1.setAccount(accountRepository.findById(1700)); //Cuotas a cobrar
-        item1.setCredit(350.00F);
-        item2.setCreationDate(LocalDateTime.now());
+        item1.setItemType(AccountingEntryItemType.CREDIT);
+        item1.setAmount(350.00F);
+        //item2.setCreationDate(LocalDateTime.now());
         item2.setAccount(accountRepository.findById(8800)); //Cuotas y servicios
-        item2.setDebit(350.00F);
+        item2.setItemType(AccountingEntryItemType.DEBIT);
+        item2.setAmount(350.00F);
         entry.addEntryItem(item1);
         entry.addEntryItem(item2);
         accountingEntryRepository.save(entry);
