@@ -2,9 +2,7 @@ package com.cua.admin.model.billing;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 

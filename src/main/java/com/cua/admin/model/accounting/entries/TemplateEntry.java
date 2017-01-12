@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.accounting.*;
@@ -59,25 +54,23 @@ public class TemplateEntry implements Serializable {
     private Set<TemplateEntryLine> getCreditEntryLines() {
         return entryLines.stream().filter(entryLine -> entryLine.
                 getAccountingEntryItemType().equals(AccountingEntryItemType.CREDIT)).
-                map(entryLine -> entryLine
-                    ).collect(Collectors.toCollection(HashSet::new));
+                collect(Collectors.toSet());
     }
 
     private Set<TemplateEntryLine> getDebitEntryLines() {
         return entryLines.stream().filter(entryLine -> entryLine.
                 getAccountingEntryItemType().equals(AccountingEntryItemType.DEBIT)).
-                map(entryLine -> entryLine
-                    ).collect(Collectors.toCollection(HashSet::new));
+                collect(Collectors.toSet());
     }
 
     public Set<TemplateEntryLine> getEntryLineByPaymentType(PaymentType paymentType) {
         return entryLines.stream().
-                filter(entryLine -> entryLine.getPaymentType() != null).
+                filter(entryLine -> entryLine.getPaymentType()!=null).              
                 filter(entryLine -> entryLine.getPaymentType().equals(paymentType)).
-                map(entryLine->entryLine).
-                collect(Collectors.toCollection(HashSet::new));
+                collect(Collectors.toSet());
     }
 
+    
     public AccountingEntry getAccountingEntry(Document document) {
         entry.setCreationDate(LocalDateTime.now());
         entry.setDescription(this.description);

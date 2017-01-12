@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.accounting.Account;
@@ -33,7 +28,7 @@ public class TemplateEntryLine implements Serializable {
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    private Integer id; //Número de doc
+    private Integer id; //Número de linea de asiento
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
