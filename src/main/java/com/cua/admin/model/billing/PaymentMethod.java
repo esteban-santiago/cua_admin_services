@@ -1,9 +1,14 @@
 package com.cua.admin.model.billing;
 
 import java.io.Serializable;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -36,4 +41,7 @@ public class PaymentMethod implements Serializable {
     
     private String description;
     
+   @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_method__id", nullable = false, foreignKey = @ForeignKey(name = "payment_method_term_id_fk"))
+    Set <PaymentTerm> paymentTerm;
 }
