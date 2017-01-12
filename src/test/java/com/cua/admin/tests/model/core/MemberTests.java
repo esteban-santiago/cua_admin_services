@@ -14,6 +14,7 @@ import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.MemberRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
 import java.time.LocalDate;
+import javax.transaction.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class MemberTests extends SpringIntegrationTest {
     @Autowired
     private NationalityRepository nationalityRepository;
 
+    @Transactional
     @Test
     public void createMember() {
         Address address = new Address();

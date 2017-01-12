@@ -27,7 +27,7 @@ public class Member implements Serializable {
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                 @Parameter(name = "sequence_name", value = "member_id_seq"),
-                @Parameter(name = "initial_value", value = "100"),
+                @Parameter(name = "initial_value", value = "1"),
                 @Parameter(name = "increment_size", value = "1")
             }
     )
@@ -48,20 +48,20 @@ public class Member implements Serializable {
 
     private IdentityCard identityCard; //Documento de identidad
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //@JoinTable(name = "member_address")
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_address_id_fk"))
     private Set<Address> address = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "member_category_id_fk"))
     private Category category;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_way_to_contact_id_fk"))
     private Set<ContactWay> contactWay = new HashSet<>();
 
-    @ElementCollection(fetch=FetchType.EAGER)
+    @ElementCollection(fetch=FetchType.LAZY)
     @JoinTable(
             name="member_rating_type", // ref table.
             joinColumns = {@JoinColumn(name="member_id")}
@@ -72,7 +72,7 @@ public class Member implements Serializable {
     @Enumerated(EnumType.STRING)
     private MemberStatus status = MemberStatus.ACTIVE;
 
-    @ElementCollection(fetch=FetchType.EAGER)
+    @ElementCollection(fetch=FetchType.LAZY)
     @JoinTable(
             name="member_role_type", // ref table.
             joinColumns = {@JoinColumn(name="member_id")}
@@ -80,7 +80,7 @@ public class Member implements Serializable {
     @Column(name="rol_id", nullable = false)
     private Set<MemberRole> roles = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_medical_certification_id_fk"))
     private Set<MedicalCertification> medicalCertifications = new HashSet<>();
     
@@ -103,7 +103,5 @@ public class Member implements Serializable {
 
     public void addMedicalCertification(MedicalCertification medicalCertification) {
         this.medicalCertifications.add(medicalCertification);
-    }
-
-    
+    }   
 }
