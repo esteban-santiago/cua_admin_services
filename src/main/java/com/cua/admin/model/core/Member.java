@@ -42,7 +42,7 @@ public class Member implements Serializable {
 
     private LocalDate dateOfBirth; //Fecha de nacimiento
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "member_nationality_id_fk"))
     private Nationality nationality; //Nacionalidad
 

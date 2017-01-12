@@ -37,9 +37,14 @@ INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,
 --INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (103,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-11-03',103);
 
 --Payment Methods
-INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (1,0,'Efectivo',0,0,'CASH');
-INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (2,0.1,'VISA',0,0,'CREDIT_CARD');
-INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (3,0,'Cuenta Corriente',0,0,'ACCOUNT');
+INSERT INTO payment_method(id, description) VALUES (1,'Efectivo');
+INSERT INTO payment_method(id, description) VALUES (2,'Cheque Bancario');
+INSERT INTO payment_method(id, description) VALUES (3,'Cuenta Corriente');
+INSERT INTO payment_method(id, description) VALUES (4,'Tarjeta de Crédito');
+INSERT INTO payment_method(id, description) VALUES (5,'Tarjeta de Débito');
+--INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (1,0,'Efectivo',0,0,'CASH');
+--INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (2,0.1,'VISA',0,0,'CREDIT_CARD');
+--INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (3,0,'Cuenta Corriente',0,0,'ACCOUNT');
 
 --Flight Record
 INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);

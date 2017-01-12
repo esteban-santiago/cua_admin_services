@@ -36,6 +36,6 @@ public class PaymentTerms implements Serializable {
     private Integer id;
     
     @Enumerated(EnumType.STRING)
-    private PaymentType paymentType;
+    private PaymentMethod paymentType;
     
 }

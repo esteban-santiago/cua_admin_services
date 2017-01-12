@@ -1,6 +1,4 @@
 package com.cua.admin.test.model.accounting;
-
-import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntry;
 import com.cua.admin.model.accounting.AccountingEntryItem;
 import com.cua.admin.model.accounting.AccountingEntryItemType;
@@ -11,7 +9,7 @@ import com.cua.admin.model.accounting.documents.DocumentType;
 import com.cua.admin.model.accounting.documents.FlightRecordIssued;
 import com.cua.admin.model.accounting.documents.ReceiptIssued;
 import com.cua.admin.model.accounting.entries.TemplateEntry;
-import com.cua.admin.model.billing.PaymentType;
+import com.cua.admin.model.billing.PaymentMethod;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
@@ -21,10 +19,6 @@ import com.cua.admin.repositories.model.billing.PaymentMethodRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -56,7 +50,8 @@ public class AccountingTests extends SpringIntegrationTest {
     public void getTemplateEntry() {
         TemplateEntry entry = templateEntryRepository.findByDocumentType(DocumentType.FRI);
         System.out.println(entry);
-        System.out.println(entry.getEntryLineByPaymentType(PaymentType.ACCOUNT));
+        PaymentMethod paymentMethod = paymentMethodRepository.findById(1);
+        System.out.println(entry.getEntryLineByPaymentMethod(paymentMethod));
     }
     
     @Test

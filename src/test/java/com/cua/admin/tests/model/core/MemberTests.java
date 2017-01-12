@@ -1,21 +1,15 @@
 package com.cua.admin.tests.model.core;
 
 import com.cua.admin.model.core.Address;
-import com.cua.admin.model.core.Category;
 import com.cua.admin.model.core.IdentityCard;
 import com.cua.admin.model.core.IdentityCardType;
-import com.cua.admin.model.core.MedicalCertification;
-import com.cua.admin.model.core.MedicalCertificationClass;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.MemberRole;
-import com.cua.admin.model.core.Nationality;
 import com.cua.admin.model.core.flight.Rating;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.MemberRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
-import java.time.LocalDate;
 import javax.transaction.Transactional;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

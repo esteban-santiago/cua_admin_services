@@ -2,7 +2,7 @@ package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.accounting.*;
 import com.cua.admin.model.accounting.documents.*;
-import com.cua.admin.model.billing.PaymentType;
+import com.cua.admin.model.billing.PaymentMethod;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -46,7 +46,8 @@ public class TemplateEntry implements Serializable {
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "template_entry_id", foreignKey = @ForeignKey(name = "template_entry_id_fk"))
-    private Set <TemplateEntryLine>entryLines = new HashSet<>(); 
+    private Set<TemplateEntryLine> entryLines = new HashSet<>(); 
+
     public void addEntryLine(TemplateEntryLine entryLine) {
         this.entryLines.add(entryLine);
     }
@@ -63,10 +64,10 @@ public class TemplateEntry implements Serializable {
                 collect(Collectors.toSet());
     }
 
-    public Set<TemplateEntryLine> getEntryLineByPaymentType(PaymentType paymentType) {
+    public Set<TemplateEntryLine> getEntryLineByPaymentMethod(PaymentMethod paymentMethod) {
         return entryLines.stream().
-                filter(entryLine -> entryLine.getPaymentType()!=null).              
-                filter(entryLine -> entryLine.getPaymentType().equals(paymentType)).
+                filter(entryLine -> entryLine.getPaymentMethod()!=null).              
+                filter(entryLine -> entryLine.getPaymentMethod().equals(paymentMethod)).
                 collect(Collectors.toSet());
     }
 
