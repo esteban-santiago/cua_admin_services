@@ -26,7 +26,7 @@ public class PaymentTerms implements Serializable {
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "payment_method_id_seq"),
+                @Parameter(name = "sequence_name", value = "payment_terms_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
             }
@@ -38,9 +38,4 @@ public class PaymentTerms implements Serializable {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
     
-    private String description;
-    
-    private Float charge;
-    
-    private Float discount;
 }
