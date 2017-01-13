@@ -1,4 +1,4 @@
-package com.cua.admin.repositories.model.billing;
+package com.cua.admin.repositories.billing;
 
 import com.cua.admin.model.billing.PaymentMethod;
 import org.springframework.data.jpa.repository.JpaRepository;

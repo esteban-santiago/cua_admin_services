@@ -1,4 +1,4 @@
-package com.cua.admin.model.core.sales;
+package com.cua.admin.model.sales;
 
 /**
  *

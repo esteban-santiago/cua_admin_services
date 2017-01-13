@@ -15,7 +15,7 @@ import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
 import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
-import com.cua.admin.repositories.model.billing.PaymentMethodRepository;
+import com.cua.admin.repositories.billing.PaymentMethodRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

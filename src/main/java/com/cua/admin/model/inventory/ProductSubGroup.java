@@ -1,4 +1,4 @@
-package com.cua.admin.model.core.inventory;
+package com.cua.admin.model.inventory;
 
 /**
  *

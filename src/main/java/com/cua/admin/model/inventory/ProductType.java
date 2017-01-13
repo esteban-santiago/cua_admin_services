@@ -1,4 +1,4 @@
-package com.cua.admin.model.core.inventory;
+package com.cua.admin.model.inventory;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
