@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -41,7 +43,11 @@ public class PaymentMethod implements Serializable {
     
     private String description;
     
-   @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "payment_method__id", nullable = false, foreignKey = @ForeignKey(name = "payment_method_term_id_fk"))
-    Set <PaymentTerm> paymentTerm;
+    //@OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "payment_method_id", nullable = false, foreignKey = @ForeignKey(name = "payment_method_term_id_fk"))
+    //@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@JoinTable(name = "member_address")
+    @JoinColumn(name = "payment_term_id", nullable = false, foreignKey = @ForeignKey(name = "payment_term_id_fk"))
+    Set<PaymentTerm> paymentTerm;
 }

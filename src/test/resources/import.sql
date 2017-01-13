@@ -42,9 +42,12 @@ INSERT INTO payment_method(id, description) VALUES (2,'Cheque Bancario');
 INSERT INTO payment_method(id, description) VALUES (3,'Cuenta Corriente');
 INSERT INTO payment_method(id, description) VALUES (4,'Tarjeta de Crédito');
 INSERT INTO payment_method(id, description) VALUES (5,'Tarjeta de Débito');
---INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (1,0,'Efectivo',0,0,'CASH');
---INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (2,0.1,'VISA',0,0,'CREDIT_CARD');
---INSERT INTO payment_method(id,charge,description,discount,fee,payment_type) VALUES (3,0,'Cuenta Corriente',0,0,'ACCOUNT');
+--Payment Methods
+INSERT INTO  payment_term (id, charge, description, discount, payment_term_id) VALUES (1, 0,'Contado', 0,1);
+INSERT INTO  payment_term (id, charge, description, discount, payment_term_id) VALUES (2, 0,'Al dia', 0,2);
+INSERT INTO  payment_term (id, charge, description, discount, payment_term_id) VALUES (3, 0.10,'1 Cuota', 0,4);
+INSERT INTO  payment_term (id, charge, description, discount, payment_term_id) VALUES (4, 0.10,'3 Cuotas', 0,4);
+
 
 --Flight Record
 INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
@@ -55,7 +58,7 @@ INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (
 INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (101,'PIC',1,101);
 INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INS',2,101);
 
-INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,NULL);
+--INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,NULL);
 
 --Account
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(100,1,0,0,0,'Activo');
@@ -76,8 +79,8 @@ INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_g
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(8500,4,1,1,1,'Horas de vuelo');
 
 --Template Entry
-INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'Asiento automatico de Ficha de Vuelo');
+--INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'Asiento automatico de Ficha de Vuelo');
 
 --Template Entry Line
-INSERT INTO template_entry_line(id, accounting_entry_item_type, factor, payment_type, account_id, template_entry_id) VALUES(100, 'CREDIT', 1, NULL,2100,100);
-INSERT INTO template_entry_line(id, accounting_entry_item_type, factor, payment_type, account_id, template_entry_id) VALUES(101, 'DEBIT', 1, 'ACCOUNT',8500,100);
+--INSERT INTO template_entry_line(id, accounting_entry_item_type, factor, payment_type, account_id, template_entry_id) VALUES(100, 'CREDIT', 1, NULL,2100,100);
+--INSERT INTO template_entry_line(id, accounting_entry_item_type, factor, payment_type, account_id, template_entry_id) VALUES(101, 'DEBIT', 1, 'ACCOUNT',8500,100);

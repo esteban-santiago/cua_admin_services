@@ -29,15 +29,14 @@ public class TemplateEntryLine implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id; //Número de linea de asiento
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
     
-    private PaymentMethod paymentMethod;
-    
     @Enumerated(EnumType.STRING)
     private AccountingEntryItemType accountingEntryItemType;
-    
+            
     private Integer factor;
     
 }

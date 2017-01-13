@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import javax.transaction.Transactional;
 
 public class EmployeeTests extends SpringIntegrationTest {
 
@@ -25,7 +26,7 @@ public class EmployeeTests extends SpringIntegrationTest {
     private NationalityRepository nationalityReposity;
 
 
-
+    @Transactional
     @Test
     public void createEmployee() {
         Nationality peruvian = new Nationality("Peruana");

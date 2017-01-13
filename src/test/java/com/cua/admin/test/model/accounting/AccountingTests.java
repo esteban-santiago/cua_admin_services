@@ -21,11 +21,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 //@DataJpaTest
+@Transactional
 public class AccountingTests extends SpringIntegrationTest {
 
     @Autowired
@@ -51,7 +53,7 @@ public class AccountingTests extends SpringIntegrationTest {
         TemplateEntry entry = templateEntryRepository.findByDocumentType(DocumentType.FRI);
         System.out.println(entry);
         PaymentMethod paymentMethod = paymentMethodRepository.findById(1);
-        System.out.println(entry.getEntryLineByPaymentMethod(paymentMethod));
+        //System.out.println(entry.getEntryLineByPaymentMethod(paymentMethod));
     }
     
     @Test
@@ -92,7 +94,7 @@ public class AccountingTests extends SpringIntegrationTest {
         });
     }
     
-    @Test
+    //@Test
     public void createAutomaticAccountingEntry() {
         Document document = documentRepository.findById(100L);
         TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());

@@ -64,13 +64,6 @@ public class TemplateEntry implements Serializable {
                 collect(Collectors.toSet());
     }
 
-    public Set<TemplateEntryLine> getEntryLineByPaymentMethod(PaymentMethod paymentMethod) {
-        return entryLines.stream().
-                filter(entryLine -> entryLine.getPaymentMethod()!=null).              
-                filter(entryLine -> entryLine.getPaymentMethod().equals(paymentMethod)).
-                collect(Collectors.toSet());
-    }
-
     
     public AccountingEntry getAccountingEntry(Document document) {
         entry.setCreationDate(LocalDateTime.now());
