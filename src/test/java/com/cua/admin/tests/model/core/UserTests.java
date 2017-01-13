@@ -17,13 +17,6 @@ public class UserTests extends SpringIntegrationTest {
     private UserService userService;
 
     @Test
-    public void lockUser() {
-        User user = userRepository.findByName("Esteban").get(0);
-        System.out.println("-----Bloqueo de usuario----");
-        userService.lock(user);
-    }
-
-    @Test
     public void createUser() {
         User user = new User();
         //user.setId(0);

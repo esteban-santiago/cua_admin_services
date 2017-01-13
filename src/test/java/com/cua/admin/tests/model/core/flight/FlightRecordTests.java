@@ -29,7 +29,6 @@ public class FlightRecordTests extends SpringIntegrationTest {
     @Autowired
     private FlightRecordRepository flightRecordRepository;
     
-    @Transactional
     @Test
     public void createFlightRecord() {
         CrewMember crew = new CrewMember();

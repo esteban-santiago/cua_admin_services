@@ -9,7 +9,6 @@ import com.cua.admin.model.core.flight.Rating;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.MemberRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
-import javax.transaction.Transactional;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,7 +24,6 @@ public class MemberTests extends SpringIntegrationTest {
     @Autowired
     private NationalityRepository nationalityRepository;
 
-    @Transactional
     @Test
     public void createMember() {
         Address address = new Address();
