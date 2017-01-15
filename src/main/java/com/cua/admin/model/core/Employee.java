@@ -18,7 +18,7 @@ public class Employee extends Member {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_seq" )  
     
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
     private Activity activity;
 

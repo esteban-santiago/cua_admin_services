@@ -1,17 +1,11 @@
 package com.cua.admin.model.billing;
 
 import java.io.Serializable;
+
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -48,6 +42,6 @@ public class PaymentMethod implements Serializable {
     //@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //@JoinTable(name = "member_address")
-    @JoinColumn(name = "payment_term_id", nullable = false, foreignKey = @ForeignKey(name = "payment_term_id_fk"))
+    @JoinColumn(name = "payment_method_id", nullable = false, foreignKey = @ForeignKey(name = "payment_term_id_fk"))
     Set<PaymentTerm> paymentTerm;
 }

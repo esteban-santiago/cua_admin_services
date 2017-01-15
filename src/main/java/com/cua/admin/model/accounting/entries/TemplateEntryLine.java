@@ -2,7 +2,6 @@ package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.AccountingEntryItemType;
-import com.cua.admin.model.billing.PaymentMethod;
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.Data;
@@ -30,7 +29,7 @@ public class TemplateEntryLine implements Serializable {
     @Id
     private Integer id; //Número de linea de asiento
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
     

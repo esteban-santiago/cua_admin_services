@@ -2,6 +2,7 @@ package com.cua.admin.model.accounting.documents;
 
 import com.cua.admin.model.accounting.Currency;
 import com.cua.admin.model.billing.PaymentMethod;
+import com.cua.admin.model.billing.PaymentTerm;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.User;
 import lombok.Data;
@@ -60,8 +61,10 @@ public abstract class Document implements Serializable {
     @JoinColumn(name="payment_method_id", foreignKey = @ForeignKey(name = "document_payment_method_id_fk"))
     private PaymentMethod paymentMethod; //Forma de pago
 
-    //Número de documento contable
-    //Indicador Debe/Haber
+    @OneToOne
+    @JoinColumn(name="payment_term_id", foreignKey = @ForeignKey(name = "document_payment_term_id_fk"))
+    private PaymentTerm paymentTerm; //Condiciones de Pago
+    
     @OneToOne
     @JoinColumn(name="user_id")
     private User user; //Usuario

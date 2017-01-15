@@ -1,19 +1,16 @@
 package com.cua.admin.model.accounting.entries;
 
-import com.cua.admin.model.billing.PaymentMethod;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import com.cua.admin.model.billing.PaymentTerm;
+import javax.persistence.*;
 
 /**
  *
  * @author esantiago
  */
 public class TemplateEntryLineByPaymentMethod extends TemplateEntryLine {
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "payment_method_id", nullable = false)
-    private PaymentMethod paymentMethod;
+    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_term_id", nullable = false)
+    private PaymentTerm paymentTerm;
   
 }

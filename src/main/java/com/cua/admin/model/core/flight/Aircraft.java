@@ -34,7 +34,7 @@ public class Aircraft implements Serializable {
     private AircraftStatus status; //Status: Activo, Inactivo
     private String brand; //Marca
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_id_fk"))
     private Set<AircraftInsurance> insurance = new HashSet<>();
 

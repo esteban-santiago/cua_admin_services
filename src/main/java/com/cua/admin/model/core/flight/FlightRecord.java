@@ -29,9 +29,11 @@ public class FlightRecord implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Long id;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "flight_record_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_member_id_fk"))
     private Set<CrewMember> crew = new HashSet<>();
+    
     @OneToOne
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_aircraft_id_fk"))
     private Aircraft aircraft;

@@ -42,11 +42,13 @@ INSERT INTO payment_method(id, description) VALUES (2,'Cheque Bancario');
 INSERT INTO payment_method(id, description) VALUES (3,'Cuenta Corriente');
 INSERT INTO payment_method(id, description) VALUES (4,'Tarjeta de Crédito');
 INSERT INTO payment_method(id, description) VALUES (5,'Tarjeta de Débito');
+
 --Payment Methods
-INSERT INTO  payment_term (id, charge, description, discount, payment_term_id) VALUES (1, 0,'Contado', 0,1);
-INSERT INTO  payment_term (id, charge, description, discount, payment_term_id) VALUES (2, 0,'Al dia', 0,2);
-INSERT INTO  payment_term (id, charge, description, discount, payment_term_id) VALUES (3, 0.10,'1 Cuota', 0,4);
-INSERT INTO  payment_term (id, charge, description, discount, payment_term_id) VALUES (4, 0.10,'3 Cuotas', 0,4);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (1, 0,'Contado', 0,1);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (2, 0,'Al dia', 0,2);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (3, 0.10,'1 Cuota', 0,4);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (4, 0.10,'3 Cuotas', 0,4);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0,'1 Cuota', 0,5);
 
 
 --Flight Record

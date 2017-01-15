@@ -44,7 +44,7 @@ public class TemplateEntry implements Serializable {
     @Enumerated(EnumType.STRING)
     private DocumentType documentType;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "template_entry_id", foreignKey = @ForeignKey(name = "template_entry_id_fk"))
     private Set<TemplateEntryLine> entryLines = new HashSet<>(); 
 

@@ -27,7 +27,7 @@ public class Address implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
-
+    
     private String street;
     private String zip;
     private String city;
