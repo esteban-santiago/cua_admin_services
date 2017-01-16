@@ -57,7 +57,7 @@ public class UserServiceTest {
         userService.unlock(id);
 
         // Then
-        assertThat(user.isLocked()).isTrue();
+        assertThat(user.isLocked()).isFalse();
         verify(userRepository).save(user);
     }
 
@@ -77,7 +77,7 @@ public class UserServiceTest {
         userService.unlock(user);
 
         // Then
-        assertThat(user.isLocked()).isTrue();
+        assertThat(user.isLocked()).isFalse();
         verify(userRepository).save(user);
     }
     

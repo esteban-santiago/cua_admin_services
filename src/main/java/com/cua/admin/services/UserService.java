@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public void unlock(User user) {
-        user.lock();
+        user.unLock();
         userRepository.save(user);
     }
 
