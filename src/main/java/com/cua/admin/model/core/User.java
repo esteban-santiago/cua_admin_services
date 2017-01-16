@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Data
 @Entity
@@ -39,6 +41,34 @@ public class User implements Serializable {
     @NonNull
     private String passwd;
 
-    private Boolean locked;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    
+    
+    public void lock() {
+        this.status = Status.LOCKED;
+    }
+    
+    public void unLock() {
+        this.status = Status.ACTIVE;
+    }
 
+    
+    public Boolean isLocked() {
+        return status == Status.LOCKED;
+    }
+    
+
+    public enum Status {
+
+        ACTIVE("Activo"), 
+        LOCKED("Bloqueado");
+        
+        Status(String description) {
+            this.description = description;
+        }        
+
+        private final String description;
+
+}
 }

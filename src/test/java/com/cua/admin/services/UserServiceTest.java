@@ -43,21 +43,21 @@ public class UserServiceTest {
         userService.lock(id);
 
         // Then
-        assertThat(user.getLocked()).isTrue();
+        assertThat(user.isLocked()).isTrue();
         verify(userRepository).save(user);
     }
 
     @Test
     public void unlock() throws Exception {
         // Given
-        user.setLocked(true);
+        user.isLocked();
         when(userRepository.findById(id)).thenReturn(user);
 
         // When
         userService.unlock(id);
 
         // Then
-        assertThat(user.getLocked()).isFalse();
+        assertThat(user.isLocked()).isFalse();
         verify(userRepository).save(user);
     }
 
@@ -67,7 +67,7 @@ public class UserServiceTest {
         userService.lock(user);
 
         // Then
-        assertThat(user.getLocked()).isTrue();
+        assertThat(user.isLocked()).isTrue();
         verify(userRepository).save(user);
     }
 
@@ -77,12 +77,8 @@ public class UserServiceTest {
         userService.unlock(user);
 
         // Then
-        assertThat(user.getLocked()).isFalse();
+        assertThat(user.isLocked()).isFalse();
         verify(userRepository).save(user);
-    }
-
-    @Test
-    public void check() {
     }
     
 }

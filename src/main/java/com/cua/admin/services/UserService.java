@@ -20,12 +20,12 @@ public class UserService {
     }
 
     public void lock(User user) {
-        user.setLocked(Boolean.TRUE);
+        user.lock();
         userRepository.save(user);
     }
 
     public void unlock(User user) {
-        user.setLocked(Boolean.FALSE);
+        user.lock();
         userRepository.save(user);
     }
 

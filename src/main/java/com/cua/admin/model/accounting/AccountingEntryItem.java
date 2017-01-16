@@ -37,13 +37,9 @@ public class AccountingEntryItem implements Serializable {
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "accounting_entry_item_account_id_fk"))
     private Account account;
-
-    //@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    //@JoinColumn(name = "document_type_id", foreignKey = @ForeignKey(name = "accounting_entry_document_type_id_fk"))
-    //private CreditNoteDocumentType documentType;
 
 /*    
 Año fiscal

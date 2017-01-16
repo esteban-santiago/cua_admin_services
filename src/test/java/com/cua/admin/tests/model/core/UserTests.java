@@ -24,9 +24,11 @@ public class UserTests extends SpringIntegrationTest {
         user.setPasswd("passwd");
         userRepository.save(user);
 
+        user.lock();
+        
         assertThat(user.getId()).isGreaterThan(0);
 
-        //user.setName("pepe");
+        
         userRepository.findAll().forEach((u) -> System.out.println(u.toString()));
 
         userRepository.findByPasswd("password2")
