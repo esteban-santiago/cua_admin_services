@@ -42,7 +42,7 @@ public class User implements Serializable {
     private String passwd;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.ACTIVE;
     
     
     public void lock() {
