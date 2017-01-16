@@ -1,18 +1,8 @@
 package com.cua.admin.test.model.accounting;
-import com.cua.admin.model.accounting.AccountingEntry;
-import com.cua.admin.model.accounting.AccountingEntryItem;
-import com.cua.admin.model.accounting.AccountingEntryItemType;
-import com.cua.admin.model.accounting.Currency;
-import com.cua.admin.model.accounting.documents.CreditNoteIssued;
-import com.cua.admin.model.accounting.documents.Document;
-import com.cua.admin.model.accounting.documents.DocumentType;
-import com.cua.admin.model.accounting.documents.FlightRecordIssued;
-import com.cua.admin.model.accounting.documents.ReceiptIssued;
-import com.cua.admin.model.accounting.entries.TemplateEntry;
-import com.cua.admin.model.accounting.entries.TemplateEntryLine;
-import com.cua.admin.model.accounting.entries.TemplateEntryLineByPaymentMethod;
-import com.cua.admin.model.billing.PaymentMethod;
-import com.cua.admin.repositories.accounting.AccountRepository;
+import com.cua.admin.model.accounting.*;
+import com.cua.admin.model.accounting.documents.*;
+import com.cua.admin.model.accounting.entries.*;
+import com.cua.admin.repositories.accounting.*;
 import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.documents.DocumentRepository;
@@ -53,27 +43,12 @@ public class AccountingTests extends SpringIntegrationTest {
     public void getTemplateEntry() {
         
         TemplateEntry entry = templateEntryRepository.findByDocumentType(DocumentType.FRI);
-        /*
-        TemplateEntryLine entryLine = new TemplateEntryLine();
-        entryLine.setAccount(accountRepository.findById(2100));
-        entryLine.setAccountingEntryItemType(AccountingEntryItemType.CREDIT);
-        entryLine.setFactor(1);
-        TemplateEntryLineByPaymentMethod entryLinePayment = new TemplateEntryLineByPaymentMethod();
-        entryLinePayment.setPaymentMethod(paymentMethodRepository.findById(3));
-        entryLinePayment.setAccount(accountRepository.findById(8500));
-        entryLinePayment.setAccountingEntryItemType(AccountingEntryItemType.DEBIT);
-        entryLinePayment.setFactor(1);
-
-        
-        entry.addEntryLine(entryLine);
-        entry.addEntryLine(entryLinePayment);
-        
-        templateEntryRepository.save(entry);
-        */
         assertThat(entry.getId()).isGreaterThan(0);
-        
-        System.out.println(entry);
-        
+        System.out.println("--------Asiento Template---------");
+        System.out.println(entry);   
+        System.out.println("----------------Asiento-----------");
+        System.out.println(entry.getEntry());   
+        System.out.println("---------------------------------");
     }
     
     @Test

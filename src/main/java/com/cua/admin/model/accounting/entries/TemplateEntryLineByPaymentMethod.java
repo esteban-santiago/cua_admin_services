@@ -23,5 +23,5 @@ public class TemplateEntryLineByPaymentMethod extends TemplateEntryLine {
     @JoinColumn(name = "payment_method_id", nullable = true)
     private PaymentMethod paymentMethod;
 
-  
+    
 }

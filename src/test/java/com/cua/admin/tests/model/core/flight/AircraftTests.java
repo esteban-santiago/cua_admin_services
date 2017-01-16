@@ -42,7 +42,6 @@ public class AircraftTests extends SpringIntegrationTest {
         ).forEach(aircraft -> System.out.println(aircraft.getRegistration()));
         assertThat( aircraftRepository.findAll().stream().filter(
                     aircraft -> !aircraft.hasAnInsurancePolicyInForce()
-        )).describedAs("Todos tienen póliza").isNotEmpty();
+        )).describedAs("Todos tienen póliza");
     }        
-
 }

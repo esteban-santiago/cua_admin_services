@@ -40,5 +40,5 @@ public class TemplateEntryLine implements Serializable {
     private AccountingEntryItemType accountingEntryItemType;
             
     private Integer factor;
-    
+        
 }

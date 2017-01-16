@@ -52,9 +52,7 @@ public class TemplateEntry implements Serializable {
     }
     
     private Set<TemplateEntryLine> getCreditEntryLines() {
-        return entryLines.stream().filter(entryLine -> entryLine.
-                getAccountingEntryItemType().equals(AccountingEntryItemType.CREDIT)).
-                collect(Collectors.toSet());
+        return entryLines;
     }
 
     private Set<TemplateEntryLine> getDebitEntryLines() {
@@ -62,11 +60,16 @@ public class TemplateEntry implements Serializable {
                 getAccountingEntryItemType().equals(AccountingEntryItemType.DEBIT)).
                 collect(Collectors.toSet());
     }
-
+    
+    /*
+     * Este método devuelve la instancia armada desde el template
+    */  
     public AccountingEntry getAccountingEntry(Document document) {
         entry.setCreationDate(LocalDateTime.now());
         entry.setDescription(this.description);
         entry.setFiscalYear(LocalDate.now().getYear());
+        entry.getEntryItems().clear(); //remueve los items si existen
+        //-----
         
         getCreditEntryLines().stream().forEach(entryLine -> {
             AccountingEntryItem item = new AccountingEntryItem();
