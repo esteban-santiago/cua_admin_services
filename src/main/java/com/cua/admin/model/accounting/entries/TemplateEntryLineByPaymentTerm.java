@@ -1,5 +1,6 @@
 package com.cua.admin.model.accounting.entries;
 
+import com.cua.admin.model.accounting.documents.Document;
 import com.cua.admin.model.billing.PaymentTerm;
 import javax.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -22,5 +23,10 @@ public class TemplateEntryLineByPaymentTerm extends TemplateEntryLine {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_term_id", nullable = true)
     private PaymentTerm paymentTerm;
+
+    @Override
+    public Boolean match(Document document) {
+        return this.paymentTerm.equals(document.getPaymentTerm());
+    }    
     
 }

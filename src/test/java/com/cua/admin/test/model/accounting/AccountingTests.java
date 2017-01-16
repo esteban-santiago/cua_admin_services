@@ -41,14 +41,23 @@ public class AccountingTests extends SpringIntegrationTest {
     
     @Test
     public void getTemplateEntry() {
-        
-        TemplateEntry entry = templateEntryRepository.findByDocumentType(DocumentType.FRI);
+        Document document = documentRepository.findById(100L);
+        TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
         assertThat(entry.getId()).isGreaterThan(0);
         System.out.println("--------Asiento Template---------");
         System.out.println(entry);   
         System.out.println("----------------Asiento-----------");
-        System.out.println(entry.getEntry());   
+        accountingEntryRepository.saveAndFlush(entry.getAccountingEntry(document));
+        System.out.println(entry.getAccountingEntry(document));   
         System.out.println("---------------------------------");
+        
+        //AccountingEntry savedEntry = accountingEntryRepository.findById(1);
+        //System.out.println(savedEntry);   
+        System.out.println("---------------------------------");
+        
+        accountingEntryRepository.findAll().stream().forEach(entry_e -> System.out.println(entry_e));
+        System.out.println("---------------------------------");
+        
     }
     
     @Test

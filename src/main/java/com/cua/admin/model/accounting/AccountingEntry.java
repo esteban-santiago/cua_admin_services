@@ -35,17 +35,17 @@ public class AccountingEntry implements Serializable {
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    private Long id;
+    private Integer id;
 
     private String description; //Descripción del asiento
 
     private Integer fiscalYear;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "accounting_document_id", foreignKey = @ForeignKey(name = "accounting_entry_id_fk"))
     private Set<AccountingEntryItem> entryItems = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "accounting_entry_user_id_fk"))
     private User user;
 

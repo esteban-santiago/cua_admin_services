@@ -1,11 +1,11 @@
 package com.cua.admin.repositories.accounting;
 
 import com.cua.admin.model.accounting.Account;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AccountRepository extends CrudRepository<Account, Integer> {
+public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     List<Account> findByDescription(String description);
 

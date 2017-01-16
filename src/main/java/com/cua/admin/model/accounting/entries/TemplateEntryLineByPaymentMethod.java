@@ -1,5 +1,6 @@
 package com.cua.admin.model.accounting.entries;
 
+import com.cua.admin.model.accounting.documents.Document;
 import com.cua.admin.model.billing.PaymentMethod;
 import javax.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -23,5 +24,8 @@ public class TemplateEntryLineByPaymentMethod extends TemplateEntryLine {
     @JoinColumn(name = "payment_method_id", nullable = true)
     private PaymentMethod paymentMethod;
 
-    
+    @Override
+    public Boolean match(Document document) {
+        return this.paymentMethod.equals(document.getPaymentMethod());
+    }    
 }

@@ -69,16 +69,16 @@ public class TemplateEntry implements Serializable {
         entry.setDescription(this.description);
         entry.setFiscalYear(LocalDate.now().getYear());
         entry.getEntryItems().clear(); //remueve los items si existen
-        //-----
-        
-        getCreditEntryLines().stream().forEach(entryLine -> {
+  
+        getEntryLines().stream().filter(entryLine -> entryLine.match(document)).forEach(entryLine -> {
             AccountingEntryItem item = new AccountingEntryItem();
             item.setAccount(entryLine.getAccount());
-            item.setItemType(AccountingEntryItemType.CREDIT);
+            item.setItemType(entryLine.getAccountingEntryItemType());
             item.setAmount(entryLine.getFactor()* document.getAmount());
             item.setCurrency(document.getCurrency());
             entry.addEntryItem(item);
         });
+        
         getDebitEntryLines().stream().forEach(entryLine -> {
             AccountingEntryItem item = new AccountingEntryItem();
             item.setAccount(entryLine.getAccount());
