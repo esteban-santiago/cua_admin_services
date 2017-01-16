@@ -9,6 +9,8 @@ import com.cua.admin.model.accounting.documents.DocumentType;
 import com.cua.admin.model.accounting.documents.FlightRecordIssued;
 import com.cua.admin.model.accounting.documents.ReceiptIssued;
 import com.cua.admin.model.accounting.entries.TemplateEntry;
+import com.cua.admin.model.accounting.entries.TemplateEntryLine;
+import com.cua.admin.model.accounting.entries.TemplateEntryLineByPaymentMethod;
 import com.cua.admin.model.billing.PaymentMethod;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.core.UserRepository;
@@ -26,7 +28,6 @@ import javax.transaction.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-//@DataJpaTest
 @Transactional
 public class AccountingTests extends SpringIntegrationTest {
 
@@ -50,10 +51,29 @@ public class AccountingTests extends SpringIntegrationTest {
     
     @Test
     public void getTemplateEntry() {
+        
         TemplateEntry entry = templateEntryRepository.findByDocumentType(DocumentType.FRI);
+        /*
+        TemplateEntryLine entryLine = new TemplateEntryLine();
+        entryLine.setAccount(accountRepository.findById(2100));
+        entryLine.setAccountingEntryItemType(AccountingEntryItemType.CREDIT);
+        entryLine.setFactor(1);
+        TemplateEntryLineByPaymentMethod entryLinePayment = new TemplateEntryLineByPaymentMethod();
+        entryLinePayment.setPaymentMethod(paymentMethodRepository.findById(3));
+        entryLinePayment.setAccount(accountRepository.findById(8500));
+        entryLinePayment.setAccountingEntryItemType(AccountingEntryItemType.DEBIT);
+        entryLinePayment.setFactor(1);
+
+        
+        entry.addEntryLine(entryLine);
+        entry.addEntryLine(entryLinePayment);
+        
+        templateEntryRepository.save(entry);
+        */
+        assertThat(entry.getId()).isGreaterThan(0);
+        
         System.out.println(entry);
-        PaymentMethod paymentMethod = paymentMethodRepository.findById(1);
-        //System.out.println(entry.getEntryLineByPaymentMethod(paymentMethod));
+        
     }
     
     @Test
