@@ -54,12 +54,6 @@ public class TemplateEntry implements Serializable {
     private Set<TemplateEntryLine> getCreditEntryLines() {
         return entryLines;
     }
-
-    private Set<TemplateEntryLine> getDebitEntryLines() {
-        return entryLines.stream().filter(entryLine -> entryLine.
-                getAccountingEntryItemType().equals(AccountingEntryItemType.DEBIT)).
-                collect(Collectors.toSet());
-    }
     
     /*
      * Este método devuelve la instancia armada desde el template
@@ -74,15 +68,6 @@ public class TemplateEntry implements Serializable {
             AccountingEntryItem item = new AccountingEntryItem();
             item.setAccount(entryLine.getAccount());
             item.setItemType(entryLine.getAccountingEntryItemType());
-            item.setAmount(entryLine.getFactor()* document.getAmount());
-            item.setCurrency(document.getCurrency());
-            entry.addEntryItem(item);
-        });
-        
-        getDebitEntryLines().stream().forEach(entryLine -> {
-            AccountingEntryItem item = new AccountingEntryItem();
-            item.setAccount(entryLine.getAccount());
-            item.setItemType(AccountingEntryItemType.DEBIT);
             item.setAmount(entryLine.getFactor()* document.getAmount());
             item.setCurrency(document.getCurrency());
             entry.addEntryItem(item);
