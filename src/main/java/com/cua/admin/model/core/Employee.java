@@ -13,7 +13,6 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "employee")
-@SequenceGenerator(name="employee_id_seq", sequenceName="employee_id_seq",allocationSize=1)    
 public class Employee extends Member {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_seq" )  

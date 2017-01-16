@@ -13,6 +13,8 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Data
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "ENTRY_LINE_DISCRIMINATOR")
 @Table(name="template_entry_line")
 public class TemplateEntryLine implements Serializable {
     
