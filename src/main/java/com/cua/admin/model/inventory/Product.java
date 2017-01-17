@@ -37,6 +37,8 @@ public class Product implements Serializable {
     @Id
     private Long id;
     
+    private String description;
+    
     @OneToOne
     @JoinColumn(name = "product_group_id", nullable = false, foreignKey = @ForeignKey(name = "product_group_id_fk"))
     private ProductGroup group;
