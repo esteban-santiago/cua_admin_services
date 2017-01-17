@@ -35,5 +35,9 @@ public class ProductTests extends SpringIntegrationTest {
         productRepository.save(product);
         
         System.out.println(product);
+        System.out.println("---------------");
+        productRepository.findByGroupSubGroup(subGroup).stream()
+                .forEach(lproduct -> 
+                        System.out.println(lproduct.getDescription()));
     }
 }
