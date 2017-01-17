@@ -1,6 +1,7 @@
 package com.cua.admin.model.inventory;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -39,13 +40,9 @@ public class Product implements Serializable {
     
     private String description;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)    
     @JoinColumn(name = "product_group_id", nullable = false, foreignKey = @ForeignKey(name = "product_group_id_fk"))
     private ProductGroup group;
-
-    @OneToOne    
-    @JoinColumn(name = "product_subgroup_id", nullable = false, foreignKey = @ForeignKey(name = "product_subgroup_id_fk"))
-    private ProductSubGroup subGroup;
 
     @Enumerated(EnumType.STRING)   
     private ProductType type;

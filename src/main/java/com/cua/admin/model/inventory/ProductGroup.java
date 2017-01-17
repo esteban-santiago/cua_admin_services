@@ -1,9 +1,13 @@
 package com.cua.admin.model.inventory;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,4 +36,9 @@ public class ProductGroup implements Serializable {
     @Id
     private Integer id;
     private String description;    
+    
+    @OneToOne(cascade = CascadeType.MERGE)    
+    @JoinColumn(name = "product_group_subgroup_id", nullable = false, foreignKey = @ForeignKey(name = "product_group_subgroup_id_fk"))
+    private ProductSubGroup subGroup;
+
 }
