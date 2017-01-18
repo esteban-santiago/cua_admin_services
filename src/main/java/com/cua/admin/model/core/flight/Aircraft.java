@@ -42,7 +42,7 @@ public class Aircraft implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_component_id_fk"))
-    private Set<AircraftComponent> component;
+    private Set<AircraftComponent> component = new HashSet<>();
     
     
     public Boolean hasAnInsurancePolicyInForce() {

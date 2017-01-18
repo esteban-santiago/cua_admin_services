@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AircraftComponentRepository extends JpaRepository<AircraftComponent, Integer> {
 
+    AircraftComponent findBySerial(String serial);
+
 }
