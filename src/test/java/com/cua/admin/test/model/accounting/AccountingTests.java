@@ -72,7 +72,8 @@ public class AccountingTests extends SpringIntegrationTest {
         ReceiptIssued rci = new ReceiptIssued();
         rci.setAmount(3544F);
         rci.setCurrency(Currency.ARS);
-        rci.setCompensationDocumentId(rci.getId());
+        //rci.setCompensationDocumentId(rci.getId());
+        rci.setCompensationDocument(rci);
         rci.setCompensationDate(LocalDate.now());
         rci.setPaymentMethod(paymentMethodRepository.findById(1)); //Cash
         rci.close();
@@ -82,7 +83,8 @@ public class AccountingTests extends SpringIntegrationTest {
 
         //Compensando Ficha de vuelo
         fve.setCompensationDate(LocalDate.now());
-        fve.setCompensationDocumentId(rci.getId());
+        //fve.setCompensationDocumentId(rci.getId());
+        fve.setCompensationDocument(rci);
         fve.close();
         documentRepository.save(fve);
         

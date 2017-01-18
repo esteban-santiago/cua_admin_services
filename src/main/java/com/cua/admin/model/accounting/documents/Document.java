@@ -14,8 +14,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import lombok.ToString;
 
 @Data
+@ToString(exclude = "compensationDocument")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -44,13 +46,13 @@ public abstract class Document implements Serializable {
 
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 
-    //@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    //@JoinColumn(name="compensation_document_id", foreignKey = @ForeignKey(name = "document_id_fk"))
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name="compensation_document_id", foreignKey = @ForeignKey(name = "document_id_fk"))
     //@ManyToOne
     //@JoinColumn(name="compensation_document_id")
-    //private Document compensationDocument; //(*) Documento de compensación
+    private Document compensationDocument; //(*) Documento de compensación
 
-    private Long compensationDocumentId;
+    //private Long compensationDocumentId;
     
     private LocalDate compensationDate; //(*) Fecha de compensación
 

@@ -7,13 +7,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class AircraftService {
-
+    @Autowired //No es obligatorio
     private final AircraftRepository aircraftRepository;
     
     public Aircraft getAircraft(Integer id) {

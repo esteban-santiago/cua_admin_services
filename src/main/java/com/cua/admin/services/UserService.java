@@ -4,13 +4,14 @@ import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.core.UserRepository;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class UserService {
-
+    @Autowired //No es obligatorio
     private final UserRepository userRepository;
 
     public void lock(Integer id) {
