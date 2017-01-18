@@ -54,5 +54,5 @@ public class AccountingEntry implements Serializable {
 
     public void addEntryItem(AccountingEntryItem entryItem) {
         this.entryItems.add(entryItem);
-    }
+    } 
 }

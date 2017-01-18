@@ -34,10 +34,12 @@ public class CrewMember implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+        
     @NonNull    
     @OneToOne
     @JoinColumn(name="member_id")
     private Member member;
+    
     @NonNull
     @Enumerated(EnumType.STRING)
     private CrewMemberRole crewMemberRole;

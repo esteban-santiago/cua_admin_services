@@ -53,22 +53,12 @@ public class User implements Serializable {
         this.status = Status.ACTIVE;
     }
 
-    
     public Boolean isLocked() {
         return status == Status.LOCKED;
     }
     
-
     public enum Status {
-
-        ACTIVE("Activo"), 
-        LOCKED("Bloqueado");
-        
-        Status(String description) {
-            this.description = description;
-        }        
-
-        private final String description;
-
-}
+        ACTIVE(), 
+        LOCKED();
+    }
 }

@@ -44,28 +44,29 @@ public abstract class Document implements Serializable {
 
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 
-    //@OneToOne
+    //@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     //@JoinColumn(name="compensation_document_id", foreignKey = @ForeignKey(name = "document_id_fk"))
+    //@ManyToOne
+    //@JoinColumn(name="compensation_document_id")
     //private Document compensationDocument; //(*) Documento de compensación
 
-    private Long compensationDocument;
+    private Long compensationDocumentId;
     
     private LocalDate compensationDate; //(*) Fecha de compensación
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name="member_id", foreignKey = @ForeignKey(name = "document_member_id_fk"))
     private Member member; //Socio
 
-
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name="payment_method_id", foreignKey = @ForeignKey(name = "document_payment_method_id_fk"))
     private PaymentMethod paymentMethod; //Forma de pago
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name="payment_term_id", foreignKey = @ForeignKey(name = "document_payment_term_id_fk"))
     private PaymentTerm paymentTerm; //Condiciones de Pago
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name="user_id")
     private User user; //Usuario
 
@@ -76,4 +77,34 @@ public abstract class Document implements Serializable {
     
     public abstract Long getLegalId();
     
+    private Status status = Status.OPENED;
+    
+    public void open() {
+        this.status = Status.OPENED;
+    }
+    
+    public void close() {
+        this.status = Status.CLOSED;
+    }
+    public void cancel() {
+        this.status = Status.CANCELLED;
+    }
+    
+    public Boolean isOpened() {
+        return this.status == Status.OPENED;
+    }
+    
+    public Boolean isClosed() {
+        return this.status == Status.CLOSED;
+    }
+    
+    public Boolean isCancelled() {
+        return this.status == Status.CANCELLED;
+    }
+    
+    private enum Status {
+        OPENED,
+        CLOSED,
+        CANCELLED;
+    }
 }

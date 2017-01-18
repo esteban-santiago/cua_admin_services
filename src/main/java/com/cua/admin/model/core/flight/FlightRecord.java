@@ -60,7 +60,7 @@ public class FlightRecord implements Serializable {
     
     //private Float amountOfTime; 
     @Enumerated(EnumType.STRING)
-    private FlightRecordStatus status = FlightRecordStatus.OPENED;
+    private Status status = Status.OPENED;
     
     public void addCrewMember(CrewMember crewMember) {
         this.crew.add(crewMember);
@@ -82,4 +82,10 @@ public class FlightRecord implements Serializable {
         return amountOfHours;
     }
     
+    public enum Status {
+        PENDING(),
+        OPENED(),
+        CLOSED(),
+        CANCELED();
+    }
 }

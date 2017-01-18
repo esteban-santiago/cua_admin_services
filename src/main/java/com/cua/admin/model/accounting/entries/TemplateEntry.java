@@ -50,10 +50,6 @@ public class TemplateEntry implements Serializable {
         this.entryLines.add(entryLine);
     }
     
-    private Set<TemplateEntryLine> getCreditEntryLines() {
-        return entryLines;
-    }
-    
     /*
      * Este método devuelve la instancia armada desde el template
     */  

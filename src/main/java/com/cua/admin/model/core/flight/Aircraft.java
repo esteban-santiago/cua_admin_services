@@ -30,8 +30,10 @@ public class Aircraft implements Serializable {
 
     private String registration; //Matrícula
     private String model; //Modelo
+    
     @Enumerated(EnumType.STRING)
-    private AircraftStatus status; //Status: Activo, Inactivo
+    private Status status; //Status: Activo, Inactivo
+    
     private String brand; //Marca
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -43,7 +45,13 @@ public class Aircraft implements Serializable {
     }
     
     public Boolean hasAnInsurancePolicyInForce(LocalDate date) {
-        return getInsurance().stream().anyMatch(insurance -> insurance.isInForce(date));
+        return getInsurance().stream().anyMatch(_insurance -> _insurance.isInForce(date));
     }
     
+    public enum Status {
+        ACTIVE(),
+        INACTIVE(),
+        MAINTENANCE(),
+        OUT_OF_ORDER();
+    }
 }

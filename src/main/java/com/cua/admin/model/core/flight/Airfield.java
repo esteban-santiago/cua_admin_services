@@ -10,7 +10,6 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "airfield")
-
 @SuppressWarnings("ValidAttributes")
 public class Airfield implements Serializable {
 
@@ -38,6 +37,12 @@ public class Airfield implements Serializable {
     private String longitude;
     
     @Enumerated(EnumType.STRING)
-    private AirfieldSize size;
+    private Size size;
 
+    public enum Size {
+        SMALL(),
+        MEDIUM(),
+        LARGE();
+    }
+    
 }
