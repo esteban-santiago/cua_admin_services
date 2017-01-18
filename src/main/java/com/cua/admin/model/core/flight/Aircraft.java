@@ -37,9 +37,14 @@ public class Aircraft implements Serializable {
     private String brand; //Marca
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_id_fk"))
+    @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_insurance_id_fk"))
     private Set<AircraftInsurance> insurance = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_component_id_fk"))
+    private Set<AircraftComponent> component;
+    
+    
     public Boolean hasAnInsurancePolicyInForce() {
         return hasAnInsurancePolicyInForce(LocalDate.now());
     }

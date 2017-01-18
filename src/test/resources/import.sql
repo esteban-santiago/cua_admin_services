@@ -30,6 +30,11 @@ INSERT INTO aircraft(id,brand,model,registration,status) VALUES (101,'Cessna','1
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (102,'Cessna','150','LV-LGF','ACTIVE');
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (103,'Pipper','PA-11','LV-YMV','OUT_OF_ORDER');
 
+INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (100,'Motor 100HP',TRUE,'1MOTOR100HP','ENGINE',100);
+INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (101,'Helice de madera',TRUE,'1HELICEMAD','PROPELLER',100);
+INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (102,'Capsula C152',FALSE,'CAPSULAC152','CAPSULE',100);
+
+
 --Aircraft Insurance
 INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (100,'Sancor','ABC-4444224422','Terceros Completo','2016-07-03','2017-09-03',100);
 INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (101,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-09-03',101);

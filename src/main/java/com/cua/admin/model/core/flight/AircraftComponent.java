@@ -2,11 +2,14 @@ package com.cua.admin.model.core.flight;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -17,7 +20,7 @@ import org.hibernate.annotations.Parameter;
  */
 @Data
 @Entity
-@Table(name = "aircraft_component")
+@Table(name = "aircraft_component", uniqueConstraints = {@UniqueConstraint(columnNames = {"serial"})})
 public class AircraftComponent implements Serializable {
     @GenericGenerator(
             name = "SequenceGenerator",
@@ -30,13 +33,21 @@ public class AircraftComponent implements Serializable {
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    private Long id;
+    private Integer id;
 
     private String description;
 
     private String serial;    
     
-    @OneToOne    
-    @JoinColumn(name="component_type_id")
-    private AircraftComponentType type;
+    private Boolean relocable;
+    
+    @Enumerated(EnumType.STRING)
+    private Type type;
+    
+    public enum Type {
+        ENGINE(),        //Motor
+        PROPELLER(),    //Hélice
+        CAPSULE();      //Capsula
+    }
+    
 }
