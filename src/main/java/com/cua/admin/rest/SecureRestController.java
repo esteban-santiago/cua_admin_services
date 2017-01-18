@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sapi")
 @RequiredArgsConstructor
-public class SecureRestService {
+public class SecureRestController {
 
     private final UserService userService;
     private final MemberRepository memberRepository;

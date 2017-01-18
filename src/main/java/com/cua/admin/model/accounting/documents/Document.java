@@ -87,7 +87,7 @@ public abstract class Document implements Serializable {
         this.status = Status.CLOSED;
     }
     public void cancel() {
-        this.status = Status.CANCELLED;
+        this.status = Status.CANCELED;
     }
     
     public Boolean isOpened() {
@@ -98,13 +98,13 @@ public abstract class Document implements Serializable {
         return this.status == Status.CLOSED;
     }
     
-    public Boolean isCancelled() {
-        return this.status == Status.CANCELLED;
+    public Boolean isCanceled() {
+        return this.status == Status.CANCELED;
     }
     
     private enum Status {
         OPENED,
         CLOSED,
-        CANCELLED;
+        CANCELED;
     }
 }

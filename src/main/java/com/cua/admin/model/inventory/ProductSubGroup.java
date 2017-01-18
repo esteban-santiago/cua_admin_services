@@ -16,7 +16,7 @@ import org.hibernate.annotations.Parameter;
  */
 @Data
 @Entity
-@Table(name = "product_subgroup")
+@Table(name = "product_group_subgroup")
 @NoArgsConstructor
 public class ProductSubGroup implements Serializable {
     @GenericGenerator(

@@ -5,7 +5,7 @@ import com.cua.admin.model.core.IdentityCard;
 import com.cua.admin.model.core.IdentityCardType;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.MemberRole;
-import com.cua.admin.model.core.flight.Rating;
+import com.cua.admin.model.core.flight.PilotRating;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.MemberRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
@@ -43,8 +43,8 @@ public class MemberTests extends SpringIntegrationTest {
         member.addAddress(address2);
         member.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
         member.setNationality(nationalityRepository.findById(1));
-        member.addRating(Rating.IFR);
-        member.addRating(Rating.CROSSING);
+        member.addRating(PilotRating.IFR);
+        member.addRating(PilotRating.CROSSING);
         member.addRole(MemberRole.PILOT);
         memberRepository.save(member);
 

@@ -30,6 +30,7 @@ INSERT INTO aircraft(id,brand,model,registration,status) VALUES (101,'Cessna','1
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (102,'Cessna','150','LV-LGF','ACTIVE');
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (103,'Pipper','PA-11','LV-YMV','OUT_OF_ORDER');
 
+--Aircrafts Components
 INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (100,'Motor 100HP',TRUE,'1MOTOR100HP','ENGINE',100);
 INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (101,'Helice de madera',TRUE,'1HELICEMAD','PROPELLER',100);
 INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (102,'Capsula C152',FALSE,'CAPSULAC152','CAPSULE',100);
@@ -54,7 +55,6 @@ INSERT INTO  payment_term (id, charge, description, discount, payment_method_id)
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (3, 0.10,'1 Cuota', 0,4);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (4, 0.10,'3 Cuotas', 0,4);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0,'1 Cuota', 0,5);
-
 
 --Flight Record
 INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
@@ -92,4 +92,16 @@ INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'A
 --Template Entry Line
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, template_entry_id) VALUES(100, 'ENTRY_LINE_BASE','CREDIT',1,2100,100);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(101, 'ENTRY_LINE_PAYMENT_METHOD', 'DEBIT',1,8500,3,100);
- 
+
+--Product Group
+INSERT INTO product_group (description, id) VALUES ('Servicios de vuelo', 100);
+
+
+--Product SubGroup
+INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C150', 100,100);
+INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('PA-11', 100,101);
+INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C152', 100, 102);
+--Product
+INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('Cessna 150', 100, 100,'SERVICE', 100);
+INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('Cessna 152', 100, 102,'SERVICE', 101);
+INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('PA-11', 100, 101,'SERVICE', 102);

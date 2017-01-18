@@ -5,10 +5,12 @@ import com.cua.admin.repositories.core.flight.AircraftRepository;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AircraftService {
 

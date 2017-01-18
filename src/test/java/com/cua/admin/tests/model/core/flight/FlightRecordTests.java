@@ -9,7 +9,6 @@ import com.cua.admin.repositories.core.flight.CrewRepository;
 import com.cua.admin.repositories.core.flight.FlightRecordRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import java.time.LocalDateTime;
-import javax.transaction.Transactional;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

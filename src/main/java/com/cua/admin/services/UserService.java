@@ -2,10 +2,12 @@ package com.cua.admin.services;
 
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.core.UserRepository;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserService {
 

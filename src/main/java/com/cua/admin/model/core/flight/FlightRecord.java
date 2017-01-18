@@ -82,6 +82,31 @@ public class FlightRecord implements Serializable {
         return amountOfHours;
     }
     
+    public void open() {
+        this.status = Status.OPENED;
+    }
+
+    public void close() {
+        this.status = Status.CLOSED;
+    }
+
+    public void cancel() {
+        this.status = Status.CANCELED;
+    }
+
+    public Boolean isOpened() {
+        return this.status.equals(Status.OPENED);
+    }
+
+    public Boolean isClosed() {
+        return this.status.equals(Status.CLOSED);
+    }
+
+    public Boolean isCanceled() {
+        return this.status.equals(Status.CANCELED);
+    }
+    
+    
     public enum Status {
         PENDING(),
         OPENED(),

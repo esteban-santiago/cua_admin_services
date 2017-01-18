@@ -1,6 +1,6 @@
 package com.cua.admin.model.core;
 
-import com.cua.admin.model.core.flight.Rating;
+import com.cua.admin.model.core.flight.PilotRating;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -67,7 +67,7 @@ public class Member implements Serializable {
             joinColumns = {@JoinColumn(name="member_id")}
     )
     @Column(name="rating_id", nullable = false)
-    private Set<Rating> ratings = new HashSet<>();
+    private Set<PilotRating> ratings = new HashSet<>();
     
     @Enumerated(EnumType.STRING)
     private MemberStatus status = MemberStatus.ACTIVE;
@@ -93,7 +93,7 @@ public class Member implements Serializable {
         this.contactWay.add(contactWay);
     }
     
-    public void addRating(Rating rating) {
+    public void addRating(PilotRating rating) {
         this.ratings.add(rating);
     }
 

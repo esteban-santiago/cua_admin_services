@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum Rating {
+public enum PilotRating {
     CROSSING("Travesía"),
     PASSENGER("Transporte Pasajeros"),
     NIGTH_FLIGHT("Nocturno Local"),
