@@ -1,11 +1,13 @@
 package com.cua.admin.test.model.accounting;
+import com.cua.admin.model.accounting.entries.AccountingEntryItem;
+import com.cua.admin.model.accounting.entries.AccountingEntry;
+import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
 import com.cua.admin.model.accounting.*;
 import com.cua.admin.model.accounting.documents.*;
 import com.cua.admin.model.accounting.entries.*;
 import com.cua.admin.repositories.accounting.*;
 import com.cua.admin.repositories.core.UserRepository;
-import com.cua.admin.repositories.accounting.AccountingEntryRepository;
-import com.cua.admin.repositories.accounting.documents.DocumentRepository;
+import com.cua.admin.repositories.accounting.entry.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
 import com.cua.admin.repositories.billing.PaymentMethodRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import com.cua.admin.repositories.accounting.documents.AccountingDocumentRepository;
 
 
 @Transactional
@@ -25,7 +28,7 @@ public class AccountingTests extends SpringIntegrationTest {
     private AccountRepository accountRepository;
   
     @Autowired
-    private DocumentRepository<Document> documentRepository;
+    private AccountingDocumentRepository<Document> documentRepository;
 
     @Autowired
     private AccountingEntryRepository accountingEntryRepository;

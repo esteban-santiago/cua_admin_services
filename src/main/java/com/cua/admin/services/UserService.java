@@ -33,7 +33,7 @@ public class UserService {
     }
 
     public User get(User user) {
-        return userRepository.findById(user.getId());
+        return this.get(user.getId());
     }
 
     public User get(Integer id) {

@@ -2,13 +2,11 @@ package com.cua.admin.model.core;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+
 import lombok.Data;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -32,10 +30,37 @@ public class MedicalCertification implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+    
     @Enumerated(EnumType.STRING)
-    private MedicalCertificationClass medicalCertificationClass;
+    private MedicalCertificationClass medicalCertificationClass = MedicalCertificationClass.NONE;
+    
     private LocalDate validityFrom;
+    
     private LocalDate validityTo;
+    
     private String observations;
+    
+    public void setClassNone() {
+        this.medicalCertificationClass = MedicalCertificationClass.NONE;
+    }
+
+    public void setClassI() {
+        this.medicalCertificationClass = MedicalCertificationClass.CLASS_I;
+    }
+
+    public void setClassII() {
+        this.medicalCertificationClass = MedicalCertificationClass.CLASS_II;
+    }
+
+    public void setClassIII() {
+        this.medicalCertificationClass = MedicalCertificationClass.CLASS_III;
+    }
+    
+    private enum MedicalCertificationClass {
+        NONE(),
+        CLASS_I(),
+        CLASS_II(),
+        CLASS_III();
+    }
 
 }

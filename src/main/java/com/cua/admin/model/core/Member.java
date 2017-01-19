@@ -1,6 +1,8 @@
 package com.cua.admin.model.core;
 
 import com.cua.admin.model.flight.PilotRating;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -41,27 +43,28 @@ public class Member implements Serializable {
     private LocalDate dateOfCreation = LocalDate.now(); //Fecha de Alta
 
     private LocalDate dateOfBirth; //Fecha de nacimiento
-
+    
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "member_nationality_id_fk"))
-    private Nationality nationality; //Nacionalidad
+    private Nationality nationality = new Nationality(); //Nacionalidad
 
     private IdentityCard identityCard; //Documento de identidad
 
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinTable(name = "member_address")
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_address_id_fk"))
     private Set<Address> address = new HashSet<>();
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "member_category_id_fk"))
     private Category category;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_way_to_contact_id_fk"))
     private Set<ContactWay> contactWay = new HashSet<>();
 
-    @ElementCollection(fetch=FetchType.LAZY)
+    @ElementCollection(fetch=FetchType.EAGER)
     @JoinTable(
             name="member_rating_type", // ref table.
             joinColumns = {@JoinColumn(name="member_id")}
@@ -72,7 +75,7 @@ public class Member implements Serializable {
     @Enumerated(EnumType.STRING)
     private MemberStatus status = MemberStatus.ACTIVE;
 
-    @ElementCollection(fetch=FetchType.LAZY)
+    @ElementCollection(fetch=FetchType.EAGER)
     @JoinTable(
             name="member_role_type", // ref table.
             joinColumns = {@JoinColumn(name="member_id")}
@@ -80,7 +83,7 @@ public class Member implements Serializable {
     @Column(name="rol_id", nullable = false)
     private Set<MemberRole> roles = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_medical_certification_id_fk"))
     private Set<MedicalCertification> medicalCertifications = new HashSet<>();
     

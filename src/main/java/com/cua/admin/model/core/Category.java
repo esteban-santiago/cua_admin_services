@@ -17,7 +17,6 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Category implements Serializable {
-
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",

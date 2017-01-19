@@ -17,10 +17,15 @@ public class AircraftService {
     @Autowired //No es obligatorio
     private final AircraftRepository aircraftRepository;
     
-    public Aircraft getAircraft(Integer id) {
+    public Aircraft get(Integer id) {
         return aircraftRepository.findById(id);
     }
 
+    public Aircraft get(Aircraft aircraft) {
+        return get(aircraft.getId());
+    }
+
+    
     public Set<Aircraft> checkAircraftWithoutActiveInsurancePolicy(LocalDate atDate) {
         return aircraftRepository.findAll().stream(
         ).filter(aircraft -> !aircraft.hasAnInsurancePolicyInForce(atDate)

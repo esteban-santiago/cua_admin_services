@@ -1,4 +1,4 @@
-package com.cua.admin.model.accounting;
+package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.core.User;
 import lombok.Data;

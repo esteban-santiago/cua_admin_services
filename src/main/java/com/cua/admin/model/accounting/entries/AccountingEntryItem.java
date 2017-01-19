@@ -1,5 +1,7 @@
-package com.cua.admin.model.accounting;
+package com.cua.admin.model.accounting.entries;
 
+import com.cua.admin.model.accounting.Account;
+import com.cua.admin.model.accounting.Currency;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;

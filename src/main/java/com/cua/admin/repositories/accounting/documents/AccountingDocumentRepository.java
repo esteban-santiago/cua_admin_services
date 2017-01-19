@@ -5,7 +5,7 @@ import com.cua.admin.model.core.Member;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DocumentRepository<T extends Document> extends JpaRepository<T, Long> {
+public interface AccountingDocumentRepository<T extends Document> extends JpaRepository<T, Long> {
 
     List<Document> findByMember(Member member);
     //List<T> findByDescription(String description);
