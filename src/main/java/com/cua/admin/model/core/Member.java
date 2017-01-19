@@ -50,12 +50,10 @@ public class Member implements Serializable {
 
     private IdentityCard identityCard; //Documento de identidad
 
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_address_id_fk"))
     private Set<Address> address = new HashSet<>();
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "member_category_id_fk"))
     private Category category;
