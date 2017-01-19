@@ -1,9 +1,9 @@
-package com.cua.admin.tests.model.core.flight;
+package com.cua.admin.tests.model.flight;
 
-import com.cua.admin.model.core.flight.Aircraft;
-import com.cua.admin.model.core.flight.AircraftComponent;
-import com.cua.admin.repositories.core.flight.AircraftComponentRepository;
-import com.cua.admin.repositories.core.flight.AircraftRepository;
+import com.cua.admin.model.flight.Aircraft;
+import com.cua.admin.model.flight.AircraftComponent;
+import com.cua.admin.repositories.flight.AircraftComponentRepository;
+import com.cua.admin.repositories.flight.AircraftRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

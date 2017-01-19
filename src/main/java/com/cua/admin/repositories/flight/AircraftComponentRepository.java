@@ -1,6 +1,6 @@
-package com.cua.admin.repositories.core.flight;
+package com.cua.admin.repositories.flight;
 
-import com.cua.admin.model.core.flight.AircraftComponent;
+import com.cua.admin.model.flight.AircraftComponent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

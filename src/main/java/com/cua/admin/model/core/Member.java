@@ -1,6 +1,6 @@
 package com.cua.admin.model.core;
 
-import com.cua.admin.model.core.flight.PilotRating;
+import com.cua.admin.model.flight.PilotRating;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;

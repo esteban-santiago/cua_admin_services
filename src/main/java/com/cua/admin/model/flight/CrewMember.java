@@ -1,4 +1,4 @@
-package com.cua.admin.model.core.flight;
+package com.cua.admin.model.flight;
 
 import com.cua.admin.model.core.Member;
 import java.io.Serializable;

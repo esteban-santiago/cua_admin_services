@@ -1,8 +1,8 @@
-package com.cua.admin.repositories.core.flight;
+package com.cua.admin.repositories.flight;
 
 import com.cua.admin.model.core.Member;
-import com.cua.admin.model.core.flight.CrewMember;
-import com.cua.admin.model.core.flight.CrewMemberRole;
+import com.cua.admin.model.flight.CrewMember;
+import com.cua.admin.model.flight.CrewMemberRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
