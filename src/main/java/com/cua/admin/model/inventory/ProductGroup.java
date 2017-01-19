@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class ProductGroup implements Serializable {
     private Integer id;
     private String description;    
     
-    @OneToMany(cascade = CascadeType.ALL)    
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)    
     @JoinColumn(name = "group_id", nullable = false, foreignKey = @ForeignKey(name = "product_group_subgroup_id_fk"))
     private Set<ProductSubGroup> subGroup = new HashSet<>();
 

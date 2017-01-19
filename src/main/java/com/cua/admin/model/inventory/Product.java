@@ -5,6 +5,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,11 +41,11 @@ public class Product implements Serializable {
     
     private String description;
     
-    @OneToOne(cascade = CascadeType.ALL)    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)    
     @JoinColumn(name = "group_id", nullable = false, foreignKey = @ForeignKey(name = "product_group_id_fk"))
     private ProductGroup group;
 
-    @OneToOne(cascade = CascadeType.ALL)    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)    
     @JoinColumn(name = "subgroup_id", nullable = false,  foreignKey = @ForeignKey(name = "product_subgroup_id_fk"))
     private ProductSubGroup subGroup;
 

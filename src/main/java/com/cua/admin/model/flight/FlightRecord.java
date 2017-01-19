@@ -34,7 +34,7 @@ public class FlightRecord implements Serializable {
     @JoinColumn(name = "flight_record_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_member_id_fk"))
     private Set<CrewMember> crew = new HashSet<>();
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_aircraft_id_fk"))
     private Aircraft aircraft;
  
@@ -51,10 +51,10 @@ public class FlightRecord implements Serializable {
     @Enumerated(EnumType.STRING)
     private FlightType type = FlightType.ENT;//Tipo de vuelo
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "airfield_origin_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_origin_id_fk"))
     private Airfield origin;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "airfield_destiny_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_destiny_id_fk"))
     private Airfield destiny;
     

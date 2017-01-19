@@ -29,6 +29,7 @@ public class SecureRestServiceIntegrationTest extends SpringIntegrationTest {
 
     @Autowired
     private UserRepository userRepository;
+    
 
     private User user;
 
@@ -51,5 +52,13 @@ public class SecureRestServiceIntegrationTest extends SpringIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("Esteban"));
     }
+    
+    @Test
+    public void getMember() throws Exception {
+        mockMvc.perform(get("/sapi/member?id={userId}", 100).with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("nationality").value("Argentina"));
+    }
+    
 
 }
