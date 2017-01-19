@@ -7,8 +7,8 @@ import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.MemberRole;
 import com.cua.admin.model.flight.PilotRating;
 import com.cua.admin.repositories.core.CategoryRepository;
-import com.cua.admin.repositories.core.MemberRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
+import com.cua.admin.services.MemberService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MemberTests extends SpringIntegrationTest {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberService memberService;
 
     @Autowired
     private CategoryRepository categoryReposity;
@@ -46,16 +46,16 @@ public class MemberTests extends SpringIntegrationTest {
         member.addRating(PilotRating.IFR);
         member.addRating(PilotRating.CROSSING);
         member.addRole(MemberRole.PILOT);
-        memberRepository.save(member);
+        memberService.save(member);
 
         Member member2 = new Member();
         member2.setName("Socio 2");
         member2.setCategory(categoryReposity.findById(1));
         member2.setNationality(nationalityRepository.findById(2));
         member2.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
-        memberRepository.save(member2);
+        memberService.save(member2);
 
-        memberRepository.findAll()
+        memberService.getAll()
                 .stream().forEach(
                         aMember -> System.out.println(aMember));
         

@@ -7,6 +7,7 @@ import com.cua.admin.repositories.core.MemberRepository;
 import com.cua.admin.repositories.flight.AircraftRepository;
 import com.cua.admin.repositories.flight.CrewRepository;
 import com.cua.admin.repositories.flight.FlightRecordRepository;
+import com.cua.admin.services.MemberService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import java.time.LocalDateTime;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class FlightRecordTests extends SpringIntegrationTest {
     private AircraftRepository aircraftRepository;
     
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberService memberService;
     
     @Autowired
     private CrewRepository crewRepository;
@@ -28,10 +29,10 @@ public class FlightRecordTests extends SpringIntegrationTest {
     private FlightRecordRepository flightRecordRepository;
     
     @Test
-    public void createFlightRecord() {
+    public void createFlightRecord() throws Throwable {
         CrewMember crew = new CrewMember();
         crew.setCrewMemberRole(CrewMemberRole.PIC);
-        crew.setMember(memberRepository.findById(100));
+        crew.setMember(memberService.get(100));
         
         FlightRecord record = new FlightRecord();
         record.addCrewMember(crew);

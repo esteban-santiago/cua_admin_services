@@ -5,6 +5,7 @@ import com.cua.admin.model.core.Nationality;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +17,5 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     List<Member> findByNationality(Nationality nationality);
 
-    Member findById(Integer id);
+    Optional<Member> findById(Integer id);
 }

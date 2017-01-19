@@ -44,7 +44,7 @@ public class SecureRestController {
     }
     
     @RequestMapping(value = "/member", method = RequestMethod.GET, headers = "Accept=application/json")
-    public Member getMember(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) {
+    public Member getMember(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) throws Throwable {
         return memberService.get(id);
     }
 
