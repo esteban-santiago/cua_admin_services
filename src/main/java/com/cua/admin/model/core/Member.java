@@ -42,7 +42,7 @@ public class Member implements Serializable {
 
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "member_nationality_id_fk"))
     private Nationality nationality = new Nationality(); //Nacionalidad
 
@@ -52,7 +52,7 @@ public class Member implements Serializable {
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_address_id_fk"))
     private Set<Address> address = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "member_category_id_fk"))
     private Category category;
 
