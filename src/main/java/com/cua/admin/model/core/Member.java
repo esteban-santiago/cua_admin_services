@@ -9,7 +9,6 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -45,13 +44,13 @@ public class Member implements Serializable {
     
     @OneToOne
     @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "member_nationality_id_fk"))
-    private Nationality nationality = new Nationality(); //Nacionalidad
+    private Nationality nationality; //Nacionalidad
 
     private IdentityCard identityCard; //Documento de identidad
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_address_id_fk"))
-    private Set<Address> addresses = new HashSet<>();
+    private Set<Address> addresses;
 
     @OneToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "member_category_id_fk"))
@@ -67,7 +66,7 @@ public class Member implements Serializable {
             joinColumns = {@JoinColumn(name="member_id")}
     )
     @Column(name="rating_id", nullable = false)
-    private Set<PilotRating> ratings = new HashSet<>();
+    private Set<PilotRating> ratings;
     
     @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE;

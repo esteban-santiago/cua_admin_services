@@ -45,7 +45,7 @@ public class SecureRestController {
     
     @RequestMapping(value = "/member", method = RequestMethod.GET, headers = "Accept=application/json")
     public Member getMember(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) throws Throwable {
-        return memberService.get(id);
+        return memberService.getMember(id);
     }
 
     @RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -55,6 +55,6 @@ public class SecureRestController {
 
     @RequestMapping(value = "/aircraft", method = RequestMethod.GET, headers = "Accept=application/json")
     public Aircraft getAircraft(@RequestParam(value = "id", required = true) Integer id) {
-        return aircraftService.get(id);
+        return aircraftService.getAircraft(id);
     }
 }

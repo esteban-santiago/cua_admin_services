@@ -40,22 +40,24 @@ public class MemberTests extends SpringIntegrationTest {
         Member member = new Member();
         member.setName("Socio 1");
         member.setCategory(categoryReposity.findById(1));
+        member.setAddresses(new HashSet<>());
         member.addAddress(address);
         member.addAddress(address2);
         member.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
         member.setNationality(nationalityRepository.findById(1));
+        member.setRatings(new HashSet<>());
         member.addRating(PilotRating.IFR);
         member.addRating(PilotRating.CROSSING);
         member.setRoles(new HashSet<>());
         member.addRole(MemberRole.PILOT);
-        memberService.save(member);
+        memberService.saveMember(member);
 
         Member member2 = new Member();
         member2.setName("Socio 2");
         member2.setCategory(categoryReposity.findById(1));
         member2.setNationality(nationalityRepository.findById(2));
         member2.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
-        memberService.save(member2);
+        memberService.saveMember(member2);
 
         memberService.getAll()
                 .stream().forEach(

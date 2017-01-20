@@ -53,6 +53,7 @@ public class EmployeeTests extends SpringIntegrationTest {
         mecanico.setCategory(category);
         mecanico.setDateOfCreation(LocalDate.now());
         mecanico.setDateOfBirth(LocalDate.parse("1974-08-02"));
+        mecanico.setAddresses(new HashSet<>());
         mecanico.addAddress(address);
         mecanico.setContactWays(new HashSet<>());
         mecanico.addContactWay(mail);

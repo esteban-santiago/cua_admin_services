@@ -15,20 +15,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemberService {
     @Autowired
     private final MemberRepository memberRepository;
     
-    public Member get(Integer id) throws Throwable {
+    public Member getMember(Integer id) throws Throwable {
         return memberRepository.findById(id).orElseThrow(
         () -> new MemberNotFoundException(id));
     }
     
-    public Member get(Member member) throws Throwable {
-        return this.get(member.getId());
+    public Member getMember(Member member) throws Throwable {
+        return this.getMember(member.getId());
     }
     
-    public void save(Member member) {
+    public void saveMember(Member member) {
         this.memberRepository.save(member);
     }
 

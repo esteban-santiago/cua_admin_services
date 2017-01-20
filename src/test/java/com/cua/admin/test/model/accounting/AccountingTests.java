@@ -1,13 +1,12 @@
 package com.cua.admin.test.model.accounting;
+import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.model.accounting.entries.AccountingEntryItem;
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
 import com.cua.admin.model.accounting.*;
 import com.cua.admin.model.accounting.documents.*;
 import com.cua.admin.model.accounting.entries.*;
-import com.cua.admin.repositories.accounting.*;
 import com.cua.admin.repositories.core.UserRepository;
-import com.cua.admin.repositories.accounting.entry.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
 import com.cua.admin.repositories.billing.PaymentMethodRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
@@ -19,6 +18,7 @@ import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import com.cua.admin.repositories.accounting.documents.AccountingDocumentRepository;
+import com.cua.admin.services.AccountingService;
 
 
 @Transactional
@@ -27,11 +27,14 @@ public class AccountingTests extends SpringIntegrationTest {
     @Autowired
     private AccountRepository accountRepository;
   
+    /*
+    * Le puse el tipo en el generico para que me tome el mismo en el retorno
+    ***************/
     @Autowired
-    private AccountingDocumentRepository<Document> documentRepository;
+    private AccountingDocumentRepository<Document> documentRepository; 
 
     @Autowired
-    private AccountingEntryRepository accountingEntryRepository;
+    private AccountingService accountingService;
 
     @Autowired
     private UserRepository userRepository;
@@ -50,15 +53,14 @@ public class AccountingTests extends SpringIntegrationTest {
         System.out.println("--------Asiento Template---------");
         System.out.println(entry);   
         System.out.println("----------------Asiento-----------");
-        accountingEntryRepository.saveAndFlush(entry.getAccountingEntry(document));
+        accountingService.saveAccountingEntry(entry.getAccountingEntry(document));
         System.out.println(entry.getAccountingEntry(document));   
         System.out.println("---------------------------------");
         
         //AccountingEntry savedEntry = accountingEntryRepository.findById(1);
         //System.out.println(savedEntry);   
         System.out.println("---------------------------------");
-        
-        accountingEntryRepository.findAll().stream().forEach(entry_e -> System.out.println(entry_e));
+        accountingService.getAll().stream().forEach(entry_e -> System.out.println(entry_e));
         System.out.println("---------------------------------");
         
     }
@@ -110,7 +112,7 @@ public class AccountingTests extends SpringIntegrationTest {
         Document document = documentRepository.findById(100L);
         TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
         AccountingEntry _entry = entry.getAccountingEntry(document);
-        accountingEntryRepository.save(_entry);
+        accountingService.saveAccountingEntry(_entry);
         System.out.println("---------Acá viene: -------\n" + _entry);
     }
     
@@ -118,23 +120,27 @@ public class AccountingTests extends SpringIntegrationTest {
     public void createAccountingEntry() {
         AccountingEntry entry = new  AccountingEntry();
         entry.setCreationDate(LocalDateTime.now());
-        entry.setDescription("Asiento de prueba");
+        entry.setDescription("Asiento de prueba de Cuota");
         entry.setFiscalYear(LocalDate.now().getYear());
         entry.setUser(userRepository.findById(1002));
-        accountingEntryRepository.save(entry);
+        accountingService.saveAccountingEntry(entry);
         AccountingEntryItem item1 = new AccountingEntryItem();
         AccountingEntryItem item2 = new AccountingEntryItem();
-        //item1.setCreationDate(LocalDateTime.now());
-        item1.setAccount(accountRepository.findById(1700)); //Cuotas a cobrar
+
+        item1.setAccount(accountRepository.findById(1900)); //Cuotas a cobrar
         item1.setItemType(AccountingEntryItemType.CREDIT);
         item1.setAmount(350.00F);
-        //item2.setCreationDate(LocalDateTime.now());
-        item2.setAccount(accountRepository.findById(8800)); //Cuotas y servicios
+        item1.setCurrency(Currency.ARS);
+
+        item2.setAccount(accountRepository.findById(9000)); //Cuotas y servicios
         item2.setItemType(AccountingEntryItemType.DEBIT);
         item2.setAmount(350.00F);
+        item2.setCurrency(Currency.ARS);
+
         entry.addEntryItem(item1);
         entry.addEntryItem(item2);
-        accountingEntryRepository.save(entry);
+        System.out.println(entry);
+        accountingService.saveAccountingEntry(entry);
     }
 
 }
