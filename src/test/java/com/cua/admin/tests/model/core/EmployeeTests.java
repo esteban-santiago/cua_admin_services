@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 public class EmployeeTests extends SpringIntegrationTest {
 
@@ -53,8 +54,9 @@ public class EmployeeTests extends SpringIntegrationTest {
         mecanico.setDateOfCreation(LocalDate.now());
         mecanico.setDateOfBirth(LocalDate.parse("1974-08-02"));
         mecanico.addAddress(address);
-        mecanico.addWayToContact(mail);
-        mecanico.addWayToContact(mail2);
+        mecanico.setContactWays(new HashSet<>());
+        mecanico.addContactWay(mail);
+        mecanico.addContactWay(mail2);
         mecanico.setNationality(peruvian);
         employeeService.save(mecanico);
 

@@ -9,6 +9,7 @@ import com.cua.admin.model.flight.PilotRating;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
 import com.cua.admin.services.MemberService;
+import java.util.HashSet;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -45,6 +46,7 @@ public class MemberTests extends SpringIntegrationTest {
         member.setNationality(nationalityRepository.findById(1));
         member.addRating(PilotRating.IFR);
         member.addRating(PilotRating.CROSSING);
+        member.setRoles(new HashSet<>());
         member.addRole(MemberRole.PILOT);
         memberService.save(member);
 

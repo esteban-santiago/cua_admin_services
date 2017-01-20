@@ -43,8 +43,7 @@ public class User implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE;
-    
-    
+      
     public void lock() {
         this.status = Status.LOCKED;
     }

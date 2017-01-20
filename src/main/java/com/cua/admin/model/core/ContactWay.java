@@ -34,7 +34,7 @@ public class ContactWay implements Serializable {
     private Integer id;
 
     @NonNull
-    private String typeOf;
+    private String type;
 
     @NonNull
     private String identificator;
