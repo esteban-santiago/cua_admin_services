@@ -41,11 +41,11 @@ public class Product implements Serializable {
     
     private String description;
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)    
+    @OneToOne(cascade = CascadeType.ALL)    
     @JoinColumn(name = "group_id", nullable = false, foreignKey = @ForeignKey(name = "product_group_id_fk"))
     private ProductGroup group;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)    
+    @OneToOne(cascade = CascadeType.ALL)    
     @JoinColumn(name = "subgroup_id", nullable = false,  foreignKey = @ForeignKey(name = "product_subgroup_id_fk"))
     private ProductSubGroup subGroup;
 

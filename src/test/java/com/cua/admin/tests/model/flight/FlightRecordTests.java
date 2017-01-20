@@ -10,6 +10,7 @@ import com.cua.admin.repositories.flight.FlightRecordRepository;
 import com.cua.admin.services.MemberService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,6 +36,7 @@ public class FlightRecordTests extends SpringIntegrationTest {
         crew.setMember(memberService.get(100));
         
         FlightRecord record = new FlightRecord();
+        record.setCrew(new HashSet<>());
         record.addCrewMember(crew);
         record.setAircraft(aircraftRepository.findById(100));
         record.setStartFlight(LocalDateTime.now());

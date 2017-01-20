@@ -8,5 +8,5 @@ import java.util.Set;
 public interface ProductGroupRepository extends JpaRepository<ProductGroup, Integer> {
 
     ProductGroup findById(Integer id);
-    Set<Product>  findBySubGroup(ProductSubGroup subGroup);
+    Set<Product>  findBySubGroups(ProductSubGroup subGroup);
 }

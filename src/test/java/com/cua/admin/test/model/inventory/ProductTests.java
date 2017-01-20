@@ -24,7 +24,8 @@ public class ProductTests extends SpringIntegrationTest {
         Product product = new Product();
         ProductGroup group = new ProductGroup();
         ProductSubGroup subGroup = new ProductSubGroup();
-        group.getSubGroup().add(subGroup);
+        group.setSubGroups(new HashSet<>());
+        group.getSubGroups().add(subGroup);
         group.setDescription("Material didáctico");
         subGroup.setDescription("Manual");
         product.setGroup(group);

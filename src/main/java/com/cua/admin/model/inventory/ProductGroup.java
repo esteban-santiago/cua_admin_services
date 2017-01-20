@@ -40,8 +40,8 @@ public class ProductGroup implements Serializable {
     private Integer id;
     private String description;    
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)    
+    @OneToMany(cascade = CascadeType.ALL)    
     @JoinColumn(name = "group_id", nullable = false, foreignKey = @ForeignKey(name = "product_group_subgroup_id_fk"))
-    private Set<ProductSubGroup> subGroup = new HashSet<>();
+    private Set<ProductSubGroup> subGroups;
 
 }

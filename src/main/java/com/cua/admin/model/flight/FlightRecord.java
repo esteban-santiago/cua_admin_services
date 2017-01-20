@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -30,11 +29,11 @@ public class FlightRecord implements Serializable {
     @Id
     private Long id;
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "flight_record_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_member_id_fk"))
-    private Set<CrewMember> crew = new HashSet<>();
+    private Set<CrewMember> crew;
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_aircraft_id_fk"))
     private Aircraft aircraft;
  
@@ -51,10 +50,11 @@ public class FlightRecord implements Serializable {
     @Enumerated(EnumType.STRING)
     private FlightType type = FlightType.ENT;//Tipo de vuelo
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name = "airfield_origin_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_origin_id_fk"))
     private Airfield origin;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    
+    @OneToOne
     @JoinColumn(name = "airfield_destiny_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_destiny_id_fk"))
     private Airfield destiny;
     
