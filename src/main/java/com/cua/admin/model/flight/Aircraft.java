@@ -7,7 +7,6 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -38,11 +37,11 @@ public class Aircraft implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_insurance_id_fk"))
-    private Set<AircraftInsurance> insurance;
+    private Set<AircraftInsurance> insurances;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_component_id_fk"))
-    private Set<AircraftComponent> component;
+    private Set<AircraftComponent> components;
     
     
     public Boolean hasAnInsurancePolicyInForce() {
@@ -50,7 +49,7 @@ public class Aircraft implements Serializable {
     }
     
     public Boolean hasAnInsurancePolicyInForce(LocalDate date) {
-        return getInsurance().stream().anyMatch(_insurance -> _insurance.isInForce(date));
+        return getInsurances().stream().anyMatch(_insurance -> _insurance.isInForce(date));
     }
     
     public enum Status {

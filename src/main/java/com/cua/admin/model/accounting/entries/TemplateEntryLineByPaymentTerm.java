@@ -20,7 +20,7 @@ import lombok.ToString;
 @DiscriminatorValue(value = "ENTRY_LINE_PAYMENT_TERM")
 public class TemplateEntryLineByPaymentTerm extends TemplateEntryLine {
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "payment_term_id", nullable = true)
     private PaymentTerm paymentTerm;
 

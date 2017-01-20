@@ -10,5 +10,5 @@ public interface AircraftRepository extends JpaRepository<Aircraft, Integer> {
 
     Aircraft findById(Integer id);
     
-    Aircraft findByComponent(AircraftComponent component);
+    Aircraft findByComponents(AircraftComponent component);
 }

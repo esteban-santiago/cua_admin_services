@@ -51,8 +51,8 @@ public class AircraftTests extends SpringIntegrationTest {
         System.out.println(c152);
         System.out.println(c152_2);
         //--Trasfer engine
-        c152_2.getComponent().add(component);
-        c152.getComponent().remove(component);
+        c152_2.getComponents().add(component);
+        c152.getComponents().remove(component);
         aircraftRepository.save(c152);
         aircraftRepository.save(c152_2);
         System.out.println(c152);

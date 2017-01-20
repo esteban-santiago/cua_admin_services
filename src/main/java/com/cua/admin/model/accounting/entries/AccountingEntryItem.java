@@ -39,8 +39,8 @@ public class AccountingEntryItem implements Serializable {
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "accounting_entry_item_account_id_fk"))
+    @OneToOne
+    @JoinColumn(name = "account_id", nullable = false,foreignKey = @ForeignKey(name = "accounting_entry_item_account_id_fk"))
     private Account account;
 
 /*    

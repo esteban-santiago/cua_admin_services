@@ -37,7 +37,7 @@ public class PaymentMethod implements Serializable {
     
     private String description;
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_method_id", nullable = false, foreignKey = @ForeignKey(name = "payment_method_id_fk"))
-    Set<PaymentTerm> paymentTerm;
+    Set<PaymentTerm> paymentTerms;
 }

@@ -1,10 +1,8 @@
 package com.cua.admin.model.accounting.documents;
 
 import com.cua.admin.model.accounting.Currency;
-import com.cua.admin.model.billing.PaymentMethod;
-import com.cua.admin.model.billing.PaymentTerm;
-import com.cua.admin.model.core.Member;
-import com.cua.admin.model.core.User;
+import com.cua.admin.model.billing.*;
+import com.cua.admin.model.core.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -46,29 +44,27 @@ public abstract class Document implements Serializable {
 
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="compensation_document_id", foreignKey = @ForeignKey(name = "document_id_fk"))
-    //@ManyToOne
-    //@JoinColumn(name="compensation_document_id")
     private Document compensationDocument; //(*) Documento de compensación
 
     //private Long compensationDocumentId;
     
     private LocalDate compensationDate; //(*) Fecha de compensación
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name="member_id", foreignKey = @ForeignKey(name = "document_member_id_fk"))
     private Member member; //Socio
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name="payment_method_id", foreignKey = @ForeignKey(name = "document_payment_method_id_fk"))
     private PaymentMethod paymentMethod; //Forma de pago
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name="payment_term_id", foreignKey = @ForeignKey(name = "document_payment_term_id_fk"))
     private PaymentTerm paymentTerm; //Condiciones de Pago
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name="user_id")
     private User user; //Usuario
 

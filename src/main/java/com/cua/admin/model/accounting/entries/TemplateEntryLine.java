@@ -32,7 +32,7 @@ public class TemplateEntryLine implements Serializable {
     @Id
     private Integer id; //Número de linea de asiento
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
     
