@@ -24,8 +24,8 @@ import com.cua.admin.services.AccountingService;
 @Transactional
 public class AccountingTests extends SpringIntegrationTest {
 
-    @Autowired
-    private AccountRepository accountRepository;
+    //@Autowired
+    //private AccountRepository accountRepository;
   
     /*
     * Le puse el tipo en el generico para que me tome el mismo en el retorno
@@ -45,27 +45,28 @@ public class AccountingTests extends SpringIntegrationTest {
     @Autowired
     private TemplateEntryRepository templateEntryRepository;
     
+    
     @Test
     public void getTemplateEntry() {
         Document document = documentRepository.findById(100L);
-        TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
-        assertThat(entry.getId()).isGreaterThan(0);
-        System.out.println("--------Asiento Template---------");
-        System.out.println(entry);   
+        accountingService.saveAccountingEntryUsingTemplate(document);
+
+        document = documentRepository.findById(101L);
+        accountingService.saveAccountingEntryUsingTemplate(document);
+
+        
+        //assertThat(entry.getId()).isGreaterThan(0);
+        //System.out.println("--------Asiento Template---------");
+        //System.out.println(entry);   
         System.out.println("----------------Asiento-----------");
-        accountingService.saveAccountingEntry(entry.getAccountingEntry(document));
-        System.out.println(entry.getAccountingEntry(document));   
-        System.out.println("---------------------------------");
-        
-        //AccountingEntry savedEntry = accountingEntryRepository.findById(1);
-        //System.out.println(savedEntry);   
-        System.out.println("---------------------------------");
-        accountingService.getAll().stream().forEach(entry_e -> System.out.println(entry_e));
-        System.out.println("---------------------------------");
-        
+        //accountingService.saveAccountingEntry(entry.getAccountingEntry(document));
+        accountingService.getAllAccountingEntries().stream().forEach(entry -> System.out.println(entry));
+        //System.out.println(entry.getAccountingEntry(document));   
+        System.out.println("----------------...-----------------");
+                
     }
     
-    @Test
+    //@Test
     public void createDocuments() {
         FlightRecordIssued fve = new FlightRecordIssued();
         fve.setAmount(3544F);
@@ -113,7 +114,6 @@ public class AccountingTests extends SpringIntegrationTest {
         TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
         AccountingEntry _entry = entry.getAccountingEntry(document);
         accountingService.saveAccountingEntry(_entry);
-        System.out.println("---------Acá viene: -------\n" + _entry);
     }
     
     @Test
@@ -127,20 +127,25 @@ public class AccountingTests extends SpringIntegrationTest {
         AccountingEntryItem item1 = new AccountingEntryItem();
         AccountingEntryItem item2 = new AccountingEntryItem();
 
-        item1.setAccount(accountRepository.findById(1900)); //Cuotas a cobrar
+        item1.setAccount(accountingService.getAccount(1900)); //Cuotas a cobrar
         item1.setItemType(AccountingEntryItemType.CREDIT);
         item1.setAmount(350.00F);
         item1.setCurrency(Currency.ARS);
 
-        item2.setAccount(accountRepository.findById(9000)); //Cuotas y servicios
+        item2.setAccount(accountingService.getAccount(9000)); //Cuotas y servicios
         item2.setItemType(AccountingEntryItemType.DEBIT);
         item2.setAmount(350.00F);
         item2.setCurrency(Currency.ARS);
 
         entry.addEntryItem(item1);
         entry.addEntryItem(item2);
-        System.out.println(entry);
         accountingService.saveAccountingEntry(entry);
+
+        System.out.println("--------Asientos---------");
+        accountingService.getAllAccountingEntries().stream()
+                .forEach((_entry) -> {
+            System.out.println(_entry);
+        });
     }
 
 }

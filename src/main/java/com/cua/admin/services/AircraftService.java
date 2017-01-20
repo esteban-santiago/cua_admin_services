@@ -30,7 +30,7 @@ public class AircraftService {
         return aircraftRepository.findByRegistration(registration).get();
     }
     
-    public List<Aircraft> getAll() {
+    public List<Aircraft> getAllAircrafts() {
         return this.aircraftRepository.findAll();
     }
 

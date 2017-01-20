@@ -35,10 +35,10 @@ public class AircraftTests extends SpringIntegrationTest {
 
     @Test
     public void checkAircraftWithoutActiveInsurancePolicy() {
-        aircraftService.getAll().stream().filter(
+        aircraftService.getAllAircrafts().stream().filter(
                     aircraft -> !aircraft.hasAnInsurancePolicyInForce()
         ).forEach(aircraft -> System.out.println(aircraft.getRegistration()));
-        assertThat( aircraftService.getAll().stream().filter(
+        assertThat( aircraftService.getAllAircrafts().stream().filter(
                     aircraft -> !aircraft.hasAnInsurancePolicyInForce()
         )).describedAs("Todos tienen póliza");
     }

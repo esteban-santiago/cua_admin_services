@@ -33,7 +33,7 @@ public class MemberService {
         this.memberRepository.save(member);
     }
 
-    public List<Member> getAll() {
+    public List<Member> getAllMembers() {
         return this.memberRepository.findAll();
     }
 

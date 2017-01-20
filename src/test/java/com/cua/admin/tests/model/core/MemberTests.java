@@ -59,7 +59,7 @@ public class MemberTests extends SpringIntegrationTest {
         member2.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
         memberService.saveMember(member2);
 
-        memberService.getAll()
+        memberService.getAllMembers()
                 .stream().forEach(
                         aMember -> System.out.println(aMember));
         
