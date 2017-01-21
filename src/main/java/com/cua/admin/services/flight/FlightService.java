@@ -1,5 +1,6 @@
-package com.cua.admin.services;
+package com.cua.admin.services.flight;
 
+import com.cua.admin.services.core.MemberService;
 import com.cua.admin.model.flight.FlightRecord;
 import com.cua.admin.repositories.flight.AircraftRepository;
 import com.cua.admin.repositories.flight.CrewRepository;
@@ -18,14 +19,11 @@ public class FlightService {
     
     @Autowired
     private final MemberService memberService;
-    
-    @Autowired
-    private final CrewRepository crewRepository;
-
+ 
     @Autowired
     private final FlightRecordRepository flightRecordRepository;
    
-    
+   
     public void createFlightRecord(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.OPENED);
         flightRecordRepository.save(flightRecord);

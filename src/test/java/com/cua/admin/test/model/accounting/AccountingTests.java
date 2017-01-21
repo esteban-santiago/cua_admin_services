@@ -18,7 +18,7 @@ import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import com.cua.admin.repositories.accounting.documents.AccountingDocumentRepository;
-import com.cua.admin.services.AccountingService;
+import com.cua.admin.services.accounting.AccountingService;
 
 
 @Transactional
@@ -51,22 +51,16 @@ public class AccountingTests extends SpringIntegrationTest {
         Document document = documentRepository.findById(100L);
         accountingService.saveAccountingEntryUsingTemplate(document);
 
-        document = documentRepository.findById(101L);
-        accountingService.saveAccountingEntryUsingTemplate(document);
+        Document document2 = documentRepository.findById(101L);
+        accountingService.saveAccountingEntryUsingTemplate(document2);
 
-        
-        //assertThat(entry.getId()).isGreaterThan(0);
-        //System.out.println("--------Asiento Template---------");
-        //System.out.println(entry);   
         System.out.println("----------------Asiento-----------");
-        //accountingService.saveAccountingEntry(entry.getAccountingEntry(document));
-        accountingService.getAllAccountingEntries().stream().forEach(entry -> System.out.println(entry));
-        //System.out.println(entry.getAccountingEntry(document));   
+        accountingService.getAllAccountingEntries().stream().forEach(entry -> System.out.println(entry)); 
         System.out.println("----------------...-----------------");
                 
     }
     
-    //@Test
+    @Test
     public void createDocuments() {
         FlightRecordIssued fve = new FlightRecordIssued();
         fve.setAmount(3544F);

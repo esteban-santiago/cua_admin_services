@@ -1,6 +1,5 @@
 package com.cua.admin.model.accounting.entries;
 
-import com.cua.admin.model.accounting.*;
 import com.cua.admin.model.accounting.documents.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -42,9 +41,7 @@ public class TemplateEntry implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "template_entry_id", foreignKey = @ForeignKey(name = "template_entry_id_fk"))
     private Set<TemplateEntryLine> entryLines = new HashSet<>(); 
-
-    @Transient
-    private AccountingEntry entry = new AccountingEntry();    
+  
     
     public void addEntryLine(TemplateEntryLine entryLine) {
         this.entryLines.add(entryLine);
@@ -54,11 +51,11 @@ public class TemplateEntry implements Serializable {
      * Este método devuelve la instancia armada desde el template
     */  
     public AccountingEntry getAccountingEntry(Document document) {
+        AccountingEntry entry = new AccountingEntry();
         entry.setCreationDate(LocalDateTime.now());
         entry.setDescription(this.description);
         entry.setFiscalYear(LocalDate.now().getYear());
-        entry.getEntryItems().clear(); //remueve los items si existen
-  
+        entry.setUser(document.getUser());
         getEntryLines().stream().filter(entryLine -> entryLine.match(document)).forEach(entryLine -> {
             AccountingEntryItem item = new AccountingEntryItem();
             item.setAccount(entryLine.getAccount());
@@ -67,7 +64,7 @@ public class TemplateEntry implements Serializable {
             item.setCurrency(document.getCurrency());
             entry.addEntryItem(item);
         });
-        return this.entry;
+        return entry;
     }
     
 }

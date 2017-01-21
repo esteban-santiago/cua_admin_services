@@ -4,9 +4,9 @@ import com.cua.admin.model.flight.CrewMember;
 import com.cua.admin.model.flight.CrewMemberRole;
 import com.cua.admin.model.flight.FlightRecord;
 import com.cua.admin.repositories.flight.CrewRepository;
-import com.cua.admin.services.AircraftService;
-import com.cua.admin.services.FlightService;
-import com.cua.admin.services.MemberService;
+import com.cua.admin.services.core.AircraftService;
+import com.cua.admin.services.flight.FlightService;
+import com.cua.admin.services.core.MemberService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -32,11 +32,11 @@ public class FlightRecordTests extends SpringIntegrationTest {
 
         CrewMember crew = new CrewMember();
         crew.setCrewMemberRole(CrewMemberRole.PIC);
-        crew.setMember(memberService.getMember(100));
+        crew.setMember(memberService.get(100));
         
         record.addCrewMember(crew);
 
-        record.setAircraft(aircraftService.getAircraft(100));
+        record.setAircraft(aircraftService.get(100));
         record.setStartFlight(LocalDateTime.now());
         record.setEndFlight(LocalDateTime.now().plusMinutes(70));
         System.out.println(record.getAmountOfHours());

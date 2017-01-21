@@ -10,8 +10,6 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-
-
 /**
  *
  * @author esantiago
@@ -19,7 +17,7 @@ import org.hibernate.annotations.Parameter;
 
 @Data
 @Entity
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "payment_method")
 public class PaymentMethod implements Serializable {
     @GenericGenerator(

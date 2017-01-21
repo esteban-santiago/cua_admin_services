@@ -1,4 +1,4 @@
-package com.cua.admin.services;
+package com.cua.admin.services.inventory;
 
 import com.cua.admin.repositories.inventory.ProductRepository;
 import javax.transaction.Transactional;

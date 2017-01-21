@@ -2,7 +2,7 @@ package com.cua.admin.tests.model.core;
 
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.core.UserRepository;
-import com.cua.admin.services.UserService;
+import com.cua.admin.services.core.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

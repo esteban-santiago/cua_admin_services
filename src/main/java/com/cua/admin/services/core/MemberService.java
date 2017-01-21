@@ -1,4 +1,4 @@
-package com.cua.admin.services;
+package com.cua.admin.services.core;
 
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.exceptions.MemberNotFoundException;
@@ -20,22 +20,20 @@ public class MemberService {
     @Autowired
     private final MemberRepository memberRepository;
     
-    public Member getMember(Integer id) throws Throwable {
+    public Member get(Integer id) throws Throwable {
         return memberRepository.findById(id).orElseThrow(
         () -> new MemberNotFoundException(id));
     }
     
-    public Member getMember(Member member) throws Throwable {
-        return this.getMember(member.getId());
+    public Member get(Member member) throws Throwable {
+        return this.get(member.getId());
     }
     
-    public void saveMember(Member member) {
+    public void save(Member member) {
         this.memberRepository.save(member);
     }
 
-    public List<Member> getAllMembers() {
+    public List<Member> getAll() {
         return this.memberRepository.findAll();
     }
-
-    
 }

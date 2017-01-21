@@ -9,17 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sapi")
 @RequiredArgsConstructor
-public class UnsecureRestController {
+public class SalesRestController {
 
     private final UserRepository userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET, headers = "Accept=application/json")
-    public User login(@RequestParam(value = "user", required = true) User user) {
-        User pp = userService.findByName("Esteban").get(0);
-        User p = new User("esteban", "santiago");
-        System.out.println("Usuario: " + p.toString());
-        return pp;
-    }
+
 }

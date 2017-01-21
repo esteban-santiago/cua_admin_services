@@ -17,7 +17,7 @@ import org.hibernate.annotations.Parameter;
  */
 @Data
 @Entity
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "payment_term")
 public class PaymentTerm implements Serializable {
     @GenericGenerator(

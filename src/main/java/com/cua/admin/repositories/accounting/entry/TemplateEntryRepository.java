@@ -4,9 +4,8 @@ import com.cua.admin.model.accounting.documents.DocumentType;
 import com.cua.admin.model.accounting.entries.TemplateEntry;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-//public interface TemplateEntryRepository<T extends TemplateEntry> extends JpaRepository<T, Long> {
-
-public interface TemplateEntryRepository extends JpaRepository<TemplateEntry, Long> {
+public interface TemplateEntryRepository extends JpaRepository<TemplateEntry, Integer> {
 
     TemplateEntry findByDocumentType(DocumentType documentType);
+    
 }

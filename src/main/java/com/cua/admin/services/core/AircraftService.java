@@ -1,4 +1,4 @@
-package com.cua.admin.services;
+package com.cua.admin.services.core;
 
 import com.cua.admin.model.flight.Aircraft;
 import com.cua.admin.repositories.flight.AircraftRepository;
@@ -18,23 +18,23 @@ public class AircraftService {
     @Autowired //No es obligatorio
     private final AircraftRepository aircraftRepository;
     
-    public Aircraft getAircraft(Integer id) {
+    public Aircraft get(Integer id) {
         return aircraftRepository.findById(id).get();
     }
 
-    public Aircraft getAircraft(Aircraft aircraft) {
-        return getAircraft(aircraft.getId());
+    public Aircraft get(Aircraft aircraft) {
+        return get(aircraft.getId());
     }
 
-    public Aircraft getAircraftByRegistration(String registration) {
+    public Aircraft getByRegistration(String registration) {
         return aircraftRepository.findByRegistration(registration).get();
     }
     
-    public List<Aircraft> getAllAircrafts() {
+    public List<Aircraft> getAll() {
         return this.aircraftRepository.findAll();
     }
 
-    public void saveAircraft(Aircraft aircraft) {
+    public void save(Aircraft aircraft) {
         this.aircraftRepository.save(aircraft);
     }
     

@@ -1,4 +1,4 @@
-package com.cua.admin.services;
+package com.cua.admin.services.core;
 
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.core.UserRepository;
@@ -43,6 +43,4 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
-
-
 } 

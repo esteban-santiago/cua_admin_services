@@ -1,4 +1,4 @@
-package com.cua.admin.services;
+package com.cua.admin.services.accounting;
 
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.documents.Document;
@@ -49,19 +49,18 @@ public class AccountingService {
     
     //Documentos Contables
     public void saveDocument(Document document) {
+        document.close();
         this.accountingDocumentRepository.saveAndFlush(document);
     }
     
     //Asientos contables
     public void saveAccountingEntryUsingTemplate(Document document){
-        TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
-        AccountingEntry accountingEntry = entry.getAccountingEntry(document); 
-        this.saveAccountingEntry(accountingEntry);
-        System.out.println("Guardando: " + entry.getAccountingEntry(document) );
+        TemplateEntry template = templateEntryRepository.findByDocumentType(document.getDocumentType());
+        this.saveAccountingEntry(template.getAccountingEntry(document));
     }
     
     public void saveAccountingEntry(AccountingEntry entry) {
-       this.accountingEntryRepository.save(entry); 
+       this.accountingEntryRepository.saveAndFlush(entry);
     }
 
     public List<AccountingEntry> getAllAccountingEntries() {

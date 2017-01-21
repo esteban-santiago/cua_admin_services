@@ -1,5 +1,6 @@
 package com.cua.admin.services;
 
+import com.cua.admin.services.core.UserService;
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.core.UserRepository;
 import org.junit.Before;
