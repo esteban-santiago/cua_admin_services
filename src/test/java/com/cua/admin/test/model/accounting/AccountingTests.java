@@ -1,5 +1,4 @@
 package com.cua.admin.test.model.accounting;
-import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.model.accounting.entries.AccountingEntryItem;
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
@@ -18,7 +17,9 @@ import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import com.cua.admin.repositories.accounting.documents.AccountingDocumentRepository;
-import com.cua.admin.services.accounting.AccountingService;
+import com.cua.admin.services.accounting.AccountService;
+import com.cua.admin.services.accounting.AccountingEntryService;
+import com.cua.admin.services.accounting.DocumentService;
 
 
 @Transactional
@@ -34,7 +35,13 @@ public class AccountingTests extends SpringIntegrationTest {
     private AccountingDocumentRepository<Document> documentRepository; 
 
     @Autowired
-    private AccountingService accountingService;
+    private AccountingEntryService accountingEntryService;
+
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private DocumentService documentService;
 
     @Autowired
     private UserRepository userRepository;
@@ -49,13 +56,14 @@ public class AccountingTests extends SpringIntegrationTest {
     @Test
     public void getTemplateEntry() {
         Document document = documentRepository.findById(100L);
-        accountingService.saveAccountingEntryUsingTemplate(document);
+        
+        documentService.saveAccountingEntryUsingTemplate(document);
 
         Document document2 = documentRepository.findById(101L);
-        accountingService.saveAccountingEntryUsingTemplate(document2);
+        documentService.saveAccountingEntryUsingTemplate(document2);
 
         System.out.println("----------------Asiento-----------");
-        accountingService.getAllAccountingEntries().stream().forEach(entry -> System.out.println(entry)); 
+        accountingEntryService.getAll().stream().forEach(entry -> System.out.println(entry)); 
         System.out.println("----------------...-----------------");
                 
     }
@@ -107,7 +115,7 @@ public class AccountingTests extends SpringIntegrationTest {
         Document document = documentRepository.findById(100L);
         TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
         AccountingEntry _entry = entry.getAccountingEntry(document);
-        accountingService.saveAccountingEntry(_entry);
+        accountingEntryService.save(_entry);
     }
     
     @Test
@@ -117,26 +125,26 @@ public class AccountingTests extends SpringIntegrationTest {
         entry.setDescription("Asiento de prueba de Cuota");
         entry.setFiscalYear(LocalDate.now().getYear());
         entry.setUser(userRepository.findById(1002));
-        accountingService.saveAccountingEntry(entry);
+        accountingEntryService.save(entry);
         AccountingEntryItem item1 = new AccountingEntryItem();
         AccountingEntryItem item2 = new AccountingEntryItem();
 
-        item1.setAccount(accountingService.getAccount(1900)); //Cuotas a cobrar
+        item1.setAccount(accountService.get(1900)); //Cuotas a cobrar
         item1.setItemType(AccountingEntryItemType.CREDIT);
         item1.setAmount(350.00F);
         item1.setCurrency(Currency.ARS);
 
-        item2.setAccount(accountingService.getAccount(9000)); //Cuotas y servicios
+        item2.setAccount(accountService.get(9000)); //Cuotas y servicios
         item2.setItemType(AccountingEntryItemType.DEBIT);
         item2.setAmount(350.00F);
         item2.setCurrency(Currency.ARS);
 
         entry.addEntryItem(item1);
         entry.addEntryItem(item2);
-        accountingService.saveAccountingEntry(entry);
+        accountingEntryService.save(entry);
 
         System.out.println("--------Asientos---------");
-        accountingService.getAllAccountingEntries().stream()
+        accountingEntryService.getAll().stream()
                 .forEach((_entry) -> {
             System.out.println(_entry);
         });

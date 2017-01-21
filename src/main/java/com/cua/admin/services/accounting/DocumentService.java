@@ -21,31 +21,16 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AccountingService {
-    @Autowired
-    private final AccountRepository accountRepository;
-
+public class DocumentService {
     @Autowired
     private final AccountingEntryRepository accountingEntryRepository; 
     
     @Autowired
-    private final AccountingDocumentRepository accountingDocumentRepository;
+    private final AccountingDocumentRepository<Document> accountingDocumentRepository;
     
     @Autowired
     private final TemplateEntryRepository templateEntryRepository;
-    
-    
-    /*
-    ** Account Basic Services
-    */
-    public Account getAccount(Integer id) {
-        return this.accountRepository.findById(id);
-    }
-    
-    public void saveAccount(Account account) {
-        this.accountRepository.save(account);
-    }
-    
+        
     //Documentos Contables
     public void saveDocument(Document document) {
         document.close();
@@ -55,14 +40,7 @@ public class AccountingService {
     //Asientos contables
     public void saveAccountingEntryUsingTemplate(Document document){
         TemplateEntry template = templateEntryRepository.findByDocumentType(document.getDocumentType());
-        this.saveAccountingEntry(template.getAccountingEntry(document));
+        this.accountingEntryRepository.save(template.getAccountingEntry(document));
     }
     
-    public void saveAccountingEntry(AccountingEntry entry) {
-       this.accountingEntryRepository.saveAndFlush(entry);
-    }
-
-    public List<AccountingEntry> getAllAccountingEntries() {
-        return this.accountingEntryRepository.findAll();
-    }
 }
