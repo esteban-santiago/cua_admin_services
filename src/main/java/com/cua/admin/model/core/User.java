@@ -1,5 +1,6 @@
 package com.cua.admin.model.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -14,12 +15,14 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import lombok.ToString;
 
 @Data
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@ToString(exclude = "password")
 public class User implements Serializable {
 
     @GenericGenerator(
@@ -39,11 +42,16 @@ public class User implements Serializable {
     private String name;
 
     @NonNull
-    private String passwd;
+    @JsonIgnore(true)
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE;
-      
+
+    @Enumerated(EnumType.STRING)
+    private Profile profile = Profile.USER;
+
+    
     public void lock() {
         this.status = Status.LOCKED;
     }
@@ -59,5 +67,11 @@ public class User implements Serializable {
     public enum Status {
         ACTIVE(), 
         LOCKED();
+    }
+    
+    public enum Profile {
+        USER(),
+        ADMINISTRATOR(),
+        SUPER_USER();
     }
 }

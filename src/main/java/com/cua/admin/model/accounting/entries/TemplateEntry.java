@@ -60,7 +60,8 @@ public class TemplateEntry implements Serializable {
             AccountingEntryItem item = new AccountingEntryItem();
             item.setAccount(entryLine.getAccount());
             item.setItemType(entryLine.getAccountingEntryItemType());
-            item.setAmount(entryLine.getFactor()* document.getAmount());
+            item.setAmount(Math.abs(entryLine.getFactor() * document.getAmount()));
+            System.out.println("Factor: " + entryLine.getFactor());
             item.setCurrency(document.getCurrency());
             entry.addEntryItem(item);
         });

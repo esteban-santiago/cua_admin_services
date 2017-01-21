@@ -29,7 +29,7 @@ public class AccountingEntryService {
     private final AccountingEntryRepository accountingEntryRepository; 
     
     @Autowired
-    private final AccountingDocumentRepository accountingDocumentRepository;
+    private final AccountingDocumentRepository<Document> accountingDocumentRepository;
     
     
     public void saveDocument(Document document) {

@@ -2,22 +2,27 @@ package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.accounting.documents.Document;
+import com.cua.admin.model.accounting.documents.DocumentType;
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
  * @author esteban_santiago
  */
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "ENTRY_LINE_DISCRIMINATOR")
-@DiscriminatorValue(value = "ENTRY_LINE_BASE")
-@Table(name="template_entry_line")
-public class TemplateEntryLine implements Serializable {
+@DiscriminatorValue(value = "ENTRY_LINE_DOCUMENT_TYPE")
+public class TemplateEntryLineByDocumentType extends TemplateEntryLine implements Serializable {
     
     @GenericGenerator(
             name = "SequenceGenerator",
@@ -32,16 +37,18 @@ public class TemplateEntryLine implements Serializable {
     @Id
     private Integer id; //Número de linea de asiento
 
+    @Enumerated(EnumType.STRING)
+    private DocumentType documentType;
+    
     @OneToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
     
     @Enumerated(EnumType.STRING)
     private AccountingEntryItemType accountingEntryItemType;
-            
-    private Float factor;
     
+    @Override
     public Boolean match(Document document) {
-        return true;
+        return this.documentType == document.getDocumentType();
     }
 }

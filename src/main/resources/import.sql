@@ -21,8 +21,8 @@ INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,ident
 INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (101,'1989-01-27','2017-01-03','CC123331','PASSPORT','SANTIAGO, Pablo',1,2,'ACTIVE');
 
 --Users
-INSERT INTO users (id, name, passwd, status) VALUES (100,'esantiago','passwd','ACTIVE');
-INSERT INTO users (id, name, passwd, status) VALUES (101,'psantiago','passwd','ACTIVE');
+INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');
+INSERT INTO users (id, name, password, profile, status) VALUES (101,'psantiago','passwd','ADMINISTRATOR','ACTIVE');
 
 --Medical Certifications
 INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (1,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',100);
@@ -62,7 +62,7 @@ INSERT INTO  payment_term (id, charge, description, discount, payment_method_id)
 
 --Flight Record
 INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
-INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','CLOSED','ENT',101,NULL,NULL);
+INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
 
 --Crew Member
 INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (100,'PIC',1,100);
@@ -70,7 +70,8 @@ INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (
 INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INS',2,101);
 
 --Flight Record Issued
-INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,NULL);
+INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,100);
+INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
 
 --Account
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(100,1,0,0,0,'Activo');
@@ -94,15 +95,12 @@ INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_g
 
 --Template Entry
 INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'Asiento automatico de Ficha de Vuelo');
-
 --Template Entry Line
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, template_entry_id) VALUES(100, 'ENTRY_LINE_BASE','CREDIT',1,2100,100);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(101, 'ENTRY_LINE_PAYMENT_METHOD', 'DEBIT',1,8500,3,100);
 
 --Product Group
 INSERT INTO product_group (description, id) VALUES ('Servicios de vuelo', 100);
-
-
 --Product SubGroup
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C150', 100,100);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('PA-11', 100,101);

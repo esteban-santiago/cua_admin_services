@@ -55,14 +55,12 @@ public class AccountingTests extends SpringIntegrationTest {
     
     @Test
     public void getTemplateEntry() {
-        Document document = documentRepository.findById(100L);
-        
-        documentService.saveAccountingEntryUsingTemplate(document);
+        //Contabilizar los documentos de Ficha de Vuelo
+        documentRepository.findAll().forEach(
+                RCIDocument -> documentService.saveAccountingEntryUsingTemplate(RCIDocument)
+        );
 
-        Document document2 = documentRepository.findById(101L);
-        documentService.saveAccountingEntryUsingTemplate(document2);
-
-        System.out.println("----------------Asiento-----------");
+        System.out.println("----------------Asiento automáticos----------");
         accountingEntryService.getAll().stream().forEach(entry -> System.out.println(entry)); 
         System.out.println("----------------...-----------------");
                 

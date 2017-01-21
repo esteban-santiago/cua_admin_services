@@ -11,6 +11,8 @@ public enum DocumentType {
     FRI("Ficha de Vuelo Emitida"),  //Flight Record Issued
     RCI("Recibo Emitido"), //Receipt Issued
     @Deprecated
+    DNI("Nota de Débito"),  //Debit Note Issued
+    @Deprecated
     POI("Orden de Pago Emitida"),  //Pay Order Issued
     @Deprecated
     MFI("Cuota Social Emitida"), //Membership Fee Issued

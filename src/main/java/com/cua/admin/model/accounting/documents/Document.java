@@ -75,6 +75,7 @@ public abstract class Document implements Serializable {
     
     public abstract Long getLegalId();
     
+    @Enumerated(EnumType.STRING)
     private Status status = Status.OPENED;
     
     public void open() {

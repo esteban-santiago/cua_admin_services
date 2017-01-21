@@ -38,8 +38,10 @@ public class FlightRecord implements Serializable {
     private Aircraft aircraft;
  
     private LocalDateTime startFlight = LocalDateTime.now();
+    
     private LocalDateTime endFlight = LocalDateTime.now();
-    private Integer landings = 0;
+    
+    private Integer landings = 1;
     
     @Enumerated(EnumType.STRING)
     private FlightPurpose purpose = FlightPurpose.VP;//Finalidad 
@@ -108,7 +110,6 @@ public class FlightRecord implements Serializable {
     
     
     public enum Status {
-        PENDING(),
         OPENED(),
         CLOSED(),
         CANCELED();

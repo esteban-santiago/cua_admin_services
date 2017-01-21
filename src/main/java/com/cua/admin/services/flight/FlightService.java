@@ -21,7 +21,7 @@ public class FlightService {
    
    
     public void createFlightRecord(FlightRecord flightRecord) throws Throwable {
-        flightRecord.setStatus(FlightRecord.Status.PENDING);
+        flightRecord.setStatus(FlightRecord.Status.OPENED);
         flightRecordRepository.save(flightRecord);
     }
 

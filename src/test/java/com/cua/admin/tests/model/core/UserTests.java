@@ -21,7 +21,7 @@ public class UserTests extends SpringIntegrationTest {
         User user = new User();
         //user.setId(0);
         user.setName("Esteban");
-        user.setPasswd("passwd");
+        user.setPassword("passwd");
         userRepository.save(user);
 
         user.lock();
