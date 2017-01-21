@@ -17,17 +17,17 @@ public class AdministrationRestController {
     private final UserService userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET, headers = "Accept=application/json")
-    public User getUser(@RequestParam(value = "id", required = false, defaultValue = "1") Integer id) {
+    public User getUser(@RequestParam(value = "id", required = true) Integer id) {
         return userService.get(id);
     }
 
     @RequestMapping(value = "/user/lock", method = RequestMethod.POST, headers = "Accept=application/json")
-    public void lockUser(@RequestParam(value = "id", required = false, defaultValue = "") Integer id) {
+    public void lockUser(@RequestParam(value = "id", required = true) Integer id) {
         userService.lock(id);
     }
 
     @RequestMapping(value = "/user/unlock", method = RequestMethod.POST, headers = "Accept=application/json")
-    public void unlockUser(@RequestParam(value = "id", required = false, defaultValue = "") Integer id) {
+    public void unlockUser(@RequestParam(value = "id", required = true) Integer id) {
         userService.unlock(id);
     }
 

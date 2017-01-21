@@ -20,6 +20,10 @@ INSERT INTO category(id, description) VALUES (3,'Instructor');
 INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (100,'1974-08-02','2017-01-03','24036873','DNI','SANTIAGO, Esteban',1,1, 'ACTIVE');
 INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (101,'1989-01-27','2017-01-03','CC123331','PASSPORT','SANTIAGO, Pablo',1,2,'ACTIVE');
 
+--Users
+INSERT INTO users (id, name, passwd, status) VALUES (100,'esantiago','passwd','ACTIVE');
+INSERT INTO users (id, name, passwd, status) VALUES (101,'psantiago','passwd','ACTIVE');
+
 --Medical Certifications
 INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (1,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',100);
 INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (2,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',101);
