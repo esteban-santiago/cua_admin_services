@@ -33,8 +33,10 @@ public class AircraftComponent implements Serializable {
     @Id
     private Integer id;
 
+    private String brand; //Marca
+    
     private String description;
-
+    
     private String serial;    
     
     private Boolean relocable;
