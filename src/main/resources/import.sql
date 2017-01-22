@@ -72,6 +72,12 @@ INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (
 --Flight Record Issued
 INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,100);
 INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
+INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (102, 4110,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
+
+--Receipt Issued
+INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (200, -2400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,1, NULL,100);
+INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (201, -3400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,4, 3,100);
+INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (202, -4110,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,5, NULL,100);
 
 --Account
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(100,1,0,0,0,'Activo');
@@ -89,15 +95,29 @@ INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_g
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(1300,1,1,2,2,'Banco Provincia Cuenta Corriente U$S');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(1900,1,1,3,3,'Cuotas a cobrar');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(2100,1,1,3,5,'Deudores por vuelos');
+INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(7000,2,4,1,2,'Acreedores varios');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(8200,4,0,0,0,'Ingresos');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(8500,4,1,1,1,'Horas de vuelo');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(9000,4,1,2,1,'Cuotas y servicios');
+INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(10500,4,2,1,7,'Recargo financiero');
 
 --Template Entry
 INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'Asiento automatico de Ficha de Vuelo');
---Template Entry Line
-INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, template_entry_id) VALUES(100, 'ENTRY_LINE_BASE','CREDIT',1,2100,100);
-INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(101, 'ENTRY_LINE_PAYMENT_METHOD', 'DEBIT',1,8500,3,100);
+INSERT INTO template_entry (id, document_type, description) VALUES(101,'RCI', 'Asiento automatico de Recibo');
+--Template Entry Line FRI
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(100, 'ENTRY_LINE_DOCUMENT_TYPE','DEBIT','FRI',1,2100,100);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(101, 'ENTRY_LINE_PAYMENT_METHOD', 'CREDIT',1,8500,3,100);
+--Template Entry Line RCI
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(102, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,400,1,101);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(103, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,600,2,101);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(104, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,700,5,101);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(105, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,7000,3,101);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id)     VALUES(106, 'ENTRY_LINE_COMPENSATED_DOC_TYPE','CREDIT','FRI',1,2100,101);
+--Template Entry Line RCI Tarjeta
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(107, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,800,4,101);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_term_id, template_entry_id) VALUES(108, 'ENTRY_LINE_PAYMENT_TERM','DEBIT',0.1,10500,3,101);
+
+
 
 --Product Group
 INSERT INTO product_group (description, id) VALUES ('Servicios de vuelo', 100);
