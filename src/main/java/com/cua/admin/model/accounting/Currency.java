@@ -11,7 +11,7 @@ public enum Currency {
     
     ARS("Pesos Argentinos"),
     USD("Dólares Estadounidenses"),
-    BRL("Reales Brasileros "),
+    BRL("Reales Brasileros"),
     EUR("Euro");
 
     private final String description;

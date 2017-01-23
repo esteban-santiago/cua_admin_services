@@ -47,8 +47,6 @@ public abstract class Document implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="compensation_document_id", foreignKey = @ForeignKey(name = "document_id_fk"))
     private Document compensationDocument; //(*) Documento de compensación
-
-    //private Long compensationDocumentId;
     
     private LocalDate compensationDate; //(*) Fecha de compensación
 

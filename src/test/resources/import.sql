@@ -118,7 +118,6 @@ INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_term_id, template_entry_id) VALUES(108, 'ENTRY_LINE_PAYMENT_TERM','DEBIT',0.1,10500,3,101);
 
 
-
 --Product Group
 INSERT INTO product_group (description, id) VALUES ('Servicios de vuelo', 100);
 --Product SubGroup
