@@ -1,6 +1,6 @@
-package com.cua.admin.controllers.IT.rest;
+package com.cua.admin.controllers.rest.it;
 
-import com.cua.admin.model.core.User;
+import com.cua.admin.model.it.User;
 import com.cua.admin.services.core.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;

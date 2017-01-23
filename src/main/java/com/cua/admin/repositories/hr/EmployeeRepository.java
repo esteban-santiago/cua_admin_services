@@ -1,6 +1,6 @@
-package com.cua.admin.repositories.core;
+package com.cua.admin.repositories.hr;
 
-import com.cua.admin.model.core.Employee;
+import com.cua.admin.model.hr.Employee;
 import com.cua.admin.model.core.Nationality;
 import org.springframework.data.jpa.repository.JpaRepository;
 

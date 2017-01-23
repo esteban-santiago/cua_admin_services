@@ -1,4 +1,4 @@
-package com.cua.admin.model.core;
+package com.cua.admin.model.it;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

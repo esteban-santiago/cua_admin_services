@@ -9,7 +9,7 @@ import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
 import com.cua.admin.model.accounting.*;
 import com.cua.admin.model.accounting.entries.*;
-import com.cua.admin.repositories.core.UserRepository;
+import com.cua.admin.repositories.it.UserRepository;
 import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
 import com.cua.admin.repositories.finance.billing.PaymentMethodRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;

@@ -1,9 +1,10 @@
 package com.cua.admin.tests.model.core;
 
+import com.cua.admin.model.hr.Employee;
 import com.cua.admin.model.core.*;
 import com.cua.admin.repositories.core.ActivityRepository;
 import com.cua.admin.repositories.core.CategoryRepository;
-import com.cua.admin.repositories.core.EmployeeRepository;
+import com.cua.admin.repositories.hr.EmployeeRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

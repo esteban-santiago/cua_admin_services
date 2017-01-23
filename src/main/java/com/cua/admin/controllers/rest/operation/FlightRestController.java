@@ -1,4 +1,4 @@
-package com.cua.admin.controllers.operation.rest;
+package com.cua.admin.controllers.rest.operation;
 
 import com.cua.admin.model.operation.flight.Aircraft;
 import com.cua.admin.services.core.AircraftService;

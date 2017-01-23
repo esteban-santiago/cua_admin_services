@@ -1,5 +1,7 @@
-package com.cua.admin.model.core;
+package com.cua.admin.model.hr;
 
+import com.cua.admin.model.core.Activity;
+import com.cua.admin.model.core.Member;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

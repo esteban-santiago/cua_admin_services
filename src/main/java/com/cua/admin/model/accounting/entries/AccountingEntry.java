@@ -1,6 +1,6 @@
 package com.cua.admin.model.accounting.entries;
 
-import com.cua.admin.model.core.User;
+import com.cua.admin.model.it.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;

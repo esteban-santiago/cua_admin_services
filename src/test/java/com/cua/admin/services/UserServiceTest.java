@@ -1,8 +1,8 @@
 package com.cua.admin.services;
 
 import com.cua.admin.services.core.UserService;
-import com.cua.admin.model.core.User;
-import com.cua.admin.repositories.core.UserRepository;
+import com.cua.admin.model.it.User;
+import com.cua.admin.repositories.it.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

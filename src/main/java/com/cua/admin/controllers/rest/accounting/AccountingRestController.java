@@ -1,7 +1,7 @@
-package com.cua.admin.controllers.sales.rest;
+package com.cua.admin.controllers.rest.accounting;
 
-import com.cua.admin.model.core.User;
-import com.cua.admin.repositories.core.UserRepository;
+import com.cua.admin.model.it.User;
+import com.cua.admin.repositories.it.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sapi")
 @RequiredArgsConstructor
-public class SalesRestController {
+public class AccountingRestController {
 
     private final UserRepository userService;
 

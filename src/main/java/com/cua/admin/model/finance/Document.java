@@ -1,5 +1,6 @@
 package com.cua.admin.model.finance;
 
+import com.cua.admin.model.it.User;
 import com.cua.admin.model.finance.billing.PaymentTerm;
 import com.cua.admin.model.finance.billing.PaymentMethod;
 import com.cua.admin.model.core.*;
