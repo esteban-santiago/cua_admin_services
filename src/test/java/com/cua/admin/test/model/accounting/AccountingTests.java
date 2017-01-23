@@ -1,4 +1,5 @@
 package com.cua.admin.test.model.accounting;
+import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.finance.documents.CreditNoteIssued;

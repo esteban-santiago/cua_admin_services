@@ -2,7 +2,6 @@ package com.cua.admin.model.finance;
 
 import com.cua.admin.model.finance.billing.PaymentTerm;
 import com.cua.admin.model.finance.billing.PaymentMethod;
-import com.cua.admin.model.accounting.Currency;
 import com.cua.admin.model.core.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;

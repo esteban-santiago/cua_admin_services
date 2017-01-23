@@ -1,4 +1,4 @@
-package com.cua.admin.model.accounting;
+package com.cua.admin.model.finance;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

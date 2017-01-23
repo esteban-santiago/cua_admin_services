@@ -1,5 +1,6 @@
-package com.cua.admin.model.accounting;
+package com.cua.admin.model.finance.billing;
 
+import com.cua.admin.model.finance.Currency;
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.*;
