@@ -1,6 +1,7 @@
 package com.cua.admin.model.accounting.entries;
 
-import com.cua.admin.model.accounting.documents.*;
+import com.cua.admin.model.finance.DocumentType;
+import com.cua.admin.model.finance.Document;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

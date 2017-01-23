@@ -3,7 +3,7 @@ package com.cua.admin.rest;
 import com.cua.admin.model.core.Employee;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.User;
-import com.cua.admin.model.flight.Aircraft;
+import com.cua.admin.model.operation.flight.Aircraft;
 import com.cua.admin.repositories.core.EmployeeRepository;
 import com.cua.admin.services.core.AircraftService;
 import com.cua.admin.services.core.MemberService;

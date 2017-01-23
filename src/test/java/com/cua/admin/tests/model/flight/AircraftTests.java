@@ -1,8 +1,8 @@
 package com.cua.admin.tests.model.flight;
 
-import com.cua.admin.model.flight.Aircraft;
-import com.cua.admin.model.flight.AircraftComponent;
-import com.cua.admin.repositories.flight.AircraftComponentRepository;
+import com.cua.admin.model.operation.flight.Aircraft;
+import com.cua.admin.model.operation.flight.AircraftComponent;
+import com.cua.admin.repositories.operation.flight.AircraftComponentRepository;
 import com.cua.admin.services.core.AircraftService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;

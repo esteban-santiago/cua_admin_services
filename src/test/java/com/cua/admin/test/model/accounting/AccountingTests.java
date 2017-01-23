@@ -1,13 +1,16 @@
 package com.cua.admin.test.model.accounting;
+import com.cua.admin.model.finance.documents.ReceiptIssued;
+import com.cua.admin.model.finance.documents.FlightRecordIssued;
+import com.cua.admin.model.finance.documents.CreditNoteIssued;
+import com.cua.admin.model.finance.Document;
 import com.cua.admin.model.accounting.entries.AccountingEntryItem;
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
 import com.cua.admin.model.accounting.*;
-import com.cua.admin.model.accounting.documents.*;
 import com.cua.admin.model.accounting.entries.*;
 import com.cua.admin.repositories.core.UserRepository;
 import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
-import com.cua.admin.repositories.billing.PaymentMethodRepository;
+import com.cua.admin.repositories.finance.billing.PaymentMethodRepository;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +19,10 @@ import java.time.LocalDateTime;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import com.cua.admin.repositories.accounting.documents.AccountingDocumentRepository;
+import com.cua.admin.repositories.finance.documents.AccountingDocumentRepository;
 import com.cua.admin.services.accounting.AccountService;
 import com.cua.admin.services.accounting.AccountingEntryService;
-import com.cua.admin.services.accounting.DocumentService;
+import com.cua.admin.services.finance.DocumentService;
 
 
 @Transactional

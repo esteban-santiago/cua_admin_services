@@ -5,7 +5,7 @@ import com.cua.admin.model.core.IdentityCard;
 import com.cua.admin.model.core.IdentityCardType;
 import com.cua.admin.model.core.Member;
 import com.cua.admin.model.core.MemberRole;
-import com.cua.admin.model.flight.PilotRating;
+import com.cua.admin.model.operation.flight.PilotRating;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
 import com.cua.admin.services.core.MemberService;

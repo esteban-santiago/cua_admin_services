@@ -1,7 +1,7 @@
 package com.cua.admin.services.core;
 
-import com.cua.admin.model.flight.Aircraft;
-import com.cua.admin.repositories.flight.AircraftRepository;
+import com.cua.admin.model.operation.flight.Aircraft;
+import com.cua.admin.repositories.operation.flight.AircraftRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;

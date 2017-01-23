@@ -1,7 +1,7 @@
 package com.cua.admin.model.accounting.entries;
 
-import com.cua.admin.model.accounting.documents.Document;
-import com.cua.admin.model.billing.PaymentTerm;
+import com.cua.admin.model.finance.Document;
+import com.cua.admin.model.finance.billing.PaymentTerm;
 import javax.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,7 +1,12 @@
 package com.cua.admin.test.model.inventory;
 
-import com.cua.admin.model.inventory.*;
-import com.cua.admin.repositories.inventory.*;
+import com.cua.admin.repositories.operation.inventory.ProductGroupRepository;
+import com.cua.admin.repositories.operation.inventory.ProductRepository;
+import com.cua.admin.repositories.operation.inventory.ProductSubGroupRepository;
+import com.cua.admin.model.operation.inventory.ProductGroup;
+import com.cua.admin.model.operation.inventory.Product;
+import com.cua.admin.model.operation.inventory.ProductSubGroup;
+import com.cua.admin.model.operation.inventory.ProductType;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import java.util.HashSet;
 import org.junit.Test;
