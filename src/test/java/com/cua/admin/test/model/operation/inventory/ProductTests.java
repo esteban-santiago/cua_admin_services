@@ -1,4 +1,4 @@
-package com.cua.admin.test.model.inventory;
+package com.cua.admin.test.model.operation.inventory;
 
 import com.cua.admin.repositories.operation.inventory.ProductGroupRepository;
 import com.cua.admin.repositories.operation.inventory.ProductRepository;

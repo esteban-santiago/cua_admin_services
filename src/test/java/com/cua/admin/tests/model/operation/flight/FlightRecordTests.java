@@ -1,4 +1,4 @@
-package com.cua.admin.tests.model.flight;
+package com.cua.admin.tests.model.operation.flight;
 
 import com.cua.admin.model.operation.flight.CrewMember;
 import com.cua.admin.model.operation.flight.CrewMemberRole;

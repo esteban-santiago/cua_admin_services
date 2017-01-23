@@ -1,4 +1,4 @@
-package com.cua.admin.rest;
+package com.cua.admin.controllers.sales.rest;
 
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.core.UserRepository;

@@ -1,4 +1,4 @@
-package com.cua.admin.rest;
+package com.cua.admin.controllers.finance.rest;
 
 import com.cua.admin.model.core.User;
 import com.cua.admin.repositories.core.UserRepository;
@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sapi")
 @RequiredArgsConstructor
-public class InventoryRestController {
+public class FinanceRestController {
+
+    private final UserRepository userService;
 
 
 }
