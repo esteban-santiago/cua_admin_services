@@ -1,4 +1,4 @@
-package com.cua.admin.controllers.rest;
+package com.cua.admin.controllers.rest.hr;
 
 import com.cua.admin.model.hr.Employee;
 import com.cua.admin.model.core.Member;
