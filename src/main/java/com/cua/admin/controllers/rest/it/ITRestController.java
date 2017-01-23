@@ -13,7 +13,7 @@ public class ITRestController {
 
     private final UserService userService;
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(@PathVariable("id") Integer id) {
         return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
     }
@@ -42,12 +42,12 @@ public class ITRestController {
     }
 
 
-    @RequestMapping(value = "/user/lock", method = RequestMethod.POST, headers = "Accept=application/json")
+    @RequestMapping(value = "/user/lock", method = RequestMethod.PUT, headers = "Accept=application/json")
     public void lockUser(@RequestParam(value = "id", required = true) Integer id) {
         userService.lock(id);
     }
 
-    @RequestMapping(value = "/user/unlock", method = RequestMethod.POST, headers = "Accept=application/json")
+    @RequestMapping(value = "/user/unlock", method = RequestMethod.PUT, headers = "Accept=application/json")
     public void unlockUser(@RequestParam(value = "id", required = true) Integer id) {
         userService.unlock(id);
     }
