@@ -3,7 +3,7 @@ package com.cua.admin.tests.model.operation.flight;
 import com.cua.admin.model.operation.flight.Aircraft;
 import com.cua.admin.model.operation.flight.AircraftComponent;
 import com.cua.admin.repositories.operation.flight.AircraftComponentRepository;
-import com.cua.admin.services.core.AircraftService;
+import com.cua.admin.services.operation.flight.AircraftService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

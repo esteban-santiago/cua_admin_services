@@ -1,7 +1,7 @@
 package com.cua.admin.controllers.rest.operation;
 
 import com.cua.admin.model.operation.flight.Aircraft;
-import com.cua.admin.services.core.AircraftService;
+import com.cua.admin.services.operation.flight.AircraftService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

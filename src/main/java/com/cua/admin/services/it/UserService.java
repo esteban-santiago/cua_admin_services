@@ -1,4 +1,4 @@
-package com.cua.admin.services.core;
+package com.cua.admin.services.it;
 
 import com.cua.admin.model.it.User;
 import com.cua.admin.repositories.it.UserRepository;
@@ -43,4 +43,10 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    public void delete(Integer id) {
+        userRepository.delete(id);
+    }
+
+
 } 

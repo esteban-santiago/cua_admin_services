@@ -1,4 +1,4 @@
-package com.cua.admin.services.core;
+package com.cua.admin.services.operation.flight;
 
 import com.cua.admin.model.operation.flight.Aircraft;
 import com.cua.admin.repositories.operation.flight.AircraftRepository;
