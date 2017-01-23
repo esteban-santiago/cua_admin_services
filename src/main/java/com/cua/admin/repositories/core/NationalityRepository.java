@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NationalityRepository extends JpaRepository<Nationality, Integer> {
-
     List<Nationality> findByDescription(String description);
 
     Nationality findById(Integer id);

@@ -28,7 +28,11 @@ public class Account implements Serializable {
         return firstOrderGrouper + "/"
                 + secondOrderGrouper + "/"
                 + thirdOrderGrouper + "/"
-                + "0000" + fourthOrderGrouper;
+                + String.format("%04d", fourthOrderGrouper);
+    }
+    
+    public String toFormattedStringWithDescription() {
+        return toFormattedString() + "-" + description;
     }
 
 }

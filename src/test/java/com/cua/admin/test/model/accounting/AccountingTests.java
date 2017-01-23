@@ -58,6 +58,11 @@ public class AccountingTests extends SpringIntegrationTest {
     
     
     @Test
+    public void getAllAccounts(){
+        accountService.getAll().stream().forEach(account -> System.out.println(account.toFormattedStringWithDescription()));
+    }
+    
+    @Test
     public void getTemplateEntry() {
         //Contabilizar los documentos de Ficha de Vuelo
         documentRepository.findAll().forEach(
@@ -110,14 +115,6 @@ public class AccountingTests extends SpringIntegrationTest {
         documentRepository.findAll().stream().forEach((document) -> {
             System.out.println(document);
         });
-    }
-    
-    //@Test
-    public void createAutomaticAccountingEntry() {
-        Document document = documentRepository.findById(100L);
-        TemplateEntry entry = templateEntryRepository.findByDocumentType(document.getDocumentType());
-        AccountingEntry _entry = entry.getAccountingEntry(document);
-        accountingEntryService.save(_entry);
     }
     
     @Test
