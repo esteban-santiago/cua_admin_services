@@ -1,6 +1,7 @@
 package com.cua.admin.model.core;
 
 import com.cua.admin.model.operation.flight.PilotRating;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -35,11 +36,11 @@ public class Member implements Serializable {
 
     private String name;
 
-    //@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
+    //@JsonFormat(pattern = "yyyy-MM-dd")
     @CreatedDate
     private LocalDate dateOfCreation = LocalDate.now(); //Fecha de Alta
 
-    //@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
+    //@JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
     @OneToOne

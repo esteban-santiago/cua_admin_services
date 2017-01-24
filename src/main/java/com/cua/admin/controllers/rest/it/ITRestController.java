@@ -29,6 +29,7 @@ public class ITRestController {
     @RequestMapping(value="/user/{id}", method=RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<Void> update(@RequestBody User user){
         HttpHeaders headers = new HttpHeaders();
+        System.out.println("PUT---");
         userService.save(user);
         headers.add("id", user.getId().toString());
         return new ResponseEntity<>(headers, HttpStatus.OK);
