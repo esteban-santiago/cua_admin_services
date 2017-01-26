@@ -2,6 +2,7 @@ package com.cua.admin.services.it;
 
 import com.cua.admin.model.it.User;
 import com.cua.admin.repositories.it.UserRepository;
+import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,8 @@ public class UserService {
         userRepository.delete(id);
     }
 
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
 
 } 

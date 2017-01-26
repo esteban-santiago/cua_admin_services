@@ -2,6 +2,7 @@ package com.cua.admin.controllers.rest.it;
 
 import com.cua.admin.model.it.User;
 import com.cua.admin.services.it.UserService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +14,18 @@ public class ITRestController {
 
     private final UserService userService;
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<User> getUser(@PathVariable("id") Integer id) {
+        System.out.println(id);
         return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/user/", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List<User>> getAll() {
+        return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
+    }
+
+    
     @RequestMapping(value="/user/", method=RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<Void> create(@RequestBody User user){
         HttpHeaders headers = new HttpHeaders();
