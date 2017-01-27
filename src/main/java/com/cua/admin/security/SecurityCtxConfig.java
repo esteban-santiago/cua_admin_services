@@ -13,8 +13,10 @@ public class SecurityCtxConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.cors().disable()
+        
+        http
                 .csrf().disable()
+                //.cors().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/**").permitAll()
@@ -22,10 +24,12 @@ public class SecurityCtxConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/sapi/**").authenticated()
                 .antMatchers(HttpMethod.PUT, "/sapi/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/sapi/**").authenticated()
+                .antMatchers(HttpMethod.OPTIONS,"/sapi/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .httpBasic().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
+    
 
 }

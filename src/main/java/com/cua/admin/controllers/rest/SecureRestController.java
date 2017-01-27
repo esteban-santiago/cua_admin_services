@@ -36,7 +36,6 @@ public class SecureRestController {
     public ResponseEntity<Void> create(@RequestBody Member member){
         HttpHeaders headers = new HttpHeaders();
         memberService.save(member);
-        headers.add("id", member.getId().toString());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }    
 
