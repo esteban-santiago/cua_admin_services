@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class CorsConfiguration extends WebMvcConfigurerAdapter {
      @Override
      public void addCorsMappings(CorsRegistry registry) {
-         registry.addMapping("/**");
+         registry.addMapping("/**")
+                 .allowedOrigins("http://192.168.0.13:8383");
      }
 }
