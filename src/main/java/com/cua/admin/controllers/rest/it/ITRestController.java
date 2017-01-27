@@ -16,7 +16,6 @@ public class ITRestController {
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<User> getUser(@PathVariable("id") Integer id) {
-        System.out.println(id);
         return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
     }
 
