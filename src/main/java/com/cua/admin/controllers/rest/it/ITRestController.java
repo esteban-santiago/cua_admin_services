@@ -4,6 +4,7 @@ import com.cua.admin.model.it.User;
 import com.cua.admin.services.it.UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,13 +20,21 @@ public class ITRestController {
         return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<User>> getAll() {
         return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/user", 
+            params = { "page", "size" }, 
+            method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Page<User>> getAllPaginated(
+            @RequestParam(value = "page") Integer page, 
+            @RequestParam(value = "size") Integer size) {
+        return new ResponseEntity<>(userService.getAllByPage(page, size), HttpStatus.OK);
+    }   
     
-    @RequestMapping(value="/user/", method=RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value="/user", method=RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<Void> create(@RequestBody User user){
         HttpHeaders headers = new HttpHeaders();
         userService.save(user);
@@ -36,7 +45,6 @@ public class ITRestController {
     @RequestMapping(value="/user/{id}", method=RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<Void> update(@RequestBody User user){
         HttpHeaders headers = new HttpHeaders();
-        System.out.println("PUT---");
         userService.save(user);
         headers.add("id", user.getId().toString());
         return new ResponseEntity<>(headers, HttpStatus.OK);

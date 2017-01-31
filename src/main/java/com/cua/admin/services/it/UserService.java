@@ -6,6 +6,9 @@ import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,6 +54,12 @@ public class UserService {
 
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+    
+    public Page<User> getAllByPage(Integer number, Integer size) {
+        PageRequest request =
+            new PageRequest(number - 1, size, Sort.Direction.DESC, "name");
+        return userRepository.findAll(request);
     }
 
 } 
