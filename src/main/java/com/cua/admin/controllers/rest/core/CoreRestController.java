@@ -1,4 +1,4 @@
-package com.cua.admin.controllers.rest;
+package com.cua.admin.controllers.rest.core;
 
 import com.cua.admin.model.hr.Employee;
 import com.cua.admin.model.core.Member;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sapi")
 @RequiredArgsConstructor
-public class SecureRestController {
+public class CoreRestController {
 
     @Autowired
     private final MemberService memberService;

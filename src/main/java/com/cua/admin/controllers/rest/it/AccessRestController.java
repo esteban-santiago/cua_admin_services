@@ -1,4 +1,4 @@
-package com.cua.admin.controllers.rest;
+package com.cua.admin.controllers.rest.it;
 
 import com.cua.admin.model.it.User;
 import com.cua.admin.repositories.it.UserRepository;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sdapi")
 @RequiredArgsConstructor
-public class SecurityRestController {
+public class AccessRestController {
 
     private final UserRepository userService;
 
