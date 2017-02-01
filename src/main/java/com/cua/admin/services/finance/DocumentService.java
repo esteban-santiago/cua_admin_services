@@ -49,4 +49,8 @@ public class DocumentService {
         
     }
     
+    public void delete(Document document) {
+        this.accountingDocumentRepository.delete(document.getId());
+    }
+    
 }

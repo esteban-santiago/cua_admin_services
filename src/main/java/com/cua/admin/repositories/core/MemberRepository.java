@@ -18,4 +18,5 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     List<Member> findByNationality(Nationality nationality);
 
     Optional<Member> findById(Integer id);
+
 }

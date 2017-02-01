@@ -65,9 +65,9 @@ INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,sta
 INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
 
 --Crew Member
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (100,'PIC',1,100);
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (101,'PIC',1,101);
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INS',2,101);
+INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (100,'PIC',100,100);
+INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (101,'PIC',100,101);
+INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INST',101,101);
 
 --Flight Record Issued
 INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,100);

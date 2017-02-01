@@ -13,7 +13,6 @@ import java.util.Set;
 @Entity
 @Table(name = "aircraft", uniqueConstraints = {@UniqueConstraint(columnNames = {"registration"})})
 public class Aircraft implements Serializable {
-
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",

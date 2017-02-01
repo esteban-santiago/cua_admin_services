@@ -19,7 +19,7 @@ import org.hibernate.annotations.Parameter;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "crew_member")
+@Table(name = "crew_member") //, uniqueConstraints = {@UniqueConstraint(columnNames = {"member_id"})})
 @SuppressWarnings("ValidAttributes")
 public class CrewMember implements Serializable {
         @GenericGenerator(
@@ -35,9 +35,9 @@ public class CrewMember implements Serializable {
     @Id
     private Integer id;
         
-    @NonNull    
-    @OneToOne
-    @JoinColumn(name="member_id")
+    //@NonNull    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "crew_member_member_id_fk"))
     private Member member;
     
     @NonNull

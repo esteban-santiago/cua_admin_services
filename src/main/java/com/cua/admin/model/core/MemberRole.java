@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MemberRole {
     PUPIL("Alumno"),
-    PILOT("Piloto"),
+    PILOT("Piloto al Mando"),
     INSTRUCTOR("Instructor"),
     INSPECTOR("Inspector");
 

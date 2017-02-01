@@ -33,6 +33,14 @@ public class MemberService {
         this.memberRepository.save(member);
     }
 
+    public void delete(Integer id) {
+        this.memberRepository.delete(id);
+    }
+
+    public void delete(Member member) {
+        this.memberRepository.delete(member.getId());
+    }
+
     public List<Member> getAll() {
         return this.memberRepository.findAll();
     }

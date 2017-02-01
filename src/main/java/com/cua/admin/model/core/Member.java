@@ -1,16 +1,32 @@
 package com.cua.admin.model.core;
 
 import com.cua.admin.model.operation.flight.PilotRating;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -44,21 +60,21 @@ public class Member implements Serializable {
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
     @OneToOne
-    @JoinColumn(name = "nationality_id", foreignKey = @ForeignKey(name = "member_nationality_id_fk"))
-    private Nationality nationality; //Nacionalidad
+    @JoinColumn(name = "nationality_id", nullable = false, foreignKey = @ForeignKey(name = "nationality_member_id_fk"))
+    private Nationality nationality;
+
+    @OneToOne
+    @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "category_member_id_fk"))
+    private Category category;
 
     private IdentityCard identityCard; //Documento de identidad
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_address_id_fk"))
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "address_member_id_fk"))
     private Set<Address> addresses;
 
-    @OneToOne
-    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "member_category_id_fk"))
-    private Category category;
-
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_way_to_contact_id_fk"))
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "way_to_contact_member_id_fk"))
     private Set<ContactWay> contactWays;
 
     @ElementCollection
@@ -80,8 +96,8 @@ public class Member implements Serializable {
     @Column(name="rol_id", nullable = false)
     private Set<MemberRole> roles;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_medical_certification_id_fk"))
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "medical_certification_member_id_fk"))
     private Set<MedicalCertification> medicalCertifications;
     
     public void activate() {

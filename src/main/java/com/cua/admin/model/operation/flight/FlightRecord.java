@@ -29,8 +29,8 @@ public class FlightRecord implements Serializable {
     @Id
     private Long id;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "flight_record_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_member_id_fk"))
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "flight_record_id",nullable = false, foreignKey = @ForeignKey(name = "flight_record_crew_member_id_fk"))
     private Set<CrewMember> crew;
     
     @OneToOne(cascade = CascadeType.MERGE)

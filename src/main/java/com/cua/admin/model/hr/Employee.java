@@ -20,7 +20,7 @@ public class Employee extends Member {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="employee_seq" )  
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "activity_id_fk"))
+    @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "employee_activity_id_fk"))
     private Activity activity;
 
 }

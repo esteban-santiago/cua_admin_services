@@ -1,3 +1,15 @@
+--ALTER TABLE "public"."member_medical_certification" ADD CONSTRAINT "medical_certification_member_id_fk" FOREIGN KEY ( "member_id" ) REFERENCES "public"."member" ( "id" ) MATCH FULL ON DELETE Cascade ON UPDATE Cascade;
+--ALTER TABLE "public"."flight_record_issued" ADD CONSTRAINT "flight_record_issued_member_id_fk" FOREIGN KEY ( "member_id" ) REFERENCES "public"."member" ( "id" ) MATCH FULL ON DELETE Cascade;
+CREATE INDEX "index_flight_record_id" ON "public"."crew_member" USING btree( "flight_record_id" );
+-- -------------------------------------------------------------
+-- CREATE LINK "crew_member_member_id_fk" ----------------------
+ALTER TABLE "public"."crew_member" ADD CONSTRAINT "crew_member_member_id_fk" FOREIGN KEY ( "member_id" ) REFERENCES "public"."member" ( "id" ) MATCH FULL ON DELETE Cascade ON UPDATE Cascade;
+-- CREATE INDEX "index_member_id" ------------------------------
+CREATE INDEX "index_member_id" ON "public"."crew_member" USING btree( "member_id" );
+-- CREATE LINK "crew_member_flight_record_id_fk" ---------------
+--ALTER TABLE "public"."flight_record" ADD CONSTRAINT "crew_member_flight_record_id_fk" FOREIGN KEY ( "id" ) REFERENCES "public"."crew_member" ( "flight_record_id" ) MATCH FULL ON DELETE Cascade ON UPDATE Cascade;
+
+
 --Nationality
 INSERT INTO nationality(id, description) VALUES (1,'Argentina');
 INSERT INTO nationality(id, description) VALUES (2,'Brasilera');
@@ -65,9 +77,9 @@ INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,sta
 INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
 
 --Crew Member
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (100,'PIC',1,100);
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (101,'PIC',1,101);
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INS',2,101);
+INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (100,'PIC',100,100);
+INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (101,'PIC',100,101);
+INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INST',101,101);
 
 --Flight Record Issued
 INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,100);
@@ -128,3 +140,4 @@ INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C152', 1
 INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('Cessna 150', 100, 100,'SERVICE', 100);
 INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('Cessna 152', 100, 102,'SERVICE', 101);
 INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('PA-11', 100, 101,'SERVICE', 102);
+
