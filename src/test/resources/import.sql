@@ -1,14 +1,13 @@
 --ALTER TABLE "public"."member_medical_certification" ADD CONSTRAINT "medical_certification_member_id_fk" FOREIGN KEY ( "member_id" ) REFERENCES "public"."member" ( "id" ) MATCH FULL ON DELETE Cascade ON UPDATE Cascade;
---ALTER TABLE "public"."flight_record_issued" ADD CONSTRAINT "flight_record_issued_member_id_fk" FOREIGN KEY ( "member_id" ) REFERENCES "public"."member" ( "id" ) MATCH FULL ON DELETE Cascade;
+ALTER TABLE "public"."flight_record_issued" ADD CONSTRAINT "flight_record_issued_member_id_fk" FOREIGN KEY ( "member_id" ) REFERENCES "public"."member" ( "id" ) MATCH FULL ON DELETE Cascade;
 CREATE INDEX "index_flight_record_id" ON "public"."crew_member" USING btree( "flight_record_id" );
 -- -------------------------------------------------------------
 -- CREATE LINK "crew_member_member_id_fk" ----------------------
 ALTER TABLE "public"."crew_member" ADD CONSTRAINT "crew_member_member_id_fk" FOREIGN KEY ( "member_id" ) REFERENCES "public"."member" ( "id" ) MATCH FULL ON DELETE Cascade ON UPDATE Cascade;
 -- CREATE INDEX "index_member_id" ------------------------------
 CREATE INDEX "index_member_id" ON "public"."crew_member" USING btree( "member_id" );
--- CREATE LINK "crew_member_flight_record_id_fk" ---------------
---ALTER TABLE "public"."flight_record" ADD CONSTRAINT "crew_member_flight_record_id_fk" FOREIGN KEY ( "id" ) REFERENCES "public"."crew_member" ( "flight_record_id" ) MATCH FULL ON DELETE Cascade ON UPDATE Cascade;
-
+-- CREATE LINK "flight_record_crew_member_id_fk" ---------------
+--ALTER TABLE "public"."crew_member" ADD CONSTRAINT "flight_record_crew_member_id_fk" FOREIGN KEY ( "flight_record_id" ) REFERENCES "public"."flight_record" ( "id" ) MATCH FULL ON DELETE Cascade ON UPDATE Cascade;
 
 --Nationality
 INSERT INTO nationality(id, description) VALUES (1,'Argentina');

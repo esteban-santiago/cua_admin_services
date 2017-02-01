@@ -29,7 +29,7 @@ public class FlightRecord implements Serializable {
     @Id
     private Long id;
     
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "flight_record_id",nullable = false, foreignKey = @ForeignKey(name = "flight_record_crew_member_id_fk"))
     private Set<CrewMember> crew;
     
