@@ -72,8 +72,8 @@ public class MemberTests extends SpringIntegrationTest {
         Member member3 = memberService.get(100);
         Employee god = new Employee();
         BeanUtils.copyProperties(member3, god);
-        memberService.delete(memberService.get(member3));
-        System.out.println("Borrado");
+        //memberService.delete(memberService.get(member3));
+        //System.out.println("Borrado");
         employeeRepository.save(god);
         
        
