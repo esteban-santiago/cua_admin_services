@@ -1,7 +1,7 @@
 package com.cua.admin.services.accounting;
 
 import com.cua.admin.model.accounting.Account;
-import com.cua.admin.model.finance.Document;
+import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.TemplateEntry;
 import com.cua.admin.repositories.accounting.AccountRepository;

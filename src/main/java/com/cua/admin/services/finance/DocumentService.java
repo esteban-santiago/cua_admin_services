@@ -1,6 +1,6 @@
 package com.cua.admin.services.finance;
 
-import com.cua.admin.model.finance.Document;
+import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.model.accounting.entries.TemplateEntry;

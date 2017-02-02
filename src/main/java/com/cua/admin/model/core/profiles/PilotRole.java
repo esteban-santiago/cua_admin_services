@@ -1,4 +1,4 @@
-package com.cua.admin.model.core;
+package com.cua.admin.model.core.profiles;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum MemberRole {
+public enum PilotRole {
     PUPIL("Alumno"),
     PILOT("Piloto al Mando"),
     INSTRUCTOR("Instructor"),

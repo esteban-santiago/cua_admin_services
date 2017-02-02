@@ -3,7 +3,7 @@ import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.finance.documents.CreditNoteIssued;
-import com.cua.admin.model.finance.Document;
+import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.accounting.entries.AccountingEntryItem;
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.AccountingEntryItemType;

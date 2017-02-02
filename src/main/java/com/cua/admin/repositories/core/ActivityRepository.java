@@ -1,6 +1,6 @@
 package com.cua.admin.repositories.core;
 
-import com.cua.admin.model.core.Activity;
+import com.cua.admin.model.hr.profiles.Activity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

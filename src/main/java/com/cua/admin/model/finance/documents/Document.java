@@ -1,9 +1,11 @@
-package com.cua.admin.model.finance;
+package com.cua.admin.model.finance.documents;
 
+import com.cua.admin.model.core.profiles.Member;
 import com.cua.admin.model.it.User;
 import com.cua.admin.model.finance.billing.PaymentTerm;
 import com.cua.admin.model.finance.billing.PaymentMethod;
 import com.cua.admin.model.core.*;
+import com.cua.admin.model.finance.Currency;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -52,15 +54,15 @@ public abstract class Document implements Serializable {
     private LocalDate compensationDate; //(*) Fecha de compensación
 
     @OneToOne
-    @JoinColumn(name="member_id", foreignKey = @ForeignKey(name = "document_member_id_fk"))
-    private Member member; //Socio
+    @JoinColumn(name="person_id", foreignKey = @ForeignKey(name = "person_document_id_fk"))
+    private Person person; //Socio
 
     @OneToOne
-    @JoinColumn(name="payment_method_id", foreignKey = @ForeignKey(name = "document_payment_method_id_fk"))
+    @JoinColumn(name="payment_method_id", foreignKey = @ForeignKey(name = "payment_method_document_id_fk"))
     private PaymentMethod paymentMethod; //Forma de pago
 
     @OneToOne
-    @JoinColumn(name="payment_term_id", foreignKey = @ForeignKey(name = "document_payment_term_id_fk"))
+    @JoinColumn(name="payment_term_id", foreignKey = @ForeignKey(name = "payment_term_document_id_fk"))
     private PaymentTerm paymentTerm; //Condiciones de Pago
     
     @OneToOne

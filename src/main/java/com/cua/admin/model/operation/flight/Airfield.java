@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Table(name = "airfield")
 @SuppressWarnings("ValidAttributes")
 public class Airfield implements Serializable {
-
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",

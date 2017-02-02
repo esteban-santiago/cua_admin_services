@@ -1,7 +1,5 @@
 package com.cua.admin.model.finance.documents;
 
-import com.cua.admin.model.finance.DocumentType;
-import com.cua.admin.model.finance.Document;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

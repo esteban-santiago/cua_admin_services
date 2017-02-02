@@ -1,6 +1,6 @@
 package com.cua.admin.repositories.operation.flight;
 
-import com.cua.admin.model.core.Member;
+import com.cua.admin.model.core.profiles.Member;
 import com.cua.admin.model.operation.flight.CrewMember;
 import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;

@@ -17,16 +17,16 @@ INSERT INTO category(id, description) VALUES (2,'Empleado');
 INSERT INTO category(id, description) VALUES (3,'Instructor');
 
 --Members
-INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (100,'1974-08-02','2017-01-03','24036873','DNI','SANTIAGO, Esteban',1,1, 'ACTIVE');
-INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (101,'1989-01-27','2017-01-03','CC123331','PASSPORT','SANTIAGO, Pablo',1,2,'ACTIVE');
+--INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (100,'1974-08-02','2017-01-03','24036873','DNI','SANTIAGO, Esteban',1,1, 'ACTIVE');
+--INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (101,'1989-01-27','2017-01-03','CC123331','PASSPORT','SANTIAGO, Pablo',1,2,'ACTIVE');
 
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');
 INSERT INTO users (id, name, password, profile, status) VALUES (101,'psantiago','passwd','ADMINISTRATOR','ACTIVE');
 
 --Medical Certifications
-INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (1,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',100);
-INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (2,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',101);
+--INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (1,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',100);
+--INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (2,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',101);
 
 --Aircrafts
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (100,'Cessna','152','LV-OEE','ACTIVE');
@@ -61,23 +61,23 @@ INSERT INTO  payment_term (id, charge, description, discount, payment_method_id)
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0,'1 Cuota', 0,5);
 
 --Flight Record
-INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
-INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
+--INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
+--INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
 
 --Crew Member
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (100,'PIC',100,100);
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (101,'PIC',100,101);
-INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INST',101,101);
+--INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (100,'PIC',100,100);
+--INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (101,'PIC',100,101);
+--INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INST',101,101);
 
 --Flight Record Issued
-INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,100);
-INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
-INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (102, 4110,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
+--INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,100);
+--INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
+--INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (102, 4110,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
 
 --Receipt Issued
-INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (200, -2400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,1, NULL,100);
-INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (201, -3400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,4, 3,100);
-INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (202, -4110,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,5, NULL,100);
+--INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (200, -2400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,1, NULL,100);
+--INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (201, -3400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,4, 3,100);
+--INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (202, -4110,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,5, NULL,100);
 
 --Account
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(100,1,0,0,0,'Activo');

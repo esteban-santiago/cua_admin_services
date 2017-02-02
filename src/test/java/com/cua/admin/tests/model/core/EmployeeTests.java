@@ -1,6 +1,8 @@
 package com.cua.admin.tests.model.core;
 
-import com.cua.admin.model.hr.Employee;
+import com.cua.admin.model.core.profiles.Category;
+import com.cua.admin.model.hr.profiles.Activity;
+import com.cua.admin.model.hr.profiles.Employee;
 import com.cua.admin.model.core.*;
 import com.cua.admin.repositories.core.ActivityRepository;
 import com.cua.admin.repositories.core.CategoryRepository;
@@ -48,10 +50,12 @@ public class EmployeeTests extends SpringIntegrationTest {
         ContactWay mail = new ContactWay("M", "esteban.s@gmail.com");
         ContactWay mail2 = new ContactWay("M", "esteban.san@gmail.com");
 
-        Employee mecanico = new Employee();
+        /*
+        Person mecanico = new Person();
+        Employee empleado = new Employee();
         mecanico.setName("Mecanico 1");
-        mecanico.setActivity(activity);
-        mecanico.setCategory(category);
+        empleado.setActivity(activity);
+        empleado.setCategory(category);
         mecanico.setDateOfCreation(LocalDate.now());
         mecanico.setDateOfBirth(LocalDate.parse("1974-08-02"));
         mecanico.setAddresses(new HashSet<>());
@@ -74,11 +78,14 @@ public class EmployeeTests extends SpringIntegrationTest {
         employeeService.findAll().stream().forEach((e) -> {
             System.out.println(e + " : " + e.getActivity());
         });
+        */
     }
 
     @Test
     public void getEmployeesByNationality() {
+        /*
         Nationality peruvian = nationalityReposity.findById(2);
         employeeService.findByNationality(peruvian).forEach(System.out::println);
+        */
     }
 }

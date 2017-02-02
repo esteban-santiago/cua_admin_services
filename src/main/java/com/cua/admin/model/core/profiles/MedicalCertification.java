@@ -1,4 +1,4 @@
-package com.cua.admin.model.core;
+package com.cua.admin.model.core.profiles;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package com.cua.admin.model.operation.flight;
 
-import com.cua.admin.model.core.Member;
+import com.cua.admin.model.core.Person;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -37,8 +37,8 @@ public class CrewMember implements Serializable {
         
     //@NonNull    
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "crew_member_member_id_fk"))
-    private Member member;
+    @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "person_crew_member_id_fk"))
+    private Person person;
     
     @NonNull
     @Enumerated(EnumType.STRING)

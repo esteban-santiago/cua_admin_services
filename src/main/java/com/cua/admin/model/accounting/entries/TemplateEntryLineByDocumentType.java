@@ -1,8 +1,8 @@
 package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.accounting.Account;
-import com.cua.admin.model.finance.Document;
-import com.cua.admin.model.finance.DocumentType;
+import com.cua.admin.model.finance.documents.Document;
+import com.cua.admin.model.finance.documents.DocumentType;
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.Data;

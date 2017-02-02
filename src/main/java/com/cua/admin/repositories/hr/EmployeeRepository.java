@@ -1,6 +1,6 @@
 package com.cua.admin.repositories.hr;
 
-import com.cua.admin.model.hr.Employee;
+import com.cua.admin.model.hr.profiles.Employee;
 import com.cua.admin.model.core.Nationality;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    List<Employee> findByName(String name);
+//    List<Employee> findByNationality(Nationality nationality);
 
-    List<Employee> findByNationality(Nationality nationality);
-
-    Employee findById(Integer id);
 }

@@ -1,6 +1,5 @@
 package com.cua.admin.services.operation.flight;
 
-import com.cua.admin.services.core.MemberService;
 import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.repositories.operation.flight.AircraftRepository;
 import com.cua.admin.repositories.operation.flight.FlightRecordRepository;

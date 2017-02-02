@@ -1,27 +1,29 @@
-package com.cua.admin.model.core;
+package com.cua.admin.model.sales.profiles;
 
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
+/**
+ *
+ * @author esteban_santiago
+ */
 @Data
 @Entity
-@Table(name = "category")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class Category implements Serializable {
+@Table(name = "customer")
+@NoArgsConstructor
+public class Customer implements Serializable {
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "category_id_seq"),
+                @Parameter(name = "sequence_name", value = "airfield_id_seq"),
                 @Parameter(name = "initial_value", value = "1000"),
                 @Parameter(name = "increment_size", value = "1")
             }
@@ -29,8 +31,7 @@ public class Category implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
-
-    @NonNull
-    private String description;
-
+    
+    private String name;
+    
 }
