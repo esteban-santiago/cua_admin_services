@@ -42,11 +42,11 @@ public class AccountingEntry implements Serializable {
     private Integer fiscalYear;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "accounting_document_id", foreignKey = @ForeignKey(name = "accounting_entry_id_fk"))
+    @JoinColumn(name = "accounting_document_id", foreignKey = @ForeignKey(name = "item_accounting_entry_id_fk"))
     private Set<AccountingEntryItem> entryItems = new HashSet<>();
 
     @OneToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "accounting_entry_user_id_fk"))
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "user_accounting_entry_id_fk"))
     private User user;
 
     @CreatedDate

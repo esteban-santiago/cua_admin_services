@@ -40,7 +40,7 @@ public class AccountingEntryItem implements Serializable {
     private Currency currency;
 
     @OneToOne
-    @JoinColumn(name = "account_id", nullable = false,foreignKey = @ForeignKey(name = "accounting_entry_item_account_id_fk"))
+    @JoinColumn(name = "account_id", nullable = false,foreignKey = @ForeignKey(name = "account_accounting_entry_item_id_fk"))
     private Account account;
 
 /*    

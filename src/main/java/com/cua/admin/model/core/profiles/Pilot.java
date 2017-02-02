@@ -49,22 +49,24 @@ public class Pilot implements Serializable {
     @Id
     private Integer id;
     
+    private String license;
+    
     @ElementCollection
     @JoinTable(
-            name="member_rating_type", // ref table.
-            joinColumns = {@JoinColumn(name="member_id")}
+            name="pilot_rating_type", // ref table.
+            joinColumns = {@JoinColumn(name="pilot_id")}
     )
     @Column(name="rating_id", nullable = false)
     private Set<PilotRating> ratings;
     
     @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "member_medical_certification_id_fk"))
+    @JoinColumn(name = "pilot_id", nullable = false, foreignKey = @ForeignKey(name = "pilot_medical_certification_id_fk"))
     private Set<MedicalCertification> medicalCertifications;
 
     @ElementCollection
     @JoinTable(
-            name="member_role_type", // ref table.
-            joinColumns = {@JoinColumn(name="member_id")}
+            name="pilot_role_type", // ref table.
+            joinColumns = {@JoinColumn(name="pilot_id")}
     )
     @Column(name="rol_id", nullable = false)
     private Set<PilotRole> roles;    

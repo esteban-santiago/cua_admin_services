@@ -16,7 +16,7 @@ import org.hibernate.annotations.Parameter;
  */
 @Data
 @Entity
-@Table(name = "member_medical_certification")
+@Table(name = "pilot_medical_certification")
 public class MedicalCertification implements Serializable {
     @GenericGenerator(
             name = "SequenceGenerator",

@@ -5,7 +5,6 @@ import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.DocumentType;
 import java.io.Serializable;
 import javax.persistence.*;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
