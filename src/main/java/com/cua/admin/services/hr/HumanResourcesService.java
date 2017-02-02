@@ -1,7 +1,7 @@
-package com.cua.admin.services.sales;
+package com.cua.admin.services.hr;
 
 import com.cua.admin.model.core.Person;
-import com.cua.admin.model.sales.exceptions.CustomerNotFoundException;
+import com.cua.admin.model.hr.exceptions.EmployeeNotFoundException;
 import com.cua.admin.repositories.core.PersonRepository;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -12,19 +12,19 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class SalesService {
+public class HumanResourcesService {
     
     @Autowired
     private PersonRepository personRepository;
     
     
-    public Person getCustomer(Integer id) throws Throwable {
-        return this.personRepository.findByIdAndCustomerProfileIsNotNull(id).orElseThrow(
-        () -> new CustomerNotFoundException(id));
+    public Person getEmployee(Integer id) throws Throwable {
+        return this.personRepository.findByIdAndEmployeeProfileIsNotNull(id).orElseThrow(
+        () -> new EmployeeNotFoundException(id));
     }
     
-    public List getCustomers(Integer id) {
-        return this.personRepository.findByCustomerProfileIsNotNull();
+    public List getEmployees(Integer id) {
+        return this.personRepository.findByEmployeeProfileIsNotNull();
     }
 
 } 

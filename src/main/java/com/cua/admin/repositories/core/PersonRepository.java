@@ -19,6 +19,17 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     Optional<Person> findById(Integer id);
     
+    //Socios
     Optional<Person> findByIdAndMemberProfileIsNotNull(Integer id);
+    List<Person> findByMemberProfileIsNotNull();
+    //Pilotos
+    Optional<Person> findByIdAndPilotProfileIsNotNull(Integer id);
+    List<Person> findByPilotProfileIsNotNull();
+    //Clientes
+    Optional<Person> findByIdAndCustomerProfileIsNotNull(Integer id);
+    List<Person> findByCustomerProfileIsNotNull();
+    //Empleados
+    Optional<Person> findByIdAndEmployeeProfileIsNotNull(Integer id);
+    List<Person> findByEmployeeProfileIsNotNull();
 
 }

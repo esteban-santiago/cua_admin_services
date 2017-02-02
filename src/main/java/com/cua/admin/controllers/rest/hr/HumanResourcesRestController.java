@@ -1,11 +1,13 @@
 package com.cua.admin.controllers.rest.hr;
 
+import com.cua.admin.model.core.Person;
 import com.cua.admin.model.hr.profiles.Employee;
 import com.cua.admin.model.core.profiles.Member;
 import com.cua.admin.model.it.User;
 import com.cua.admin.model.operation.flight.Aircraft;
 import com.cua.admin.services.operation.flight.AircraftService;
 import com.cua.admin.services.core.PersonService;
+import com.cua.admin.services.hr.HumanResourcesService;
 import com.cua.admin.services.it.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class HumanResourcesRestController {
 
-    /*
+    
     @Autowired
-    private final EmployeeRepository employeeRepository;
+    private final HumanResourcesService humanResourcesService;
   
     @RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
-    public Employee getEmployee(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) {
-        return employeeRepository.findById(id);
-    }*/
+    public Person getEmployee(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) throws Throwable {
+        return this.humanResourcesService.getEmployee(id);
+    }
 }

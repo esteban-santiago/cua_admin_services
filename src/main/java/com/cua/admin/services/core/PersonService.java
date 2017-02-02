@@ -2,6 +2,9 @@ package com.cua.admin.services.core;
 
 import com.cua.admin.model.core.Person;
 import com.cua.admin.model.core.exceptions.MemberNotFoundException;
+import com.cua.admin.model.core.exceptions.PersonNotFoundException;
+import com.cua.admin.model.core.exceptions.PilotNotFoundException;
+import com.cua.admin.model.sales.exceptions.CustomerNotFoundException;
 import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +25,7 @@ public class PersonService {
     
     public Person get(Integer id) throws Throwable {
         return personRepository.findById(id).orElseThrow(
-        () -> new MemberNotFoundException(id));
+        () -> new PersonNotFoundException(id));
     }
     
     public Person get(Person person) throws Throwable {
@@ -44,4 +47,24 @@ public class PersonService {
     public List<Person> getAll() {
         return this.personRepository.findAll();
     }
+    
+    public Person getMember(Integer id) throws Throwable {
+        return this.personRepository.findByIdAndMemberProfileIsNotNull(id).orElseThrow(
+        () -> new MemberNotFoundException(id));
+    }
+
+    public List getMembers(Integer id) {
+        return this.personRepository.findByMemberProfileIsNotNull();
+    }
+    
+    
+    public Person getPilot(Integer id) throws Throwable {
+        return this.personRepository.findByIdAndPilotProfileIsNotNull(id).orElseThrow(
+        () -> new PilotNotFoundException(id));
+    }
+    
+    public List getPilots(Integer id) {
+        return this.personRepository.findByPilotProfileIsNotNull();
+    }
+    
 }
