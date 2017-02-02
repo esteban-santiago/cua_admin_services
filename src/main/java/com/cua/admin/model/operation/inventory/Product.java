@@ -36,7 +36,7 @@ public class Product implements Serializable {
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    private Long id;
+    private Integer id;
     
     private String description;
     

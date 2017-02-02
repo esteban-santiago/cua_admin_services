@@ -3,13 +3,15 @@ package com.cua.admin.tests.model.core;
 import com.cua.admin.model.core.Address;
 import com.cua.admin.model.core.IdentityCard;
 import com.cua.admin.model.core.IdentityCardType;
+import com.cua.admin.model.core.Person;
 import com.cua.admin.model.core.profiles.Member;
-import com.cua.admin.model.core.profiles.PilotRole;
+import com.cua.admin.model.core.profiles.Pilot;
+import com.cua.admin.model.core.profiles.PilotRank;
 import com.cua.admin.model.hr.profiles.Employee;
-import com.cua.admin.model.operation.flight.PilotRating;
+import com.cua.admin.model.core.profiles.PilotRating;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
-import com.cua.admin.repositories.hr.EmployeeRepository;
+import com.cua.admin.repositories.core.PersonRepository;
 import com.cua.admin.repositories.operation.flight.FlightRecordRepository;
 import com.cua.admin.services.core.PersonService;
 import java.util.HashSet;
@@ -21,10 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MemberTests extends SpringIntegrationTest {
 
     @Autowired
-    private PersonService memberService;
+    private PersonService personService;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private PersonRepository personRepository;
     
     @Autowired
     private CategoryRepository categoryReposity;
@@ -46,22 +48,27 @@ public class MemberTests extends SpringIntegrationTest {
         address2.setStreet("Pasaje Bélgica 837");
         address2.setCity("Adrogué");
         address2.setZip("1846");
-        /*
-        Member member = new Member();
-        member.setName("Socio 1");
-        member.setCategory(categoryReposity.findById(1));
-        member.setAddresses(new HashSet<>());
-        member.addAddress(address);
-        member.addAddress(address2);
-        member.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
-        member.setNationality(nationalityRepository.findById(1));
-        member.setRatings(new HashSet<>());
-        member.addRating(PilotRating.IFR);
-        member.addRating(PilotRating.CROSSING);
-        member.setRoles(new HashSet<>());
-        member.addRole(PilotRole.PILOT);
-        memberService.save(member);
 
+        Person partner = new Person();
+
+        partner.setName("Socio 1");
+        partner.setAddresses(new HashSet<>());
+        partner.addAddress(address);
+        partner.addAddress(address2);
+        partner.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
+        partner.setNationality(nationalityRepository.findById(1));
+        //Es socio
+        partner.setMemberProfile(new Member());
+        partner.getMemberProfile().setCategory(categoryReposity.findById(1));
+        //Es piloto
+        partner.setPilotProfile(new Pilot());
+        partner.getPilotProfile().setRatings(new HashSet<>());
+        partner.getPilotProfile().addRating(PilotRating.IFR);
+        partner.getPilotProfile().addRating(PilotRating.CROSSING);
+  
+        personService.save(partner);
+
+        /*
         Member member2 = new Member();
         member2.setName("Socio 2");
         member2.setCategory(categoryReposity.findById(1));
@@ -75,20 +82,18 @@ public class MemberTests extends SpringIntegrationTest {
         //memberService.delete(memberService.get(member3));
         //System.out.println("Borrado");
         employeeRepository.save(god);
-        
+        */
        
-        memberService.getAll()
+        personService.getAll()
                 .stream().forEach(
                         aMember -> System.out.println(aMember)
                 );
+        
         
         flightRecordRepository.findAll()
                 .stream().forEach(
                         aRecord -> System.out.println(aRecord)
                 );
-        
-        */
-        
     }
     
 }

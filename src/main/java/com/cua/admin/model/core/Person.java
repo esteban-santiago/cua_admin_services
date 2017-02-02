@@ -77,19 +77,19 @@ public class Person implements Serializable {
     
     //Perfiles de la persona
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "person_member_id_fk"))
+    @JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "person_member_id_fk"))
     private Member memberProfile;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pilot_id", nullable = false, foreignKey = @ForeignKey(name = "person_pilot_id_fk"))
+    @JoinColumn(name = "pilot_id", foreignKey = @ForeignKey(name = "person_pilot_id_fk"))
     private Pilot pilotProfile;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", nullable = false, foreignKey = @ForeignKey(name = "person_customer_id_fk"))
+    @JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "person_customer_id_fk"))
     private Customer customerProfile;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id", nullable = false, foreignKey = @ForeignKey(name = "person_employee_id_fk"))
+    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "person_employee_id_fk"))
     private Employee employeeProfile;
     
     private enum Status {

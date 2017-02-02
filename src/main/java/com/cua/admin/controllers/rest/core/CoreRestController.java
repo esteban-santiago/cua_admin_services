@@ -22,7 +22,7 @@ public class CoreRestController {
     private final PersonService personService;
 
     @RequestMapping(value = "/person/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Person getMember(@PathVariable("id") Integer id) throws Throwable {
+    public Person getPerson(@PathVariable("id") Integer id) throws Throwable {
         return personService.get(id);
     }
 

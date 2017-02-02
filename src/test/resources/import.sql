@@ -22,8 +22,9 @@ INSERT INTO nationality(id, description) VALUES (11,'Mexicana');
 
 --Category
 INSERT INTO category(id, description) VALUES (1,'Socio');
-INSERT INTO category(id, description) VALUES (2,'Empleado');
-INSERT INTO category(id, description) VALUES (3,'Instructor');
+INSERT INTO category(id, description) VALUES (2,'Vitalicio');
+INSERT INTO category(id, description) VALUES (3,'Comisión Directiva');
+INSERT INTO category(id, description) VALUES (4,'Comisión Directiva Vitalicio');
 
 --Members
 --INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (100,'1974-08-02','2017-01-03','24036873','DNI','SANTIAGO, Esteban',1,1, 'ACTIVE');

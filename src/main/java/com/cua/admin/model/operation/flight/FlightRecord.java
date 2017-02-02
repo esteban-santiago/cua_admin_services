@@ -27,7 +27,7 @@ public class FlightRecord implements Serializable {
     })
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    private Long id;
+    private Integer id;
     
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "flight_record_id",nullable = false, foreignKey = @ForeignKey(name = "flight_record_crew_member_id_fk"))

@@ -4,7 +4,6 @@ import com.cua.admin.model.hr.profiles.Employee;
 import com.cua.admin.model.core.profiles.Member;
 import com.cua.admin.model.it.User;
 import com.cua.admin.model.operation.flight.Aircraft;
-import com.cua.admin.repositories.hr.EmployeeRepository;
 import com.cua.admin.services.operation.flight.AircraftService;
 import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.it.UserService;

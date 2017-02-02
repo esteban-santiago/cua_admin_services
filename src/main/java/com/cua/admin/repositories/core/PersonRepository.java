@@ -18,5 +18,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     List<Person> findByNationality(Nationality nationality);
 
     Optional<Person> findById(Integer id);
+    
+    Optional<Person> findByIdAndMemberProfileIsNotNull(Integer id);
 
 }

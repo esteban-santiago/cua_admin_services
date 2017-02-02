@@ -5,7 +5,6 @@
  */
 package com.cua.admin.model.core.profiles;
 
-import com.cua.admin.model.operation.flight.PilotRating;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -49,7 +48,7 @@ public class Pilot implements Serializable {
     @Id
     private Integer id;
     
-    private String license;
+    private String licence;
     
     @ElementCollection
     @JoinTable(
@@ -63,6 +62,11 @@ public class Pilot implements Serializable {
     @JoinColumn(name = "pilot_id", nullable = false, foreignKey = @ForeignKey(name = "pilot_medical_certification_id_fk"))
     private Set<MedicalCertification> medicalCertifications;
 
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "pilot_id", nullable = false, foreignKey = @ForeignKey(name = "pilot_pilot_certification_id_fk"))
+    private Set<PilotCertification> pilotCertifications;
+    
+    /*
     @ElementCollection
     @JoinTable(
             name="pilot_role_type", // ref table.
@@ -71,16 +75,20 @@ public class Pilot implements Serializable {
     @Column(name="rol_id", nullable = false)
     private Set<PilotRole> roles;    
     
+    public void addRole(PilotRole role) {
+        this.roles.add(role);
+    }
+*/
     
     public void addRating(PilotRating rating) {
         this.ratings.add(rating);
     }
     
-    public void addMedicalCertification(MedicalCertification medicalCertification) {
+    public void addCertification(MedicalCertification medicalCertification) {
         this.medicalCertifications.add(medicalCertification);
     }
-     
-    public void addRole(PilotRole role) {
-        this.roles.add(role);
-    }
+
+    public void addCertification(PilotCertification pilotCertification) {
+        this.pilotCertifications.add(pilotCertification);
+    }    
 }

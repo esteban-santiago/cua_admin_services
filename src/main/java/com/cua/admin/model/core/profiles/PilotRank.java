@@ -9,8 +9,8 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum PilotRole {
-    PUPIL("Alumno"),
+public enum PilotRank {
+    STUDENT("Alumno"),
     PILOT("Piloto al Mando"),
     INSTRUCTOR("Instructor"),
     INSPECTOR("Inspector");

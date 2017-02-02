@@ -1,4 +1,4 @@
-package com.cua.admin.model.operation.flight;
+package com.cua.admin.model.core.profiles;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
