@@ -33,13 +33,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "pilot")
+@Table(name = "pilot_profile")
 public class Pilot implements Serializable {
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "pilot_id_seq"),
+                @Parameter(name = "sequence_name", value = "pilot_profile_id_seq"),
                 @Parameter(name = "initial_value", value = "1"),
                 @Parameter(name = "increment_size", value = "1")
             }

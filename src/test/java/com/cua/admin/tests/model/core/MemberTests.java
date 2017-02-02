@@ -1,6 +1,7 @@
 package com.cua.admin.tests.model.core;
 
 import com.cua.admin.model.core.Address;
+import com.cua.admin.model.core.ContactWay;
 import com.cua.admin.model.core.IdentityCard;
 import com.cua.admin.model.core.IdentityCardType;
 import com.cua.admin.model.core.Person;
@@ -55,6 +56,10 @@ public class MemberTests extends SpringIntegrationTest {
         partner.setAddresses(new HashSet<>());
         partner.addAddress(address);
         partner.addAddress(address2);
+        partner.setContactWays(new HashSet<>());
+        partner.addContactWay(new ContactWay("M", "esteban.s@gmail.com"));
+        partner.addContactWay(new ContactWay("M", "esteban.san@gmail.com"));
+
         partner.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
         partner.setNationality(nationalityRepository.findById(1));
         //Es socio
