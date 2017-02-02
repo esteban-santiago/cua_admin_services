@@ -23,7 +23,7 @@ public class SalesService {
         () -> new CustomerNotFoundException(id));
     }
     
-    public List getCustomers(Integer id) {
+    public List getCustomers() {
         return this.personRepository.findByCustomerProfileIsNotNull();
     }
 

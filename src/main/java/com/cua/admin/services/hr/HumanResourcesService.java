@@ -23,7 +23,7 @@ public class HumanResourcesService {
         () -> new EmployeeNotFoundException(id));
     }
     
-    public List getEmployees(Integer id) {
+    public List getEmployees() {
         return this.personRepository.findByEmployeeProfileIsNotNull();
     }
 

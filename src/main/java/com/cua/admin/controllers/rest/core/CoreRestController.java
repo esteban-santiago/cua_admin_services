@@ -39,7 +39,5 @@ public class CoreRestController {
         personService.save(person);
         headers.add("id", person.getId().toString());
         return new ResponseEntity<>(headers, HttpStatus.ACCEPTED);
-    }    
-
-
+    }
 }
