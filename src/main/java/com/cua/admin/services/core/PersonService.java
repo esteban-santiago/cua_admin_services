@@ -53,7 +53,7 @@ public class PersonService {
         () -> new MemberNotFoundException(id));
     }
 
-    public List getMembers(Integer id) {
+    public List getMembers() {
         return this.personRepository.findByMemberProfileIsNotNull();
     }
     
@@ -63,7 +63,7 @@ public class PersonService {
         () -> new PilotNotFoundException(id));
     }
     
-    public List getPilots(Integer id) {
+    public List getPilots() {
         return this.personRepository.findByPilotProfileIsNotNull();
     }
     

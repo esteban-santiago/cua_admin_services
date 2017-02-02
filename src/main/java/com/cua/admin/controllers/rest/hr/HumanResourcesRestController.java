@@ -1,7 +1,6 @@
 package com.cua.admin.controllers.rest.hr;
 
 import com.cua.admin.model.core.Person;
-import com.cua.admin.model.it.User;
 import com.cua.admin.services.hr.HumanResourcesService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +19,8 @@ public class HumanResourcesRestController {
     @Autowired
     private final HumanResourcesService humanResourcesService;
   
-    @RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
-    public ResponseEntity<Person> getEmployee(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) throws Throwable {
+    @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public ResponseEntity<Person> getEmployee(@RequestParam(value = "id", required = true) Integer id) throws Throwable {
         return new ResponseEntity<>(this.humanResourcesService.getEmployee(id), HttpStatus.OK);
     }
 

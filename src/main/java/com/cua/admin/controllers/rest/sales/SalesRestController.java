@@ -21,7 +21,7 @@ public class SalesRestController {
     @Autowired
     private final SalesService salesService;
   
-    @RequestMapping(value = "/customer", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<Person> getCustomer(@RequestParam(value = "id", required = true, defaultValue = "1") Integer id) throws Throwable {
         return new ResponseEntity<>(this.salesService.getCustomer(id), HttpStatus.OK);
     }
