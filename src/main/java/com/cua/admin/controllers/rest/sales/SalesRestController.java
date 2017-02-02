@@ -1,8 +1,6 @@
 package com.cua.admin.controllers.rest.sales;
 
 import com.cua.admin.model.core.Person;
-import com.cua.admin.model.it.User;
-import com.cua.admin.repositories.it.UserRepository;
 import com.cua.admin.services.sales.SalesService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

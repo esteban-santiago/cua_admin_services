@@ -29,12 +29,12 @@ public class ReceiptIssued extends Document implements Serializable {
     
     private Long legalId;
     
-    @Override
-    public void setAmount(Float amount) {
-        super.setAmount(amount * (-1));
-    }
 
     public ReceiptIssued() {
         setDocumentType(DocumentType.RCI);  
+    }
+    @Override
+    public void setAmount(Float amount) {
+        super.setAmount(amount * (-1));
     }
 }
