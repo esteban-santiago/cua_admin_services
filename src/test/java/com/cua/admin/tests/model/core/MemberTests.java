@@ -98,6 +98,5 @@ public class MemberTests extends SpringIntegrationTest {
                 .stream().forEach(
                         aRecord -> System.out.println(aRecord)
                 );
-    }
-    
+    }   
 }
