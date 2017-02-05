@@ -90,7 +90,7 @@ public class MemberTests extends SpringIntegrationTest {
        
         personService.getAll()
                 .stream().forEach(
-                        aMember -> System.out.println(aMember)
+                        person -> System.out.println("Persona: " + person)
                 );
         
         

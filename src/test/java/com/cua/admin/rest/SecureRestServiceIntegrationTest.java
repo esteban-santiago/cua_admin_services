@@ -53,7 +53,7 @@ public class SecureRestServiceIntegrationTest extends SpringIntegrationTest {
                 .andExpect(jsonPath("name").value("Esteban"));
     }
 
-    /*
+    
     @Test
     public void getMember() throws Exception {
         
@@ -61,7 +61,7 @@ public class SecureRestServiceIntegrationTest extends SpringIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("nationality.description").value("Argentina"));
     }
-    */
+    
     @Test
     public void getMemberNotFound() throws Exception {
         mockMvc.perform(get("/sapi/member/{id}", 200000).with(httpBasic("user", "password")))

@@ -1,6 +1,7 @@
 package com.cua.admin.model.it;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -23,6 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @ToString(exclude = "password")
+@JsonIgnoreProperties("password")
 public class User implements Serializable {
 
     @GenericGenerator(
@@ -42,7 +44,7 @@ public class User implements Serializable {
     private String name;
 
     @NonNull
-    @JsonIgnore(true)
+    //@JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)
