@@ -12,4 +12,4 @@ spring:
       hibernate:
         ddl-auto: create
   main:
-    banner-mode: on
+    banner-mode: 'off'
