@@ -13,12 +13,22 @@ INSERT INTO nationality(id, description) VALUES (11,'Mexicana');
 
 --Category
 INSERT INTO category(id, description) VALUES (1,'Socio');
-INSERT INTO category(id, description) VALUES (2,'Empleado');
-INSERT INTO category(id, description) VALUES (3,'Instructor');
+INSERT INTO category(id, description) VALUES (2,'Vitalicio');
+INSERT INTO category(id, description) VALUES (3,'Comisión Directiva');
+INSERT INTO category(id, description) VALUES (4,'Comisión Directiva Vitalicio');
 
---Members
---INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (100,'1974-08-02','2017-01-03','24036873','DNI','SANTIAGO, Esteban',1,1, 'ACTIVE');
---INSERT INTO member(id, date_of_birth,date_of_creation,identity_card_number,identity_card_type,name,category_id,nationality_id,status) VALUES (101,'1989-01-27','2017-01-03','CC123331','PASSPORT','SANTIAGO, Pablo',1,2,'ACTIVE');
+
+--Member Profile
+INSERT INTO member_profile (id, status, category_id) VALUES(100, 'ACTIVE', 1);
+INSERT INTO member_profile (id, status, category_id) VALUES(101, 'ACTIVE', 1);
+
+--Pilot Profile
+INSERT INTO pilot_profile (id, licence) VALUES(100, '24036873');
+
+--Person
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (100, '1974-08-02', '2017-02-03', '24036873', 'DNI', 'SANTIAGO, Esteban', 'ACTIVE',NULL, NULL, 100, 100,1);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (101, '1987-01-27', '2017-02-03', '32036874', 'DNI', 'SANTIAGO, Pablo', 'ACTIVE',NULL, NULL, 101, NULL,2);
+
 
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');
@@ -35,8 +45,8 @@ INSERT INTO aircraft(id,brand,model,registration,status) VALUES (102,'Cessna','1
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (103,'Pipper','PA-11','LV-YMV','OUT_OF_ORDER');
 
 --Aircrafts Components
-INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (100,'Motor 100HP',TRUE,'1MOTOR100HP','ENGINE',100);
-INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (101,'Helice de madera',TRUE,'1HELICEMAD','PROPELLER',100);
+INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (100,'Motor 100HP',TRUE,'1MOTOR100HP','ENGINE',101);
+INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (101,'Helice de madera',TRUE,'1HELICEMAD','PROPELLER',101);
 INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (102,'Capsula C152',FALSE,'CAPSULAC152','CAPSULE',100);
 
 
@@ -61,17 +71,18 @@ INSERT INTO  payment_term (id, charge, description, discount, payment_method_id)
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0,'1 Cuota', 0,5);
 
 --Flight Record
---INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
---INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
+INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
+INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
 
 --Crew Member
---INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (100,'PIC',100,100);
---INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (101,'PIC',100,101);
---INSERT INTO crew_member(id,crew_member_role,member_id,flight_record_id) VALUES (102,'INST',101,101);
+INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (100,'PIC',100,100);
+INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (101,'PIC',100,101);
+INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (102,'INST',101,101);
+
 
 --Flight Record Issued
---INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,100);
---INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
+INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,100);
+INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,101);
 --INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (102, 4110,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
 
 --Receipt Issued
@@ -116,7 +127,6 @@ INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_
 --Template Entry Line RCI Tarjeta
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(107, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,800,4,101);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_term_id, template_entry_id) VALUES(108, 'ENTRY_LINE_PAYMENT_TERM','DEBIT',0.1,10500,3,101);
-
 
 
 --Product Group

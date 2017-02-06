@@ -26,15 +26,17 @@ INSERT INTO category(id, description) VALUES (2,'Vitalicio');
 INSERT INTO category(id, description) VALUES (3,'Comisión Directiva');
 INSERT INTO category(id, description) VALUES (4,'Comisión Directiva Vitalicio');
 
+--Pilot Profile
+INSERT INTO pilot_profile (id, licence) VALUES(100, '24036873');
+
 
 --Member Profile
 INSERT INTO member_profile (id, status, category_id) VALUES(100, 'ACTIVE', 1);
 INSERT INTO member_profile (id, status, category_id) VALUES(101, 'ACTIVE', 1);
 
 --Person
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (100, '1974-08-02', '2017-02-03', '24036873', 'DNI', 'SANTIAGO, Esteban', 'ACTIVE',NULL, NULL, 100, NULL,1);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (100, '1974-08-02', '2017-02-03', '24036873', 'DNI', 'SANTIAGO, Esteban', 'ACTIVE',NULL, NULL, 100, 100,1);
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (101, '1987-01-27', '2017-02-03', '32036874', 'DNI', 'SANTIAGO, Pablo', 'ACTIVE',NULL, NULL, 101, NULL,2);
-
 
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');

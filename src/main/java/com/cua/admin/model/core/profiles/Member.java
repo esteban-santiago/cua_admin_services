@@ -62,10 +62,6 @@ public class Member implements Serializable {
     public void deactivate() {
         this.status = Member.Status.INACTIVE;
     }
-
-    public Boolean isInactive() {
-        return this.status == Member.Status.INACTIVE;
-    }
    
     public void dismiss() {
         this.status = Member.Status.DISMISS;

@@ -5,6 +5,7 @@ import com.cua.admin.services.core.PersonService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,8 +25,8 @@ public class CoreRestController {
     private final PersonService personService;
 
     @RequestMapping(value = "/person/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Person get(@PathVariable("id") Integer id) throws Throwable {
-        return personService.get(id);
+    public ResponseEntity<Person> get(@PathVariable("id") Integer id) throws Throwable {
+        return new ResponseEntity<>(personService.get(id), HttpStatus.OK);
     }
 
     @RequestMapping(value="/person", method=RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
@@ -41,10 +43,19 @@ public class CoreRestController {
         headers.add("id", person.getId().toString());
         return new ResponseEntity<>(headers, HttpStatus.ACCEPTED);
     }
+    
+    @RequestMapping(value = "/sapi/person", 
+            params = { "page", "size" }, 
+            method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Page<Person>> getAllPaginated(
+            @RequestParam(value = "page") Integer page, 
+            @RequestParam(value = "size") Integer size) {
+        return new ResponseEntity<>(personService.getAllByPage(page, size), HttpStatus.OK);
+    }   
 
     @RequestMapping(value = "/member/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Person getMember(@PathVariable("id") Integer id) throws Throwable {
-        return personService.getMember(id);
+    public ResponseEntity<Person> getMember(@PathVariable("id") Integer id) throws Throwable {
+        return new ResponseEntity<>(personService.getMember(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/member", method = RequestMethod.GET, produces = "application/json")

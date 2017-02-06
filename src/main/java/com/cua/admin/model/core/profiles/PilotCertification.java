@@ -8,6 +8,8 @@ package com.cua.admin.model.core.profiles;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -46,6 +48,9 @@ public class PilotCertification implements Serializable {
     
     //Fecha de Validez hasta
     private LocalDate validityTo;
+    
+    @Enumerated(EnumType.STRING)
+    private Type type = Type.APPA;
 
     public enum Type {     
         APPA(), //Alumno

@@ -51,11 +51,9 @@ public class Person implements Serializable {
 
     private String name;
         
-    //@JsonFormat(pattern = "yyyy-MM-dd")
     @CreatedDate
     private LocalDate dateOfCreation = LocalDate.now(); //Fecha de Alta
 
-    //@JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
     @OneToOne
@@ -107,10 +105,6 @@ public class Person implements Serializable {
     
     public void deactivate() {
         this.status = Person.Status.INACTIVE;
-    }
-
-    public Boolean isInactive() {
-        return this.status == Person.Status.INACTIVE;
     }
     
     public void addAddress(Address address) {

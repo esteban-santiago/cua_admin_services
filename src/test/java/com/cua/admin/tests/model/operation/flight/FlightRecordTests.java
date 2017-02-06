@@ -5,7 +5,7 @@ import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.repositories.operation.flight.CrewRepository;
 import com.cua.admin.services.operation.flight.AircraftService;
-import com.cua.admin.services.operation.flight.FlightService;
+import com.cua.admin.services.operation.flight.FlightRecordService;
 import com.cua.admin.services.core.PersonService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ public class FlightRecordTests extends SpringIntegrationTest {
     private PersonService personService;
 
     @Autowired
-    private FlightService flightService;
+    private FlightRecordService flightService;
     
     @Test
     public void createFlightRecord() throws Throwable {
