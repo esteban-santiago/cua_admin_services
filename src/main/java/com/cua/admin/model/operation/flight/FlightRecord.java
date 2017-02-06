@@ -37,9 +37,9 @@ public class FlightRecord implements Serializable {
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_aircraft_id_fk"))
     private Aircraft aircraft;
  
-    private LocalDateTime startFlight = LocalDateTime.now();
+    private LocalDateTime startFlight;
     
-    private LocalDateTime endFlight = LocalDateTime.now();
+    private LocalDateTime endFlight;
     
     private Integer landings = 1;
     

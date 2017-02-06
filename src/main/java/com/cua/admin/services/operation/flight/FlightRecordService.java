@@ -1,6 +1,7 @@
 package com.cua.admin.services.operation.flight;
 
 import com.cua.admin.model.operation.flight.FlightRecord;
+import com.cua.admin.model.operation.flight.exceptions.FlightRecordNotFoundException;
 import com.cua.admin.repositories.operation.flight.AircraftRepository;
 import com.cua.admin.repositories.operation.flight.FlightRecordRepository;
 import java.util.List;
@@ -19,8 +20,9 @@ public class FlightRecordService {
     @Autowired
     private final FlightRecordRepository flightRecordRepository;
    
-    public FlightRecord getFlightRecord(Integer Id) {
-        return flightRecordRepository.findById(Id).get();
+    public FlightRecord getFlightRecord(Integer id) throws Throwable {
+        return flightRecordRepository.findById(id).orElseThrow(
+        () -> new FlightRecordNotFoundException(id));
     }
 
     public List<FlightRecord> getAllFlightRecord() {

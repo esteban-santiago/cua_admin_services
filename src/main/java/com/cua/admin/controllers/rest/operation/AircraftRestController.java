@@ -19,7 +19,7 @@ public class AircraftRestController {
     @Autowired
     AircraftService aircraftService;
     
-    @RequestMapping(value = "/aircraft", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(value = "/aircraft/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<Aircraft> get(@RequestParam(value = "id", required = true) Integer id) {
         return new ResponseEntity<>(aircraftService.get(id), HttpStatus.OK);
     }

@@ -56,12 +56,18 @@ public class SecureRestServiceIntegrationTest extends SpringIntegrationTest {
     
     @Test
     public void getMember() throws Exception {
-        
         mockMvc.perform(get("/sapi/member/{id}", 100).with(httpBasic("user", "password")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("nationality.description").value("Argentina"));
     }
     
+    @Test
+    public void getFlightRecord() throws Exception {
+        mockMvc.perform(get("/sapi/flight_record/{id}", 100).with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("startFlight").value("2017-06-02"));
+    }
+
     @Test
     public void getMemberNotFound() throws Exception {
         mockMvc.perform(get("/sapi/member/{id}", 200000).with(httpBasic("user", "password")))
