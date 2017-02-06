@@ -65,7 +65,7 @@ public class SecureRestServiceIntegrationTest extends SpringIntegrationTest {
     public void getFlightRecord() throws Exception {
         mockMvc.perform(get("/sapi/flight_record/{id}", 100).with(httpBasic("user", "password")))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("startFlight").value("2017-06-02"));
+                .andExpect(jsonPath("startFlight").value("2017-01-06"));
     }
 
     @Test

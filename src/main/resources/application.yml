@@ -60,7 +60,7 @@ spring:
 
 ---
 spring:
-  profiles: qas
+  profiles: calidad
   jpa:
     database: POSTGRESQL
     ##show-sql: true
@@ -85,7 +85,7 @@ spring:
 
 ---
 spring:
-  profiles: prd
+  profiles: produccion
   jpa:
     database: POSTGRESQL
     show-sql: false
