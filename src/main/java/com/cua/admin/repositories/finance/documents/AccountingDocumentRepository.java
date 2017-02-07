@@ -12,6 +12,4 @@ public interface AccountingDocumentRepository<T extends Document> extends JpaRep
     List<Document> findByDocumentType(DocumentType documentType);
 
     T findById(Long id);
-
-    //T findByDocumentTypeId(Integer id);
 }
