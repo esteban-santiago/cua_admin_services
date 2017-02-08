@@ -1,8 +1,11 @@
 package com.cua.admin.controllers.rest.core;
 
 import com.cua.admin.model.core.Person;
+import com.cua.admin.model.core.profiles.PilotRating;
 import com.cua.admin.services.core.PersonService;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +26,13 @@ public class CoreRestController {
 
     @Autowired
     private final PersonService personService;
+    
+    @RequestMapping(value = "/person", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List<Person>> get() {
+        return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
+    }
 
+    
     @RequestMapping(value = "/person/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Person> get(@PathVariable("id") Integer id) throws Throwable {
         return new ResponseEntity<>(personService.get(id), HttpStatus.OK);
@@ -72,4 +81,18 @@ public class CoreRestController {
     public ResponseEntity<List<Person>> getPilots() {
         return new ResponseEntity<>(personService.getPilots(), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/pilot/rating", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map> getPilotRatings() {
+        Map ratings = new HashMap<>();
+        String values[];
+        for(int i = 0 ; i < PilotRating.values().length; i = i + 1) {
+            values = new String[2];
+            values[0] = PilotRating.values()[i].name();
+            values[1] = PilotRating.values()[i].getDescription();
+            ratings.put(i, values);
+        }
+        return new ResponseEntity<>(ratings, HttpStatus.OK);
+    }
 }
+
