@@ -31,7 +31,6 @@ public class CoreRestController {
     public ResponseEntity<List<Person>> get() {
         return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
     }
-
     
     @RequestMapping(value = "/person/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Person> get(@PathVariable("id") Integer id) throws Throwable {

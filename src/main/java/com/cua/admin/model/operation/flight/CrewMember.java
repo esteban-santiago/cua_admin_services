@@ -36,7 +36,7 @@ public class CrewMember implements Serializable {
     private Integer id;
         
     //@NonNull    
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "person_crew_member_id_fk"))
     private Person person;
     

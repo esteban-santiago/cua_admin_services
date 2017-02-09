@@ -29,17 +29,17 @@ public class FlightRecordService {
         return this.flightRecordRepository.findAll();
     }
     
-    public void createFlightRecord(FlightRecord flightRecord) throws Throwable {
+    public void create(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.OPENED);
         flightRecordRepository.save(flightRecord);
     }
 
-    public void cancelFlightRecord(FlightRecord flightRecord) throws Throwable {
+    public void cancel(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.CANCELED);
         flightRecordRepository.save(flightRecord);
     }    
     
-    public void saveFlightRecord(FlightRecord flightRecord) throws Throwable {
+    public void close(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.CLOSED);
         flightRecordRepository.save(flightRecord);
     }
