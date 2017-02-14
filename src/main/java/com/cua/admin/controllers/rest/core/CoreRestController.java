@@ -38,18 +38,19 @@ public class CoreRestController {
     }
 
     @RequestMapping(value="/person", method=RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<Void> create(@RequestBody Person person){
-        HttpHeaders headers = new HttpHeaders();
+    public ResponseEntity<Person> create(@RequestBody Person person){
+        //HttpHeaders headers = new HttpHeaders();
         personService.save(person);
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        //headers.add("id", person.getId().toString());
+        return new ResponseEntity<>(person, HttpStatus.CREATED);
     }    
 
     @RequestMapping(value="/person/{id}", method=RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<Void> update(@RequestBody Person person){
-        HttpHeaders headers = new HttpHeaders();
+    public ResponseEntity<Person> update(@RequestBody Person person){
+        //HttpHeaders headers = new HttpHeaders();
         personService.save(person);
-        headers.add("id", person.getId().toString());
-        return new ResponseEntity<>(headers, HttpStatus.ACCEPTED);
+        //headers.add("id", person.getId().toString());
+        return new ResponseEntity<>(person, HttpStatus.ACCEPTED);
     }
     
     @RequestMapping(value = "/sapi/person", 

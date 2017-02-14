@@ -33,10 +33,10 @@ public class FlightRecordRestController {
     }
 
     @RequestMapping(value="/flight_record", method=RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<Void> create(@RequestBody FlightRecord flightRecord) throws Throwable {
-        HttpHeaders headers = new HttpHeaders();
+    public ResponseEntity<FlightRecord> create(@RequestBody FlightRecord flightRecord) throws Throwable {
+        //HttpHeaders headers = new HttpHeaders();
         flightRecordService.create(flightRecord);
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(flightRecord, HttpStatus.CREATED);
     }    
    
     

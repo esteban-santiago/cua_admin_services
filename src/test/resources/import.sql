@@ -26,25 +26,33 @@ INSERT INTO category(id, description) VALUES (2,'Vitalicio');
 INSERT INTO category(id, description) VALUES (3,'Comisión Directiva');
 INSERT INTO category(id, description) VALUES (4,'Comisión Directiva Vitalicio');
 
---Pilot Profile
-INSERT INTO pilot_profile (id, licence) VALUES(100, '24036873');
-
 
 --Member Profile
 INSERT INTO member_profile (id, status, category_id) VALUES(100, 'ACTIVE', 1);
 INSERT INTO member_profile (id, status, category_id) VALUES(101, 'ACTIVE', 1);
+INSERT INTO member_profile (id, status, category_id) VALUES(102, 'ACTIVE', 1);
+INSERT INTO member_profile (id, status, category_id) VALUES(103, 'ACTIVE', 1);
+
+--Pilot Profile
+INSERT INTO pilot_profile (id, licence) VALUES(100, '24036873');
+INSERT INTO pilot_profile (id, licence) VALUES(101, '28036873');
+INSERT INTO pilot_profile (id, licence) VALUES(102, '28036873');
 
 --Person
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (100, '1974-08-02', '2017-02-03', '24036873', 'DNI', 'SANTIAGO, Esteban', 'ACTIVE',NULL, NULL, 100, 100,1);
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (101, '1987-01-27', '2017-02-03', '32036874', 'DNI', 'SANTIAGO, Pablo', 'ACTIVE',NULL, NULL, 101, NULL,2);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (102, '1974-08-02', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Guillermo', 'ACTIVE',NULL, NULL, 102, 100,1);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (103, '1987-01-27', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Gustavo', 'ACTIVE',NULL, NULL, 103, NULL,2);
+
 
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');
 INSERT INTO users (id, name, password, profile, status) VALUES (101,'psantiago','passwd','ADMINISTRATOR','ACTIVE');
 
 --Medical Certifications
---INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (1,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',100);
---INSERT INTO member_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,member_id) VALUES (2,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',101);
+INSERT INTO pilot_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,pilot_id) VALUES (1,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',100);
+INSERT INTO pilot_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,pilot_id) VALUES (2,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',101);
+INSERT INTO pilot_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,pilot_id) VALUES (3,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',102);
 
 --Aircrafts
 INSERT INTO aircraft(id,brand,model,registration,status) VALUES (100,'Cessna','152','LV-OEE','ACTIVE');
@@ -147,4 +155,3 @@ INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C152', 1
 INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('Cessna 150', 100, 100,'SERVICE', 100);
 INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('Cessna 152', 100, 102,'SERVICE', 101);
 INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('PA-11', 100, 101,'SERVICE', 102);
-
