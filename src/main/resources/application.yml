@@ -52,10 +52,15 @@ spring:
           factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   datasource:
     ## PostgreSQL
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.0.27:5432/cua_admin.dev
-    username: admin
-    password: admin
+    ##driver-class-name: org.postgresql.Driver
+    ##url: jdbc:postgresql://192.168.0.27:5432/cua_admin.dev
+    ##username: admin
+    ##password: admin
+    ## H2
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:cua;IGNORECASE=TRUE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS "public";DB_CLOSE_DELAY=-1;
+    username: sa
+    password: 
   jackson:
     serialization:
         WRITE_DATES_AS_TIMESTAMPS: false
