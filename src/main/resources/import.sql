@@ -45,24 +45,6 @@ INSERT INTO pilot_medical_certification(id,medical_certification_class,observati
 INSERT INTO pilot_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,pilot_id) VALUES (2,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',101);
 INSERT INTO pilot_medical_certification(id,medical_certification_class,observations,validity_from,validity_to,pilot_id) VALUES (3,'CLASS_I','Observaciones!!!','2017-01-04','2020-01-04',102);
 
---Aircrafts
-INSERT INTO aircraft(id,brand,model,registration,status) VALUES (100,'Cessna','152','LV-OEE','ACTIVE');
-INSERT INTO aircraft(id,brand,model,registration,status) VALUES (101,'Cessna','152','LV-AMS','ACTIVE');
-INSERT INTO aircraft(id,brand,model,registration,status) VALUES (102,'Cessna','150','LV-LGF','ACTIVE');
-INSERT INTO aircraft(id,brand,model,registration,status) VALUES (103,'Pipper','PA-11','LV-YMV','OUT_OF_ORDER');
-
---Aircrafts Components
-INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (100,'Motor 100HP',TRUE,'1MOTOR100HP','ENGINE',101);
-INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (101,'Helice de madera',TRUE,'1HELICEMAD','PROPELLER',101);
-INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (102,'Capsula C152',FALSE,'CAPSULAC152','CAPSULE',100);
-
-
---Aircraft Insurance
-INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (100,'Sancor','ABC-4444224422','Terceros Completo','2016-07-03','2017-09-03',100);
-INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (101,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-09-03',101);
-INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (102,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-11-03',102);
---INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (103,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-11-03',103);
-
 --Payment Methods
 INSERT INTO payment_method(id, description) VALUES (1,'Efectivo');
 INSERT INTO payment_method(id, description) VALUES (2,'Cheque Bancario');
@@ -76,21 +58,6 @@ INSERT INTO  payment_term (id, charge, description, discount, payment_method_id)
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (3, 0.10,'1 Cuota', 0,4);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (4, 0.10,'3 Cuotas', 0,4);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0,'1 Cuota', 0,5);
-
---Flight Record
-INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
-INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
-
---Crew Member
-INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (100,'PIC',100,100);
-INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (101,'PIC',100,101);
-INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (102,'INST',101,101);
-
-
---Flight Record Issued
-INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,100);
-INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,101);
---INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (102, 4110,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
 
 --Receipt Issued
 --INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (200, -2400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,1, NULL,100);
@@ -135,14 +102,73 @@ INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(107, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,800,4,101);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_term_id, template_entry_id) VALUES(108, 'ENTRY_LINE_PAYMENT_TERM','DEBIT',0.1,10500,3,101);
 
-
 --Product Group
 INSERT INTO product_group (description, id) VALUES ('Servicios de vuelo', 100);
+
 --Product SubGroup
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C150', 100,100);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('PA-11', 100,101);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C152', 100, 102);
+
 --Product
-INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('Cessna 150', 100, 100,'SERVICE', 100);
-INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('Cessna 152', 100, 102,'SERVICE', 101);
-INSERT INTO product (description, group_id, subgroup_id, type, id) VALUES ('PA-11', 100, 101,'SERVICE', 102);
+INSERT INTO product (price, description, group_id, subgroup_id, type, id) VALUES(1150, 'Cessna 150', 100, 100,'SERVICE', 100);
+INSERT INTO product (price, description, group_id, subgroup_id, type, id) VALUES(1152,'Cessna 152', 100, 102,'SERVICE', 101);
+INSERT INTO product (price, description, group_id, subgroup_id, type, id) VALUES(911,'PA-11', 100, 101,'SERVICE', 102);
+
+--Product Profile
+INSERT INTO product_profile (id, group_id, product_id, subgroup_id) VALUES (100,100,100,100);
+
+--Aircrafts
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (100,'Cessna','152','LV-OEE','ACTIVE', NULL);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (101,'Cessna','152','LV-AMS','ACTIVE', NULL);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (102,'Cessna','150','LV-LGF','ACTIVE',100);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (103,'Pipper','PA-11','LV-YMV','OUT_OF_ORDER', NULL);
+
+--Aircrafts Components
+INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (100,'Motor 100HP',TRUE,'1MOTOR100HP','ENGINE',101);
+INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (101,'Helice de madera',TRUE,'1HELICEMAD','PROPELLER',101);
+INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (102,'Capsula C152',FALSE,'CAPSULAC152','CAPSULE',100);
+
+
+--Aircraft Insurance
+INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (100,'Sancor','ABC-4444224422','Terceros Completo','2016-07-03','2017-09-03',100);
+INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (101,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-09-03',101);
+INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (102,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-11-03',102);
+--INSERT INTO aircraft_insurance(id,company,policy,type,validity_from,validity_to,aircraft_id) VALUES (103,'Sancor','ABC-4444224423','Terceros Completo','2016-07-03','2017-11-03',103);
+
+--Flight Record
+INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (100,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',100,NULL,NULL);
+INSERT INTO flight_record(id,end_flight,landings,nature,purpose,start_flight,status,type,aircraft_id,airfield_destiny_id,airfield_origin_id) VALUES (101,'2017-01-06 20:54:05.296',0,'LDI','VP','2017-01-06 19:44:05.296','OPENED','ENT',101,NULL,NULL);
+
+--Crew Member
+INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (100,'PIC',100,100);
+INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (101,'PIC',100,101);
+INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (102,'INST',101,101);
+
+--Flight Record Issued
+INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,100);
+INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,101);
+--INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (102, 4110,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
+
+--Airfields
+INSERT INTO airfield (id, iata_code, name) VALUES(1,'ACB','Coronel Bogado Agroservicios');
+INSERT INTO airfield (id, iata_code, name) VALUES(2,'ACH','General Acha');
+INSERT INTO airfield (id, iata_code, name) VALUES(3,'ACM','Arrecifes La Cura Malal');
+INSERT INTO airfield (id, iata_code, name) VALUES(4,'ADO','Puerto Deseado');
+INSERT INTO airfield (id, iata_code, name) VALUES(5,'ADT','Bandera Agroservicio');
+INSERT INTO airfield (id, iata_code, name) VALUES(6,'ADU','Bandera Dutto');
+INSERT INTO airfield (id, iata_code, name) VALUES(7,'AER','Buenos Aires Aeroparque J Newbery');
+INSERT INTO airfield (id, iata_code, name) VALUES(8,'AGI','Piedra del Aguila');
+INSERT INTO airfield (id, iata_code, name) VALUES(9,'AGR','Alta Gracia');
+INSERT INTO airfield (id, iata_code, name) VALUES(10,'AII','Chacabuco Las 2 A');
+INSERT INTO airfield (id, iata_code, name) VALUES(11,'AJA','La Laja');
+INSERT INTO airfield (id, iata_code, name) VALUES(12,'ALC','Ameghino La Chacra');
+INSERT INTO airfield (id, iata_code, name) VALUES(13,'ALL','Allen');
+INSERT INTO airfield (id, iata_code, name) VALUES(14,'ALR','Alejandro Roca');
+INSERT INTO airfield (id, iata_code, name) VALUES(15,'ALT','ruz Alta');
+INSERT INTO airfield (id, iata_code, name) VALUES(16,'ALV','Alvear Agroalvear');
+INSERT INTO airfield (id, iata_code, name) VALUES(17,'AMA','Roberts La Amalia');
+INSERT INTO airfield (id, iata_code, name) VALUES(18,'AME','Ameghino Sigfrido Rohr Aviagro');
+INSERT INTO airfield (id, iata_code, name) VALUES(19,'AMG','Ameghino');
+INSERT INTO airfield (id, iata_code, name) VALUES(20,'ANA','Parana Aeroclub');
+

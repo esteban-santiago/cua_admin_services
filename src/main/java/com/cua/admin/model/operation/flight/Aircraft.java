@@ -1,5 +1,6 @@
 package com.cua.admin.model.operation.flight;
 
+import com.cua.admin.model.operation.flight.profiles.ProductProfile;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -42,6 +43,10 @@ public class Aircraft implements Serializable {
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "aircraft_component_id_fk"))
     private Set<AircraftComponent> components;
     
+    //Profile para pricing
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_profile_id", foreignKey = @ForeignKey(name = "product_profile_id_fk"))
+    private ProductProfile productProfile;
     
     public Boolean hasAnInsurancePolicyInForce() {
         return hasAnInsurancePolicyInForce(LocalDate.now());

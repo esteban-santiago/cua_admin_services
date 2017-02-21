@@ -51,4 +51,6 @@ public class Product implements Serializable {
 
     @Enumerated(EnumType.STRING)   
     private ProductType type;
+    
+    private Float price;
 }

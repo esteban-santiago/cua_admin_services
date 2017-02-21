@@ -13,3 +13,8 @@ spring:
         ddl-auto: create
   main:
     banner-mode: 'off'
+    
+security:
+  user:
+    name: user
+    password: password

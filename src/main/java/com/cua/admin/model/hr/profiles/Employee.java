@@ -1,9 +1,6 @@
 package com.cua.admin.model.hr.profiles;
 
 import java.io.Serializable;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import lombok.Data;

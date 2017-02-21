@@ -1,6 +1,5 @@
 package com.cua.admin.controllers.rest.operation;
 
-import com.cua.admin.model.core.profiles.PilotRating;
 import com.cua.admin.model.operation.flight.FlightNature;
 import com.cua.admin.model.operation.flight.FlightPurpose;
 import com.cua.admin.model.operation.flight.FlightType;
