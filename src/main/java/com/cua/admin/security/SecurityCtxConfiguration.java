@@ -16,7 +16,7 @@ public class SecurityCtxConfiguration extends WebSecurityConfigurerAdapter {
         
         http
                 .csrf().disable()
-                //.cors().disable()
+                .cors().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/**").permitAll()

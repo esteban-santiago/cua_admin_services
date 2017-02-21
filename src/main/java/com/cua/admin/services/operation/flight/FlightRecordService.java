@@ -29,12 +29,20 @@ public class FlightRecordService {
         return this.flightRecordRepository.findAll();
     }
     
-    public void create(FlightRecord flightRecord) throws Throwable {
+    public void deleteFlightRecord(Integer id) throws Throwable {
+        flightRecordRepository.delete(id);
+    }
+
+    public void deleteFlightRecord(FlightRecord flightRecord) throws Throwable {
+        this.deleteFlightRecord(flightRecord.getId());
+    }
+
+    public void createFlightRecord(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.OPENED);
         flightRecordRepository.save(flightRecord);
     }
 
-    public void cancel(FlightRecord flightRecord) throws Throwable {
+    public void cancelFlightRecord(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.CANCELED);
         flightRecordRepository.save(flightRecord);
     }    

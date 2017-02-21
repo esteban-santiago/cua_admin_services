@@ -72,8 +72,8 @@ public class CoreRestController {
     }
 
     @RequestMapping(value = "/pilot/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Person getPilot(@PathVariable("id") Integer id) throws Throwable {
-        return personService.getPilot(id);
+    public ResponseEntity<Person> getPilot(@PathVariable("id") Integer id) throws Throwable {
+                return new ResponseEntity<>(personService.getPilot(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/pilot", method = RequestMethod.GET, produces = "application/json")
