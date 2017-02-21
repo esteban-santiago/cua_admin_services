@@ -59,8 +59,7 @@ public class FlightRecord implements Serializable {
     @OneToOne
     @JoinColumn(name = "airfield_destiny_id", nullable = true, foreignKey = @ForeignKey(name = "flight_record_airfield_destiny_id_fk"))
     private Airfield destiny;
-    
-    //private Float amountOfTime; 
+     
     @Enumerated(EnumType.STRING)
     private Status status = Status.OPENED;
     

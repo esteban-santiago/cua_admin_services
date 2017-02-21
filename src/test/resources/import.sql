@@ -180,3 +180,4 @@ INSERT INTO airfield (id, iata_code, name) VALUES(17,'AMA','Roberts La Amalia');
 INSERT INTO airfield (id, iata_code, name) VALUES(18,'AME','Ameghino Sigfrido Rohr Aviagro');
 INSERT INTO airfield (id, iata_code, name) VALUES(19,'AMG','Ameghino');
 INSERT INTO airfield (id, iata_code, name) VALUES(20,'ANA','Parana Aeroclub');
+INSERT INTO airfield (id, iata_code, name) VALUES(21,'MAT','Matanza');
