@@ -37,7 +37,7 @@ public class FlightRecordService {
         this.deleteFlightRecord(flightRecord.getId());
     }
 
-    public void createFlightRecord(FlightRecord flightRecord) throws Throwable {
+    public void saveFlightRecord(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.OPENED);
         flightRecordRepository.save(flightRecord);
     }

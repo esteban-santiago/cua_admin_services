@@ -5,9 +5,7 @@ import com.cua.admin.services.operation.flight.FlightRecordService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,11 +33,11 @@ public class FlightRecordRestController {
 
     @RequestMapping(value = "/flight_record", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<FlightRecord> create(@RequestBody FlightRecord flightRecord) throws Throwable {
-        flightRecordService.createFlightRecord(flightRecord);
+        flightRecordService.saveFlightRecord(flightRecord);
         return new ResponseEntity<>(flightRecord, HttpStatus.CREATED);
     }
                                                                                  
-    @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws Throwable {
         flightRecordService.deleteFlightRecord(id);
         return new ResponseEntity<>(HttpStatus.OK);
