@@ -33,10 +33,15 @@ public class FlightRecordRestController {
 
     @RequestMapping(value = "/flight_record", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<FlightRecord> create(@RequestBody FlightRecord flightRecord) throws Throwable {
-        flightRecordService.saveFlightRecord(flightRecord);
+        if (flightRecord.isOpened()) {
+            flightRecordService.saveFlightRecord(flightRecord);
+        } else if (flightRecord.isClosed()) {
+            flightRecordService.closeFlightRecord(flightRecord);
+        }
+
         return new ResponseEntity<>(flightRecord, HttpStatus.CREATED);
     }
-                                                                                 
+
     @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws Throwable {
         flightRecordService.deleteFlightRecord(id);

@@ -111,9 +111,9 @@ INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('PA-11', 
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C152', 100, 102);
 
 --Product
-INSERT INTO product (price, description, group_id, subgroup_id, type, id) VALUES(1150, 'Cessna 150', 100, 100,'SERVICE', 100);
-INSERT INTO product (price, description, group_id, subgroup_id, type, id) VALUES(1152,'Cessna 152', 100, 102,'SERVICE', 101);
-INSERT INTO product (price, description, group_id, subgroup_id, type, id) VALUES(911,'PA-11', 100, 101,'SERVICE', 102);
+INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 1150, 'Cessna 150', 100, 100,'SERVICE', 100);
+INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 1152,'Cessna 152', 100, 102,'SERVICE', 101);
+INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 911,'PA-11', 100, 101,'SERVICE', 102);
 
 --Product Profile
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (100,100,100,100);

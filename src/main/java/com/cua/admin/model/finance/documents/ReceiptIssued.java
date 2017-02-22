@@ -26,7 +26,6 @@ public class ReceiptIssued extends Document implements Serializable {
             columnDefinition = "BIGINT DEFAULT nextval('document_receipt_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
-    
     private Long legalId;
     
 

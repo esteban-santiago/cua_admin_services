@@ -1,5 +1,6 @@
 package com.cua.admin.model.operation.inventory;
 
+import com.cua.admin.model.finance.Currency;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -51,6 +52,9 @@ public class Product implements Serializable {
 
     @Enumerated(EnumType.STRING)   
     private ProductType type;
+    
+    @Enumerated(EnumType.STRING)
+    private Currency currency = Currency.ARS;
     
     private Float price;
 }

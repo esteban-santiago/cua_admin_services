@@ -1,15 +1,11 @@
 package com.cua.admin.tests.model.operation.flight;
 
-import com.cua.admin.model.operation.flight.CrewMember;
 import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;
-import com.cua.admin.repositories.operation.flight.CrewRepository;
 import com.cua.admin.services.operation.flight.AircraftService;
 import com.cua.admin.services.operation.flight.FlightRecordService;
 import com.cua.admin.services.core.PersonService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
-import java.time.LocalDateTime;
-import java.util.HashSet;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,7 +22,13 @@ public class FlightRecordTests extends SpringIntegrationTest {
     private FlightRecordService flightService;
     
     @Test
-    public void createFlightRecord() throws Throwable {
+    public void flightRecord() throws Throwable {
+        FlightRecord fr = flightService.getFlightRecord(101);
+        System.out.println("-------------------");
+        System.out.println(
+        fr.getCrew().stream()
+                .filter(member -> member.getCrewMemberRole().equals(CrewMemberRole.INST))
+                .findAny().get().getPerson());
         /*
         FlightRecord record = new FlightRecord();
         record.setCrew(new HashSet<>());

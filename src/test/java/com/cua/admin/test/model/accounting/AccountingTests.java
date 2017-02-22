@@ -18,10 +18,10 @@ import java.time.LocalDateTime;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import com.cua.admin.repositories.finance.documents.AccountingDocumentRepository;
 import com.cua.admin.services.accounting.AccountService;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import com.cua.admin.services.finance.DocumentService;
+import com.cua.admin.repositories.finance.documents.DocumentRepository;
 
 
 @Transactional
@@ -34,7 +34,7 @@ public class AccountingTests extends SpringIntegrationTest {
     * Le puse el tipo en el generico para que me tome el mismo en el retorno
     ***************/
     @Autowired
-    private AccountingDocumentRepository<Document> documentRepository; 
+    private DocumentRepository<Document> documentRepository; 
 
     @Autowired
     private AccountingEntryService accountingEntryService;

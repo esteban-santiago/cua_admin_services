@@ -4,6 +4,7 @@ import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.model.operation.flight.exceptions.FlightRecordNotFoundException;
 import com.cua.admin.repositories.operation.flight.AircraftRepository;
 import com.cua.admin.repositories.operation.flight.FlightRecordRepository;
+import com.cua.admin.services.finance.DocumentService;
 import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,9 @@ import org.springframework.stereotype.Service;
 @Transactional
 @RequiredArgsConstructor
 public class FlightRecordService {
-    @Autowired //No es obligatorio
-    private final AircraftRepository aircraftRepository;
+    
+    //Servicio de documentos financieros para grabar en la cuenta corriente
+    private final DocumentService documentService;
     
     @Autowired
     private final FlightRecordRepository flightRecordRepository;
@@ -47,8 +49,9 @@ public class FlightRecordService {
         flightRecordRepository.save(flightRecord);
     }    
     
-    public void close(FlightRecord flightRecord) throws Throwable {
+    public void closeFlightRecord(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.CLOSED);
         flightRecordRepository.save(flightRecord);
+        documentService.saveDocument(flightRecord);
     }
 } 
