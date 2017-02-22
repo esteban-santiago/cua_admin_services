@@ -1,10 +1,5 @@
 package com.cua.admin.model.core.profiles;
 
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
-
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -16,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Data

@@ -1,11 +1,8 @@
 package com.cua.admin.model.finance.billing;
 
 import java.io.Serializable;
-
 import java.util.Set;
-
 import javax.persistence.*;
-
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;

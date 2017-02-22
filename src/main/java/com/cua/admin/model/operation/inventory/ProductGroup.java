@@ -1,11 +1,9 @@
 package com.cua.admin.model.operation.inventory;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

@@ -2,9 +2,9 @@ package com.cua.admin.tests.model.operation.flight;
 
 import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;
+import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.operation.flight.AircraftService;
 import com.cua.admin.services.operation.flight.FlightRecordService;
-import com.cua.admin.services.core.PersonService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

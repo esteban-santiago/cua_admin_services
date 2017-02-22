@@ -2,11 +2,8 @@ package com.cua.admin.model.core.profiles;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import javax.persistence.*;
-
 import lombok.Data;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 

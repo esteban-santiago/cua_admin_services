@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class FlightRecordNotFoundException extends Exception {
 
     public FlightRecordNotFoundException(Integer id) {
-        super("La aeronave " + id + " no existe.");
+        super("La ficha de vuelo " + id + " no existe.");
     }
     
 }

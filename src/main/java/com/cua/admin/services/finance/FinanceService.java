@@ -1,0 +1,46 @@
+package com.cua.admin.services.finance;
+
+import com.cua.admin.model.finance.documents.Document;
+import com.cua.admin.model.finance.documents.FlightRecordIssued;
+import com.cua.admin.model.finance.documents.ReceiptIssued;
+import com.cua.admin.model.operation.flight.CrewMemberRole;
+import com.cua.admin.model.operation.flight.FlightRecord;
+import com.cua.admin.repositories.finance.documents.DocumentRepository;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ *
+ * @author esantiago
+ */
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class FinanceService {
+
+    @Autowired
+    private final DocumentRepository<Document> documentRepository;
+
+    public void saveDocument(FlightRecord flightRecord) {
+        FlightRecordIssued flightRecordIssued = new FlightRecordIssued();
+        flightRecordIssued.setReferencedDocumentId(flightRecord.getId());
+        flightRecordIssued.setAmount(flightRecord.getAmountOfHours() * flightRecord.getAircraft().getProductProfile().getProduct().getPrice());
+        flightRecordIssued.setCurrency(flightRecord.getAircraft().getProductProfile().getProduct().getCurrency());
+        flightRecordIssued.setPerson(flightRecord.getCrew().stream()
+                .filter(member -> member.getCrewMemberRole().equals(CrewMemberRole.PIC))
+                .findAny().get().getPerson());
+        flightRecordIssued.close();
+        documentRepository.saveAndFlush(flightRecordIssued);
+    }
+
+    public void compensate(ReceiptIssued receipt, FlightRecordIssued flightRecord) {
+        this.compensate((Document) receipt, (Document) receipt);
+    }
+
+    private void compensate(Document parent, Document child) {
+
+    }
+
+}

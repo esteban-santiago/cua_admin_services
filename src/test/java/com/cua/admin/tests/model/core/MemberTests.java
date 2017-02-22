@@ -8,7 +8,6 @@ import com.cua.admin.model.core.Person;
 import com.cua.admin.model.core.profiles.Member;
 import com.cua.admin.model.core.profiles.Pilot;
 import com.cua.admin.model.core.profiles.PilotRating;
-import com.cua.admin.model.hr.profiles.Employee;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
 import com.cua.admin.repositories.core.PersonRepository;
@@ -16,7 +15,6 @@ import com.cua.admin.repositories.operation.flight.FlightRecordRepository;
 import com.cua.admin.services.core.PersonService;
 import java.util.HashSet;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 

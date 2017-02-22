@@ -1,14 +1,13 @@
 package com.cua.admin.model.operation.flight;
 
 import com.cua.admin.model.operation.flight.profiles.ProductProfile;
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
+import javax.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Data
 @Entity

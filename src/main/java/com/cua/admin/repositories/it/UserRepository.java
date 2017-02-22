@@ -1,9 +1,8 @@
 package com.cua.admin.repositories.it;
 
 import com.cua.admin.model.it.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -4,6 +4,7 @@ import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.DocumentType;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DocumentRepository<T extends Document> extends JpaRepository<T, Long> {
@@ -11,5 +12,8 @@ public interface DocumentRepository<T extends Document> extends JpaRepository<T,
     List<Document> findByPerson(Person person);
     List<Document> findByDocumentType(DocumentType documentType);
 
-    T findById(Long id);
+    Optional<T> findById(Long id);
+    Optional<T> findByLegalId(Long id);
+    Optional<T> findByReferencedDocumentId(Integer id);
+
 }

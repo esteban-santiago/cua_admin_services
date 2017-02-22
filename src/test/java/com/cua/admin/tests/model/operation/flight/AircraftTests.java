@@ -5,12 +5,10 @@ import com.cua.admin.model.operation.flight.AircraftComponent;
 import com.cua.admin.repositories.operation.flight.AircraftComponentRepository;
 import com.cua.admin.services.operation.flight.AircraftService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
+import java.time.LocalDate;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.LocalDate;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class AircraftTests extends SpringIntegrationTest {
 

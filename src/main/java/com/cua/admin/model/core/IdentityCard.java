@@ -1,11 +1,10 @@
 package com.cua.admin.model.core;
 
-import lombok.*;
-
+import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import java.io.Serializable;
+import lombok.*;
 
 @Data
 @Embeddable

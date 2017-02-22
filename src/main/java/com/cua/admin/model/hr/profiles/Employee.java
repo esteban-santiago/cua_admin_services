@@ -1,7 +1,6 @@
 package com.cua.admin.model.hr.profiles;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;

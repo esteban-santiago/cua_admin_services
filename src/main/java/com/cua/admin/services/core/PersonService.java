@@ -4,17 +4,15 @@ import com.cua.admin.model.core.Person;
 import com.cua.admin.model.core.exceptions.MemberNotFoundException;
 import com.cua.admin.model.core.exceptions.PersonNotFoundException;
 import com.cua.admin.model.core.exceptions.PilotNotFoundException;
-import com.cua.admin.model.it.User;
-import com.cua.admin.model.sales.exceptions.CustomerNotFoundException;
+import com.cua.admin.repositories.core.PersonRepository;
 import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.cua.admin.repositories.core.PersonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 /**
  *

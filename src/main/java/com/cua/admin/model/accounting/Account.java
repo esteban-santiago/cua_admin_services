@@ -1,12 +1,11 @@
 package com.cua.admin.model.accounting;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity

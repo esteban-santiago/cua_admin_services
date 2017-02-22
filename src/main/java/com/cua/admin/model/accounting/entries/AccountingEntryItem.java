@@ -2,13 +2,12 @@ package com.cua.admin.model.accounting.entries;
 
 import com.cua.admin.model.accounting.Account;
 import com.cua.admin.model.finance.Currency;
+import java.io.Serializable;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Lineas del asiento

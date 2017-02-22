@@ -3,11 +3,9 @@ package com.cua.admin.model.operation.flight;
 import com.cua.admin.model.core.Person;
 import java.io.Serializable;
 import javax.persistence.*;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 

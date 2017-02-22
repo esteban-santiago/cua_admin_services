@@ -1,7 +1,6 @@
 package com.cua.admin.repositories.accounting;
 
 import com.cua.admin.model.accounting.Account;
-
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

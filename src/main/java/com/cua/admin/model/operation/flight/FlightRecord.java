@@ -1,17 +1,13 @@
 package com.cua.admin.model.operation.flight;
 
-import lombok.Data;
-
-import javax.persistence.*;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-
 import java.util.Set;
+import javax.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Data
 @Entity
@@ -33,7 +29,7 @@ public class FlightRecord implements Serializable {
     @JoinColumn(name = "flight_record_id",nullable = false, foreignKey = @ForeignKey(name = "flight_record_crew_member_id_fk"))
     private Set<CrewMember> crew;
     
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name = "aircraft_id", nullable = false, foreignKey = @ForeignKey(name = "flight_record_aircraft_id_fk"))
     private Aircraft aircraft;
  

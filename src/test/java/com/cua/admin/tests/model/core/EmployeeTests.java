@@ -1,9 +1,8 @@
 package com.cua.admin.tests.model.core;
 
+import com.cua.admin.model.core.*;
 import com.cua.admin.model.core.profiles.Category;
 import com.cua.admin.model.hr.profiles.Activity;
-import com.cua.admin.model.hr.profiles.Employee;
-import com.cua.admin.model.core.*;
 import com.cua.admin.repositories.core.ActivityRepository;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
@@ -11,8 +10,6 @@ import com.cua.admin.repositories.core.PersonRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
-import java.util.HashSet;
 
 public class EmployeeTests extends SpringIntegrationTest {
 

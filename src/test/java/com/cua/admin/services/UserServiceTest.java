@@ -1,17 +1,16 @@
 package com.cua.admin.services;
 
-import com.cua.admin.services.it.UserService;
 import com.cua.admin.model.it.User;
 import com.cua.admin.repositories.it.UserRepository;
+import com.cua.admin.services.it.UserService;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  * Este es un ejemplo de Unit Test

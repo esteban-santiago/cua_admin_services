@@ -1,15 +1,16 @@
 package com.cua.admin.services.accounting;
 
-import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.accounting.entries.AccountingEntry;
+import com.cua.admin.model.accounting.entries.TemplateEntry;
+import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.entry.AccountingEntryRepository;
+import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
 import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.cua.admin.repositories.finance.documents.DocumentRepository;
 
 /**
  *
@@ -21,19 +22,19 @@ import com.cua.admin.repositories.finance.documents.DocumentRepository;
 public class AccountingEntryService {
     @Autowired
     private final AccountRepository accountRepository;
-
+    
+    @Autowired
+    private final TemplateEntryRepository templateEntryRepository;
+    
     @Autowired
     private final AccountingEntryRepository accountingEntryRepository; 
     
-    @Autowired
-    private final DocumentRepository<Document> accountingDocumentRepository;
-    
-    
-    public void saveDocument(Document document) {
-        document.close();
-        this.accountingDocumentRepository.saveAndFlush(document);
+    //Asientos contables
+    public void saveAccountingEntryUsingTemplate(Document document){
+        TemplateEntry template = templateEntryRepository.findByDocumentType(document.getDocumentType());
+        this.accountingEntryRepository.save(template.getAccountingEntry(document));
     }
-        
+    
     public void save(AccountingEntry entry) {
        this.accountingEntryRepository.save(entry);
     }

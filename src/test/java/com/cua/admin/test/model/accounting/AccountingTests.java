@@ -1,27 +1,26 @@
 package com.cua.admin.test.model.accounting;
+import com.cua.admin.model.accounting.entries.AccountingEntry;
+import com.cua.admin.model.accounting.entries.AccountingEntryItem;
+import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
 import com.cua.admin.model.finance.Currency;
-import com.cua.admin.model.finance.documents.ReceiptIssued;
-import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.finance.documents.CreditNoteIssued;
 import com.cua.admin.model.finance.documents.Document;
-import com.cua.admin.model.accounting.entries.AccountingEntryItem;
-import com.cua.admin.model.accounting.entries.AccountingEntry;
-import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
-import com.cua.admin.repositories.it.UserRepository;
+import com.cua.admin.model.finance.documents.FlightRecordIssued;
+import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
 import com.cua.admin.repositories.finance.billing.PaymentMethodRepository;
-import com.cua.admin.tests.model.core.SpringIntegrationTest;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import javax.transaction.Transactional;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import com.cua.admin.repositories.finance.documents.DocumentRepository;
+import com.cua.admin.repositories.it.UserRepository;
 import com.cua.admin.services.accounting.AccountService;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import com.cua.admin.services.finance.DocumentService;
-import com.cua.admin.repositories.finance.documents.DocumentRepository;
+import com.cua.admin.tests.model.core.SpringIntegrationTest;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import javax.transaction.Transactional;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Transactional
@@ -64,7 +63,7 @@ public class AccountingTests extends SpringIntegrationTest {
     public void getTemplateEntry() {
         //Contabilizar los documentos de Ficha de Vuelo
         documentRepository.findAll().forEach(
-                RCIDocument -> documentService.saveAccountingEntryUsingTemplate(RCIDocument)
+                RCIDocument -> accountingEntryService.saveAccountingEntryUsingTemplate(RCIDocument)
         );
 
         System.out.println("----------------Asiento automáticos----------");
