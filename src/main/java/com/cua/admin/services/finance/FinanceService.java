@@ -31,7 +31,7 @@ public class FinanceService {
         flightRecordIssued.setPerson(flightRecord.getCrew().stream()
                 .filter(member -> member.getCrewMemberRole().equals(CrewMemberRole.PIC))
                 .findAny().get().getPerson());
-        flightRecordIssued.close();
+        flightRecordIssued.open();
         documentRepository.saveAndFlush(flightRecordIssued);
     }
 

@@ -46,10 +46,8 @@ public class CoreRestController {
 
     @RequestMapping(value="/person/{id}", method=RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<Person> update(@RequestBody Person person){
-        //HttpHeaders headers = new HttpHeaders();
         personService.save(person);
-        //headers.add("id", person.getId().toString());
-        return new ResponseEntity<>(person, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(person, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/sapi/person", 

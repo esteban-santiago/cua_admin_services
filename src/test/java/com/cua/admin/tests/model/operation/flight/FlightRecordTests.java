@@ -23,7 +23,7 @@ public class FlightRecordTests extends SpringIntegrationTest {
     
     @Test
     public void flightRecord() throws Throwable {
-        FlightRecord fr = flightService.getFlightRecord(101);
+        FlightRecord fr = flightService.get(101);
         System.out.println("-------------------");
         System.out.println(
         fr.getCrew().stream()

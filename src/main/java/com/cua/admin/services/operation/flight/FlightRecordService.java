@@ -19,38 +19,44 @@ public class FlightRecordService {
     private final FlightRecordRepository flightRecordRepository;
 
     //Servicio de movimientos financieros para grabar en la cuenta corriente
-    private final FinanceService financeService;   
+    private final FinanceService financeService;
 
-    public FlightRecord getFlightRecord(Integer id) throws Throwable {
+    public FlightRecord get(Integer id) throws Throwable {
         return flightRecordRepository.findById(id).orElseThrow(
-        () -> new FlightRecordNotFoundException(id));
+                () -> new FlightRecordNotFoundException(id));
     }
 
-    public List<FlightRecord> getAllFlightRecord() {
+    public List<FlightRecord> getAll() {
         return this.flightRecordRepository.findAll();
     }
-    
-    public void deleteFlightRecord(Integer id) throws Throwable {
+
+    public void delete(Integer id) throws Throwable {
         flightRecordRepository.delete(id);
     }
 
-    public void deleteFlightRecord(FlightRecord flightRecord) throws Throwable {
-        this.deleteFlightRecord(flightRecord.getId());
+    public void delete(FlightRecord flightRecord) throws Throwable {
+        this.delete(flightRecord.getId());
     }
 
-    public void saveFlightRecord(FlightRecord flightRecord) throws Throwable {
-        flightRecord.setStatus(FlightRecord.Status.OPENED);
-        flightRecordRepository.save(flightRecord);
+    public void save(FlightRecord flightRecord) throws Throwable {
+        if (flightRecord.isClosed()) {
+            this.close(flightRecord);
+        } else if (flightRecord.isCanceled()) {
+            this.cancel(flightRecord);
+        } else {
+            flightRecord.setStatus(FlightRecord.Status.OPENED);
+            flightRecordRepository.save(flightRecord);
+        }
     }
 
-    public void cancelFlightRecord(FlightRecord flightRecord) throws Throwable {
+    public void cancel(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.CANCELED);
         flightRecordRepository.save(flightRecord);
-    }    
-    
-    public void closeFlightRecord(FlightRecord flightRecord) throws Throwable {
+    }
+
+    public void close(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.CLOSED);
         flightRecordRepository.save(flightRecord);
         financeService.saveDocument(flightRecord);
     }
-} 
+}

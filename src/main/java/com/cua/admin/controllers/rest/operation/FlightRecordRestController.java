@@ -23,28 +23,29 @@ public class FlightRecordRestController {
 
     @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<FlightRecord> get(@PathVariable("id") Integer id) throws Throwable {
-        return new ResponseEntity<>(flightRecordService.getFlightRecord(id), HttpStatus.OK);
+        return new ResponseEntity<>(flightRecordService.get(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/flight_record", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<FlightRecord>> get() {
-        return new ResponseEntity<>(flightRecordService.getAllFlightRecord(), HttpStatus.OK);
+        return new ResponseEntity<>(flightRecordService.getAll(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/flight_record", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<FlightRecord> create(@RequestBody FlightRecord flightRecord) throws Throwable {
-        if (flightRecord.isOpened()) {
-            flightRecordService.saveFlightRecord(flightRecord);
-        } else if (flightRecord.isClosed()) {
-            flightRecordService.closeFlightRecord(flightRecord);
-        }
-
+        flightRecordService.save(flightRecord);
         return new ResponseEntity<>(flightRecord, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    public ResponseEntity<FlightRecord> save(@RequestBody FlightRecord flightRecord) throws Throwable {
+        flightRecordService.save(flightRecord);
+        return new ResponseEntity<>(flightRecord, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws Throwable {
-        flightRecordService.deleteFlightRecord(id);
+        flightRecordService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
