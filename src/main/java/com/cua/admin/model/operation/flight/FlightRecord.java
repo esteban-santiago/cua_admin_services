@@ -37,7 +37,7 @@ public class FlightRecord implements Serializable {
     
     private LocalDateTime endFlight;
     
-    private Integer landings = 1;
+    private Integer landings;
     
     @Enumerated(EnumType.STRING)
     private FlightPurpose purpose = FlightPurpose.VP;//Finalidad 
