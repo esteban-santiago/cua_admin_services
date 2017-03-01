@@ -10,11 +10,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DocumentRepository<T extends Document> extends JpaRepository<T, Long> {
 
-    List<Document> findByPerson(Person person);
-    List<Document> findByDocumentType(DocumentType documentType);
+    List<T> findByPerson(Person person);
+    List<T> findByDocumentType(DocumentType documentType);
 
     Optional<T> findById(Long id);
-    Optional<FlightRecordIssued> findByLegalId(Long id);
+    Optional<T> findByLegalId(Long id);
     Optional<T> findByReferencedDocumentId(Integer id);
 
 }

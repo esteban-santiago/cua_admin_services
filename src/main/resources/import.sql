@@ -35,7 +35,6 @@ INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, i
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (102, '1974-08-02', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Guillermo', 'ACTIVE',NULL, NULL, 102, 101,1);
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (103, '1987-01-27', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Gustavo', 'ACTIVE',NULL, NULL, 103, 102,2);
 
-
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');
 INSERT INTO users (id, name, password, profile, status) VALUES (101,'psantiago','passwd','ADMINISTRATOR','ACTIVE');

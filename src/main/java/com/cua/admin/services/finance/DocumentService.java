@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 /**
  *
  * @author esantiago
+ * @param <T>
  */
 @Service
 @Transactional
@@ -21,16 +22,14 @@ public class DocumentService {
 
     @Autowired
     private final DocumentRepository<Document> documentRepository;
+    
 
-    @Autowired
-    private final DocumentRepository<FlightRecordIssued> FRIRepository;
-
-    public Document get(Long id) throws Throwable {
+    public <T extends Document> get(Long id) throws Throwable {
         return this.documentRepository.findById(id).orElseThrow(
                 () -> new DocumentNotFoundException(id));
     }
 
-    public FlightRecordIssued getByLegalId(Long id) throws Throwable {
+    public <T extends Document> getByLegalId(Long id) throws Throwable {
         return this.documentRepository.findByLegalId(id).orElseThrow(
                 () -> new DocumentNotFoundException(id));
     }

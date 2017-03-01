@@ -53,11 +53,17 @@ public class AccountingTests extends SpringIntegrationTest {
     @Autowired
     private TemplateEntryRepository templateEntryRepository;
     
-    
     @Test
     public void getAllAccounts(){
         accountService.getAll().stream().forEach(account -> System.out.println(account.toFormattedStringWithDescription()));
     }
+    
+    @Test
+    public void recordAccountingEntry() throws Throwable {
+        FlightRecordIssued fri = documentService.get(100L);
+        accountingEntryService.saveAccountingEntryUsingTemplate(fri);
+    }
+    
     
     @Test
     public void getTemplateEntry() {
