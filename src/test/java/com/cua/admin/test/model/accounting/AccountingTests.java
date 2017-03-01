@@ -1,4 +1,5 @@
 package com.cua.admin.test.model.accounting;
+
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.AccountingEntryItem;
 import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
@@ -15,12 +16,14 @@ import com.cua.admin.services.accounting.AccountService;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import com.cua.admin.services.finance.DocumentService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import javax.transaction.Transactional;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @Transactional
@@ -60,7 +63,7 @@ public class AccountingTests extends SpringIntegrationTest {
     
     @Test
     public void recordAccountingEntry() throws Throwable {
-        FlightRecordIssued fri = documentService.get(100L);
+        Document fri = documentService.get(100L);
         accountingEntryService.saveAccountingEntryUsingTemplate(fri);
     }
     
