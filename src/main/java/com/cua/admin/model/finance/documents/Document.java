@@ -1,19 +1,20 @@
 package com.cua.admin.model.finance.documents;
 
-import com.cua.admin.model.core.*;
+import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.billing.PaymentMethod;
 import com.cua.admin.model.finance.billing.PaymentTerm;
 import com.cua.admin.model.it.User;
-import java.io.Serializable;
-import java.time.LocalDate;
-import javax.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Data
 @ToString(exclude = "compensationDocument")
@@ -23,15 +24,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class Document implements Serializable {
 
     @GenericGenerator(
-            name = "SequenceGenerator",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                @Parameter(name = "sequence_name", value = "accounting_document_id_seq")
-                ,
-                    @Parameter(name = "initial_value", value = "1")
-                ,
-                    @Parameter(name = "increment_size", value = "1")
-            }
+        name = "SequenceGenerator",
+        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+        parameters = {
+            @Parameter(name = "sequence_name", value = "accounting_document_id_seq"),
+            @Parameter(name = "initial_value", value = "1"),
+            @Parameter(name = "increment_size", value = "1")
+        }
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id

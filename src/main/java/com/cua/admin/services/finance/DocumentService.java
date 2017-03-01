@@ -15,15 +15,16 @@ public class DocumentService {
 
     private final DocumentRepository<Document> documentRepository;
 
-    public Document get(Long id) throws Throwable {
-        return this.documentRepository.findById(id)
+    @SuppressWarnings("unchecked")
+    public <T extends Document> T get(Long id) throws Throwable {
+        return (T) this.documentRepository.findById(id)
             .orElseThrow(() -> new DocumentNotFoundException(id));
     }
 
-    public Document getByLegalId(Long id) throws Throwable {
-        return this.documentRepository.findByLegalId(id)
-            .orElseThrow(() -> new DocumentNotFoundException(id));
-    }
+//    public Document getByLegalId(Long id) throws Throwable {
+//        return this.documentRepository.findByLegalId(id)
+//            .orElseThrow(() -> new DocumentNotFoundException(id));
+//    }
 
     public void save(Document document) {
         document.close();
