@@ -15,7 +15,7 @@ public class DocumentService {
 
     private final DocumentRepository<Document> documentRepository;
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public <T extends Document> T get(Long id) throws Throwable {
         return (T) this.documentRepository.findById(id)
             .orElseThrow(() -> new DocumentNotFoundException(id));

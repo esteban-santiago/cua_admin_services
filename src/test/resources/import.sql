@@ -68,11 +68,6 @@ INSERT INTO  payment_term (id, charge, description, discount, payment_method_id)
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (4, 0.10,'3 Cuotas', 0,4);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0,'1 Cuota', 0,5);
 
---Receipt Issued
---INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (200, -2400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,1, NULL,100);
---INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (201, -3400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,4, 3,100);
---INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, member_id, payment_method_id, payment_term_id, user_id) VALUES (202, -4110,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,5, NULL,100);
-
 --Account
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(100,1,0,0,0,'Activo');
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(200,1,1,0,0,'Caja y Bancos');
@@ -161,6 +156,12 @@ INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (
 INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,100);
 INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,101);
 --INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (102, 4110,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
+
+--Receipt Issued
+INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, person_id, payment_method_id, payment_term_id, user_id) VALUES (200, -2400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,1, NULL,100);
+INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, person_id, payment_method_id, payment_term_id, user_id) VALUES (201, -3400,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,4, 3,100);
+INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensation_document_id, person_id, payment_method_id, payment_term_id, user_id) VALUES (202, -4110,'2017-01-09','2017-01-09','ARS','RCI','2017-01-09', 0, 'CLOSED' ,100, 100,5, NULL,100);
+
 
 --Airfields
 INSERT INTO airfield (id, iata_code, name) VALUES(1,'ACB','Coronel Bogado Agroservicios');

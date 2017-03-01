@@ -63,8 +63,11 @@ public class AccountingTests extends SpringIntegrationTest {
 
     @Test
     public void recordAccountingEntry() throws Throwable {
-        FlightRecordIssued fri = documentService.get(100L);
-        accountingEntryService.saveAccountingEntryUsingTemplate(fri);
+        ReceiptIssued fri = documentService.get(200L);
+        accountingEntryService.saveAccountingEntryUsingTemplate(fri);        
+        System.out.println("---------------- Asiento automáticos 2 ----------");
+        accountingEntryService.getAll().stream().forEach(entry -> System.out.println(entry));
+        System.out.println("----------------...-----------------");
     }
 
 
