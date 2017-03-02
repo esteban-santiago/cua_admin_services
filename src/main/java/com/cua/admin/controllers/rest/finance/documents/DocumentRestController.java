@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,8 +28,8 @@ public class DocumentRestController {
         return new ResponseEntity<>(documentService.getAllByType(DocumentType.FRI), HttpStatus.OK);
     }
         
-    @RequestMapping(value = "/{person_id}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List <? extends Document>> get(@PathVariable("person_id") Integer id) {
+    @RequestMapping(value = "/",  params = { "person_id" }, method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List <? extends Document>> get(@RequestParam(value = "person_id") Integer id) {
         return new ResponseEntity<>(documentService.getAllByPerson(id), HttpStatus.OK);
     }
 

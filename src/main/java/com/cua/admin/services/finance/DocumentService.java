@@ -29,7 +29,7 @@ public class DocumentService {
     }
     
     public List<? extends Document> getAllByPerson(Integer person_id) {
-        return this.documentRepository.findByPerson(person_id);
+        return this.documentRepository.findByPerson_Id(person_id);
     }
 //    public Document getByLegalId(Long id) throws Throwable {
 //        return this.documentRepository.findByLegalId(id)
