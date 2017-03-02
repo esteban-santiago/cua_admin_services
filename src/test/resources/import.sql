@@ -95,7 +95,7 @@ INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'A
 INSERT INTO template_entry (id, document_type, description) VALUES(101,'RCI', 'Asiento automatico de Recibo');
 --Template Entry Line FRI
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(100, 'ENTRY_LINE_DOCUMENT_TYPE','DEBIT','FRI',1,2100,100);
-INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(101, 'ENTRY_LINE_PAYMENT_METHOD', 'CREDIT',1,8500,3,100);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(101, 'ENTRY_LINE_DOCUMENT_TYPE','CREDIT','FRI',1,8500,100);
 --Template Entry Line RCI
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(102, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,400,1,101);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(103, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,600,2,101);

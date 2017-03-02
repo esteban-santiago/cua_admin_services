@@ -57,6 +57,6 @@ public class FlightRecordService {
     public void close(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.CLOSED);
         flightRecordRepository.save(flightRecord);
-        financeService.saveDocument(flightRecord);
+        financeService.save(flightRecord);
     }
 }

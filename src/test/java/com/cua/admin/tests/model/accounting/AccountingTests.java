@@ -1,4 +1,4 @@
-package com.cua.admin.test.model.accounting;
+package com.cua.admin.tests.model.accounting;
 
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.AccountingEntryItem;
@@ -32,9 +32,6 @@ public class AccountingTests extends SpringIntegrationTest {
     //@Autowired
     //private AccountRepository accountRepository;
 
-    /*
-    * Le puse el tipo en el generico para que me tome el mismo en el retorno
-    ***************/
     @Autowired
     private DocumentRepository<Document> documentRepository;
 
@@ -63,7 +60,7 @@ public class AccountingTests extends SpringIntegrationTest {
 
     @Test
     public void recordAccountingEntry() throws Throwable {
-        ReceiptIssued fri = documentService.get(200L);
+        FlightRecordIssued fri = documentService.get(100L);
         accountingEntryService.saveAccountingEntryUsingTemplate(fri);        
         System.out.println("---------------- Asiento automáticos 2 ----------");
         accountingEntryService.getAll().stream().forEach(entry -> System.out.println(entry));

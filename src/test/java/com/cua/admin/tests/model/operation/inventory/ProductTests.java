@@ -1,4 +1,4 @@
-package com.cua.admin.test.model.operation.inventory;
+package com.cua.admin.tests.model.operation.inventory;
 
 import com.cua.admin.model.operation.inventory.Product;
 import com.cua.admin.model.operation.inventory.ProductGroup;

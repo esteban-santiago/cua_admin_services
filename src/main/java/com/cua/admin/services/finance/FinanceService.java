@@ -6,6 +6,7 @@ import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.repositories.finance.documents.DocumentRepository;
+import com.cua.admin.services.accounting.AccountingEntryService;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,12 @@ import org.springframework.stereotype.Service;
 public class FinanceService {
 
     @Autowired
-    private final DocumentRepository<Document> documentRepository;
+    private DocumentRepository<Document> documentRepository;
+    
+    @Autowired
+    private AccountingEntryService accountingEntryService;
 
-    public void saveDocument(FlightRecord flightRecord) {
+    public void save(FlightRecord flightRecord) {
         FlightRecordIssued flightRecordIssued = new FlightRecordIssued();
         flightRecordIssued.setReferencedDocumentId(flightRecord.getId());
         flightRecordIssued.setAmount(flightRecord.getAmountOfHours() * flightRecord.getAircraft().getProductProfile().getProduct().getPrice());
@@ -32,7 +36,10 @@ public class FinanceService {
                 .filter(member -> member.getCrewMemberRole().equals(CrewMemberRole.PIC))
                 .findAny().get().getPerson());
         flightRecordIssued.open();
+        //Graba el documento
         documentRepository.saveAndFlush(flightRecordIssued);
+        //Contabiliza el documento (crea el asiento)
+        accountingEntryService.saveAccountingEntryUsingTemplate(flightRecordIssued);
     }
 
     public void compensate(ReceiptIssued receipt, FlightRecordIssued flightRecord) {
