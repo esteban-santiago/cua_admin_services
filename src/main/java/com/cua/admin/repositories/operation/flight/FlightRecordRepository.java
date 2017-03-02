@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface FlightRecordRepository extends JpaRepository<FlightRecord, Integer> {
 
     Optional<FlightRecord> findById(Integer id);
+
 }

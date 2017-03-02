@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/sapi")
+@RequestMapping("/sapi/operation")
 @RequiredArgsConstructor
 public class FlightRecordRestController {
 

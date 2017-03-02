@@ -1,7 +1,6 @@
 package com.cua.admin.controllers.rest.accounting;
 
 import com.cua.admin.model.accounting.Account;
-import com.cua.admin.model.core.Person;
 import com.cua.admin.services.accounting.AccountService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/sapi")
+@RequestMapping("/sapi/accounting")
 @RequiredArgsConstructor
 public class AccountingRestController {
 

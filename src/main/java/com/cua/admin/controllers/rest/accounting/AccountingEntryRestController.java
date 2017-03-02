@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/sapi")
+@RequestMapping("/sapi/accounting")
 @RequiredArgsConstructor
 public class AccountingEntryRestController {
 

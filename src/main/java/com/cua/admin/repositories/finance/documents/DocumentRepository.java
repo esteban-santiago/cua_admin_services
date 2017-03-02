@@ -12,6 +12,8 @@ public interface DocumentRepository<T extends Document> extends JpaRepository<T,
 
     List<T> findByPerson(Person person);
 
+    List<T> findByPerson(Integer person_id);
+
     List<T> findByDocumentType(DocumentType documentType);
 
     Optional<T> findById(Long id);
