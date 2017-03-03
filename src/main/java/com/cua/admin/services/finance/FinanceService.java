@@ -41,9 +41,10 @@ public class FinanceService {
         //Contabiliza el documento (crea el asiento)
         accountingEntryService.saveAccountingEntryUsingTemplate(flightRecordIssued);
     }
-
-    public void compensate(ReceiptIssued receipt, FlightRecordIssued flightRecord) {
-        this.compensate((Document) receipt, (Document) receipt);
+    
+    
+    public void compensate(ReceiptIssued receipt, FlightRecordIssued flightRecordIssued) {
+        this.compensate((Document) receipt, (Document) flightRecordIssued);
     }
 
     private void compensate(Document parent, Document child) {

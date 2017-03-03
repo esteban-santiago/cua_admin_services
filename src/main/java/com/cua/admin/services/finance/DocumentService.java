@@ -31,6 +31,11 @@ public class DocumentService {
     public List<? extends Document> getAllByPerson(Integer person_id) {
         return this.documentRepository.findByPerson_Id(person_id);
     }
+
+    public List<? extends Document> getAll() {
+        return this.documentRepository.findAll();
+    }
+
 //    public Document getByLegalId(Long id) throws Throwable {
 //        return this.documentRepository.findByLegalId(id)
 //            .orElseThrow(() -> new DocumentNotFoundException(id));

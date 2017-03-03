@@ -3,6 +3,7 @@ package com.cua.admin.repositories.finance.documents;
 import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.DocumentType;
+import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface DocumentRepository<T extends Document> extends JpaRepository<T,
 
     Optional<T> findById(Long id);
 
-    //    Optional<T> findByLegalId(Long id);
+    Optional<FlightRecordIssued> findFlightRecordIssuedByLegalId(Long id);
 
     Optional<T> findByReferencedDocumentId(Integer id);
 
