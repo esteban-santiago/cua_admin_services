@@ -22,13 +22,17 @@ public class DocumentRestController {
     private DocumentService documentService;
 
     @RequestMapping(value = "/flight_record_issued", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<? extends Document>> get() {
+    public ResponseEntity<List<? extends Document>> getFlightRecordsIssued() {
         return new ResponseEntity<>(documentService.getAllByType(DocumentType.FRI), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/", params = {"person_id"}, method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<? extends Document>> get(@RequestParam(value = "person_id") Integer id) {
+    public ResponseEntity<List<? extends Document>> getByPerson(@RequestParam(value = "person_id") Integer id) {
         return new ResponseEntity<>(documentService.getAllByPerson(id), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List<? extends Document>> get() {
+        return new ResponseEntity<>(documentService.getAll(), HttpStatus.OK);
+    }
 }
