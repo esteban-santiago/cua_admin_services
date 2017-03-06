@@ -38,21 +38,11 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         ReceiptIssued rci = new ReceiptIssued();
         rci.setAmount(3544F);
         rci.setCurrency(Currency.ARS);
-        //rci.setCompensationDocumentId(rci.getId());
-        rci.setCompensationDocument(rci);
-        rci.setCompensationDate(LocalDate.now());
-        rci.setPaymentMethod(paymentMethodRepository.findById(1)); //Cash
-        rci.close();
-        documentRepository.saveAndFlush(rci);
+
+        financeService.compensate(rci, fve);
+        
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
-
-        //Compensando Ficha de vuelo
-        fve.setCompensationDate(LocalDate.now());
-        //fve.setCompensationDocumentId(rci.getId());
-        fve.setCompensationDocument(rci);
-        fve.close();
-        documentRepository.save(fve);
 
         CreditNoteIssued nce = new CreditNoteIssued();
         nce.setAmount(1544F);
