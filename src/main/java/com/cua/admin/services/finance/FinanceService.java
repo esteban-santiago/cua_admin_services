@@ -8,6 +8,7 @@ import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.repositories.finance.documents.DocumentRepository;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import java.time.LocalDate;
+import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,12 @@ import org.springframework.stereotype.Service;
 public class FinanceService {
 
     @Autowired
-    private DocumentRepository<Document> documentRepository;
+    private DocumentService documentService;
 
     @Autowired
     private AccountingEntryService accountingEntryService;
 
-    public void save(FlightRecord flightRecord) {
+    public void save(FlightRecord flightRecord) throws Throwable {
         FlightRecordIssued flightRecordIssued = new FlightRecordIssued();
         flightRecordIssued.setReferencedDocumentId(flightRecord.getId());
         flightRecordIssued.setAmount(flightRecord.getAmountOfHours() * flightRecord.getAircraft().getProductProfile().getProduct().getPrice());
@@ -37,25 +38,33 @@ public class FinanceService {
                 .filter(member -> member.getCrewMemberRole().equals(CrewMemberRole.PIC))
                 .findAny().get().getPerson());
         flightRecordIssued.open();
+        save(flightRecordIssued);
+    }
+    
+    public <T extends Document> void save(T document) throws Throwable {
+        saveAndCreateEntry(document);
+    }
+    
+    private void saveAndCreateEntry(Document document) throws Throwable {
         //Graba el documento
-        documentRepository.saveAndFlush(flightRecordIssued);
+        documentService.save(document);        
         //Contabiliza el documento (crea el asiento)
-        accountingEntryService.saveAccountingEntryUsingTemplate(flightRecordIssued);
+        accountingEntryService.saveAccountingEntryUsingTemplate(document);
+    }
+    
+    public <T extends Document> void compensate(T parent, List<T> childs) {
+        childs.forEach(child -> compensate(parent, child));
     }
 
-    public void compensate(ReceiptIssued receipt, FlightRecordIssued flightRecordIssued) {
-        this.compensate((Document) receipt, (Document) flightRecordIssued);
-    }
-
-    private void compensate(Document parent, Document child) {
+    public <T extends Document> void compensate(T parent, T child) {
         parent.setCompensationDocument(parent);
         parent.setCompensationDate(LocalDate.now());
         parent.close();
-        documentRepository.save(parent);
+        documentService.save(parent);
         child.setCompensationDate(LocalDate.now());
         child.setCompensationDocument(parent);
         child.close();
-        documentRepository.save(child);
+        documentService.save(child);
     }
 
 }

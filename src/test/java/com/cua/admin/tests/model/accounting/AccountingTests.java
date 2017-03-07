@@ -6,7 +6,6 @@ import com.cua.admin.model.accounting.entries.AccountingEntryItemType;
 import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
-import com.cua.admin.repositories.finance.billing.PaymentMethodRepository;
 import com.cua.admin.repositories.it.UserRepository;
 import com.cua.admin.services.accounting.AccountService;
 import com.cua.admin.services.accounting.AccountingEntryService;
@@ -18,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-
 
 @Transactional
 public class AccountingTests extends SpringIntegrationTest {
@@ -41,32 +38,32 @@ public class AccountingTests extends SpringIntegrationTest {
 
     @Test
     public void getAllAccounts() {
-        accountService.getAll().stream().forEach(account -> System.out.println(account.toFormattedStringWithDescription()));
+        accountService.getAll().stream().forEach(
+                account -> System.out.println(account.toFormattedStringWithDescription())
+        );
     }
 
     @Test
     public void recordAccountingEntry() throws Throwable {
         FlightRecordIssued fri = documentService.get(100L);
-        accountingEntryService.saveAccountingEntryUsingTemplate(fri);        
+        accountingEntryService.saveAccountingEntryUsingTemplate(fri);
         System.out.println("---------------- Asiento automáticos 2 ----------");
         accountingEntryService.getAll().stream().forEach(entry -> System.out.println(entry));
         System.out.println("----------------...-----------------");
     }
 
-
     @Test
-    public void getTemplateEntry() {
+    public void getTemplateEntry() throws Throwable {
         //Contabilizar los documentos de Ficha de Vuelo
-        documentService.getAll().forEach(
-            RCIDocument -> accountingEntryService.saveAccountingEntryUsingTemplate(RCIDocument)
+        documentService.getAll().forEach(RCIDocument -> 
+            accountingEntryService.saveAccountingEntryUsingTemplate(RCIDocument)
         );
-
+                
         System.out.println("----------------Asiento automáticos----------");
         accountingEntryService.getAll().stream().forEach(entry -> System.out.println(entry));
         System.out.println("----------------...-----------------");
 
     }
-
 
     @Test
     public void createAccountingEntry() {
@@ -95,9 +92,9 @@ public class AccountingTests extends SpringIntegrationTest {
 
         System.out.println("--------Asientos---------");
         accountingEntryService.getAll().stream()
-            .forEach((_entry) -> {
-                System.out.println(_entry);
-            });
+                .forEach((_entry) -> {
+                    System.out.println(_entry);
+                });
     }
 
 }

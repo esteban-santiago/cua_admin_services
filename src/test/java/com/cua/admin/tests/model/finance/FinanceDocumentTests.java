@@ -7,9 +7,10 @@ import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.repositories.finance.billing.PaymentMethodRepository;
 import com.cua.admin.repositories.finance.documents.DocumentRepository;
+import com.cua.admin.services.accounting.AccountingEntryService;
+import com.cua.admin.services.finance.DocumentService;
 import com.cua.admin.services.finance.FinanceService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
-import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,24 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
     private FinanceService financeService; 
     
     @Autowired
+    private DocumentService documentService; 
+
+    @Autowired
     private DocumentRepository<Document> documentRepository;           
  
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;   
+    
+    @Autowired
+    private AccountingEntryService accountingEntryService;
     
     @Test
     public void compensate() throws Throwable {
         FlightRecordIssued fve = new FlightRecordIssued();
         fve.setAmount(3544F);
         fve.setCurrency(Currency.ARS);
-        documentRepository.saveAndFlush(fve);
+        financeService.save(fve);
+        
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
 
@@ -43,19 +51,28 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
-
+        financeService.save(rci);
+        /*
         CreditNoteIssued nce = new CreditNoteIssued();
         nce.setAmount(1544F);
         nce.setCurrency(Currency.ARS);
         nce.setPaymentMethod(paymentMethodRepository.findById(1));
-        documentRepository.saveAndFlush(nce);
+        financeService.save(nce);
         assertThat(nce.getId()).isGreaterThan(0);
         assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
-
+        */
+        
         System.out.println("--------Documentos---------");
-        documentRepository.findAll().stream().forEach((document) -> {
+        documentService.getAll().stream().forEach((document) -> {
             System.out.println(document);
         });
+
+        System.out.println("--------Asientos---------");
+        accountingEntryService.getAll().stream().forEach((entry) -> {
+            System.out.println(entry);
+        });
+        
+        
     }
 
 }

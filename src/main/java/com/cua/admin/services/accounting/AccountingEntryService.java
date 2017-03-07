@@ -2,6 +2,7 @@ package com.cua.admin.services.accounting;
 
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.TemplateEntry;
+import com.cua.admin.model.accounting.entries.exceptions.TemplateEntryNotFoundException;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.entry.AccountingEntryRepository;
@@ -20,8 +21,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 @RequiredArgsConstructor
 public class AccountingEntryService {
-    @Autowired
-    private final AccountRepository accountRepository;
     
     @Autowired
     private final TemplateEntryRepository templateEntryRepository;
@@ -31,7 +30,8 @@ public class AccountingEntryService {
     
     //Asientos contables
     public void saveAccountingEntryUsingTemplate(Document document){
-        TemplateEntry template = templateEntryRepository.findByDocumentType(document.getDocumentType());
+        TemplateEntry template = templateEntryRepository
+                .findByDocumentType(document.getDocumentType()).get();
         this.accountingEntryRepository.save(template.getAccountingEntry(document));
     }
     
