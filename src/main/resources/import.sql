@@ -82,8 +82,10 @@ INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_g
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(10500,4,2,1,7,'Recargo financiero');
 
 --Template Entry
-INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'Asiento automatico de Ficha de Vuelo');
-INSERT INTO template_entry (id, document_type, description) VALUES(101,'RCI', 'Asiento automatico de Recibo');
+INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'Asiento automático de Ficha de Vuelo');
+INSERT INTO template_entry (id, document_type, description) VALUES(101,'RCI', 'Asiento automático de Recibo');
+INSERT INTO template_entry (id, document_type, description) VALUES(102,'CNI', 'Asiento automático de Nota de Crédito');
+INSERT INTO template_entry (id, document_type, description) VALUES(103,'DNI', 'Asiento automático de Nota de Dédito');
 --Template Entry Line FRI
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(100, 'ENTRY_LINE_DOCUMENT_TYPE','DEBIT','FRI',1,2100,100);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(101, 'ENTRY_LINE_DOCUMENT_TYPE','CREDIT','FRI',1,8500,100);
@@ -92,10 +94,16 @@ INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(103, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,600,2,101);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(104, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,700,5,101);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(105, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,7000,3,101);
-INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id)     VALUES(106, 'ENTRY_LINE_COMPENSATED_DOC_TYPE','CREDIT','FRI',1,2100,101);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id)     VALUES(106, 'ENTRY_LINE_COMPENSATED_DOC_TYPE','CREDIT','RCI',1,2100,101);
 --Template Entry Line RCI Tarjeta
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_method_id, template_entry_id) VALUES(107, 'ENTRY_LINE_PAYMENT_METHOD','DEBIT',1,800,4,101);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, factor, account_id, payment_term_id, template_entry_id) VALUES(108, 'ENTRY_LINE_PAYMENT_TERM','DEBIT',0.1,10500,3,101);
+--Template Entry Line CNI
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(109, 'ENTRY_LINE_DOCUMENT_TYPE','DEBIT','CNI',1,8500,102);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(110, 'ENTRY_LINE_DOCUMENT_TYPE','CREDIT','CNI',1,2100,102);
+--Template Entry Line DNI
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(111, 'ENTRY_LINE_DOCUMENT_TYPE','CREDIT','DNI',1,8500,103);
+INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(112, 'ENTRY_LINE_DOCUMENT_TYPE','DEBIT','DNI',1,2100,103);
 
 --Product Group
 INSERT INTO product_group (description, id) VALUES ('Servicios de vuelo', 100);

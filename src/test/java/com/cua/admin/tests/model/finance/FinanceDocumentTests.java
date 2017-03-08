@@ -1,6 +1,7 @@
 package com.cua.admin.tests.model.finance;
 
 import com.cua.admin.model.finance.Currency;
+import com.cua.admin.model.finance.billing.PaymentMethod;
 import com.cua.admin.model.finance.documents.CreditNoteIssued;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
@@ -45,6 +46,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         ReceiptIssued rci = new ReceiptIssued();
         rci.setAmount(3544F);
+        rci.setPaymentMethod(paymentMethodRepository.findById(1));
         rci.setCurrency(Currency.ARS);
 
         financeService.compensate(rci, fve);
@@ -52,15 +54,15 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
         financeService.save(rci);
-        /*
+        
         CreditNoteIssued nce = new CreditNoteIssued();
         nce.setAmount(1544F);
         nce.setCurrency(Currency.ARS);
-        nce.setPaymentMethod(paymentMethodRepository.findById(1));
+        //nce.setPaymentMethod(paymentMethodRepository.findById(1));
         financeService.save(nce);
         assertThat(nce.getId()).isGreaterThan(0);
         assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
-        */
+        
         
         System.out.println("--------Documentos---------");
         documentService.getAll().stream().forEach((document) -> {

@@ -15,6 +15,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * Cabecera del asiento
+ * 
+ * ToDo: Agregar referencia a documento original para asientos automáticos
+ * 
  */
 @Data
 @Entity
