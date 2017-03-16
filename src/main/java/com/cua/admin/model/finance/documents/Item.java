@@ -1,12 +1,8 @@
-package com.cua.admin.model.commercial;
+package com.cua.admin.model.finance.documents;
 
 import com.cua.admin.model.operation.inventory.Product;
 import lombok.Data;
 
-/**
- *
- * @author esantiago
- */
 @Data
 public class Item {
 

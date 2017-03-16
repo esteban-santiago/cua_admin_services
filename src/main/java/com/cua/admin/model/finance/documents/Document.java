@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @ToString(exclude = "compensationDocument")
@@ -79,6 +80,15 @@ public abstract class Document implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status = Status.OPENED;
 
+    private List<Item> items;
+    
+    public Float getTotalAmount() {
+        return (float) items.stream().mapToDouble(
+                (item) -> item.getQuantity() * item.getPrice())
+                .sum();
+    }    
+    
+    
     public void open() {
         this.status = Status.OPENED;
     }

@@ -5,7 +5,7 @@
  */
 package com.cua.admin.tests.model.commercial;
 
-import com.cua.admin.model.commercial.Item;
+import com.cua.admin.model.finance.documents.Item;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
