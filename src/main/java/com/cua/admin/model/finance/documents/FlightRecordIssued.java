@@ -17,7 +17,6 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 public class FlightRecordIssued extends Document implements Serializable {
-
     @Column(
         nullable = false,
         unique = true,
@@ -25,7 +24,7 @@ public class FlightRecordIssued extends Document implements Serializable {
     )
     @Generated(GenerationTime.INSERT)
     private Long legalId;
-
+    
     public FlightRecordIssued() {
         setDocumentType(DocumentType.FRI);
     }
