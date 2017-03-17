@@ -1,6 +1,7 @@
 package com.cua.admin.model.sales;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,4 +32,6 @@ public class SaleOrder implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Long id;
+    
+    List<SaleOrderItem> items;
 }

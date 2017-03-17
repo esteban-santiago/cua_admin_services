@@ -43,7 +43,7 @@ public class DocumentService {
 
 
     public <T extends Document> void save(T document) {
-        document.close();
+        document.compensate();
         this.documentRepository.saveAndFlush(document);
     }
 

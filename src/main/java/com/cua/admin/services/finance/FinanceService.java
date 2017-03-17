@@ -2,10 +2,8 @@ package com.cua.admin.services.finance;
 
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
-import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;
-import com.cua.admin.repositories.finance.documents.DocumentRepository;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import java.time.LocalDate;
 import java.util.List;
@@ -59,11 +57,11 @@ public class FinanceService {
     public <T extends Document> void compensate(T parent, T child) {
         parent.setCompensationDocument(parent);
         parent.setCompensationDate(LocalDate.now());
-        parent.close();
+        parent.compensate();
         documentService.save(parent);
         child.setCompensationDate(LocalDate.now());
         child.setCompensationDocument(parent);
-        child.close();
+        child.compensate();
         documentService.save(child);
     }
 

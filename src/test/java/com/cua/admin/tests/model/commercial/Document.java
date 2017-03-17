@@ -5,7 +5,7 @@
  */
 package com.cua.admin.tests.model.commercial;
 
-import com.cua.admin.model.finance.documents.Item;
+import com.cua.admin.model.sales.SaleOrderItem;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -21,11 +21,11 @@ public class Document {
     
     @Test
     public void SummarizeItems() {
-        List<Item> items = new ArrayList<>();
+        List<SaleOrderItem> items = new ArrayList<>();
         
-        items.add(new Item(2, 2.1F));
-        items.add(new Item(2, 2.2F));
-        items.add(new Item(12, 22.5F));
+        items.add(new SaleOrderItem(2, 2.1F));
+        items.add(new SaleOrderItem(2, 2.2F));
+        items.add(new SaleOrderItem(12, 22.5F));
 
         
         System.out.println(

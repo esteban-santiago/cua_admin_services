@@ -15,7 +15,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @ToString(exclude = "compensationDocument")
@@ -79,22 +78,24 @@ public abstract class Document implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.OPENED;
-
-    private List<Item> items;
     
-    public Float getTotalAmount() {
-        return (float) items.stream().mapToDouble(
-                (item) -> item.getQuantity() * item.getPrice())
-                .sum();
-    }    
+    //@OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "item_document_id_fk"))
+    //private Set<Document> items; //(*) Documento compensados
+    
+    //public Float getTotalAmount() {
+    //    return (float) items.stream().mapToDouble(
+    //            (item) -> item.getAmount())
+    //            .sum();
+    //}    
     
     
     public void open() {
         this.status = Status.OPENED;
     }
 
-    public void close() {
-        this.status = Status.CLOSED;
+    public void compensate() {
+        this.status = Status.COMPENSATED;
     }
 
     public void cancel() {
@@ -105,8 +106,8 @@ public abstract class Document implements Serializable {
         return this.status == Status.OPENED;
     }
 
-    public Boolean isClosed() {
-        return this.status == Status.CLOSED;
+    public Boolean isCompensated() {
+        return this.status == Status.COMPENSATED;
     }
 
     public Boolean isCanceled() {
@@ -115,7 +116,7 @@ public abstract class Document implements Serializable {
 
     private enum Status {
         OPENED,
-        CLOSED,
+        COMPENSATED,
         CANCELED;
     }
 }
