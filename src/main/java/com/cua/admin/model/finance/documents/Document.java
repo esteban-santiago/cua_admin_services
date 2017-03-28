@@ -15,9 +15,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
-@ToString(exclude = "compensationDocument")
+@ToString(exclude = "compensatedBy")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -49,10 +51,6 @@ public abstract class Document implements Serializable {
 
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "compensation_document_id", foreignKey = @ForeignKey(name = "document_id_fk"))
-    private Document compensationDocument; //(*) Documento de compensación
-
     private LocalDate compensationDate; //(*) Fecha de compensación
 
     @OneToOne
@@ -78,10 +76,15 @@ public abstract class Document implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.OPENED;
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
+    private Document compensatedBy; //(*) Documento de compensación
+
     
-    //@OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "compensatedBy")
     //@JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "item_document_id_fk"))
-    //private Set<Document> items; //(*) Documento compensados
+    private Set<Document> compensatedDocuments = new HashSet<>(); //(*) Documento compensados
     
     //public Float getTotalAmount() {
     //    return (float) items.stream().mapToDouble(

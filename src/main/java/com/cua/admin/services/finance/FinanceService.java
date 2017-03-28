@@ -46,8 +46,10 @@ public class FinanceService {
     private void saveAndCreateEntry(Document document) throws Throwable {
         //Graba el documento
         documentService.save(document);        
+        
+        // Lo saco hasta tener el modelo Ok
         //Contabiliza el documento (crea el asiento)
-        accountingEntryService.saveAccountingEntryUsingTemplate(document);
+        //accountingEntryService.saveAccountingEntryUsingTemplate(document);
     }
     
     public <T extends Document> void compensate(T parent, List<T> childs) {
@@ -55,14 +57,19 @@ public class FinanceService {
     }
 
     public <T extends Document> void compensate(T parent, T child) {
-        parent.setCompensationDocument(parent);
+        parent.setCompensatedBy(parent);
         parent.setCompensationDate(LocalDate.now());
         parent.compensate();
-        documentService.save(parent);
+
         child.setCompensationDate(LocalDate.now());
-        child.setCompensationDocument(parent);
+        child.setCompensatedBy(parent);
         child.compensate();
         documentService.save(child);
+        
+        parent.getCompensatedDocuments().add(child);
+        documentService.save(parent);
+        
+
     }
 
 }

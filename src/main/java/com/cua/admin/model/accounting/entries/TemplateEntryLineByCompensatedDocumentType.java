@@ -48,6 +48,6 @@ public class TemplateEntryLineByCompensatedDocumentType extends TemplateEntryLin
     
     @Override
     public Boolean match(Document document) {
-        return this.documentType == document.getCompensationDocument().getDocumentType();
+        return this.documentType == document.getCompensatedBy().getDocumentType();
     }
 }
