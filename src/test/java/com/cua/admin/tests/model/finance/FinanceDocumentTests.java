@@ -11,6 +11,9 @@ import com.cua.admin.services.accounting.AccountingEntryService;
 import com.cua.admin.services.finance.DocumentService;
 import com.cua.admin.services.finance.FinanceService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,19 +46,29 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         assertThat(fve.getId()).isGreaterThan(0);
         assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
 
+        FlightRecordIssued fri = new FlightRecordIssued();
+        fri.setAmount(2544F);
+        fri.setCurrency(Currency.ARS);
+        financeService.save(fri);
+        
+        assertThat(fri.getId()).isGreaterThan(0);
+        assertThat(fri.getLegalId()).isGreaterThanOrEqualTo(9000);
         
         
         ReceiptIssued rci = new ReceiptIssued();
-        rci.setAmount(3544F);
+        rci.setAmount(fve.getAmount() + fri.getAmount());
         rci.setPaymentMethod(paymentMethodRepository.findById(1));
         rci.setCurrency(Currency.ARS);
 
         financeService.save(rci);
 
-        financeService.compensate(rci, fve);
+        List<Document> list = new ArrayList();
         
-        assertThat(fve.getId()).isGreaterThan(0);
-        assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);        
+        list.add(fve);
+        list.add(fri);
+        
+        financeService.compensate(rci, list);
+        
         
         CreditNoteIssued nce = new CreditNoteIssued();
         nce.setAmount(1544F);
