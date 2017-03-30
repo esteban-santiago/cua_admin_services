@@ -59,7 +59,7 @@ public class Payment implements Serializable {
     private String description;
     
     public Float getTotalAmount() {
-        return (amount - charge + discount);
+        return (amount + charge - discount);
     }
 
 }
