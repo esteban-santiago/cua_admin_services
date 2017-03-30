@@ -1,9 +1,7 @@
 package com.cua.admin.model.finance.documents;
 
 import com.cua.admin.model.core.Person;
-import com.cua.admin.model.finance.Currency;
-import com.cua.admin.model.finance.billing.PaymentMethod;
-import com.cua.admin.model.finance.billing.PaymentTerm;
+import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.it.User;
 import lombok.Data;
 import lombok.ToString;
@@ -15,7 +13,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -44,10 +44,10 @@ public abstract class Document implements Serializable {
     @Enumerated(EnumType.STRING)
     private DocumentType documentType; //Tipo de Documento
 
-    private Float amount; //Importe en moneda del documento
+    //private Float amount; //Importe en moneda del documento
 
-    @Enumerated(EnumType.STRING)
-    private Currency currency; //Moneda del documento
+    //@Enumerated(EnumType.STRING)
+    //private Currency currency; //Moneda del documento
 
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 
@@ -57,6 +57,7 @@ public abstract class Document implements Serializable {
     @JoinColumn(name = "person_id", foreignKey = @ForeignKey(name = "person_document_id_fk"))
     private Person person; //Socio
 
+    /*
     @OneToOne
     @JoinColumn(name = "payment_method_id", foreignKey = @ForeignKey(name = "payment_method_document_id_fk"))
     private PaymentMethod paymentMethod; //Forma de pago
@@ -65,6 +66,12 @@ public abstract class Document implements Serializable {
     @JoinColumn(name = "payment_term_id", foreignKey = @ForeignKey(name = "payment_term_document_id_fk"))
     private PaymentTerm paymentTerm; //Condiciones de Pago
 
+    */
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "document_id", nullable = true, foreignKey = @ForeignKey(name = "document_payment_id_fk"))
+    List<Payment> payments = new ArrayList<>();
+    
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user; //Usuario
@@ -75,51 +82,43 @@ public abstract class Document implements Serializable {
     private Integer referencedDocumentId; //Documento de referencia
 
     @Enumerated(EnumType.STRING)
-    private Status status = Status.OPENED;
+    private DocumentStatus status = DocumentStatus.OPENED;
 
     @ManyToOne
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
     private Document compensatedBy; //(*) Documento de compensación
 
-    
-    @OneToMany(mappedBy = "compensatedBy")
+    @OneToMany(mappedBy = "compensatedBy", orphanRemoval = false)
     //@JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "item_document_id_fk"))
     private Set<Document> compensatedDocuments = new HashSet<>(); //(*) Documento compensados
     
-    //public Float getTotalAmount() {
-    //    return (float) items.stream().mapToDouble(
-    //            (item) -> item.getAmount())
-    //            .sum();
-    //}    
-    
+    public Float getAmount() {
+        return (float) payments.stream().mapToDouble(
+                (payment) -> payment.getTotalAmount())
+                .sum();
+    }    
     
     public void open() {
-        this.status = Status.OPENED;
+        this.status = DocumentStatus.OPENED;
     }
 
     public void compensate() {
-        this.status = Status.COMPENSATED;
+        this.status = DocumentStatus.COMPENSATED;
     }
 
     public void cancel() {
-        this.status = Status.CANCELED;
+        this.status = DocumentStatus.CANCELED;
     }
 
     public Boolean isOpened() {
-        return this.status == Status.OPENED;
+        return this.status == DocumentStatus.OPENED;
     }
 
     public Boolean isCompensated() {
-        return this.status == Status.COMPENSATED;
+        return this.status == DocumentStatus.COMPENSATED;
     }
 
     public Boolean isCanceled() {
-        return this.status == Status.CANCELED;
-    }
-
-    private enum Status {
-        OPENED,
-        COMPENSATED,
-        CANCELED;
+        return this.status == DocumentStatus.CANCELED;
     }
 }

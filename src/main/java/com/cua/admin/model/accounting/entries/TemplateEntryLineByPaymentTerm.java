@@ -26,7 +26,8 @@ public class TemplateEntryLineByPaymentTerm extends TemplateEntryLine {
 
     @Override
     public Boolean match(Document document) {
-        return this.paymentTerm.equals(document.getPaymentTerm());
+        return true;
+        //return this.paymentTerm.equals(document.getPaymentTerm());
     }    
     
 }

@@ -52,7 +52,7 @@ INSERT INTO payment_method(id, description) VALUES (3,'Cuenta Corriente');
 INSERT INTO payment_method(id, description) VALUES (4,'Tarjeta de Crédito');
 INSERT INTO payment_method(id, description) VALUES (5,'Tarjeta de Débito');
 
---Payment Methods
+--Payment Terms
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (1, 0,'Contado', 0,1);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (2, 0,'Al dia', 0,2);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (3, 0.10,'1 Cuota', 0,4);

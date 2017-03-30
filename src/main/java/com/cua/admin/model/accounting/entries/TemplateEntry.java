@@ -62,7 +62,8 @@ public class TemplateEntry implements Serializable {
             item.setAccount(entryLine.getAccount());
             item.setItemType(entryLine.getAccountingEntryItemType());
             item.setAmount(Math.abs(entryLine.getFactor() * document.getAmount()));
-            item.setCurrency(document.getCurrency());
+            //Corregir los asientos!
+            //item.setCurrency(document.getCurrency());
             entry.addEntryItem(item);
         });
         return entry;

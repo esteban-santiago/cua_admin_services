@@ -31,7 +31,7 @@ public class ReceiptIssued extends Document implements Serializable {
     }
 
     @Override
-    public void setAmount(Float amount) {
-        super.setAmount(amount * (-1));
+    public Float getAmount() {
+        return super.getAmount()*(-1);
     }
 }

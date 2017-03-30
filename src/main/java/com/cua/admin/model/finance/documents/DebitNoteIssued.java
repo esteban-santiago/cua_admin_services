@@ -16,22 +16,17 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 @Entity
-public class CreditNoteIssued extends Document implements Serializable {
+public class DebitNoteIssued extends Document implements Serializable {
 
     @Column(
             nullable = false,
             unique = true,
-            columnDefinition = "BIGINT DEFAULT nextval('document_credit_note_issued_id_seq')"
+            columnDefinition = "BIGINT DEFAULT nextval('document_debit_note_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
     private Long legalId;
     
-    @Override
-    public Float getAmount() {
-        return super.getAmount()*(-1);
-    }
-
-    public CreditNoteIssued() {
-        setDocumentType(DocumentType.CNI);  
+    public DebitNoteIssued() {
+        setDocumentType(DocumentType.DNI);  
     }
 }

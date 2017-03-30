@@ -1,6 +1,7 @@
 package com.cua.admin.services.finance;
 
 import com.cua.admin.model.finance.documents.Document;
+import com.cua.admin.model.finance.documents.DocumentStatus;
 import com.cua.admin.model.finance.documents.DocumentType;
 import com.cua.admin.model.finance.documents.exceptions.DocumentNotFoundException;
 import com.cua.admin.repositories.finance.documents.DocumentRepository;
@@ -27,11 +28,29 @@ public class DocumentService {
     public List<? extends Document> getAllByType(DocumentType type) {
         return this.documentRepository.findByDocumentType(type);
     }
+
+    
     
     public List<? extends Document> getAllByPerson(Integer person_id) {
-        return this.documentRepository.findByPerson_Id(person_id);
+        return this.documentRepository.findByPersonId(person_id);
     }
 
+    public List<? extends Document> getAllCompensated() {
+        return this.documentRepository.findByStatus(DocumentStatus.COMPENSATED).get();
+    }
+
+    public List<? extends Document> getAllOpened() {
+        return this.documentRepository.findByStatus(DocumentStatus.OPENED).get();
+    }
+
+    public List<? extends Document> getAllCompensables() {
+        return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensables()).get();
+    }
+    
+    public List<? extends Document> getAllCompensators() {
+        return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensators()).get();
+    }
+    
     public List<? extends Document> getAll() {
         return this.documentRepository.findAll();
     }

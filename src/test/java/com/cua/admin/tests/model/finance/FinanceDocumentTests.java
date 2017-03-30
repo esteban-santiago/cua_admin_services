@@ -1,96 +1,202 @@
 package com.cua.admin.tests.model.finance;
 
 import com.cua.admin.model.finance.Currency;
+import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.documents.CreditNoteIssued;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.repositories.finance.billing.PaymentMethodRepository;
+import com.cua.admin.repositories.finance.billing.PaymentTermRepository;
 import com.cua.admin.repositories.finance.documents.DocumentRepository;
 import com.cua.admin.services.accounting.AccountingEntryService;
+import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.finance.DocumentService;
 import com.cua.admin.services.finance.FinanceService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 public class FinanceDocumentTests extends SpringIntegrationTest {
 
     @Autowired
-    private FinanceService financeService; 
-    
-    @Autowired
-    private DocumentService documentService; 
+    private PersonService personService;
 
     @Autowired
-    private DocumentRepository<Document> documentRepository;           
- 
+    private FinanceService financeService;
+
     @Autowired
-    private PaymentMethodRepository paymentMethodRepository;   
-    
+    private DocumentService documentService;
+
+    @Autowired
+    private DocumentRepository<Document> documentRepository;
+
+    @Autowired
+    private PaymentMethodRepository paymentMethodRepository;
+
+    @Autowired
+    private PaymentTermRepository paymentTermRepository;
+
     @Autowired
     private AccountingEntryService accountingEntryService;
-    
-    @Test
-    public void compensate() throws Throwable {
+
+    @Before
+    public void createBasicDocuments() throws Throwable {
+        Payment account = new Payment();
+        account.setCurrency(Currency.ARS);
+
         FlightRecordIssued fve = new FlightRecordIssued();
-        fve.setAmount(3544F);
-        fve.setCurrency(Currency.ARS);
+        account.setAmount(3544F);
+        fve.getPayments().add(account);
+        fve.setPerson(personService.getMember(100));
         financeService.save(fve);
-        
+
         assertThat(fve.getId()).isGreaterThan(0);
-        assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(9000);
+        assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
         FlightRecordIssued fri = new FlightRecordIssued();
-        fri.setAmount(2544F);
-        fri.setCurrency(Currency.ARS);
+        account.setAmount(2544F);
+        fri.getPayments().add(account);
+        fri.setPerson(personService.getMember(100));
         financeService.save(fri);
-        
+
         assertThat(fri.getId()).isGreaterThan(0);
-        assertThat(fri.getLegalId()).isGreaterThanOrEqualTo(9000);
-        
-        
-        ReceiptIssued rci = new ReceiptIssued();
-        rci.setAmount(fve.getAmount() + fri.getAmount());
-        rci.setPaymentMethod(paymentMethodRepository.findById(1));
-        rci.setCurrency(Currency.ARS);
+        assertThat(fri.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
-        financeService.save(rci);
+        FlightRecordIssued fri2 = new FlightRecordIssued();
+        account.setAmount(1544F);
+        fri2.getPayments().add(account);
+        fri2.setPerson(personService.getMember(100));
+        financeService.save(fri2);
 
-        List<Document> list = new ArrayList();
-        
-        list.add(fve);
-        list.add(fri);
-        
-        financeService.compensate(rci, list);
-        
-        
+        assertThat(fri.getId()).isGreaterThan(0);
+        assertThat(fri.getLegalId()).isGreaterThanOrEqualTo(70000000);
+
         CreditNoteIssued nce = new CreditNoteIssued();
-        nce.setAmount(1544F);
-        nce.setCurrency(Currency.ARS);
+        account.setAmount(1544F);
+        nce.getPayments().add(account);
+        nce.setPerson(personService.getMember(100));
 
-        
         financeService.save(nce);
+
         assertThat(nce.getId()).isGreaterThan(0);
         assertThat(nce.getLegalId()).isGreaterThanOrEqualTo(8000);
+        assertThat(nce.getAmount()).isLessThan(0);
+    }
+
+    //@Test
+    public void compensateWithCash() throws Throwable {
+
+        ReceiptIssued rci = new ReceiptIssued();
+        Payment cash = new Payment();
+        cash.setMethod(paymentMethodRepository.findById(1));
+        cash.setCurrency(Currency.ARS);
+        cash.setAmount(4632F);
+
+        rci.getPayments().add(cash);
+
+        rci.setPerson(personService.getMember(100));
+
+        Set<Document> compensated = new HashSet();
+
+        documentService.getAllCompensables().stream()
+                .forEach((document) -> {
+                    compensated.add(document);
+                });
+
+        financeService.compensate(rci, compensated);
+
+        assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
+
+        //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
+        assertThat(rci.getAmount() + ((float) rci.getCompensatedDocuments().stream().mapToDouble(
+                (item) -> item.getAmount()).sum()))
+                .isEqualByComparingTo(0F);
+
+    }
+
+    @Test
+    public void compensateWithCreditCard() throws Throwable {
+
+        ReceiptIssued rci = new ReceiptIssued();
+        Payment credit = new Payment();
+        credit.setMethod(paymentMethodRepository.findById(4)); //Tarjeta de Crédito
+        credit.setTerm(paymentTermRepository.findById(3)); //Una cuota
+        credit.setCurrency(Currency.ARS);
+
+        rci.getPayments().add(credit);
+
+        rci.setPerson(personService.getMember(100));
+
+        Set<Document> compensated = new HashSet();
+
+        documentService.getAllCompensables().stream().forEach((document) -> {
+            compensated.add(document);
+        });
+
+        Float charge = (((float) compensated.stream().mapToDouble(
+                (item) -> item.getAmount()).sum())) * credit.getTerm().getCharge();
         
+        System.out.println("Charge: " + charge); 
         
-        System.out.println("--------Documentos---------");
-        documentService.getAll().stream().forEach((document) -> {
+        credit.setCharge(charge);
+
+        Float amount = (((float) compensated.stream().mapToDouble(
+                (item) -> item.getAmount()).sum())) + (credit.getCharge());
+        
+        credit.setAmount(amount);
+
+        System.out.println("Amount: " + amount); 
+        
+        financeService.compensate(rci, compensated);
+
+        assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
+
+        //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
+        assertThat(rci.getAmount() + ((float) rci.getCompensatedDocuments().stream().mapToDouble(
+                (item) -> item.getAmount()).sum()))
+                .isEqualByComparingTo(0F);
+
+    }
+
+    @After
+    public void list() {
+        System.out.println("--------Documentos Abiertos---------");
+        documentService.getAllOpened().stream().forEach((document) -> {
             System.out.println(document);
         });
+
+        System.out.println("--------Documentos Compensados---------");
+        documentService.getAllCompensated().stream().forEach((document) -> {
+            System.out.println(document);
+        });
+
+        System.out.println("--------Documentos Compensables---------");
+        documentService.getAllCompensables().stream().forEach((document) -> {
+            System.out.println(document);
+        });
+
+        System.out.println("--------Cuenta Corriente---------");
+        documentService.getAllByPerson(100).stream().forEach((document) -> {
+            System.out.println(document.getPerson().getName()
+                    + " | " + document.getLegalId()
+                    + " : " + document.getDocumentType()
+                    + " --> " + document.getAmount());
+        });
+
+        System.out.println("Total " + " --> " + ((float) documentService.getAllByPerson(100).stream().mapToDouble(
+                (item) -> item.getAmount()).sum())
+        );
 
         System.out.println("--------Asientos---------");
         accountingEntryService.getAll().stream().forEach((entry) -> {
             System.out.println(entry);
         });
-        
-        
-    }
 
+    }
 }

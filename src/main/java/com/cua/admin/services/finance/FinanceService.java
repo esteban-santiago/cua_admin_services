@@ -1,5 +1,6 @@
 package com.cua.admin.services.finance;
 
+import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.operation.flight.CrewMemberRole;
@@ -7,6 +8,7 @@ import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,12 @@ public class FinanceService {
     public void save(FlightRecord flightRecord) throws Throwable {
         FlightRecordIssued flightRecordIssued = new FlightRecordIssued();
         flightRecordIssued.setReferencedDocumentId(flightRecord.getId());
-        flightRecordIssued.setAmount(flightRecord.getAmountOfHours() * flightRecord.getAircraft().getProductProfile().getProduct().getPrice());
-        flightRecordIssued.setCurrency(flightRecord.getAircraft().getProductProfile().getProduct().getCurrency());
+        Payment payment = new Payment();
+        
+        payment.setAmount(flightRecord.getAmountOfHours() * flightRecord.getAircraft().getProductProfile().getProduct().getPrice());
+        payment.setCurrency(flightRecord.getAircraft().getProductProfile().getProduct().getCurrency());
+        flightRecordIssued.getPayments().add(payment);
+        
         flightRecordIssued.setPerson(flightRecord.getCrew().stream()
                 .filter(member -> member.getCrewMemberRole().equals(CrewMemberRole.PIC))
                 .findAny().get().getPerson());
@@ -52,7 +58,7 @@ public class FinanceService {
         //accountingEntryService.saveAccountingEntryUsingTemplate(document);
     }
     
-    public <T extends Document> void compensate(T parent, List<T> childs) {
+    public <T extends Document> void compensate(T parent, Set<T> childs) {
         childs.forEach(child -> compensate(parent, child));
     }
 
@@ -64,7 +70,7 @@ public class FinanceService {
         child.setCompensationDate(LocalDate.now());
         child.setCompensatedBy(parent);
         child.compensate();
-        documentService.save(child);
+        
         
         parent.getCompensatedDocuments().add(child);
         documentService.save(parent);
