@@ -94,9 +94,25 @@ public abstract class Document implements Serializable {
     
     public Float getAmount() {
         return (float) payments.stream().mapToDouble(
-                (payment) -> payment.getTotalAmount())
+                (payment) -> payment.getAmount())
                 .sum();
     }    
+    
+    public Float getCharge() {
+        return (float) payments.stream().mapToDouble(
+                (payment) -> payment.getCharge())
+                .sum();
+    }    
+
+    public Float getDiscount() {
+        return (float) payments.stream().mapToDouble(
+                (payment) -> payment.getDiscount())
+                .sum();
+    }    
+
+    public Float getTotalAmount() {
+        return getAmount() + getCharge() - getDiscount();
+    }
     
     public void open() {
         this.status = DocumentStatus.OPENED;

@@ -19,9 +19,9 @@ import java.io.Serializable;
 public class ReceiptIssued extends Document implements Serializable {
 
     @Column(
-        nullable = false,
-        unique = true,
-        columnDefinition = "BIGINT DEFAULT nextval('document_receipt_issued_id_seq')"
+            nullable = false,
+            unique = true,
+            columnDefinition = "BIGINT DEFAULT nextval('document_receipt_issued_id_seq')"
     )
     @Generated(GenerationTime.INSERT)
     private Long legalId;
@@ -32,6 +32,16 @@ public class ReceiptIssued extends Document implements Serializable {
 
     @Override
     public Float getAmount() {
-        return super.getAmount()*(-1);
+        return super.getAmount() * (-1);
+    }
+
+    @Override
+    public Float getTotalAmount() {
+        return getAmount() + getCharge() - getDiscount();
+    }
+
+    @Override
+    public Float getCharge() {
+        return super.getCharge()* (-1);
     }
 }

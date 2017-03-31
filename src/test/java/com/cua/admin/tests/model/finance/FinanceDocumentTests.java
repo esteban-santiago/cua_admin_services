@@ -114,8 +114,8 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat(rci.getAmount() + ((float) rci.getCompensatedDocuments().stream().mapToDouble(
-                (item) -> item.getAmount()).sum()))
+        assertThat(((float) rci.getCompensatedDocuments().stream().mapToDouble(
+                (item) -> item.getAmount()).sum()) + rci.getTotalAmount())
                 .isEqualByComparingTo(0F);
 
     }
@@ -152,7 +152,8 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat((rci.getAmount())+ ((float) rci.getCompensatedDocuments().stream().mapToDouble(
+        assertThat((rci.getAmount()) + 
+                ((float) rci.getCompensatedDocuments().stream().mapToDouble(
                 (item) -> item.getAmount()).sum()))
                 .isEqualByComparingTo(0F);
 
@@ -183,6 +184,11 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
                     + " --> " + document.getAmount());
         });
 
+        System.out.println("Total: " + (float)
+                documentService.getAllByPerson(100).stream().mapToDouble(
+                        (document) -> document.getAmount()  ).sum()
+                );
+        
         System.out.println("--------Asientos---------");
         accountingEntryService.getAll().stream().forEach((entry) -> {
             System.out.println(entry);

@@ -26,11 +26,21 @@ public class CreditNoteIssued extends Document implements Serializable {
     @Generated(GenerationTime.INSERT)
     private Long legalId;
     
-    @Override
+     @Override
     public Float getAmount() {
-        return super.getAmount()*(-1);
+        return super.getAmount() * (-1);
     }
 
+    @Override
+    public Float getTotalAmount() {
+        return getAmount() + getCharge() - getDiscount();
+    }
+
+    @Override
+    public Float getCharge() {
+        return super.getCharge()* (-1);
+    }
+    
     public CreditNoteIssued() {
         setDocumentType(DocumentType.CNI);  
     }
