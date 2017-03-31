@@ -1,4 +1,4 @@
-package com.cua.admin.rest;
+package com.cua.admin.tests.rest;
 
 import com.cua.admin.model.it.User;
 import com.cua.admin.repositories.it.UserRepository;

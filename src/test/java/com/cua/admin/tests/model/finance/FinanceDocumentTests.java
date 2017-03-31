@@ -89,7 +89,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         assertThat(nce.getAmount()).isLessThan(0);
     }
 
-    //@Test
+    @Test
     public void compensateWithCash() throws Throwable {
 
         ReceiptIssued rci = new ReceiptIssued();
