@@ -1,6 +1,6 @@
 package com.cua.admin.services.finance;
 
-import com.cua.admin.model.finance.Currency;
+import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
@@ -8,7 +8,6 @@ import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -34,32 +33,36 @@ public class FinanceService {
         FlightRecordIssued flightRecordIssued = new FlightRecordIssued();
         flightRecordIssued.setReferencedDocumentId(flightRecord.getId());
         Payment payment = new Payment();
-        
+
         payment.setAmount(flightRecord.getAmountOfHours() * flightRecord.getAircraft().getProductProfile().getProduct().getPrice());
         payment.setCurrency(flightRecord.getAircraft().getProductProfile().getProduct().getCurrency());
-        
+
         flightRecordIssued.getPayments().add(payment);
-        
+
         flightRecordIssued.setPerson(flightRecord.getCrew().stream()
                 .filter(member -> member.getCrewMemberRole().equals(CrewMemberRole.PIC))
                 .findAny().get().getPerson());
         flightRecordIssued.open();
         save(flightRecordIssued);
     }
-    
+
     public <T extends Document> void save(T document) throws Throwable {
         saveAndCreateEntry(document);
     }
-    
+
     private void saveAndCreateEntry(Document document) throws Throwable {
         //Graba el documento
-        documentService.save(document);        
-        
+        documentService.save(document);
+
         // Lo saco hasta tener el modelo Ok
         //Contabiliza el documento (crea el asiento)
         //accountingEntryService.saveAccountingEntryUsingTemplate(document);
     }
-    
+
+    public void compensate(Document document) {
+        document.getCompensatedDocuments().forEach(child -> compensate(document, child));
+    }
+
     public <T extends Document> void compensate(T parent, Set<T> childs) {
         childs.forEach(child -> compensate(parent, child));
     }
@@ -72,12 +75,15 @@ public class FinanceService {
         child.setCompensationDate(LocalDate.now());
         child.setCompensatedBy(parent);
         child.compensate();
-        
-        
+
         parent.getCompensatedDocuments().add(child);
         documentService.save(parent);
-        
+    }
 
+    public Float balance(Person person) {
+        return (float) documentService.getAllByPerson(person.getId()).stream().mapToDouble(
+                (document) -> document.getAmount()
+        ).sum();
     }
 
 }

@@ -25,39 +25,37 @@ public class CoreRestController {
 
     @Autowired
     private final PersonService personService;
-    
+
     @RequestMapping(value = "/person", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Person>> get() {
         return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
     }
-    
+
     @RequestMapping(value = "/person/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Person> get(@PathVariable("id") Integer id) throws Throwable {
         return new ResponseEntity<>(personService.get(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/person", method=RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<Person> create(@RequestBody Person person){
-        //HttpHeaders headers = new HttpHeaders();
+    @RequestMapping(value = "/person", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    public ResponseEntity<Person> create(@RequestBody Person person) {
         personService.save(person);
-        //headers.add("id", person.getId().toString());
         return new ResponseEntity<>(person, HttpStatus.CREATED);
-    }    
+    }
 
-    @RequestMapping(value="/person/{id}", method=RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<Person> update(@RequestBody Person person){
+    @RequestMapping(value = "/person/{id}", method = RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    public ResponseEntity<Person> update(@RequestBody Person person) {
         personService.save(person);
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
-    
-    @RequestMapping(value = "/sapi/person", 
-            params = { "page", "size" }, 
+
+    @RequestMapping(value = "/sapi/person",
+            params = {"page", "size"},
             method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Page<Person>> getAllPaginated(
-            @RequestParam(value = "page") Integer page, 
+            @RequestParam(value = "page") Integer page,
             @RequestParam(value = "size") Integer size) {
         return new ResponseEntity<>(personService.getAllByPage(page, size), HttpStatus.OK);
-    }   
+    }
 
     @RequestMapping(value = "/member/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Person> getMember(@PathVariable("id") Integer id) throws Throwable {
@@ -71,7 +69,7 @@ public class CoreRestController {
 
     @RequestMapping(value = "/pilot/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Person> getPilot(@PathVariable("id") Integer id) throws Throwable {
-                return new ResponseEntity<>(personService.getPilot(id), HttpStatus.OK);
+        return new ResponseEntity<>(personService.getPilot(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/pilot", method = RequestMethod.GET, produces = "application/json")
@@ -83,7 +81,7 @@ public class CoreRestController {
     public ResponseEntity<Map> getPilotRatings() {
         Map ratings = new HashMap<>();
         String values[];
-        for(int i = 0 ; i < PilotRating.values().length; i = i + 1) {
+        for (int i = 0; i < PilotRating.values().length; i = i + 1) {
             values = new String[2];
             values[0] = PilotRating.values()[i].name();
             values[1] = PilotRating.values()[i].getDescription();
@@ -92,4 +90,3 @@ public class CoreRestController {
         return new ResponseEntity<>(ratings, HttpStatus.OK);
     }
 }
-

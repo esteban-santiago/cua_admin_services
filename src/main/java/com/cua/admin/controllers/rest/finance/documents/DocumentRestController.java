@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/sapi/finance/documents")
+@RequestMapping("/sapi/finance/document")
 public class DocumentRestController {
 
     @Autowired

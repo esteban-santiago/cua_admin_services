@@ -94,7 +94,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         ReceiptIssued rci = new ReceiptIssued();
         Payment cash = new Payment();
-        cash.setMethod(paymentMethodRepository.findById(1));
+        cash.setMethod(paymentMethodRepository.findById(1).get());
         cash.setCurrency(Currency.ARS);
         cash.setAmount(4632F);
 
@@ -125,7 +125,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         ReceiptIssued rci = new ReceiptIssued();
         Payment debit = new Payment();
-        debit.setMethod(paymentMethodRepository.findById(5)); //Pago con Tarjeta de Débito
+        debit.setMethod(paymentMethodRepository.findById(5).get()); //Pago con Tarjeta de Débito
         debit.setCurrency(Currency.ARS);
         debit.setAmount(4632F);
 
@@ -156,7 +156,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         ReceiptIssued rci = new ReceiptIssued();
         Payment bank_check = new Payment();
-        bank_check.setMethod(paymentMethodRepository.findById(2)); //Cheque Bancario
+        bank_check.setMethod(paymentMethodRepository.findById(2).get()); //Cheque Bancario
         bank_check.setTerm(paymentTermRepository.findById(6)); //Cheque de más de 30 dias
         bank_check.setCurrency(Currency.ARS);
 
@@ -195,7 +195,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         ReceiptIssued rci = new ReceiptIssued();
         Payment credit = new Payment();
-        credit.setMethod(paymentMethodRepository.findById(4)); //Tarjeta de Crédito
+        credit.setMethod(paymentMethodRepository.findById(4).get()); //Tarjeta de Crédito
         credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
 
@@ -235,13 +235,13 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         ReceiptIssued rci = new ReceiptIssued();
         //Creo una instancia de Pago con un Cheque
         Payment bank_check = new Payment();
-        bank_check.setMethod(paymentMethodRepository.findById(2)); //Cheque Bancario
+        bank_check.setMethod(paymentMethodRepository.findById(2).get()); //Cheque Bancario
         bank_check.setTerm(paymentTermRepository.findById(6)); //Cheque de más de 30 dias
         bank_check.setCurrency(Currency.ARS);
 
         //Creo una instancia de Pago con tarjeta de crédito
         Payment credit = new Payment();
-        credit.setMethod(paymentMethodRepository.findById(4)); //Tarjeta de Crédito
+        credit.setMethod(paymentMethodRepository.findById(4).get()); //Tarjeta de Crédito
         credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
 
