@@ -1,6 +1,7 @@
 package com.cua.admin.model.finance.documents;
 
 import com.cua.admin.model.core.Person;
+import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.it.User;
 import lombok.Data;
@@ -44,11 +45,6 @@ public abstract class Document implements Serializable {
     @Enumerated(EnumType.STRING)
     private DocumentType documentType; //Tipo de Documento
 
-    //private Float amount; //Importe en moneda del documento
-
-    //@Enumerated(EnumType.STRING)
-    //private Currency currency; //Moneda del documento
-
     private LocalDate expirationDate = LocalDate.now().plusDays(30); //Fecha de vencimiento
 
     private LocalDate compensationDate; //(*) Fecha de compensación
@@ -68,13 +64,15 @@ public abstract class Document implements Serializable {
 
     */
     
+    private Currency currency;
+    
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "document_id", nullable = true, foreignKey = @ForeignKey(name = "document_payment_id_fk"))
     List<Payment> payments = new ArrayList<>();
     
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user; //Usuario
+    private User user; //Representa al operador que generó el documento
 
     @CreatedDate
     private LocalDate creationDate = LocalDate.now(); //Fecha de documento
@@ -111,7 +109,9 @@ public abstract class Document implements Serializable {
     }    
 
     public Float getTotalAmount() {
-        return getAmount() + getCharge() - getDiscount();
+        return (float) payments.stream().mapToDouble(
+                (payment) -> payment.getTotalAmount())
+                .sum();
     }
     
     public void open() {

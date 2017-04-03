@@ -120,13 +120,83 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
     }
 
+   @Test
+    public void compensateWithDebitCard() throws Throwable {
+
+        ReceiptIssued rci = new ReceiptIssued();
+        Payment debit = new Payment();
+        debit.setMethod(paymentMethodRepository.findById(5)); //Pago con Tarjeta de Débito
+        debit.setCurrency(Currency.ARS);
+        debit.setAmount(4632F);
+
+        rci.getPayments().add(debit);
+
+        rci.setPerson(personService.getMember(100));
+
+        Set<Document> compensated = new HashSet();
+
+        documentService.getAllCompensables().stream()
+                .forEach((document) -> {
+                    compensated.add(document);
+                });
+
+        financeService.compensate(rci, compensated);
+
+        assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
+
+        //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
+        assertThat(((float) rci.getCompensatedDocuments().stream().mapToDouble(
+                (item) -> item.getAmount()).sum()) + rci.getTotalAmount())
+                .isEqualByComparingTo(0F);
+
+    }    
+    
+    @Test
+    public void compensateWithBankCheck() throws Throwable {
+
+        ReceiptIssued rci = new ReceiptIssued();
+        Payment bank_check = new Payment();
+        bank_check.setMethod(paymentMethodRepository.findById(2)); //Cheque Bancario
+        bank_check.setTerm(paymentTermRepository.findById(6)); //Cheque de más de 30 dias
+        bank_check.setCurrency(Currency.ARS);
+
+        rci.getPayments().add(bank_check);
+
+        rci.setPerson(personService.getMember(100));
+
+        Set<Document> compensated = new HashSet();
+
+        documentService.getAllCompensables().stream().forEach((document) -> {
+            compensated.add(document);
+        });
+
+        Float amount = (((float) compensated.stream().mapToDouble(
+                (item) -> item.getAmount()).sum()));
+        
+        bank_check.setAmount(amount);        
+        
+        bank_check.setCharge(bank_check.getAmount() * bank_check.getTerm().getCharge());
+
+        
+        financeService.compensate(rci, compensated);
+
+        assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
+
+        //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
+        assertThat((rci.getAmount()) + 
+                ((float) rci.getCompensatedDocuments().stream().mapToDouble(
+                (item) -> item.getAmount()).sum()))
+                .isEqualByComparingTo(0F);
+
+    }
+    
     @Test
     public void compensateWithCreditCard() throws Throwable {
 
         ReceiptIssued rci = new ReceiptIssued();
         Payment credit = new Payment();
         credit.setMethod(paymentMethodRepository.findById(4)); //Tarjeta de Crédito
-        credit.setTerm(paymentTermRepository.findById(3)); //Una cuota
+        credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
 
         rci.getPayments().add(credit);
@@ -159,6 +229,58 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
     }
 
+    @Test
+    public void compensateWithBankCheckAndCreditCard() throws Throwable {
+
+        ReceiptIssued rci = new ReceiptIssued();
+        //Creo una instancia de Pago con un Cheque
+        Payment bank_check = new Payment();
+        bank_check.setMethod(paymentMethodRepository.findById(2)); //Cheque Bancario
+        bank_check.setTerm(paymentTermRepository.findById(6)); //Cheque de más de 30 dias
+        bank_check.setCurrency(Currency.ARS);
+
+        //Creo una instancia de Pago con tarjeta de crédito
+        Payment credit = new Payment();
+        credit.setMethod(paymentMethodRepository.findById(4)); //Tarjeta de Crédito
+        credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
+        credit.setCurrency(Currency.ARS);
+
+
+        rci.setPerson(personService.getMember(100));
+
+        Set<Document> compensated = new HashSet();
+
+        documentService.getAllCompensables().stream().forEach((document) -> {
+            compensated.add(document);
+        });
+
+        Float amount = (((float) compensated.stream().mapToDouble(
+                (item) -> item.getAmount()).sum()));
+        
+        bank_check.setAmount((float)(0.5 * amount));        
+        
+        bank_check.setCharge(bank_check.getAmount() * bank_check.getTerm().getCharge());
+
+        credit.setAmount((float)(0.5 * amount));        
+        
+        credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
+        
+        
+        rci.getPayments().add(bank_check);
+        rci.getPayments().add(credit);
+        
+        financeService.compensate(rci, compensated);
+
+        assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
+
+        //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
+        assertThat((rci.getAmount()) + 
+                ((float) rci.getCompensatedDocuments().stream().mapToDouble(
+                (item) -> item.getAmount()).sum()))
+                .isEqualByComparingTo(0F);
+
+    }
+    
     @After
     public void list() {
         System.out.println("--------Documentos Abiertos---------");
@@ -180,8 +302,9 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         documentService.getAllByPerson(100).stream().forEach((document) -> {
             System.out.println(document.getPerson().getName()
                     + " | " + document.getLegalId()
-                    + " : " + document.getDocumentType()
-                    + " --> " + document.getAmount());
+                    + " : " + document.getDocumentType() + " : "
+                    + " Sin cargos --> " + document.getAmount()
+                    + " Total --> " + document.getTotalAmount());
         });
 
         System.out.println("Total: " + (float)

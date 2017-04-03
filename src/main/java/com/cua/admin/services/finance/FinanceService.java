@@ -1,5 +1,6 @@
 package com.cua.admin.services.finance;
 
+import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
@@ -36,6 +37,7 @@ public class FinanceService {
         
         payment.setAmount(flightRecord.getAmountOfHours() * flightRecord.getAircraft().getProductProfile().getProduct().getPrice());
         payment.setCurrency(flightRecord.getAircraft().getProductProfile().getProduct().getCurrency());
+        
         flightRecordIssued.getPayments().add(payment);
         
         flightRecordIssued.setPerson(flightRecord.getCrew().stream()

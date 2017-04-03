@@ -61,12 +61,13 @@ INSERT INTO payment_method(id, description) VALUES (3,'Cuenta Corriente');
 INSERT INTO payment_method(id, description) VALUES (4,'Tarjeta de Crédito');
 INSERT INTO payment_method(id, description) VALUES (5,'Tarjeta de Débito');
 
---Payment Methods
+--Payment Terms
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (1, 0,'Contado', 0,1);
-INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (2, 0,'Al dia', 0,2);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (2, 0,'Hasta 30 dias', 0,2);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (3, 0.10,'1 Cuota', 0,4);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (4, 0.10,'3 Cuotas', 0,4);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0,'1 Cuota', 0,5);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (6, 0.15,'Entre 31 y 60 dias', 0,2);
 
 --Account
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(100,1,0,0,0,'Activo');
