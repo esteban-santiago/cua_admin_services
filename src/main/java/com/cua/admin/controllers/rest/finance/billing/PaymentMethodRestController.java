@@ -16,7 +16,7 @@ public class PaymentMethodRestController {
     @Autowired
     private PaymentMethodService paymentMethodService;
 
-    @RequestMapping(value = "/payment", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(value = "/payment", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<PaymentMethod>> get() {
         return new ResponseEntity<>(paymentMethodService.getAll(), HttpStatus.OK);
     }
