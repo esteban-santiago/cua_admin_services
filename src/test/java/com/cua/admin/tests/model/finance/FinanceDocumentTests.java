@@ -8,7 +8,6 @@ import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.repositories.finance.billing.PaymentMethodRepository;
 import com.cua.admin.repositories.finance.billing.PaymentTermRepository;
-import com.cua.admin.repositories.finance.documents.DocumentRepository;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.finance.DocumentService;
@@ -32,9 +31,6 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
     @Autowired
     private DocumentService documentService;
-
-    @Autowired
-    private DocumentRepository<Document> documentRepository;
 
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;

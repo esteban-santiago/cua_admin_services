@@ -29,6 +29,10 @@ public class DocumentService {
         return this.documentRepository.findByDocumentType(type);
     }
 
+    public <T extends Document> T getByReferencedDocumentId(Integer id) throws Throwable {
+        return (T) this.documentRepository.findByReferencedDocumentId(id)
+                .orElseThrow(() -> new DocumentNotFoundException((long)id));
+    }
     
     
     public List<? extends Document> getAllByPerson(Integer person_id) {
