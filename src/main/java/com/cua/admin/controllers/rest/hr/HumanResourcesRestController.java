@@ -21,11 +21,11 @@ public class HumanResourcesRestController {
   
     @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<Person> getEmployee(@RequestParam(value = "id", required = true) Integer id) throws Throwable {
-        return new ResponseEntity<>(this.humanResourcesService.getEmployee(id), HttpStatus.OK);
+        return ResponseEntity.ok(this.humanResourcesService.getEmployee(id));
     }
 
     @RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<List<Person>> getEmployees() {
-        return new ResponseEntity<>(humanResourcesService.getEmployees(), HttpStatus.OK);
+        return ResponseEntity.ok(humanResourcesService.getEmployees());
     }
 }

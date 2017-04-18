@@ -19,12 +19,12 @@ public class ITRestController {
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<User> getUser(@PathVariable("id") Integer id) {
-        return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
+        return ResponseEntity.ok(userService.get(id));
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<User>> getAll() {
-        return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
+        return ResponseEntity.ok(userService.getAll());
     }
 
     @RequestMapping(value = "/user", 
@@ -33,46 +33,37 @@ public class ITRestController {
     public ResponseEntity<Page<User>> getAllPaginated(
             @RequestParam(value = "page") Integer page, 
             @RequestParam(value = "size") Integer size) {
-        return new ResponseEntity<>(userService.getAllByPage(page, size), HttpStatus.OK);
+        return ResponseEntity.ok(userService.getAllByPage(page, size));
     }   
     
     @RequestMapping(value="/user", method=RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<Void> create(@RequestBody User user){
-        HttpHeaders headers = new HttpHeaders();
+    public ResponseEntity<User> create(@RequestBody User user){
         userService.save(user);
-        headers.add("id", user.getId().toString());
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        return ResponseEntity.ok(user);
     }    
     
     @RequestMapping(value="/user/{id}", method=RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<Void> update(@RequestBody User user){
-        HttpHeaders headers = new HttpHeaders();
+    public ResponseEntity<User> update(@RequestBody User user){
         userService.save(user);
-        headers.add("id", user.getId().toString());
-        return new ResponseEntity<>(headers, HttpStatus.OK);
+        return ResponseEntity.ok(user);
     }    
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("id", id.toString());
-        return new ResponseEntity<>(headers, HttpStatus.OK);
+    public ResponseEntity<Integer> deleteUser(@PathVariable("id") Integer id) {
+        userService.delete(id);
+        return ResponseEntity.ok(id);
     }
 
 
     @RequestMapping(value = "/user/lock", method = RequestMethod.PUT, headers = "Accept=application/json")
-    public ResponseEntity<Void> lockUser(@RequestParam(value = "id", required = true) Integer id) {
+    public ResponseEntity<Integer> lockUser(@RequestParam(value = "id", required = true) Integer id) {
         userService.lock(id);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("id", id.toString());
-        return new ResponseEntity<>(headers, HttpStatus.OK);    
+        return ResponseEntity.ok(id);    
     }
 
     @RequestMapping(value = "/user/unlock", method = RequestMethod.PUT, headers = "Accept=application/json")
-    public ResponseEntity<Void> unlockUser(@RequestParam(value = "id", required = true) Integer id) {
+    public ResponseEntity<Integer> unlockUser(@RequestParam(value = "id", required = true) Integer id) {
         userService.unlock(id);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("id", id.toString());
-        return new ResponseEntity<>(headers, HttpStatus.OK);    
+        return ResponseEntity.ok(id);    
     }
 }

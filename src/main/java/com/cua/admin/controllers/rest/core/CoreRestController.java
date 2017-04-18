@@ -1,6 +1,9 @@
 package com.cua.admin.controllers.rest.core;
 
 import com.cua.admin.model.core.Person;
+import com.cua.admin.model.core.exceptions.MemberNotFoundException;
+import com.cua.admin.model.core.exceptions.PersonNotFoundException;
+import com.cua.admin.model.core.exceptions.PilotNotFoundException;
 import com.cua.admin.model.core.profiles.PilotRating;
 import com.cua.admin.services.core.PersonService;
 import java.util.HashMap;
@@ -28,24 +31,28 @@ public class CoreRestController {
 
     @RequestMapping(value = "/person", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Person>> get() {
-        return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
+        return ResponseEntity.ok(personService.getAll());
     }
 
     @RequestMapping(value = "/person/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Person> get(@PathVariable("id") Integer id) throws Throwable {
-        return new ResponseEntity<>(personService.get(id), HttpStatus.OK);
+        try {
+            return ResponseEntity.ok(personService.get(id));
+        } catch (PersonNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @RequestMapping(value = "/person", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<Person> create(@RequestBody Person person) {
         personService.save(person);
-        return new ResponseEntity<>(person, HttpStatus.CREATED);
+        return ResponseEntity.ok(person);
     }
 
     @RequestMapping(value = "/person/{id}", method = RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<Person> update(@RequestBody Person person) {
         personService.save(person);
-        return new ResponseEntity<>(person, HttpStatus.OK);
+        return ResponseEntity.ok(person);
     }
 
     @RequestMapping(value = "/sapi/person",
@@ -54,27 +61,35 @@ public class CoreRestController {
     public ResponseEntity<Page<Person>> getAllPaginated(
             @RequestParam(value = "page") Integer page,
             @RequestParam(value = "size") Integer size) {
-        return new ResponseEntity<>(personService.getAllByPage(page, size), HttpStatus.OK);
+        return ResponseEntity.ok(personService.getAllByPage(page, size));
     }
 
     @RequestMapping(value = "/member/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Person> getMember(@PathVariable("id") Integer id) throws Throwable {
-        return new ResponseEntity<>(personService.getMember(id), HttpStatus.OK);
+        try {
+            return ResponseEntity.ok(personService.getMember(id));
+        } catch (MemberNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @RequestMapping(value = "/member", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Person>> getMembers() {
-        return new ResponseEntity<>(personService.getMembers(), HttpStatus.OK);
+        return ResponseEntity.ok(personService.getMembers());
     }
 
     @RequestMapping(value = "/pilot/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Person> getPilot(@PathVariable("id") Integer id) throws Throwable {
-        return new ResponseEntity<>(personService.getPilot(id), HttpStatus.OK);
+        try {
+            return ResponseEntity.ok(personService.getPilot(id));
+        } catch(PilotNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @RequestMapping(value = "/pilot", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Person>> getPilots() {
-        return new ResponseEntity<>(personService.getPilots(), HttpStatus.OK);
+        return ResponseEntity.ok(personService.getPilots());
     }
 
     @RequestMapping(value = "/pilot/rating", method = RequestMethod.GET, produces = "application/json")
@@ -87,6 +102,6 @@ public class CoreRestController {
             values[1] = PilotRating.values()[i].getDescription();
             ratings.put(i, values);
         }
-        return new ResponseEntity<>(ratings, HttpStatus.OK);
+        return ResponseEntity.ok(ratings);
     }
 }

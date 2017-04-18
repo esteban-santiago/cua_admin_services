@@ -1,6 +1,6 @@
 package com.cua.admin.services.finance.billing;
 
-import com.cua.admin.controllers.rest.finance.billing.exceptions.PaymentMethodNotFoundException;
+import com.cua.admin.model.finance.billing.exceptions.PaymentMethodNotFoundException;
 import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.billing.PaymentMethod;
 import com.cua.admin.model.hr.exceptions.EmployeeNotFoundException;

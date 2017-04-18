@@ -35,7 +35,7 @@ public class AircraftInsurance implements Serializable {
     private LocalDate validityTo; //Fecha de validez hasta
 
     public Boolean isInForce(LocalDate date) {
-        return date.isAfter(getValidityFrom()) && date.isBefore(getValidityTo());
+        return date.isAfter(validityFrom) && date.isBefore(validityTo);
     }
     
     public Boolean isInForce() {

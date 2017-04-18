@@ -28,13 +28,13 @@ public class FinanceRestController {
     
     @RequestMapping(value = "/balance/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Float> balance(@PathVariable("id") Integer id) throws Throwable {
-        return new ResponseEntity<>(financeService.balance(personService.get(id)), HttpStatus.OK);
+        return ResponseEntity.ok(financeService.balance(personService.get(id)));
     }
 
     @RequestMapping(value = "/compensate", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<? extends Document> compensate(Document document) {
         financeService.compensate(document);
-        return new ResponseEntity<>(document, HttpStatus.OK);
+        return ResponseEntity.ok(document);
     }
     
 

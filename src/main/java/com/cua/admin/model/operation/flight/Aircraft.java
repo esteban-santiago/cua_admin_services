@@ -52,7 +52,7 @@ public class Aircraft implements Serializable {
     }
     
     public Boolean hasAnInsurancePolicyInForce(LocalDate date) {
-        return getInsurances().stream().anyMatch(_insurance -> _insurance.isInForce(date));
+        return insurances.stream().anyMatch(_insurance -> _insurance.isInForce(date));
     }
     
     public enum Status {

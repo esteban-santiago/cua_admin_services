@@ -26,17 +26,17 @@ public class DocumentRestController {
 
     @RequestMapping(value = "/flight_record_issued", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getFlightRecordsIssued() {
-        return new ResponseEntity<>(documentService.getAllByType(DocumentType.FRI), HttpStatus.OK);
+        return ResponseEntity.ok(documentService.getAllByType(DocumentType.FRI));
     }
 
     @RequestMapping(value = "/", params = {"person_id"}, method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getByPerson(@RequestParam(value = "person_id") Integer id) {
-        return new ResponseEntity<>(documentService.getAllByPerson(id), HttpStatus.OK);
+        return ResponseEntity.ok(documentService.getAllByPerson(id));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getAll() {
-        return new ResponseEntity<>(documentService.getAll(), HttpStatus.OK);
+        return ResponseEntity.ok(documentService.getAll());
     }
 
     @RequestMapping(value = "/", params = {"referenced_document_id"}, method = RequestMethod.GET, produces = "application/json")
@@ -49,18 +49,9 @@ public class DocumentRestController {
     }
 
     @RequestMapping(value = "/receipt", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<? extends Document> compensate(ReceiptIssued receipt) {
+    public ResponseEntity<ReceiptIssued> compensate(ReceiptIssued receipt) {
         documentService.save(receipt);
-        return new ResponseEntity<>(receipt, HttpStatus.OK);
+        return ResponseEntity.ok(receipt);
     }
-    
-/*
-    @RequestMapping(value = "/document/", params = {"referenced_document_id"}, method = RequestMethod.GET, produces = "application/json")
-    public <T extends Document> ResponseEntity<T> getByReferencedDocument(@RequestParam(value = "referenced_document_id") Integer id) throws Throwable {
-        System.out.println("getByReferencedDocument()");
-        return new ResponseEntity<>(documentService.getByReferencedDocumentId(id), HttpStatus.OK);
-    }
-*/
-
 
 }

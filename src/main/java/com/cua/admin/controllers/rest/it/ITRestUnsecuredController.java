@@ -17,6 +17,6 @@ public class ITRestUnsecuredController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<Boolean> login(@RequestParam(value = "user", required = true) User user) {
-        return new ResponseEntity<>(true, HttpStatus.OK);
+        return ResponseEntity.ok(true);
     }
 }

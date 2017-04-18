@@ -49,7 +49,7 @@ public class User implements Serializable {
     private Status status = Status.ACTIVE;
 
     @Enumerated(EnumType.STRING)
-    private Profile profile = Profile.USER;
+    private final Profile profile = Profile.USER;
 
     
     public void lock() {

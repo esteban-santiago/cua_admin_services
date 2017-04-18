@@ -18,11 +18,11 @@ public class PaymentMethodRestController {
 
     @RequestMapping(value = "/payment", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<PaymentMethod>> get() {
-        return new ResponseEntity<>(paymentMethodService.getAll(), HttpStatus.OK);
+        return ResponseEntity.ok(paymentMethodService.getAll());
     }
 
     @RequestMapping(value = "/payment/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<PaymentMethod> get(@PathVariable("id") Integer id) throws Throwable {
-        return new ResponseEntity<>(paymentMethodService.get(id), HttpStatus.OK);
+        return ResponseEntity.ok(paymentMethodService.get(id));
     }
 }

@@ -1,4 +1,4 @@
-package com.cua.admin.controllers.rest.finance.billing.exceptions;
+package com.cua.admin.model.finance.billing.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

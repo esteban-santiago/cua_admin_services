@@ -21,6 +21,6 @@ public class AccountingRestController {
 
     @RequestMapping(value = "/account", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Account>> get() {
-        return new ResponseEntity<>(accountService.getAll(), HttpStatus.OK);
+        return ResponseEntity.ok(accountService.getAll());
     }
 }
