@@ -5,12 +5,12 @@ import com.cua.admin.model.finance.documents.DocumentStatus;
 import com.cua.admin.model.finance.documents.DocumentType;
 import com.cua.admin.model.finance.documents.exceptions.DocumentNotFoundException;
 import com.cua.admin.repositories.finance.documents.DocumentRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
 @Service
 @Transactional
@@ -20,6 +20,7 @@ public class DocumentService {
     @Autowired
     private DocumentRepository<Document> documentRepository;
 
+    @SuppressWarnings("unchecked")
     public <T extends Document> T get(Long id) throws Throwable {
         return (T) this.documentRepository.findById(id)
             .orElseThrow(() -> new DocumentNotFoundException(id));
@@ -29,12 +30,12 @@ public class DocumentService {
         return this.documentRepository.findByDocumentType(type);
     }
 
-    public <T extends Document> T getByReferencedDocumentId(Integer id) throws Throwable {
+    @SuppressWarnings("unchecked")
+    public <T extends Document> T getByReferencedDocumentId(Integer id) throws DocumentNotFoundException {
         return (T) this.documentRepository.findByReferencedDocumentId(id)
-                .orElseThrow(() -> new DocumentNotFoundException((long)id));
+            .orElseThrow(() -> new DocumentNotFoundException((long)id));
     }
-    
-    
+
     public List<? extends Document> getAllByPerson(Integer person_id) {
         return this.documentRepository.findByPersonId(person_id);
     }

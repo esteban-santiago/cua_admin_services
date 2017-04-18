@@ -91,27 +91,19 @@ public abstract class Document implements Serializable {
     private Set<Document> compensatedDocuments = new HashSet<>(); //(*) Documento compensados
     
     public Float getAmount() {
-        return (float) payments.stream().mapToDouble(
-                (payment) -> payment.getAmount())
-                .sum();
+        return (float) payments.stream().mapToDouble(Payment::getAmount).sum();
     }    
     
     public Float getCharge() {
-        return (float) payments.stream().mapToDouble(
-                (payment) -> payment.getCharge())
-                .sum();
+        return (float) payments.stream().mapToDouble(Payment::getCharge).sum();
     }    
 
     public Float getDiscount() {
-        return (float) payments.stream().mapToDouble(
-                (payment) -> payment.getDiscount())
-                .sum();
+        return (float) payments.stream().mapToDouble(Payment::getDiscount).sum();
     }    
 
     public Float getTotalAmount() {
-        return (float) payments.stream().mapToDouble(
-                (payment) -> payment.getTotalAmount())
-                .sum();
+        return (float) payments.stream().mapToDouble(Payment::getTotalAmount).sum();
     }
     
     public void open() {

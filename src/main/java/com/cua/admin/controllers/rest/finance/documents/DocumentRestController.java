@@ -3,8 +3,8 @@ package com.cua.admin.controllers.rest.finance.documents;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.DocumentType;
 import com.cua.admin.model.finance.documents.ReceiptIssued;
+import com.cua.admin.model.finance.documents.exceptions.DocumentNotFoundException;
 import com.cua.admin.services.finance.DocumentService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,8 +40,12 @@ public class DocumentRestController {
     }
 
     @RequestMapping(value = "/", params = {"referenced_document_id"}, method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Document> getByReferencedDocument(@RequestParam(value = "referenced_document_id") Integer id) throws Throwable {
-        return new ResponseEntity<>((Document)documentService.getByReferencedDocumentId(id), HttpStatus.OK);
+    public ResponseEntity<? extends Document> getByReferencedDocument(@RequestParam(value = "referenced_document_id") Integer id) {
+        try {
+            return ResponseEntity.ok(documentService.getByReferencedDocumentId(id));
+        } catch (DocumentNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @RequestMapping(value = "/receipt", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
