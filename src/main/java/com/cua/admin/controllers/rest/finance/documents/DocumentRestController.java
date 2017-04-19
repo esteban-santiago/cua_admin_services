@@ -7,7 +7,6 @@ import com.cua.admin.model.finance.documents.exceptions.DocumentNotFoundExceptio
 import com.cua.admin.services.finance.DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,8 +47,9 @@ public class DocumentRestController {
         }
     }
 
-    @RequestMapping(value = "/receipt", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<ReceiptIssued> compensate(ReceiptIssued receipt) {
+    @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<ReceiptIssued> saveReceipt(ReceiptIssued receipt) {
+        System.out.println(receipt.toString());
         documentService.save(receipt);
         return ResponseEntity.ok(receipt);
     }

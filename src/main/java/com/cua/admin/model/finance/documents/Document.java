@@ -3,6 +3,7 @@ package com.cua.admin.model.finance.documents;
 import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.billing.Payment;
+import com.cua.admin.model.finance.billing.Promotion;
 import com.cua.admin.model.it.User;
 import lombok.Data;
 import lombok.ToString;
@@ -64,12 +65,16 @@ public abstract class Document implements Serializable {
 
     */
     
-    private Currency currency;
+    //private Currency currency;
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "document_id", nullable = true, foreignKey = @ForeignKey(name = "document_payment_id_fk"))
     List<Payment> payments = new ArrayList<>();
     
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "document_id", nullable = true, foreignKey = @ForeignKey(name = "document_promotion_id_fk"))
+    List<Promotion> promotions = new ArrayList<>();
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user; //Representa al operador que generó el documento
