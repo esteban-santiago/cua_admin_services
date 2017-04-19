@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,7 +49,7 @@ public class DocumentRestController {
     }
 
     @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<ReceiptIssued> saveReceipt(ReceiptIssued receipt) {
+    public ResponseEntity<ReceiptIssued> saveReceipt(@RequestBody ReceiptIssued receipt) {
         System.out.println(receipt.toString());
         documentService.save(receipt);
         return ResponseEntity.ok(receipt);
