@@ -49,8 +49,7 @@ public class DocumentRestController {
     }
 
     @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<ReceiptIssued> saveReceipt(@RequestBody ReceiptIssued receipt) {
-        System.out.println(receipt.toString());
+    public ResponseEntity<ReceiptIssued> save(@RequestBody ReceiptIssued receipt) {
         documentService.save(receipt);
         return ResponseEntity.ok(receipt);
     }
