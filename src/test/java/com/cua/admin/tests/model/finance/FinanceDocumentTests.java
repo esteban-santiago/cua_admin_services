@@ -140,7 +140,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
-        //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
+        //Si está compensado el valor del documento compensador es igual a la sumatoria de los compensados
         assertThat(((float) rci.getCompensatedDocuments().stream().mapToDouble(
                 (item) -> item.getAmount()).sum()) + rci.getTotalAmount())
                 .isEqualByComparingTo(0F);
