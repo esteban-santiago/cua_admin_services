@@ -1,14 +1,10 @@
 package com.cua.admin.controllers.rest.finance;
 
-import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.documents.Document;
-import com.cua.admin.model.finance.documents.DocumentType;
 import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.finance.FinanceService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
