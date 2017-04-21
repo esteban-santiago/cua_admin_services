@@ -86,6 +86,35 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
     }
 
     @Test
+    public void save() throws Throwable {
+        ReceiptIssued rci = new ReceiptIssued();
+        Payment cash = new Payment();
+        cash.setMethod(paymentMethodRepository.findById(1).get());
+        cash.setCurrency(Currency.ARS);
+        cash.setAmount(4632F);
+
+        rci.getPayments().add(cash);
+
+        rci.setPerson(personService.getMember(100));
+
+        Set<Document> compensated = new HashSet();
+
+        documentService.getAllCompensables().stream()
+                .forEach((document) -> {
+                    compensated.add(document);
+                });
+        rci.setCompensatedDocuments(compensated);
+        documentService.save(rci);
+        
+        //int rciId = rci.getId();
+        
+        assertThat(documentService.get(rci.getId()).getCompensatedDocuments().size()).isGreaterThan(0);
+        
+  
+        
+    }
+    
+    @Test
     public void compensateWithCash() throws Throwable {
 
         ReceiptIssued rci = new ReceiptIssued();
