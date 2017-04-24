@@ -100,8 +100,7 @@ public abstract class Document implements Serializable {
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
     private Document compensatedBy; //(*) Documento de compensación
 
-    @OneToMany(mappedBy = "compensatedBy", orphanRemoval = false)
-    //@JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "item_document_id_fk"))
+    @OneToMany(mappedBy = "compensatedBy")
     private Set<Document> compensatedDocuments = new HashSet<>(); //(*) Documento compensados
 
     public Float getAmount() {
@@ -120,6 +119,12 @@ public abstract class Document implements Serializable {
         return (float) payments.stream().mapToDouble(Payment::getTotalAmount).sum();
     }
 
+    /*
+    public void setCompensatedDocuments(Set compensatedDocuments) {
+        this.compensatedDocuments = compensatedDocuments;
+        this.compensatedDocuments.stream().forEach(document -> setCompensatedBy(this));
+    }*/
+    
     public void open() {
         this.status = DocumentStatus.OPENED;
     }

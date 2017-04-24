@@ -59,7 +59,7 @@ public class FinanceService {
         //accountingEntryService.saveAccountingEntryUsingTemplate(document);
     }
 
-    public void compensate(Document document) {
+    public <T extends Document> void compensate(T document) {
         document.getCompensatedDocuments().forEach(child -> compensate(document, child));
     }
 
