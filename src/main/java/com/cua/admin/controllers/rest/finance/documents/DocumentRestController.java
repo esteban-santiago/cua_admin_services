@@ -54,13 +54,14 @@ public class DocumentRestController {
         }
     }
 
-    @RequestMapping(value = "/", params = {"id"}, method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "", params = {"id"}, method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<? extends Document> get(@RequestParam(value = "id") Long id) throws Throwable {
         return ResponseEntity.ok(documentService.get(id));
     }
 
     @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<ReceiptIssued> save(@RequestBody ReceiptIssued receipt) throws Throwable {
+        //receipt.getCompensatedDocuments().stream().forEach(document -> document.setCompensatedBy(receipt));
         documentService.save(receipt);
         HttpHeaders headers = new HttpHeaders();
         headers.add("id", receipt.getId().toString());
