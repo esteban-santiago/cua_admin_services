@@ -65,9 +65,8 @@ public class DocumentService {
 //            .orElseThrow(() -> new DocumentNotFoundException(id));
 //    }
 
-
-    public <T extends Document> void save(T document) {
-        this.documentRepository.saveAndFlush(document);
+    public <T extends Document> T save(T document) {
+        return this.documentRepository.saveAndFlush(document);
     }
 
     public void delete(Long id) {
