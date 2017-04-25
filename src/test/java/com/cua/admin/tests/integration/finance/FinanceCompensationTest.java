@@ -170,7 +170,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andReturn();
 
         System.out.println("Resultado del get : \n"
-                + resultPost.getResponse().getContentAsString());
+                + resultGet.getResponse().getContentAsString());
 
     }
 

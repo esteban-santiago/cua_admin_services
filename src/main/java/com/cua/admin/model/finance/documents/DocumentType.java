@@ -1,9 +1,10 @@
 package com.cua.admin.model.finance.documents;
 
-import java.util.HashSet;
-import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @RequiredArgsConstructor
@@ -24,14 +25,14 @@ public enum DocumentType {
     private final String description;
     
     public static Set<DocumentType> getCompensators() {
-        Set<DocumentType> compensators = new HashSet();
+        Set<DocumentType> compensators = new HashSet<>();
         compensators.add(RCI);
         compensators.add(CNI);
         return compensators;
     }
 
     public static Set<DocumentType> getCompensables() {
-        Set<DocumentType> compensables = new HashSet();
+        Set<DocumentType> compensables = new HashSet<>();
         compensables.add(FRI);
         compensables.add(DNI);
         return compensables;        

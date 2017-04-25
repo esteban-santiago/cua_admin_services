@@ -61,24 +61,31 @@ public class FinanceService {
     }
 
     public <T extends Document> T compensate(T document) {
-        document.getCompensatedDocuments().forEach(child -> compensate(document, child));
-        return documentService.save(document);
+        return compensate(document, document.getCompensatedDocuments());
     }
 
-    public <T extends Document> void compensate(T parent, Set<T> childs) {
-        childs.forEach(child -> compensate(parent, child));
-    }
-
-    public <T extends Document> void compensate(T parent, T child) {
+    public <T extends Document> T compensate(T parent, Set<Document> children) {
         parent.setCompensatedBy(parent);
         parent.setCompensationDate(LocalDate.now());
         parent.compensate();
 
+        T savedParent = documentService.save(parent);
+
+        children.forEach(child -> compensate(savedParent, child));
+
+        return documentService.save(savedParent);
+    }
+
+    private <T extends Document> void compensate(T parent, T child) {
         child.setCompensationDate(LocalDate.now());
         child.setCompensatedBy(parent);
         child.compensate();
 
-        parent.getCompensatedDocuments().add(child);
+        documentService.save(child);
+
+        if (!parent.getCompensatedDocuments().contains(child)) {
+            parent.getCompensatedDocuments().add(child);
+        }
     }
 
     public Float balance(Person person) {

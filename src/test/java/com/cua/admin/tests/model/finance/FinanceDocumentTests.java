@@ -13,13 +13,15 @@ import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.finance.DocumentService;
 import com.cua.admin.services.finance.FinanceService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
-import java.util.HashSet;
-import java.util.Set;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FinanceDocumentTests extends SpringIntegrationTest {
 
@@ -97,23 +99,17 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        Set<Document> compensated = new HashSet();
+        Set<Document> compensated = new HashSet<>();
 
-        documentService.getAllCompensables().stream()
-                .forEach((document) -> {
-                    compensated.add(document);
-                });
+        compensated.addAll(documentService.getAllCompensables());
         rci.setCompensatedDocuments(compensated);
         documentService.save(rci);
-        
+
         //int rciId = rci.getId();
-        
+
         assertThat(documentService.get(rci.getId()).getCompensatedDocuments().size()).isGreaterThan(0);
-        
-  
-        
     }
-    
+
     @Test
     public void compensateWithCash() throws Throwable {
 
@@ -127,20 +123,17 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        Set<Document> compensated = new HashSet();
+        Set<Document> compensated = new HashSet<>();
 
-        documentService.getAllCompensables().stream()
-                .forEach((document) -> {
-                    compensated.add(document);
-                });
+        compensated.addAll(documentService.getAllCompensables());
 
         financeService.compensate(rci, compensated);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat(((float) rci.getCompensatedDocuments().stream().mapToDouble(
-                (item) -> item.getAmount()).sum()) + rci.getTotalAmount())
+        assertThat(((float) rci.getCompensatedDocuments().stream()
+            .mapToDouble(Document::getAmount).sum()) + rci.getTotalAmount())
                 .isEqualByComparingTo(0F);
 
     }
@@ -158,24 +151,21 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        Set<Document> compensated = new HashSet();
+        Set<Document> compensated = new HashSet<>();
 
-        documentService.getAllCompensables().stream()
-                .forEach((document) -> {
-                    compensated.add(document);
-                });
+       compensated.addAll(documentService.getAllCompensables());
 
         financeService.compensate(rci, compensated);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento compensador es igual a la sumatoria de los compensados
-        assertThat(((float) rci.getCompensatedDocuments().stream().mapToDouble(
-                (item) -> item.getAmount()).sum()) + rci.getTotalAmount())
+        assertThat(((float) rci.getCompensatedDocuments().stream()
+            .mapToDouble(Document::getAmount).sum()) + rci.getTotalAmount())
                 .isEqualByComparingTo(0F);
 
-    }    
-    
+    }
+
     @Test
     public void compensateWithBankCheck() throws Throwable {
 
@@ -189,32 +179,30 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        Set<Document> compensated = new HashSet();
+        Set<Document> compensated = new HashSet<>();
 
-        documentService.getAllCompensables().stream().forEach((document) -> {
-            compensated.add(document);
-        });
+        compensated.addAll(documentService.getAllCompensables());
 
-        Float amount = (((float) compensated.stream().mapToDouble(
-                (item) -> item.getAmount()).sum()));
-        
-        bank_check.setAmount(amount);        
-        
+        Float amount = (((float) compensated.stream()
+            .mapToDouble(Document::getAmount).sum()));
+
+        bank_check.setAmount(amount);
+
         bank_check.setCharge(bank_check.getAmount() * bank_check.getTerm().getCharge());
 
-        
+
         financeService.compensate(rci, compensated);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat((rci.getAmount()) + 
-                ((float) rci.getCompensatedDocuments().stream().mapToDouble(
-                (item) -> item.getAmount()).sum()))
+        assertThat((rci.getAmount()) +
+                ((float) rci.getCompensatedDocuments().stream()
+                    .mapToDouble(Document::getAmount).sum()))
                 .isEqualByComparingTo(0F);
 
     }
-    
+
     @Test
     public void compensateWithCreditCard() throws Throwable {
 
@@ -228,28 +216,26 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        Set<Document> compensated = new HashSet();
+        Set<Document> compensated = new HashSet<>();
 
-        documentService.getAllCompensables().stream().forEach((document) -> {
-            compensated.add(document);
-        });
+        compensated.addAll(documentService.getAllCompensables());
 
-        Float amount = (((float) compensated.stream().mapToDouble(
-                (item) -> item.getAmount()).sum()));
-        
-        credit.setAmount(amount);        
-        
+        Float amount = (((float) compensated.stream()
+            .mapToDouble(Document::getAmount).sum()));
+
+        credit.setAmount(amount);
+
         credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
 
-        
+
         financeService.compensate(rci, compensated);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat((rci.getAmount()) + 
-                ((float) rci.getCompensatedDocuments().stream().mapToDouble(
-                (item) -> item.getAmount()).sum()))
+        assertThat((rci.getAmount()) +
+                ((float) rci.getCompensatedDocuments().stream()
+                    .mapToDouble(Document::getAmount).sum()))
                 .isEqualByComparingTo(0F);
 
     }
@@ -273,58 +259,50 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        Set<Document> compensated = new HashSet();
+        Set<Document> compensated = new HashSet<>();
 
-        documentService.getAllCompensables().stream().forEach((document) -> {
-            compensated.add(document);
-        });
+        compensated.addAll(documentService.getAllCompensables());
 
-        Float amount = (((float) compensated.stream().mapToDouble(
-                (item) -> item.getAmount()).sum()));
-        
-        bank_check.setAmount((float)(0.5 * amount));        
-        
+        Float amount = (((float) compensated.stream()
+            .mapToDouble(Document::getAmount).sum()));
+
+        bank_check.setAmount((float)(0.5 * amount));
+
         bank_check.setCharge(bank_check.getAmount() * bank_check.getTerm().getCharge());
 
-        credit.setAmount((float)(0.5 * amount));        
-        
+        credit.setAmount((float)(0.5 * amount));
+
         credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
-        
-        
+
+
         rci.getPayments().add(bank_check);
         rci.getPayments().add(credit);
-        
+
         financeService.compensate(rci, compensated);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat((rci.getAmount()) + 
-                ((float) rci.getCompensatedDocuments().stream().mapToDouble(
-                (item) -> item.getAmount()).sum()))
+        assertThat((rci.getAmount()) +
+                ((float) rci.getCompensatedDocuments().stream()
+                    .mapToDouble(Document::getAmount).sum()))
                 .isEqualByComparingTo(0F);
 
     }
-    
+
     @After
     public void list() {
         System.out.println("--------Documentos Abiertos---------");
-        documentService.getAllOpened().stream().forEach((document) -> {
-            System.out.println(document);
-        });
+        documentService.getAllOpened().forEach(System.out::println);
 
         System.out.println("--------Documentos Compensados---------");
-        documentService.getAllCompensated().stream().forEach((document) -> {
-            System.out.println(document);
-        });
+        documentService.getAllCompensated().forEach(System.out::println);
 
         System.out.println("--------Documentos Compensables---------");
-        documentService.getAllCompensables().stream().forEach((document) -> {
-            System.out.println(document);
-        });
+        documentService.getAllCompensables().forEach(System.out::println);
 
         System.out.println("--------Cuenta Corriente---------");
-        documentService.getAllByPerson(100).stream().forEach((document) -> {
+        documentService.getAllByPerson(100).forEach((document) -> {
             System.out.println(document.getPerson().getName()
                     + " | " + document.getLegalId()
                     + " : " + document.getDocumentType() + " : "
@@ -333,14 +311,12 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         });
 
         System.out.println("Total: " + (float)
-                documentService.getAllByPerson(100).stream().mapToDouble(
-                        (document) -> document.getAmount()  ).sum()
+                documentService.getAllByPerson(100).stream()
+                    .mapToDouble(Document::getAmount).sum()
                 );
-        
+
         System.out.println("--------Asientos---------");
-        accountingEntryService.getAll().stream().forEach((entry) -> {
-            System.out.println(entry);
-        });
+        accountingEntryService.getAll().forEach(System.out::println);
 
     }
 }
