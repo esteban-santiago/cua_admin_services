@@ -7,12 +7,13 @@ import com.cua.admin.model.finance.documents.FlightRecordIssued;
 import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.services.accounting.AccountingEntryService;
-import java.time.LocalDate;
-import java.util.Set;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.Set;
 
 /**
  *
@@ -59,8 +60,9 @@ public class FinanceService {
         //accountingEntryService.saveAccountingEntryUsingTemplate(document);
     }
 
-    public <T extends Document> void compensate(T document) {
+    public <T extends Document> T compensate(T document) {
         document.getCompensatedDocuments().forEach(child -> compensate(document, child));
+        return documentService.save(document);
     }
 
     public <T extends Document> void compensate(T parent, Set<T> childs) {
@@ -77,13 +79,12 @@ public class FinanceService {
         child.compensate();
 
         parent.getCompensatedDocuments().add(child);
-        documentService.save(parent);
     }
 
     public Float balance(Person person) {
-        return (float) documentService.getAllByPerson(person.getId()).stream().mapToDouble(
-                (document) -> document.getAmount()
-        ).sum();
+        return (float) documentService.getAllByPerson(person.getId()).stream()
+            .mapToDouble(Document::getAmount)
+            .sum();
     }
 
 }

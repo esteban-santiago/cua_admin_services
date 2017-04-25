@@ -1,0 +1,184 @@
+{
+  "documentType": "RCI",
+  "expirationDate": "2017-05-20",
+  "compensationDate": "2017-05-20",
+  "person": {
+    "id": 100,
+    "name": "SANTIAGO, Esteban",
+    "dateOfCreation": "2017-02-03",
+    "dateOfBirth": "1974-08-02",
+    "nationality": {
+      "description": "Argentina",
+      "id": 1
+    },
+    "identityCard": {
+      "identityCardNumber": "24036873",
+      "identityCardType": "DNI"
+    },
+    "addresses": [
+    ],
+    "contactWays": [
+    ],
+    "status": "ACTIVE",
+    "memberProfile": {
+      "id": 100,
+      "category": {
+        "description": "Socio",
+        "id": 1
+      },
+      "status": "ACTIVE",
+      "active": true,
+      "dismiss": false
+    },
+    "pilotProfile": {
+      "id": 100,
+      "licence": "24036873",
+      "ratings": [
+      ],
+      "medicalCertifications": [
+        {
+          "id": 1,
+          "medicalCertificationClass": "CLASS_I",
+          "validityFrom": "2017-01-04",
+          "validityTo": "2020-01-04",
+          "observations": "Observaciones!!!"
+        }
+      ],
+      "pilotCertifications": [
+      ]
+    },
+    "customerProfile": null,
+    "employeeProfile": null,
+    "active": true
+  },
+  "payments": [
+    {
+      "method": {
+        "id": 5,
+        "description": "Tarjeta de DÃƒÂ©bito",
+        "paymentTerms": [
+          {
+            "id": 5,
+            "description": "1 Cuota",
+            "charge": 0.0,
+            "discount": 0.0
+          }
+        ]
+      },
+      "term": {
+        "id": 5,
+        "description": "1 Cuota",
+        "charge": 0.0,
+        "discount": 0.0
+      },
+      "currency": "ARS",
+      "amount": 4632.0,
+      "charge": 0.0,
+      "discount": 0.0,
+      "description": "",
+      "totalAmount": 4632.0
+    }
+  ],
+  "promotions": [
+  ],
+  "user": null,
+  "creationDate": "2017-04-19",
+  "referencedDocumentId": null,
+  "status": "OPENED",
+  "compensatedBy": null,
+  "compensatedDocuments": [
+    {
+      "id": 1,
+      "documentType": "FRI",
+      "expirationDate": "2017-05-23",
+      "compensationDate": null,
+      "person": {
+        "id": 100,
+        "name": "SANTIAGO, Esteban",
+        "dateOfCreation": "2017-02-03",
+        "dateOfBirth": "1974-08-02",
+        "nationality": {
+          "description": "Argentina",
+          "id": 1
+        },
+        "identityCard": {
+          "identityCardNumber": "24036873",
+          "identityCardType": "DNI"
+        },
+        "addresses": [
+        ],
+        "contactWays": [
+        ],
+        "status": "ACTIVE",
+        "memberProfile": {
+          "id": 100,
+          "category": {
+            "description": "Socio",
+            "id": 1
+          },
+          "status": "ACTIVE",
+          "active": true,
+          "dismiss": false
+        },
+        "pilotProfile": {
+          "id": 100,
+          "licence": "24036873",
+          "ratings": [
+          ],
+          "medicalCertifications": [
+            {
+              "id": 1,
+              "medicalCertificationClass": "CLASS_I",
+              "validityFrom": "2017-01-04",
+              "validityTo": "2020-01-04",
+              "observations": "Observaciones!!!"
+            }
+          ],
+          "pilotCertifications": [
+          ]
+        },
+        "customerProfile": null,
+        "employeeProfile": null,
+        "active": true
+      },
+      "payments": [
+        {
+          "id": 1,
+          "method": null,
+          "term": null,
+          "currency": "ARS",
+          "amount": 1152.0,
+          "charge": 0.0,
+          "discount": 0.0,
+          "description": null,
+          "totalAmount": 1152.0
+        }
+      ],
+      "promotions": [
+      ],
+      "user": null,
+      "creationDate": "2017-04-23",
+      "referencedDocumentId": 101,
+      "status": "OPENED",
+      "compensatedBy": null,
+      "compensatedDocuments": [
+      ],
+      "legalId": 70000000,
+      "opened": true,
+      "discount": 0.0,
+      "charge": 0.0,
+      "totalAmount": 1152.0,
+      "compensated": false,
+      "amount": 1152.0,
+      "canceled": false
+    }
+  ],
+  "legalId": 10000000,
+  "charge": -0.0,
+  "total Amount": -4632.0,
+  "amount": -4632.0,
+  "opened": true,
+  "discount": 0.0,
+  "compensated": false,
+  "canceled": false
+}

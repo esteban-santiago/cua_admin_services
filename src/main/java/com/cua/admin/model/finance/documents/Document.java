@@ -4,6 +4,8 @@ import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.billing.Promotion;
 import com.cua.admin.model.it.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -98,9 +100,11 @@ public abstract class Document implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
+    @JsonBackReference
     private Document compensatedBy; //(*) Documento de compensación
 
     @OneToMany(mappedBy = "compensatedBy")
+    @JsonManagedReference
     private Set<Document> compensatedDocuments = new HashSet<>(); //(*) Documento compensados
 
     public Float getAmount() {
