@@ -4,11 +4,11 @@ import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.billing.Promotion;
 import com.cua.admin.model.it.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,7 +20,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +35,7 @@ import java.util.Set;
     @Type(name = "FRI", value = FlightRecordIssued.class),
     @Type(name = "RCI", value = ReceiptIssued.class)
 })
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 public abstract class Document implements Serializable {
 
     @GenericGenerator(
@@ -98,14 +98,12 @@ public abstract class Document implements Serializable {
     @Enumerated(EnumType.STRING)
     private DocumentStatus status = DocumentStatus.OPENED;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
-    @JsonBackReference
     private Document compensatedBy; //(*) Documento de compensación
 
     @OneToMany(mappedBy = "compensatedBy")
-    @JsonManagedReference
-    private Set<Document> compensatedDocuments = new HashSet<>(); //(*) Documento compensados
+    private Set<Document> compensatedDocuments; //(*) Documento compensados
 
     public Float getAmount() {
         return (float) payments.stream().mapToDouble(Payment::getAmount).sum();
@@ -123,11 +121,10 @@ public abstract class Document implements Serializable {
         return (float) payments.stream().mapToDouble(Payment::getTotalAmount).sum();
     }
 
-    /*
-    public void setCompensatedDocuments(Set compensatedDocuments) {
+    public void setCompensatedDocuments(Set<Document> compensatedDocuments) {
         this.compensatedDocuments = compensatedDocuments;
-        this.compensatedDocuments.stream().forEach(document -> setCompensatedBy(this));
-    }*/
+        this.compensatedDocuments.forEach(document -> document.setCompensatedBy(this));
+    }
     
     public void open() {
         this.status = DocumentStatus.OPENED;
