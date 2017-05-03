@@ -98,7 +98,7 @@ public abstract class Document implements Serializable {
     @Enumerated(EnumType.STRING)
     private DocumentStatus status = DocumentStatus.OPENED;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
     private Document compensatedBy; //(*) Documento de compensación
 
