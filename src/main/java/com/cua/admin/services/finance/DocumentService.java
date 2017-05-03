@@ -10,13 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class DocumentService {
-    
+
     @Autowired
     private DocumentRepository<Document> documentRepository;
 
@@ -33,7 +38,7 @@ public class DocumentService {
     @SuppressWarnings("unchecked")
     public <T extends Document> T getByReferencedDocumentId(Integer id) throws DocumentNotFoundException {
         return (T) this.documentRepository.findByReferencedDocumentId(id)
-            .orElseThrow(() -> new DocumentNotFoundException((long)id));
+            .orElseThrow(() -> new DocumentNotFoundException((long) id));
     }
 
     public List<? extends Document> getAllByPerson(Integer person_id) {
@@ -51,11 +56,11 @@ public class DocumentService {
     public List<? extends Document> getAllCompensables() {
         return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensables()).get();
     }
-    
+
     public List<? extends Document> getAllCompensators() {
         return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensators()).get();
     }
-    
+
     public List<? extends Document> getAll() {
         return this.documentRepository.findAll();
     }
@@ -66,6 +71,14 @@ public class DocumentService {
 //    }
 
     public <T extends Document> T save(T document) {
+
+        if (!isEmpty(document.getCompensatedDocuments())) {
+            Set<Document> compensatedDocuments = new HashSet<>(
+                documentRepository.findAll(
+                    document.getCompensatedDocuments().stream().map(Document::getId).collect(toList())));
+            document.setCompensatedDocuments(compensatedDocuments);
+        }
+
         return this.documentRepository.saveAndFlush(document);
     }
 
