@@ -5,6 +5,7 @@ import com.cua.admin.model.finance.documents.DocumentStatus;
 import com.cua.admin.model.finance.documents.DocumentType;
 import com.cua.admin.model.finance.documents.exceptions.DocumentNotFoundException;
 import com.cua.admin.repositories.finance.documents.DocumentRepository;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,23 +46,23 @@ public class DocumentService {
         return this.documentRepository.findByPersonId(person_id);
     }
 
-    public List<? extends Document> getAllCompensated() {
+    public List<Document> getAllCompensated() {
         return this.documentRepository.findByStatus(DocumentStatus.COMPENSATED).get();
     }
 
-    public List<? extends Document> getAllOpened() {
+    public List<Document> getAllOpened() {
         return this.documentRepository.findByStatus(DocumentStatus.OPENED).get();
     }
 
-    public List<? extends Document> getAllCompensables() {
+    public List<Document> getAllCompensables() {
         return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensables()).get();
     }
 
-    public List<? extends Document> getAllCompensators() {
+    public List<Document> getAllCompensators() {
         return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensators()).get();
     }
 
-    public List<? extends Document> getAll() {
+    public List<Document> getAll() {
         return this.documentRepository.findAll();
     }
 
@@ -73,7 +74,7 @@ public class DocumentService {
     public <T extends Document> T save(T document) {
 
         if (!isEmpty(document.getCompensatedDocuments())) {
-            Set<Document> compensatedDocuments = new HashSet<>(
+            List<Document> compensatedDocuments = new ArrayList<>(
                 documentRepository.findAll(
                     document.getCompensatedDocuments().stream().map(Document::getId).collect(toList())));
             document.setCompensatedDocuments(compensatedDocuments);

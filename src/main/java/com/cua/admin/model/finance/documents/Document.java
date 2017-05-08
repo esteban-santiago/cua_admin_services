@@ -103,7 +103,7 @@ public abstract class Document implements Serializable {
     private Document compensatedBy; //(*) Documento de compensación
 
     @OneToMany(mappedBy = "compensatedBy")
-    private Set<Document> compensatedDocuments; //(*) Documento compensados
+    private List<Document> compensatedDocuments; //(*) Documento compensados
 
     public Float getAmount() {
         return (float) payments.stream().mapToDouble(Payment::getAmount).sum();
@@ -121,7 +121,7 @@ public abstract class Document implements Serializable {
         return (float) payments.stream().mapToDouble(Payment::getTotalAmount).sum();
     }
 
-    public void setCompensatedDocuments(Set<Document> compensatedDocuments) {
+    public void setCompensatedDocuments(List<Document> compensatedDocuments) {
         this.compensatedDocuments = compensatedDocuments;
         this.compensatedDocuments.forEach(document -> document.setCompensatedBy(this));
     }

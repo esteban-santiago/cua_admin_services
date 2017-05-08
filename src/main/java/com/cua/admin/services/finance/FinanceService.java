@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -71,7 +72,7 @@ public class FinanceService {
         return compensate(document, document.getCompensatedDocuments());
     }
 
-    public <T extends Document> T compensate(T parent, Set<Document> children) {
+    public <T extends Document> T compensate(T parent, List<? extends Document> children) {
         parent.setCompensatedBy(parent);
         parent.setCompensationDate(LocalDate.now());
         parent.compensate();
@@ -90,9 +91,9 @@ public class FinanceService {
 
         documentService.save(child);
 
-        if (!parent.getCompensatedDocuments().contains(child)) {
-            parent.getCompensatedDocuments().add(child);
-        }
+        /*if (!parent.getCompensatedDocuments().contains(child)) {
+            parent.getCompensatedDocuments().add((T extends Document)child);
+        }*/
     }
 
     public Float balance(Person person) {
