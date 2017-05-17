@@ -68,38 +68,47 @@ public class FinanceService {
         //accountingEntryService.saveAccountingEntryUsingTemplate(document);
     }
 
-    public <T extends Document> T compensate(T document) {
-        return compensate(document, document.getCompensatedDocuments());
-    }
+    //public <T extends Document> T compensate(T document) {
+    //    return compensate(document, document.getCompensatedDocuments());
+    //}
 
-    public <T extends Document> T compensate(T parent, List<? extends Document> children) {
+    //private <T extends Document> T compensate(T parent, List<? extends Document> children) {
+    public <T extends Document> T compensate(T parent) {
+        documentService.save(parent);
+
         parent.setCompensatedBy(parent);
         parent.setCompensationDate(LocalDate.now());
         parent.compensate();
 
-        T savedParent = documentService.save(parent);
+        
+        //T savedParent = 
+        //documentService.save(parent);
+        
+        parent.getCompensatedDocuments().forEach(
+                child -> {
+                    child.setCompensationDate(LocalDate.now());
+                    child.setCompensatedBy(parent);
+                    child.compensate();
+                    documentService.save(child);
+                });
 
-        children.forEach(child -> compensate(savedParent, child));
-
-        return documentService.save(savedParent);
+        return documentService.save(parent);
     }
 
+    /*
     private <T extends Document> void compensate(T parent, T child) {
         child.setCompensationDate(LocalDate.now());
         child.setCompensatedBy(parent);
         child.compensate();
-
         documentService.save(child);
-
-        /*if (!parent.getCompensatedDocuments().contains(child)) {
-            parent.getCompensatedDocuments().add((T extends Document)child);
-        }*/
-    }
-
+        if (!parent.getCompensatedDocuments().contains(child)) 
+            parent.getCompensatedDocuments().add((T extends Document)child);    
+    }*/
+    
     public Float balance(Person person) {
         return (float) documentService.getAllByPerson(person.getId()).stream()
-            .mapToDouble(Document::getAmount)
-            .sum();
+                .mapToDouble(Document::getAmount)
+                .sum();
     }
 
 }

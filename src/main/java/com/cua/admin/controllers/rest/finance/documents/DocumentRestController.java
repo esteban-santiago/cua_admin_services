@@ -60,8 +60,8 @@ public class DocumentRestController {
     @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<ReceiptIssued> save(@RequestBody ReceiptIssued receipt) throws Throwable {
         //receipt.getCompensatedDocuments().stream().forEach(document -> document.setCompensatedBy(receipt));
-        ReceiptIssued receiptIssued = documentService.save(receipt);
         HttpHeaders headers = new HttpHeaders();
+        ReceiptIssued receiptIssued = documentService.save(receipt);
         headers.add("id", receiptIssued.getId().toString());
         return new ResponseEntity<>(receiptIssued, headers, HttpStatus.CREATED);
     }

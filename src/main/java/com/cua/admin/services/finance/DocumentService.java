@@ -72,13 +72,13 @@ public class DocumentService {
 //    }
 
     public <T extends Document> T save(T document) {
-
+        /*
         if (!isEmpty(document.getCompensatedDocuments())) {
             List<Document> compensatedDocuments = new ArrayList<>(
                 documentRepository.findAll(
                     document.getCompensatedDocuments().stream().map(Document::getId).collect(toList())));
             document.setCompensatedDocuments(compensatedDocuments);
-        }
+        }*/
 
         return this.documentRepository.saveAndFlush(document);
     }

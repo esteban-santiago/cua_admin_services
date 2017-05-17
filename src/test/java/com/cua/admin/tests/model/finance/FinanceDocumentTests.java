@@ -126,13 +126,8 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        List<Document> compensated; // = new HashSet<>();
-
-        //compensated.addAll(documentService.getAllCompensables());
-
-        compensated = documentService.getAllCompensables();
         
-        rci.setCompensatedDocuments(compensated);
+        rci.setCompensatedDocuments(documentService.getAllCompensables());
         
         financeService.compensate(rci);
 
@@ -145,7 +140,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
     }
 
-   //@Test
+   @Test
     public void compensateWithDebitCard() throws Throwable {
 
         ReceiptIssued rci = new ReceiptIssued();
@@ -158,13 +153,9 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        List<Document> compensated; // = new HashSet<>();
-
-        //compensated.addAll(documentService.getAllCompensables());
-
-        compensated = documentService.getAllCompensables();
+        rci.setCompensatedDocuments(documentService.getAllCompensables());
         
-        rci.setCompensatedDocuments(compensated);
+        financeService.compensate(rci);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
@@ -175,7 +166,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
     }
 
-    //@Test
+    @Test
     public void compensateWithBankCheck() throws Throwable {
 
         ReceiptIssued rci = new ReceiptIssued();
@@ -188,22 +179,15 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        List<Document> compensated; // = new HashSet<>();
-
-        //compensated.addAll(documentService.getAllCompensables());
-        
-        compensated = documentService.getAllCompensables();
-        
-
-        Float amount = (((float) compensated.stream()
+        rci.setCompensatedDocuments(documentService.getAllCompensables());
+                
+        Float amount = (((float) rci.getCompensatedDocuments().stream()
             .mapToDouble(Document::getAmount).sum()));
 
         bank_check.setAmount(amount);
 
         bank_check.setCharge(bank_check.getAmount() * bank_check.getTerm().getCharge());
 
-        rci.setCompensatedDocuments(compensated);
-        
         financeService.compensate(rci);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
@@ -216,7 +200,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
     }
 
-    //@Test
+    @Test
     public void compensateWithCreditCard() throws Throwable {
 
         ReceiptIssued rci = new ReceiptIssued();
@@ -229,20 +213,15 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        List<Document> compensated;// = new HashSet<>();
-
-        //compensated.addAll(documentService.getAllCompensables());
-
-        compensated = documentService.getAllCompensables();
-        
-        Float amount = (((float) compensated.stream()
+        rci.setCompensatedDocuments(documentService.getAllCompensables());
+                
+        Float amount = (((float) rci.getCompensatedDocuments().stream()
             .mapToDouble(Document::getAmount).sum()));
 
         credit.setAmount(amount);
 
         credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
 
-        rci.setCompensatedDocuments(compensated);
         financeService.compensate(rci);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
@@ -255,7 +234,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
     }
 
-    //@Test
+    @Test
     public void compensateWithBankCheckAndCreditCard() throws Throwable {
 
         ReceiptIssued rci = new ReceiptIssued();
@@ -274,13 +253,9 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        List<Document> compensated;// = new HashSet<>();
-
-        //compensated.addAll(documentService.getAllCompensables());
-
-        compensated = documentService.getAllCompensables();
+        rci.setCompensatedDocuments(documentService.getAllCompensables());
         
-        Float amount = (((float) compensated.stream()
+        Float amount = (((float) rci.getCompensatedDocuments().stream()
             .mapToDouble(Document::getAmount).sum()));
 
         bank_check.setAmount((float)(0.5 * amount));
@@ -294,8 +269,6 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.getPayments().add(bank_check);
         rci.getPayments().add(credit);
-
-        rci.setCompensatedDocuments(compensated);
         
         financeService.compensate(rci);
 

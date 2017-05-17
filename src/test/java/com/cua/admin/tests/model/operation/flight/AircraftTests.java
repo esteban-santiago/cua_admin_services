@@ -26,7 +26,7 @@ public class AircraftTests extends SpringIntegrationTest {
                 .describedAs("No Tiene póliza activa")
                 .isTrue();
 
-        assertThat(c152.hasAnInsurancePolicyInForce(LocalDate.now().plusMonths(4)))
+        assertThat(c152.hasAnInsurancePolicyInForce(LocalDate.now().plusMonths(1)))
                 .describedAs("True erroneo")
                 .isTrue();
     }
