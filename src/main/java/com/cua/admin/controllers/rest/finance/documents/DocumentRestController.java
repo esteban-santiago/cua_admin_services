@@ -30,23 +30,23 @@ public class DocumentRestController {
 
     @RequestMapping(value = "/flight_record_issued", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getFlightRecordsIssued() {
-        return ok(documentService.getAllByType(DocumentType.FRI));
+        return ResponseEntity.ok(documentService.getAllByType(DocumentType.FRI));
     }
 
     @RequestMapping(value = "/", params = {"person_id"}, method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getByPerson(@RequestParam(value = "person_id") Integer id) {
-        return ok(documentService.getAllByPerson(id));
+        return ResponseEntity.ok(documentService.getAllByPerson(id));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getAll() {
-        return ok(documentService.getAll());
+        return ResponseEntity.ok(documentService.getAll());
     }
 
     @RequestMapping(value = "/", params = {"referenced_document_id"}, method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<? extends Document> getByReferencedDocument(@RequestParam(value = "referenced_document_id") Integer id) {
         try {
-            return ok(documentService.getByReferencedDocumentId(id));
+            return ResponseEntity.ok(documentService.getByReferencedDocumentId(id));
         } catch (DocumentNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
@@ -54,16 +54,16 @@ public class DocumentRestController {
 
     @RequestMapping(value = "/", params = {"id"}, method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<? extends Document> get(@RequestParam(value = "id") Long id) throws Throwable {
-        return ok(documentService.get(id));
+        return ResponseEntity.ok(documentService.get(id));
     }
 
     @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<ReceiptIssued> save(@RequestBody ReceiptIssued receipt) throws Throwable {
-        //receipt.getCompensatedDocuments().stream().forEach(document -> document.setCompensatedBy(receipt));
-        HttpHeaders headers = new HttpHeaders();
+        //HttpHeaders headers = new HttpHeaders();
         ReceiptIssued receiptIssued = documentService.save(receipt);
-        headers.add("id", receiptIssued.getId().toString());
-        return new ResponseEntity<>(receiptIssued, headers, HttpStatus.CREATED);
+        //headers.add("id", receiptIssued.getId().toString());
+        //return new ResponseEntity<>(receiptIssued, headers, HttpStatus.CREATED);
+        return ResponseEntity.ok().header("id", receiptIssued.getId().toString()).body(receiptIssued);
     }
 
     @RequestMapping(value = "/compensate", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
