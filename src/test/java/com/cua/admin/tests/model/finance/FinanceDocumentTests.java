@@ -100,15 +100,10 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setPerson(personService.getMember(100));
 
-        List<Document> compensated; // = new HashSet<>();
-
-        compensated = documentService.getAllCompensables();
+        List<Document> compensated = documentService.getAllCompensables();
         
-        //compensated.addAll(documentService.getAllCompensables());
         rci.setCompensatedDocuments(compensated);
         documentService.save(rci);
-
-        //int rciId = rci.getId();
 
         assertThat(documentService.get(rci.getId()).getCompensatedDocuments().size()).isGreaterThan(0);
     }
@@ -197,7 +192,6 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
                 ((float) rci.getCompensatedDocuments().stream()
                     .mapToDouble(Document::getAmount).sum()))
                 .isEqualByComparingTo(0F);
-
     }
 
     @Test

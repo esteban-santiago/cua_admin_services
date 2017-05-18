@@ -8,8 +8,6 @@ import com.cua.admin.services.finance.DocumentService;
 import com.cua.admin.services.finance.FinanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +31,11 @@ public class DocumentRestController {
         return ResponseEntity.ok(documentService.getAllByType(DocumentType.FRI));
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<? extends Document> get(@PathVariable("id") Long id) throws Throwable {
+        return ResponseEntity.ok(documentService.get(id));
+    }
+
     @RequestMapping(value = "/", params = {"person_id"}, method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getByPerson(@RequestParam(value = "person_id") Integer id) {
         return ResponseEntity.ok(documentService.getAllByPerson(id));
@@ -52,14 +55,8 @@ public class DocumentRestController {
         }
     }
 
-    @RequestMapping(value = "/", params = {"id"}, method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<? extends Document> get(@RequestParam(value = "id") Long id) throws Throwable {
-        return ResponseEntity.ok(documentService.get(id));
-    }
-
     @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<ReceiptIssued> save(@RequestBody ReceiptIssued receipt) throws Throwable {
-        //HttpHeaders headers = new HttpHeaders();
         ReceiptIssued receiptIssued = documentService.save(receipt);
         //headers.add("id", receiptIssued.getId().toString());
         //return new ResponseEntity<>(receiptIssued, headers, HttpStatus.CREATED);

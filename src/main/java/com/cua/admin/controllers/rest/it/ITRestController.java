@@ -18,7 +18,7 @@ public class ITRestController {
     private final UserService userService;
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<User> getUser(@PathVariable("id") Integer id) {
+    public ResponseEntity<User> get(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(userService.get(id));
     }
 

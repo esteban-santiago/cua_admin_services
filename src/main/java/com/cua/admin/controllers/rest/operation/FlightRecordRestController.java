@@ -13,37 +13,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-@RequestMapping("/sapi/operation")
+@RequestMapping("/sapi/operation/flight_record")
 @RequiredArgsConstructor
 public class FlightRecordRestController {
 
     @Autowired
     FlightRecordService flightRecordService;
 
-    @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<FlightRecord> get(@PathVariable("id") Integer id) throws Throwable {
-        return new ResponseEntity<>(flightRecordService.get(id), HttpStatus.OK);
+        return ResponseEntity.ok(flightRecordService.get(id));
     }
 
-    @RequestMapping(value = "/flight_record", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<FlightRecord>> get() {
-        return new ResponseEntity<>(flightRecordService.getAll(), HttpStatus.OK);
+        return ResponseEntity.ok(flightRecordService.getAll());
     }
 
-    @RequestMapping(value = "/flight_record", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<FlightRecord> create(@RequestBody FlightRecord flightRecord) throws Throwable {
         flightRecordService.save(flightRecord);
         return new ResponseEntity<>(flightRecord, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<FlightRecord> save(@RequestBody FlightRecord flightRecord) throws Throwable {
         flightRecordService.save(flightRecord);
         return new ResponseEntity<>(flightRecord, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/flight_record/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws Throwable {
         flightRecordService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -5,7 +5,6 @@ import com.cua.admin.services.accounting.AccountingEntryService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +19,7 @@ public class AccountingEntryRestController {
     private final AccountingEntryService accountingEntryService;
 
     @RequestMapping(value = "/accounting_entry", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<AccountingEntry>> get() {
+    public ResponseEntity<List<AccountingEntry>> getAll() {
         return ResponseEntity.ok(accountingEntryService.getAll());
     }
 }

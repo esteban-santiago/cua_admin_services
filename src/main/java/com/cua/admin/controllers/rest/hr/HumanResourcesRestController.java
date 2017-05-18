@@ -20,12 +20,12 @@ public class HumanResourcesRestController {
     private final HumanResourcesService humanResourcesService;
   
     @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public ResponseEntity<Person> getEmployee(@RequestParam(value = "id", required = true) Integer id) throws Throwable {
+    public ResponseEntity<Person> get(@RequestParam(value = "id", required = true) Integer id) throws Throwable {
         return ResponseEntity.ok(this.humanResourcesService.getEmployee(id));
     }
 
     @RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
-    public ResponseEntity<List<Person>> getEmployees() {
+    public ResponseEntity<List<Person>> getAll() {
         return ResponseEntity.ok(humanResourcesService.getEmployees());
     }
 }

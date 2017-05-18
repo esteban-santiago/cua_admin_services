@@ -29,7 +29,6 @@ import java.util.Set;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "documentType")
 @JsonSubTypes({
     @Type(name = "FRI", value = FlightRecordIssued.class),
@@ -42,11 +41,9 @@ public abstract class Document implements Serializable {
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "accounting_document_id_seq")
-                ,
-            @Parameter(name = "initial_value", value = "1")
-                ,
-            @Parameter(name = "increment_size", value = "1")
+                @Parameter(name = "sequence_name", value = "accounting_document_id_seq"),
+                @Parameter(name = "initial_value", value = "1"),
+                @Parameter(name = "increment_size", value = "1")
             }
     )
     @GeneratedValue(generator = "SequenceGenerator")
@@ -100,10 +97,10 @@ public abstract class Document implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
-    private Document compensatedBy; //(*) Documento de compensación
+    private Document compensatedBy; //Documento de compensación
 
     @OneToMany(mappedBy = "compensatedBy")
-    private List<Document> compensatedDocuments; //(*) Documento compensados
+    private List<Document> compensatedDocuments; //Documento compensados
 
     public Float getAmount() {
         return (float) payments.stream().mapToDouble(Payment::getAmount).sum();
@@ -121,10 +118,10 @@ public abstract class Document implements Serializable {
         return (float) payments.stream().mapToDouble(Payment::getTotalAmount).sum();
     }
 
-    public void setCompensatedDocuments(List<Document> compensatedDocuments) {
-        this.compensatedDocuments = compensatedDocuments;
-        this.compensatedDocuments.forEach(document -> document.setCompensatedBy(this));
-    }
+    //public void setCompensatedDocuments(List<Document> compensatedDocuments) {
+    //    this.compensatedDocuments = compensatedDocuments;
+    //    this.compensatedDocuments.forEach(document -> document.setCompensatedBy(this));
+    //}
     
     public void open() {
         this.status = DocumentStatus.OPENED;

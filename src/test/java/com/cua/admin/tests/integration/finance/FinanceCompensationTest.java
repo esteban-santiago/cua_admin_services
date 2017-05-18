@@ -117,17 +117,6 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         System.out.println("RCI: " + rci);
     }
 
-    //@After
-    public void tearDown() throws Exception {
-
-    }
-
-    //@Test
-    public void getMember() throws Exception {
-        mockMvc.perform(get("/sapi/core/person/{id}", 100).with(httpBasic("user", "password")))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("nationality.description").value("Argentina"));
-    }
 
     @Test
     public void getFlightRecord() throws Exception {
@@ -178,11 +167,6 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     public void getMemberNotFound() throws Exception {
         mockMvc.perform(get("/sapi/core/person/{id}", 200000).with(httpBasic("user", "password")))
                 .andExpect(status().isNotFound());
-    }
-
-    public static String asJsonString(final Object obj) throws Exception {
-        final ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(obj);
     }
 
 }
