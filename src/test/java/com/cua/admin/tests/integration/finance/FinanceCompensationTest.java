@@ -150,7 +150,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         Long rciId = Long.parseLong(resultPost.getResponse().getHeader("id"));
 
         MvcResult resultGet = mockMvc.perform(
-                get("/sapi/finance/document/?id={id}", rciId)
+                get("/sapi/finance/document/{id}", rciId)
                         .with(httpBasic("user", "password"))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
