@@ -44,12 +44,12 @@ public class FlightRecordToPayment extends SpringIntegrationTest {
         flightService.save(record);    
     }
     
-    @Test
+    //@Test
     public void paidWithCash() {
         
     }
     
-    @Test
+    //@Test
     public void paidWithCreditCard() {
         
     }

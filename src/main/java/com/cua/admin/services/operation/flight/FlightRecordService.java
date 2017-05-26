@@ -44,8 +44,7 @@ public class FlightRecordService {
         } else if (flightRecord.isCanceled()) {
             this.cancel(flightRecord);
         } else {
-            flightRecord.setStatus(FlightRecord.Status.OPENED);
-            flightRecordRepository.save(flightRecord);
+            this.open(flightRecord);
         }
     }
 
@@ -54,9 +53,15 @@ public class FlightRecordService {
         flightRecordRepository.save(flightRecord);
     }
 
+    public void open(FlightRecord flightRecord) throws Throwable {
+        flightRecord.setStatus(FlightRecord.Status.OPENED);
+        flightRecordRepository.save(flightRecord);
+    }
+
     public void close(FlightRecord flightRecord) throws Throwable {
         flightRecord.setStatus(FlightRecord.Status.CLOSED);
         flightRecordRepository.save(flightRecord);
+        //Genero el documento financiero
         financeService.save(flightRecord);
     }
 }

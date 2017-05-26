@@ -18,9 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -124,14 +122,18 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         
         rci.setCompensatedDocuments(documentService.getAllCompensables());
         
-        financeService.compensate(rci);
+        //financeService.compensate(rci);
 
+        financeService.save(rci);
+        
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat(((float) rci.getCompensatedDocuments().stream()
-            .mapToDouble(Document::getAmount).sum()) + rci.getTotalAmount())
-                .isEqualByComparingTo(0F);
+        //assertThat(((float) rci.getCompensatedDocuments().stream()
+        //    .mapToDouble(Document::getAmount).sum()) + rci.getTotalAmount())
+        //        .isEqualByComparingTo(0F);
+        //assertThat(rci.getDocumentBalanceTotalAmount()).isEqualByComparingTo(0F);
+        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
 
     }
 
@@ -150,14 +152,18 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         rci.setCompensatedDocuments(documentService.getAllCompensables());
         
-        financeService.compensate(rci);
+        //financeService.compensate(rci);
+
+        financeService.save(rci);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento compensador es igual a la sumatoria de los compensados
-        assertThat(((float) rci.getCompensatedDocuments().stream()
-            .mapToDouble(Document::getAmount).sum()) + rci.getTotalAmount())
-                .isEqualByComparingTo(0F);
+        //assertThat(((float) rci.getCompensatedDocuments().stream()
+        //    .mapToDouble(Document::getAmount).sum()) + rci.getTotalAmount())
+        //        .isEqualByComparingTo(0F);
+
+        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
 
     }
 
@@ -183,15 +189,19 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         bank_check.setCharge(bank_check.getAmount() * bank_check.getTerm().getCharge());
 
-        financeService.compensate(rci);
+        //financeService.compensate(rci);
+
+        financeService.save(rci);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat((rci.getAmount()) +
-                ((float) rci.getCompensatedDocuments().stream()
-                    .mapToDouble(Document::getAmount).sum()))
-                .isEqualByComparingTo(0F);
+        //assertThat((rci.getAmount()) +
+        //        ((float) rci.getCompensatedDocuments().stream()
+        //            .mapToDouble(Document::getAmount).sum()))
+        //        .isEqualByComparingTo(0F);
+
+        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
     }
 
     @Test
@@ -216,15 +226,25 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
 
         credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
 
-        financeService.compensate(rci);
+        //financeService.compensate(rci);
+
+        financeService.save(rci);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat((rci.getAmount()) +
-                ((float) rci.getCompensatedDocuments().stream()
-                    .mapToDouble(Document::getAmount).sum()))
-                .isEqualByComparingTo(0F);
+        //assertThat((rci.getAmount()) +
+        //        ((float) rci.getCompensatedDocuments().stream()
+        //            .mapToDouble(Document::getAmount).sum()))
+        //        .isEqualByComparingTo(0F);
+        
+        System.out.println("----amount---");
+        System.out.println(rci.getDocumentBalanceTotalAmount());
+
+        System.out.println("----compensated---");
+        System.out.println(rci.isCompensated());
+        
+        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
 
     }
 
@@ -264,15 +284,18 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         rci.getPayments().add(bank_check);
         rci.getPayments().add(credit);
         
-        financeService.compensate(rci);
+        //financeService.compensate(rci);
+
+        financeService.save(rci);
 
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
         //Si está compensado el valor del documento padre es igual a la sumatoria de los hijos
-        assertThat((rci.getAmount()) +
-                ((float) rci.getCompensatedDocuments().stream()
-                    .mapToDouble(Document::getAmount).sum()))
-                .isEqualByComparingTo(0F);
+        //assertThat((rci.getAmount()) +
+        //        ((float) rci.getCompensatedDocuments().stream()
+        //            .mapToDouble(Document::getAmount).sum()))
+        //        .isEqualByComparingTo(0F);
+        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
 
     }
 

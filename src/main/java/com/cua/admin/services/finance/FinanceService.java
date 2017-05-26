@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -56,7 +54,22 @@ public class FinanceService {
     }
 
     public <T extends Document> void save(T document) throws Throwable {
+        if (isCompensable(document)) {
+            compensate(document);
+        }
         saveAndCreateEntry(document);
+    }
+
+    /*
+        El valor del documento compensador debe ser igual al total de los documentos
+        compensados para poder cerrar el documento.
+     */
+    private <T extends Document> Boolean isCompensable(T document) {
+        try {
+            return document.getDocumentBalanceTotalAmount() == 0;
+        } catch (NullPointerException npe) {
+            return false;
+        }
     }
 
     private void saveAndCreateEntry(Document document) throws Throwable {
@@ -71,7 +84,6 @@ public class FinanceService {
     //public <T extends Document> T compensate(T document) {
     //    return compensate(document, document.getCompensatedDocuments());
     //}
-
     //private <T extends Document> T compensate(T parent, List<? extends Document> children) {
     public <T extends Document> T compensate(T parent) {
         documentService.save(parent);
@@ -80,10 +92,6 @@ public class FinanceService {
         parent.setCompensationDate(LocalDate.now());
         parent.compensate();
 
-        
-        //T savedParent = 
-        //documentService.save(parent);
-        
         parent.getCompensatedDocuments().forEach(
                 child -> {
                     child.setCompensationDate(LocalDate.now());
@@ -91,8 +99,8 @@ public class FinanceService {
                     child.compensate();
                     documentService.save(child);
                 });
-
-        return documentService.save(parent);
+        //return documentService.save(parent);
+        return parent;
     }
 
     /*
@@ -104,7 +112,6 @@ public class FinanceService {
         if (!parent.getCompensatedDocuments().contains(child)) 
             parent.getCompensatedDocuments().add((T extends Document)child);    
     }*/
-    
     public Float balance(Person person) {
         return (float) documentService.getAllByPerson(person.getId()).stream()
                 .mapToDouble(Document::getAmount)

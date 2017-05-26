@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 @Data
 @ToString(exclude = "compensatedBy")
@@ -116,6 +116,18 @@ public abstract class Document implements Serializable {
 
     public Float getTotalAmount() {
         return (float) payments.stream().mapToDouble(Payment::getTotalAmount).sum();
+    }
+
+    /* To do: Revisar esto */
+    public Float getDocumentBalanceTotalAmount() {
+        return (float) 
+                getCompensatedTotalAmount() + getTotalAmount() ;
+    }
+
+    /* To do: Revisar esto */
+    public Float getCompensatedTotalAmount() {
+        return (float) 
+                compensatedDocuments.stream().mapToDouble(Document::getTotalAmount).sum();
     }
 
     //public void setCompensatedDocuments(List<Document> compensatedDocuments) {
