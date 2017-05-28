@@ -63,9 +63,15 @@ public class DocumentRestController {
         return ResponseEntity.ok().header("id", receiptIssued.getId().toString()).body(receiptIssued);
     }
 
-    @RequestMapping(value = "/compensate", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public <T extends Document> ResponseEntity<? extends Document> compensate(@RequestBody T document) throws Throwable {
+    //@RequestMapping(value = "/compensate", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    private <T extends Document> ResponseEntity<? extends Document> compensate(@RequestBody T document) throws Throwable {
         T compensatedDocument = financeService.compensate(document);
         return ok().header("id", compensatedDocument.getId().toString()).body(compensatedDocument);
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    public <T extends Document> ResponseEntity<? extends Document> save(@RequestBody T document) throws Throwable {
+        document = financeService.save(document);
+        return ok().header("id", document.getId().toString()).body(document);
     }
 }

@@ -1,6 +1,5 @@
 package com.cua.admin.controllers.rest.finance;
 
-import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.finance.FinanceService;
 import lombok.RequiredArgsConstructor;

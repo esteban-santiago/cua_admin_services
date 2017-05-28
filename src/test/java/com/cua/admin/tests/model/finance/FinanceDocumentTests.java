@@ -133,7 +133,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         //    .mapToDouble(Document::getAmount).sum()) + rci.getTotalAmount())
         //        .isEqualByComparingTo(0F);
         //assertThat(rci.getDocumentBalanceTotalAmount()).isEqualByComparingTo(0F);
-        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
+        assertThat( (rci.getDocumentBalanceAmount() == 0) && rci.isCompensated() ).isTrue();
 
     }
 
@@ -163,7 +163,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         //    .mapToDouble(Document::getAmount).sum()) + rci.getTotalAmount())
         //        .isEqualByComparingTo(0F);
 
-        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
+        assertThat( (rci.getDocumentBalanceAmount() == 0) && rci.isCompensated() ).isTrue();
 
     }
 
@@ -201,7 +201,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         //            .mapToDouble(Document::getAmount).sum()))
         //        .isEqualByComparingTo(0F);
 
-        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
+        assertThat( (rci.getDocumentBalanceAmount() == 0) && rci.isCompensated() ).isTrue();
     }
 
     @Test
@@ -220,7 +220,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         rci.setCompensatedDocuments(documentService.getAllCompensables());
                 
         Float amount = (((float) rci.getCompensatedDocuments().stream()
-            .mapToDouble(Document::getAmount).sum()));
+            .mapToDouble(Document::getTotalAmount).sum()));
 
         credit.setAmount(amount);
 
@@ -238,13 +238,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         //            .mapToDouble(Document::getAmount).sum()))
         //        .isEqualByComparingTo(0F);
         
-        System.out.println("----amount---");
-        System.out.println(rci.getDocumentBalanceTotalAmount());
-
-        System.out.println("----compensated---");
-        System.out.println(rci.isCompensated());
-        
-        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
+        assertThat( (rci.getDocumentBalanceAmount() == 0) && rci.isCompensated() ).isTrue();
 
     }
 
@@ -295,7 +289,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         //        ((float) rci.getCompensatedDocuments().stream()
         //            .mapToDouble(Document::getAmount).sum()))
         //        .isEqualByComparingTo(0F);
-        assertThat( (rci.getDocumentBalanceTotalAmount() == 0) && rci.isCompensated() ).isTrue();
+        assertThat( (rci.getDocumentBalanceAmount() == 0) && rci.isCompensated() ).isTrue();
 
     }
 

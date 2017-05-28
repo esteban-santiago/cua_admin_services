@@ -119,9 +119,9 @@ public abstract class Document implements Serializable {
     }
 
     /* To do: Revisar esto */
-    public Float getDocumentBalanceTotalAmount() {
+    public Float getDocumentBalanceAmount() {
         return (float) 
-                getCompensatedTotalAmount() + getTotalAmount() ;
+                getCompensatedTotalAmount() + getAmount() ;
     }
 
     /* To do: Revisar esto */

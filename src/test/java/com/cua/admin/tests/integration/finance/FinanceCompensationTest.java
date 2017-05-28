@@ -9,7 +9,7 @@ import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.finance.FinanceService;
 import com.cua.admin.services.finance.billing.PaymentMethodService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,9 +56,9 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     @Value("receipt.json")
     private ClassPathResource receiptJson;
 
-    private Long friId_1, friId_2, rciId_1;
+    //private Long friId_1, friId_2, rciId_1;
 
-    private FlightRecordIssued fve, fri;
+    private FlightRecordIssued fri1, fri2;
     private ReceiptIssued rci;
 
     @Before
@@ -66,42 +66,51 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         Payment account = new Payment();
         account.setCurrency(Currency.ARS);
 
-        fve = new FlightRecordIssued();
+        fri1 = new FlightRecordIssued();
         account.setAmount(3544F);
-        fve.getPayments().add(account);
-        fve.setPerson(personService.getMember(100));
-        financeService.save(fve);
+        fri1.getPayments().add(account);
+        fri1.setPerson(personService.getMember(100));
+        financeService.save(fri1);
 
-        assertThat(fve.getId()).isGreaterThan(0);
-        assertThat(fve.getLegalId()).isGreaterThanOrEqualTo(70000000);
+        assertThat(fri1.getId()).isGreaterThan(0);
+        assertThat(fri1.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
-        fri = new FlightRecordIssued();
+        fri2 = new FlightRecordIssued();
         account.setAmount(2544F);
-        fri.getPayments().add(account);
-        fri.setPerson(personService.getMember(100));
-        financeService.save(fri);
-
-        assertThat(fri.getId()).isGreaterThan(0);
-        assertThat(fri.getLegalId()).isGreaterThanOrEqualTo(70000000);
-
-        friId_1 = fri.getId();
-
-        FlightRecordIssued fri2 = new FlightRecordIssued();
-        account.setAmount(1544F);
         fri2.getPayments().add(account);
         fri2.setPerson(personService.getMember(100));
         financeService.save(fri2);
 
-        assertThat(fri.getId()).isGreaterThan(0);
-        assertThat(fri.getLegalId()).isGreaterThanOrEqualTo(70000000);
+        assertThat(fri2.getId()).isGreaterThan(0);
+        assertThat(fri2.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
-        friId_2 = fri2.getId();
+        //friId_1 = fri.getId();
+
+        FlightRecordIssued fri3 = new FlightRecordIssued();
+        account.setAmount(1544F);
+        fri3.getPayments().add(account);
+        fri3.setPerson(personService.getMember(100));
+        financeService.save(fri3);
+
+        assertThat(fri3.getId()).isGreaterThan(0);
+        assertThat(fri3.getLegalId()).isGreaterThanOrEqualTo(70000000);
+
+        //friId_2 = fri2.getId();
 
         rci = new ReceiptIssued();
         Payment credit = new Payment();
+        
+        rci.setCompensatedDocuments(new ArrayList());
+        rci.getCompensatedDocuments().add(fri1);
+        rci.getCompensatedDocuments().add(fri2);
+        rci.getCompensatedDocuments().add(fri3);
+        
         credit.setMethod(paymentMethodService.get(4)); //Tarjeta de Crédito
         credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
+        
+        credit.setAmount(7632F);
+        credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
 
         rci.getPayments().add(credit);
 
@@ -112,9 +121,9 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         assertThat(rci.getId()).isGreaterThan(0);
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
 
-        rciId_1 = rci.getId();
+        //rciId_1 = rci.getId();
 
-        System.out.println("RCI: " + rci);
+        //System.out.println("RCI: " + rci);
     }
 
 
@@ -136,8 +145,13 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
 
         byte[] json = IOUtils.toByteArray(receiptJson.getInputStream());
 
+        System.out.println("---------------------------");
+        System.out.println(receiptJson.toString());
+        System.out.println("---------------------------");
+        
+        //Graba el recibo
         MvcResult resultPost = mockMvc.perform(
-                post("/sapi/finance/document/compensate")
+                post("/sapi/finance/document/")
                         .content(json)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -145,6 +159,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("documentType").value("RCI"))
                 .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
+                .andExpect(jsonPath("status").value("COMPENSATED"))
                 .andReturn();
 
         Long rciId = Long.parseLong(resultPost.getResponse().getHeader("id"));

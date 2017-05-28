@@ -53,11 +53,12 @@ public class FinanceService {
         save(flightRecordIssued);
     }
 
-    public <T extends Document> void save(T document) throws Throwable {
+    public <T extends Document> T save(T document) throws Throwable {
         if (isCompensable(document)) {
             compensate(document);
         }
         saveAndCreateEntry(document);
+        return document;
     }
 
     /*
@@ -66,7 +67,7 @@ public class FinanceService {
      */
     private <T extends Document> Boolean isCompensable(T document) {
         try {
-            return document.getDocumentBalanceTotalAmount() == 0;
+            return document.getDocumentBalanceAmount() == 0;
         } catch (NullPointerException npe) {
             return false;
         }
