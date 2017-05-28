@@ -143,11 +143,9 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
          */
         //System.out.println(asJsonString(rci));
 
+        //Una de las magias del cabezón
+        //Lo toma del arcivo receipt.json
         byte[] json = IOUtils.toByteArray(receiptJson.getInputStream());
-
-        System.out.println("---------------------------");
-        System.out.println(receiptJson.toString());
-        System.out.println("---------------------------");
         
         //Graba el recibo
         MvcResult resultPost = mockMvc.perform(
