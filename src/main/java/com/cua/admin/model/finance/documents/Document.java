@@ -22,7 +22,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Data
 @ToString(exclude = "compensatedBy")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -31,7 +30,8 @@ import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "documentType")
 @JsonSubTypes({
-    @Type(name = "FRI", value = FlightRecordIssued.class),
+    @Type(name = "FRI", value = FlightRecordIssued.class)
+    ,
     @Type(name = "RCI", value = ReceiptIssued.class)
 })
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
@@ -41,8 +41,10 @@ public abstract class Document implements Serializable {
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "accounting_document_id_seq"),
-                @Parameter(name = "initial_value", value = "1"),
+                @Parameter(name = "sequence_name", value = "accounting_document_id_seq")
+                ,
+                @Parameter(name = "initial_value", value = "1")
+                ,
                 @Parameter(name = "increment_size", value = "1")
             }
     )
@@ -103,38 +105,55 @@ public abstract class Document implements Serializable {
     private List<Document> compensatedDocuments; //Documento compensados
 
     public Float getAmount() {
-        return (float) payments.stream().mapToDouble(Payment::getAmount).sum();
+        try {
+            return (float) payments.stream().mapToDouble(Payment::getAmount).sum();
+        } catch (NullPointerException npe) {
+            return 0F;
+        }
     }
 
     public Float getCharge() {
-        return (float) payments.stream().mapToDouble(Payment::getCharge).sum();
+        try {
+            return (float) payments.stream().mapToDouble(Payment::getCharge).sum();
+        } catch (NullPointerException npe) {
+            return 0F;
+        }
     }
 
     public Float getDiscount() {
-        return (float) payments.stream().mapToDouble(Payment::getDiscount).sum();
+        try {
+            return (float) payments.stream().mapToDouble(Payment::getDiscount).sum();
+        } catch (NullPointerException npe) {
+            return 0F;
+        }
     }
 
     public Float getTotalAmount() {
-        return (float) payments.stream().mapToDouble(Payment::getTotalAmount).sum();
+        try {
+            return (float) payments.stream().mapToDouble(Payment::getTotalAmount).sum();
+        } catch (NullPointerException npe) {
+            return 0F;
+        }
     }
 
     /* To do: Revisar esto */
     public Float getDocumentBalanceAmount() {
-        return (float) 
-                getCompensatedTotalAmount() + getAmount() ;
+        return (float) getCompensatedTotalAmount() + getAmount();
     }
 
     /* To do: Revisar esto */
     public Float getCompensatedTotalAmount() {
-        return (float) 
-                compensatedDocuments.stream().mapToDouble(Document::getTotalAmount).sum();
+        try {
+            return (float) compensatedDocuments.stream().mapToDouble(Document::getTotalAmount).sum();
+        } catch (NullPointerException npe) {
+            return 0F;
+        }
     }
 
     //public void setCompensatedDocuments(List<Document> compensatedDocuments) {
     //    this.compensatedDocuments = compensatedDocuments;
     //    this.compensatedDocuments.forEach(document -> document.setCompensatedBy(this));
     //}
-    
     public void open() {
         this.status = DocumentStatus.OPENED;
     }

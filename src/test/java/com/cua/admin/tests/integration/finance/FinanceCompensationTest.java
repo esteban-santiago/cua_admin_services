@@ -56,9 +56,9 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     @Value("receipt.json")
     private ClassPathResource receiptJson;
 
-    //private Long friId_1, friId_2, rciId_1;
+    private Long friId_1, friId_2, friId_3, rciId_1;
 
-    private FlightRecordIssued fri1, fri2;
+    private FlightRecordIssued fri1, fri2, fri3;
     private ReceiptIssued rci;
 
     @Before
@@ -72,6 +72,8 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         fri1.setPerson(personService.getMember(100));
         financeService.save(fri1);
 
+        friId_1 = fri1.getId();
+
         assertThat(fri1.getId()).isGreaterThan(0);
         assertThat(fri1.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
@@ -81,34 +83,34 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         fri2.setPerson(personService.getMember(100));
         financeService.save(fri2);
 
+        friId_2 = fri2.getId();
+
         assertThat(fri2.getId()).isGreaterThan(0);
         assertThat(fri2.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
-        //friId_1 = fri.getId();
-
-        FlightRecordIssued fri3 = new FlightRecordIssued();
+        fri3 = new FlightRecordIssued();
         account.setAmount(1544F);
         fri3.getPayments().add(account);
         fri3.setPerson(personService.getMember(100));
         financeService.save(fri3);
 
+        friId_3 = fri3.getId();
+
         assertThat(fri3.getId()).isGreaterThan(0);
         assertThat(fri3.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
-        //friId_2 = fri2.getId();
-
         rci = new ReceiptIssued();
         Payment credit = new Payment();
-        
+
         rci.setCompensatedDocuments(new ArrayList());
         rci.getCompensatedDocuments().add(fri1);
         rci.getCompensatedDocuments().add(fri2);
         rci.getCompensatedDocuments().add(fri3);
-        
+
         credit.setMethod(paymentMethodService.get(4)); //Tarjeta de Crédito
         credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
-        
+
         credit.setAmount(7632F);
         credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
 
@@ -118,35 +120,20 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
 
         financeService.save(rci);
 
+        rciId_1 = rci.getId();
+
         assertThat(rci.getId()).isGreaterThan(0);
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
+        
+        //assertThat(rci.isCompensated()).isTrue();
 
-        //rciId_1 = rci.getId();
-
-        //System.out.println("RCI: " + rci);
     }
-
 
     @Test
     public void getFlightRecord() throws Exception {
-        /*
-        mockMvc.perform(get("/sapi/finance/document/?id={id}", rciId_1).with(httpBasic("user", "password"))
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("documentType").value("RCI"));
-        
-        mockMvc.perform(
-                get("/sapi/finance/document/?id={id}", friId_1).with(httpBasic("user", "password"))
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("documentType").value("FRI"));
-         */
-        //System.out.println(asJsonString(rci));
-
-        //Una de las magias del cabezón
-        //Lo toma del arcivo receipt.json
+        //Una de las magias del cabezón -> lo toma del archivo receipt.json
         byte[] json = IOUtils.toByteArray(receiptJson.getInputStream());
-        
+
         //Graba el recibo
         MvcResult resultPost = mockMvc.perform(
                 post("/sapi/finance/document/")
@@ -162,24 +149,30 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
 
         Long rciId = Long.parseLong(resultPost.getResponse().getHeader("id"));
 
-        MvcResult resultGet = mockMvc.perform(
+        mockMvc.perform(
                 get("/sapi/finance/document/{id}", rciId)
                         .with(httpBasic("user", "password"))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("documentType").value("RCI"))
                 .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
+                .andExpect(jsonPath("status").value("COMPENSATED"))
                 .andReturn();
-
-        System.out.println("Resultado del get : \n"
-                + resultGet.getResponse().getContentAsString());
-
     }
 
+    /*
+    ** Valor del Recibo = Valor de la ficha
+     */
     //@Test
-    public void getMemberNotFound() throws Exception {
-        mockMvc.perform(get("/sapi/core/person/{id}", 200000).with(httpBasic("user", "password")))
-                .andExpect(status().isNotFound());
+    public void compensationCase_1() throws Exception {
+       // MvcResult resultGet = mockMvc.perform(
+        //        get("/sapi/finance/document/")
+         //               .with(httpBasic("user", "password"))
+         //               .accept(MediaType.APPLICATION_JSON))
+          //      .andExpect(status().isOk())
+          //      .andReturn();
+        //System.out.println(resultGet);
+        System.out.println("Hola");
     }
 
 }
