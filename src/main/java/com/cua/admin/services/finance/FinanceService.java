@@ -38,13 +38,15 @@ public class FinanceService {
     public void save(FlightRecord flightRecord) throws Throwable {
         FlightRecordIssued flightRecordIssued = new FlightRecordIssued();
         flightRecordIssued.setReferencedDocumentId(flightRecord.getId());
-        Payment payment = new Payment();
+        Payment debt = new Payment();
 
-        Aircraft aircraft = aircraftRepository.findOne(Example.of(flightRecord.getAircraft()));
-        payment.setAmount(flightRecord.getAmountOfHours() * aircraft.getProductProfile().getProduct().getPrice());
-        payment.setCurrency(aircraft.getProductProfile().getProduct().getCurrency());
+        
+        //Revisar esto: para que lo vuelvo a traer de la base?
+        //Aircraft aircraft = aircraftRepository.findOne(Example.of(flightRecord.getAircraft()));
+        debt.setAmount(flightRecord.getAmountOfHours() * flightRecord.getAircraft().getProductProfile().getProduct().getPrice());
+        debt.setCurrency(flightRecord.getAircraft().getProductProfile().getProduct().getCurrency());
 
-        flightRecordIssued.getPayments().add(payment);
+        flightRecordIssued.getPayments().add(debt);
 
         flightRecordIssued.setPerson(flightRecord.getCrew().stream()
                 .filter(member -> member.getCrewMemberRole().equals(CrewMemberRole.PIC))
@@ -57,15 +59,14 @@ public class FinanceService {
         if (isCompensable(document)) {
             compensate(document);
         }
-        saveAndCreateEntry(document);
-        return document;
+        return saveAndCreateEntry(document);
     }
 
     /*
         El valor del documento compensador debe ser igual al total de los documentos
         compensados para poder cerrar el documento.
      */
-    private <T extends Document> Boolean isCompensable(T document) {
+    public <T extends Document> Boolean isCompensable(T document) {
         try {
             return document.getDocumentBalanceAmount() == 0;
         } catch (NullPointerException npe) {
@@ -73,9 +74,9 @@ public class FinanceService {
         }
     }
 
-    private void saveAndCreateEntry(Document document) throws Throwable {
+    private <T extends Document> T saveAndCreateEntry(T document) throws Throwable {
         //Graba el documento
-        documentService.save(document);
+        return documentService.save(document);
 
         // Lo saco hasta tener el modelo Ok
         //Contabiliza el documento (crea el asiento)

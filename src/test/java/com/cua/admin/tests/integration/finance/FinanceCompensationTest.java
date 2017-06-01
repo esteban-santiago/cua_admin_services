@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
 import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.billing.Payment;
@@ -28,7 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -36,7 +36,7 @@ import org.springframework.test.web.servlet.MvcResult;
  * Este es un ejemplo de un Integration Test muy simple que integra un
  * controller, seguridad y búsqueda de un usuario
  */
-@ActiveProfiles("local-test")
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class FinanceCompensationTest extends SpringIntegrationTest {
@@ -105,6 +105,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         assertThat(fri3.getId()).isGreaterThan(0);
         assertThat(fri3.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
+        
         rci = new ReceiptIssued();
         Payment credit = new Payment();
 
@@ -130,22 +131,33 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
 
         assertThat(rci.getId()).isGreaterThan(0);
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
-        
+         
         //assertThat(rci.isCompensated()).isTrue();
-
     }
 
+    
+    //Validar si un documento es compensable
     @Test
-    public void getFlightRecord() throws Exception {
+    public void compensationTC_0() throws Exception {
         //Una de las magias del cabezón -> lo toma del archivo receipt.json
-//        byte[] json = IOUtils.toByteArray(receiptJson.getInputStream());
+        //byte[] json = IOUtils.toByteArray(receiptJson.getInputStream());
 
         // Otra de las magias del "cabezón" ;)
         Map<Object, Object> context = new HashMap<>();
-        context.put("compensatedDocumentId", rciId_1);
+        context.put("compensatedDocumentId", friId_1);
         String json = mustacheCompiler
-            .compile(templateLoader.getTemplate("receipt"))
-            .execute(context);
+                .compile(templateLoader.getTemplate("receipt_base"))
+                .execute(context);
+
+        mockMvc.perform(
+                post("/sapi/finance/document/is_compensable")
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(header().string("isCompensable", "true"))
+                .andReturn();
 
         //Graba el recibo
         MvcResult resultPost = mockMvc.perform(
@@ -175,17 +187,106 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
 
     /*
     ** Valor del Recibo = Valor de la ficha
+    ** 
      */
-    //@Test
-    public void compensationCase_1() throws Exception {
-       // MvcResult resultGet = mockMvc.perform(
-        //        get("/sapi/finance/document/")
-         //               .with(httpBasic("user", "password"))
-         //               .accept(MediaType.APPLICATION_JSON))
-          //      .andExpect(status().isOk())
-          //      .andReturn();
-        //System.out.println(resultGet);
-        System.out.println("Hola");
+    @Test
+    public void compensationTC_1() throws Exception {
+        Map<Object, Object> context = new HashMap<>();
+        context.put("compensatedDocumentId", friId_1);
+        String json = mustacheCompiler
+                .compile(templateLoader.getTemplate("receipt_tc1"))
+                .execute(context);
+
+        MvcResult resultPost = mockMvc.perform(
+                post("/sapi/finance/document/")
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("documentType").value("RCI"))
+                .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
+                .andExpect(jsonPath("status").value("COMPENSATED"))
+                .andReturn();
     }
 
+    /*
+    ** Valor del Recibo = Valor de la ficha
+    ** metodo de pago con recargo
+     */
+    @Test
+    public void compensationTC_1_1() throws Exception {
+        Map<Object, Object> context = new HashMap<>();
+        context.put("compensatedDocumentId", friId_1);
+        String json = mustacheCompiler
+                .compile(templateLoader.getTemplate("receipt_tc1_1"))
+                .execute(context);
+
+        MvcResult resultPost = mockMvc.perform(
+                post("/sapi/finance/document/")
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("documentType").value("RCI"))
+                .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
+                .andExpect(jsonPath("status").value("COMPENSATED"))
+                .andReturn();
+    }
+    
+    /*
+    ** Valor del Recibo = Valor de la suma de las fichas 
+    **  compensadas
+     */
+    @Test
+    public void compensationTC_2() throws Exception {
+        Map<Object, Object> context = new HashMap<>();
+        context.put("compensatedDocumentId_1", friId_1);
+        context.put("compensatedDocumentId_2", friId_2);
+        String json = mustacheCompiler
+                .compile(templateLoader.getTemplate("receipt_tc2"))
+                .execute(context);
+
+        MvcResult resultPost = mockMvc.perform(
+                post("/sapi/finance/document/")
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("documentType").value("RCI"))
+                .andExpect(jsonPath("compensatedDocuments", hasSize(2)))
+                .andExpect(jsonPath("status").value("COMPENSATED"))
+                .andReturn();
+    }
+
+    /*
+    ** Valor del Recibo = Valor de la suma de los documentos 
+    **  compensados
+     */
+    @Test
+    public void compensationTC_3() throws Exception {
+        Map<Object, Object> context = new HashMap<>();
+        context.put("compensatedDocumentId_1", rciId_1);
+        context.put("compensatedDocumentId_2", friId_1);
+        String json = mustacheCompiler
+                .compile(templateLoader.getTemplate("receipt_tc3"))
+                .execute(context);
+
+        MvcResult resultPost = mockMvc.perform(
+                post("/sapi/finance/document/")
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("documentType").value("RCI"))
+                .andExpect(jsonPath("compensatedDocuments", hasSize(2)))
+                .andExpect(jsonPath("compensatedDocuments[0].status").value("COMPENSATED"))
+                .andExpect(jsonPath("compensatedDocuments[1].status").value("COMPENSATED"))
+                .andExpect(jsonPath("status").value("COMPENSATED"))
+                .andReturn();
+    }
+    
 }

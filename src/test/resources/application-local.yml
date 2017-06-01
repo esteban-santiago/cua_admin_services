@@ -13,6 +13,8 @@ spring:
         ddl-auto: create
   main:
     banner-mode: 'off'
+  mustache:
+    suffix: .mustache
     
 security:
   user:
