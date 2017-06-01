@@ -1,5 +1,13 @@
 package com.cua.admin.tests.integration.finance;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
@@ -9,31 +17,26 @@ import com.cua.admin.services.core.PersonService;
 import com.cua.admin.services.finance.FinanceService;
 import com.cua.admin.services.finance.billing.PaymentMethodService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
+import com.samskivert.mustache.Mustache.Compiler;
+import com.samskivert.mustache.Mustache.TemplateLoader;
 import java.util.ArrayList;
-import org.apache.commons.io.IOUtils;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Este es un ejemplo de un Integration Test muy simple que integra un
  * controller, seguridad y búsqueda de un usuario
  */
+@ActiveProfiles("local-test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class FinanceCompensationTest extends SpringIntegrationTest {
@@ -53,8 +56,11 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     @Autowired
     private PaymentTermRepository paymentTermRepository;
 
-    @Value("receipt.json")
-    private ClassPathResource receiptJson;
+    @Autowired
+    private Compiler mustacheCompiler;
+
+    @Autowired
+    private TemplateLoader templateLoader;
 
     private Long friId_1, friId_2, friId_3, rciId_1;
 
@@ -102,7 +108,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         rci = new ReceiptIssued();
         Payment credit = new Payment();
 
-        rci.setCompensatedDocuments(new ArrayList());
+        rci.setCompensatedDocuments(new ArrayList<>());
         rci.getCompensatedDocuments().add(fri1);
         rci.getCompensatedDocuments().add(fri2);
         rci.getCompensatedDocuments().add(fri3);
@@ -132,7 +138,14 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     @Test
     public void getFlightRecord() throws Exception {
         //Una de las magias del cabezón -> lo toma del archivo receipt.json
-        byte[] json = IOUtils.toByteArray(receiptJson.getInputStream());
+//        byte[] json = IOUtils.toByteArray(receiptJson.getInputStream());
+
+        // Otra de las magias del "cabezón" ;)
+        Map<Object, Object> context = new HashMap<>();
+        context.put("compensatedDocumentId", rciId_1);
+        String json = mustacheCompiler
+            .compile(templateLoader.getTemplate("receipt"))
+            .execute(context);
 
         //Graba el recibo
         MvcResult resultPost = mockMvc.perform(
