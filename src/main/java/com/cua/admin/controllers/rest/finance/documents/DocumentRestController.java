@@ -54,15 +54,7 @@ public class DocumentRestController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public ResponseEntity<ReceiptIssued> save(@RequestBody ReceiptIssued receipt) throws Throwable {
-        ReceiptIssued receiptIssued = documentService.save(receipt);
-        //headers.add("id", receiptIssued.getId().toString());
-        //return new ResponseEntity<>(receiptIssued, headers, HttpStatus.CREATED);
-        return ResponseEntity.ok().header("id", receiptIssued.getId().toString()).body(receiptIssued);
-    }
-
+    
     @RequestMapping(value = "/is_compensable", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public <T extends Document> ResponseEntity<Boolean> compensable(@RequestBody T document) throws Throwable {
         //T compensatedDocument = financeService.compensate(document);
@@ -70,9 +62,31 @@ public class DocumentRestController {
         return ok().header("isCompensable", isCompensable.toString()).body(isCompensable);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public <T extends Document> ResponseEntity<? extends Document> save(@RequestBody T document) throws Throwable {
+        Boolean isCompensable = financeService.isCompensable(document);
+        if( document.getCompensatedDocuments() != null && !isCompensable ) 
+                document.getCompensatedDocuments().clear();
+        
         document = financeService.save(document);
-        return ok().header("id", document.getId().toString()).body(document);
+        return ok()
+                .header("id", document.getId().toString())
+                .header("compensated", isCompensable.toString())
+                .body(document);
     }
 }
+
+    /*
+    @RequestMapping(value = "/receipt_issued", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
+    private ResponseEntity<ReceiptIssued> save(@RequestBody ReceiptIssued receipt) throws Throwable {
+        Boolean isCompensable = financeService.isCompensable(receipt);
+        if( receipt.getCompensatedDocuments() != null && !isCompensable ) 
+                receipt.getCompensatedDocuments().clear();
+        
+        ReceiptIssued receiptIssued = documentService.save(receipt);
+        return ok()
+                .header("id", receiptIssued.getId().toString())
+                .header("compensated", isCompensable.toString())
+                .body(receiptIssued);
+    }*/
+

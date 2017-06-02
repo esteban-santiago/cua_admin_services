@@ -136,7 +136,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     }
 
     
-    //Validar si un documento es compensable
+    //Validar si un documento es compensable = true
     @Test
     public void compensationTC_0() throws Exception {
         //Una de las magias del cabezón -> lo toma del archivo receipt.json
@@ -146,21 +146,10 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         Map<Object, Object> context = new HashMap<>();
         context.put("compensatedDocumentId", friId_1);
         String json = mustacheCompiler
-                .compile(templateLoader.getTemplate("receipt_base"))
+                .compile(templateLoader.getTemplate("receipt_tc0"))
                 .execute(context);
 
         mockMvc.perform(
-                post("/sapi/finance/document/is_compensable")
-                        .content(json)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .with(httpBasic("user", "password")))
-                .andExpect(status().isOk())
-                .andExpect(header().string("isCompensable", "true"))
-                .andReturn();
-
-        //Graba el recibo
-        MvcResult resultPost = mockMvc.perform(
                 post("/sapi/finance/document/")
                         .content(json)
                         .accept(MediaType.APPLICATION_JSON)
@@ -168,21 +157,36 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                         .with(httpBasic("user", "password")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("documentType").value("RCI"))
-                .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
                 .andExpect(jsonPath("status").value("COMPENSATED"))
+                .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
+                .andExpect(header().string("compensated", "true"))
                 .andReturn();
 
-        Long rciId = Long.parseLong(resultPost.getResponse().getHeader("id"));
+
+    }
+
+    //Validar si un documento es compensable = false
+    @Test
+    public void compensationTC_0_1() throws Exception {
+        Map<Object, Object> context = new HashMap<>();
+        context.put("compensatedDocumentId", friId_1);
+        String json = mustacheCompiler
+                .compile(templateLoader.getTemplate("receipt_tc0_1"))
+                .execute(context);
 
         mockMvc.perform(
-                get("/sapi/finance/document/{id}", rciId)
-                        .with(httpBasic("user", "password"))
-                        .accept(MediaType.APPLICATION_JSON))
+                post("/sapi/finance/document/")
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("user", "password")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("documentType").value("RCI"))
-                .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
-                .andExpect(jsonPath("status").value("COMPENSATED"))
+                .andExpect(jsonPath("status").value("OPENED"))
+                .andExpect(jsonPath("compensatedDocuments", hasSize(0)))
+                .andExpect(header().string("compensated", "false"))
                 .andReturn();
+
     }
 
     /*
@@ -288,5 +292,32 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andExpect(jsonPath("status").value("COMPENSATED"))
                 .andReturn();
     }
+    
+    /*
+            //Graba el recibo
+        MvcResult resultPost = mockMvc.perform(
+                post("/sapi/finance/document/")
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("documentType").value("RCI"))
+                .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
+                .andExpect(jsonPath("status").value("COMPENSATED"))
+                .andReturn();
+
+        Long rciId = Long.parseLong(resultPost.getResponse().getHeader("id"));
+
+        mockMvc.perform(
+                get("/sapi/finance/document/{id}", rciId)
+                        .with(httpBasic("user", "password"))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("documentType").value("RCI"))
+                .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
+                .andExpect(jsonPath("status").value("COMPENSATED"))
+                .andReturn();
+    */
     
 }
