@@ -159,7 +159,6 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andExpect(jsonPath("documentType").value("RCI"))
                 .andExpect(jsonPath("status").value("COMPENSATED"))
                 .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
-                .andExpect(header().string("compensated", "true"))
                 .andReturn();
 
 
@@ -184,7 +183,6 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andExpect(jsonPath("documentType").value("RCI"))
                 .andExpect(jsonPath("status").value("OPENED"))
                 .andExpect(jsonPath("compensatedDocuments", hasSize(0)))
-                .andExpect(header().string("compensated", "false"))
                 .andReturn();
 
     }

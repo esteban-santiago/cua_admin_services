@@ -56,22 +56,22 @@ public class DocumentRestController {
     }
     
     @RequestMapping(value = "/is_compensable", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
-    public <T extends Document> ResponseEntity<Boolean> compensable(@RequestBody T document) throws Throwable {
-        //T compensatedDocument = financeService.compensate(document);
-        Boolean isCompensable = financeService.isCompensable(document);
-        return ok().header("isCompensable", isCompensable.toString()).body(isCompensable);
+    public <T extends Document> ResponseEntity<String> compensable(@RequestBody T document) throws Throwable {
+        return ok()
+                .header("isCompensable", financeService.isCompensable(document).toString())
+                .body("");
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public <T extends Document> ResponseEntity<? extends Document> save(@RequestBody T document) throws Throwable {
-        Boolean isCompensable = financeService.isCompensable(document);
-        if( document.getCompensatedDocuments() != null && !isCompensable ) 
+   
+        if( document.getCompensatedDocuments() != null && !financeService.isCompensable(document) ) 
                 document.getCompensatedDocuments().clear();
         
         document = financeService.save(document);
         return ok()
                 .header("id", document.getId().toString())
-                .header("compensated", isCompensable.toString())
+                //.header("compensated", document.isCompensated().toString())
                 .body(document);
     }
 }
