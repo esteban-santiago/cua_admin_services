@@ -161,7 +161,6 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
                 .andReturn();
 
-
     }
 
     //Validar si un documento es compensable = false
