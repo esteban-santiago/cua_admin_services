@@ -41,7 +41,7 @@ public class DocumentRestController {
         return ResponseEntity.ok(documentService.getAllByPerson(id));
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getAll() {
         return ResponseEntity.ok(documentService.getAll());
     }
