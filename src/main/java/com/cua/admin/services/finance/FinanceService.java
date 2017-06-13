@@ -56,9 +56,16 @@ public class FinanceService {
     }
 
     public <T extends Document> T save(T document) throws Throwable {
+        /*
+        try {
+            for(int i = 0 ; i < document.getCompensatedDocuments().size() ; i++) {
+                document.getCompensatedDocuments()
+                        .set(i, documentService.get(document.getCompensatedDocuments().get(i).getId()));            
+            }
+        }catch (NullPointerException npe) {}
         if (isCompensable(document)) {
             compensate(document);
-        }
+        }*/
         return saveAndCreateEntry(document);
     }
 
@@ -66,7 +73,7 @@ public class FinanceService {
         El valor del documento compensador debe ser igual al total de los documentos
         compensados para poder cerrar el documento.
      */
-    public <T extends Document> Boolean isCompensable(T document) {
+    public <T extends Document> Boolean isCompensable(T document) throws Throwable{
         try {
             return document.getDocumentBalanceAmount() == 0;
         } catch (NullPointerException npe) {
