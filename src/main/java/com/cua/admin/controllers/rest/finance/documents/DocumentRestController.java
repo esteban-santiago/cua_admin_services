@@ -71,7 +71,6 @@ public class DocumentRestController {
         document = financeService.save(document);
         return ok()
                 .header("id", document.getId().toString())
-                //.header("compensated", document.isCompensated().toString())
                 .body(document);
     }
 }
