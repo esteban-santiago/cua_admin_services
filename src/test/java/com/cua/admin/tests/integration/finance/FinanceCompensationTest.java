@@ -23,6 +23,7 @@ import com.samskivert.mustache.Mustache.TemplateLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +63,10 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     @Autowired
     private TemplateLoader templateLoader;
 
-    private Long friId_1, friId_2, friId_3, rciId_1;
+    private Long friId_1, friId_2, friId_3, rciId_1, rciId_2;
 
     private FlightRecordIssued fri1, fri2, fri3;
-    private ReceiptIssued rci;
+    private ReceiptIssued rci, rci2;
 
     @Before
     public void setUp() throws Throwable {
@@ -73,7 +74,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         account.setCurrency(Currency.ARS);
 
         fri1 = new FlightRecordIssued();
-        account.setAmount(3544F);
+        account.setAmount(1152F);
         fri1.getPayments().add(account);
         fri1.setPerson(personService.getMember(100));
         financeService.save(fri1);
@@ -84,7 +85,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         assertThat(fri1.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
         fri2 = new FlightRecordIssued();
-        account.setAmount(2544F);
+        account.setAmount(1152F);
         fri2.getPayments().add(account);
         fri2.setPerson(personService.getMember(100));
         financeService.save(fri2);
@@ -95,7 +96,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         assertThat(fri2.getLegalId()).isGreaterThanOrEqualTo(70000000);
 
         fri3 = new FlightRecordIssued();
-        account.setAmount(1544F);
+        account.setAmount(1152F);
         fri3.getPayments().add(account);
         fri3.setPerson(personService.getMember(100));
         financeService.save(fri3);
@@ -118,7 +119,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
 
-        credit.setAmount(7632F);
+        credit.setAmount(3456F);
         credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
 
         rci.getPayments().add(credit);
@@ -131,8 +132,21 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
 
         assertThat(rci.getId()).isGreaterThan(0);
         assertThat(rci.getLegalId()).isGreaterThanOrEqualTo(10000000);
-         
-        //assertThat(rci.isCompensated()).isTrue();
+
+        rci2 = new ReceiptIssued();
+        credit = new Payment();
+        credit.setMethod(paymentMethodService.get(4)); //Tarjeta de Crédito
+        credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
+        credit.setCurrency(Currency.ARS);
+        credit.setAmount(152F);
+        credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());
+        rci2.getPayments().add(credit);
+        
+        rci2.setPerson(personService.getMember(100));
+
+        financeService.save(rci2);
+        
+        rciId_2 = rci2.getId();
     }
 
     
@@ -158,6 +172,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("documentType").value("RCI"))
                 .andExpect(jsonPath("status").value("COMPENSATED"))
+
                 .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
                 .andReturn();
 
@@ -269,8 +284,8 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     @Test
     public void compensationTC_3() throws Exception {
         Map<Object, Object> context = new HashMap<>();
-        context.put("compensatedDocumentId_1", rciId_1);
-        context.put("compensatedDocumentId_2", friId_1);
+        context.put("compensatedDocumentId_1", rciId_2);
+        context.put("compensatedDocumentId_2", friId_2);
         String json = mustacheCompiler
                 .compile(templateLoader.getTemplate("receipt_tc3"))
                 .execute(context);

@@ -37,11 +37,16 @@ public class ReceiptIssued extends Document implements Serializable {
 
     @Override
     public Float getTotalAmount() {
-        return getAmount() + getCharge() - getDiscount();
+        return super.getTotalAmount() * (-1);
     }
 
     @Override
     public Float getCharge() {
         return super.getCharge()* (-1);
+    }
+
+    @Override
+    public Float getDiscount() {
+        return super.getDiscount()* (-1);
     }
 }

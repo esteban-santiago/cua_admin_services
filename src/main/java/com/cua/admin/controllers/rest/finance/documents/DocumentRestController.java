@@ -64,9 +64,18 @@ public class DocumentRestController {
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public <T extends Document> ResponseEntity<? extends Document> save(@RequestBody T document) throws Throwable {
-   
-        if( document.getCompensatedDocuments() != null && !financeService.isCompensable(document) ) 
+               
+        try {
+            for(int i = 0 ; i < document.getCompensatedDocuments().size() ; i++) {
+                document.getCompensatedDocuments()
+                        .set(i, documentService.get(document.getCompensatedDocuments().get(i).getId()));
+            }
+
+            if(!financeService.isCompensable(document) ) 
                 document.getCompensatedDocuments().clear();
+        }catch (NullPointerException npe) {}
+        
+        
         
         document = financeService.save(document);
         return ok()

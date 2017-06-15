@@ -56,16 +56,9 @@ public class FinanceService {
     }
 
     public <T extends Document> T save(T document) throws Throwable {
-        /*
-        try {
-            for(int i = 0 ; i < document.getCompensatedDocuments().size() ; i++) {
-                document.getCompensatedDocuments()
-                        .set(i, documentService.get(document.getCompensatedDocuments().get(i).getId()));            
-            }
-        }catch (NullPointerException npe) {}
         if (isCompensable(document)) {
             compensate(document);
-        }*/
+        }
         return saveAndCreateEntry(document);
     }
 

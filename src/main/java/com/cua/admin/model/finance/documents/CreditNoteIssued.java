@@ -18,6 +18,10 @@ import java.io.Serializable;
 @Entity
 public class CreditNoteIssued extends Document implements Serializable {
 
+    public CreditNoteIssued() {
+        setDocumentType(DocumentType.CNI);
+    }
+
     @Column(
             nullable = false,
             unique = true,
@@ -25,23 +29,24 @@ public class CreditNoteIssued extends Document implements Serializable {
     )
     @Generated(GenerationTime.INSERT)
     private Long legalId;
-    
-     @Override
+
+    @Override
     public Float getAmount() {
         return super.getAmount() * (-1);
     }
 
     @Override
     public Float getTotalAmount() {
-        return getAmount() + getCharge() - getDiscount();
+        return super.getTotalAmount() * (-1);
     }
 
     @Override
     public Float getCharge() {
-        return super.getCharge()* (-1);
+        return super.getCharge() * (-1);
     }
-    
-    public CreditNoteIssued() {
-        setDocumentType(DocumentType.CNI);  
+
+    @Override
+    public Float getDiscount() {
+        return super.getDiscount() * (-1);
     }
 }

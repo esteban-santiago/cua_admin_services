@@ -138,15 +138,11 @@ public abstract class Document implements Serializable {
 
     /* To do: Revisar esto */
     public Float getDocumentBalanceAmount() {
-        return (float) getCompensatedTotalAmount() + getAmount();
-    }
 
-    /* To do: Revisar esto */
-    public Float getCompensatedTotalAmount() {
         try {
-            return (float) compensatedDocuments.stream().mapToDouble(Document::getTotalAmount).sum();
+            return (float) compensatedDocuments.stream().mapToDouble(Document::getAmount).sum()+ getAmount();
         } catch (NullPointerException npe) {
-            return 0F;
+            return getAmount();
         }
     }
 
