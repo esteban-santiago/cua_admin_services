@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.is;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -223,6 +224,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andExpect(jsonPath("documentType").value("RCI"))
                 .andExpect(jsonPath("compensatedDocuments", hasSize(1)))
                 .andExpect(jsonPath("status").value("COMPENSATED"))
+                //.andExpect(jsonPath("id",is(jsonPath("id"))))
                 .andReturn();
     }
 
