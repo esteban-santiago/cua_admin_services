@@ -277,6 +277,25 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                 .andExpect(jsonPath("compensatedDocuments", hasSize(2)))
                 .andExpect(jsonPath("status").value("COMPENSATED"))
                 .andReturn();
+
+                MvcResult resultGet = mockMvc.perform(
+                get("/sapi/finance/document/"))
+                        //En los tres casos indicados encuentra un java.lang.Integer en lugar de
+                        //un objeto document
+                        .andExpect(jsonPath("$.[0].id").isNumber())
+                        //Falla este
+                        .andExpect(jsonPath("$.[1].id").isNumber())
+                        .andExpect(jsonPath("$.[2].id").isNumber())
+                        //Falla este
+                        .andExpect(jsonPath("$.[3].id").isNumber())
+                        .andExpect(jsonPath("$.[4].id").isNumber())
+                        //Falla este
+                        .andExpect(jsonPath("$.[5].id").isNumber())
+                        .andReturn();
+                
+                System.out.println("Viene");
+                System.out.println(resultGet.getResponse().getContentAsString());
+
     }
 
     /*

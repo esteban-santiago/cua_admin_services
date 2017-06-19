@@ -90,7 +90,8 @@ public class FinanceService {
     public <T extends Document> T compensate(T parent) {
         documentService.save(parent);
 
-        parent.setCompensatedBy(parent);
+        //Si compenso con el mismo documento me lo trae como una linea en los compensados
+        //parent.setCompensatedBy(parent);
         parent.setCompensationDate(LocalDate.now());
         parent.compensate();
 

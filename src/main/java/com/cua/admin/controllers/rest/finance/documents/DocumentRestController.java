@@ -33,6 +33,7 @@ public class DocumentRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<? extends Document> get(@PathVariable("id") Long id) throws Throwable {
+        //Document document = documentService.get(id);    
         return ResponseEntity.ok(documentService.get(id));
     }
 
@@ -43,7 +44,9 @@ public class DocumentRestController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getAll() {
-        return ResponseEntity.ok(documentService.getAll());
+        java.util.ArrayList<Document> documents = (java.util.ArrayList<Document>) documentService.getAll();
+        documents.stream().forEach(doc -> System.out.println(doc));
+        return ResponseEntity.ok(documents);
     }
 
     @RequestMapping(value = "/", params = {"referenced_document_id"}, method = RequestMethod.GET, produces = "application/json")
@@ -73,7 +76,9 @@ public class DocumentRestController {
 
             if(!financeService.isCompensable(document) ) 
                 document.getCompensatedDocuments().clear();
-        }catch (NullPointerException npe) {}
+        }catch (NullPointerException npe) {
+            System.out.println("Es null!!");
+        }
         
         
         
