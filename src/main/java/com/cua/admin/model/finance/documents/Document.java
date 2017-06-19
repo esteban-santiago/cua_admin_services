@@ -5,6 +5,7 @@ import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.billing.Promotion;
 import com.cua.admin.model.it.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -34,7 +35,8 @@ import java.util.List;
     ,
     @Type(name = "RCI", value = ReceiptIssued.class)
 })
-@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
+
+//@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 public abstract class Document implements Serializable {
 
     @GenericGenerator(
@@ -101,6 +103,8 @@ public abstract class Document implements Serializable {
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
     private Document compensatedBy; //Documento de compensación
 
+
+    @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
     @OneToMany(mappedBy = "compensatedBy")
     private List<Document> compensatedDocuments; //Documento compensados
 
