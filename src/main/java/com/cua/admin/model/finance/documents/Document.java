@@ -43,10 +43,8 @@ public abstract class Document implements Serializable {
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "accounting_document_id_seq")
-                ,
-                @Parameter(name = "initial_value", value = "1")
-                ,
+                @Parameter(name = "sequence_name", value = "accounting_document_id_seq"),
+                @Parameter(name = "initial_value", value = "1"),
                 @Parameter(name = "increment_size", value = "1")
             }
     )
@@ -99,6 +97,7 @@ public abstract class Document implements Serializable {
     @Enumerated(EnumType.STRING)
     private DocumentStatus status = DocumentStatus.OPENED;
 
+    @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
     @ManyToOne
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
     private Document compensatedBy; //Documento de compensación
