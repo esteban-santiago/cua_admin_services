@@ -55,7 +55,7 @@ public class DocumentRestController {
         }
     }
 
-    @RequestMapping(value = "/is_compensated", params = {"referenced_document_id"}, method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/is_compensated", params = {"referenced_document_id"}, method = RequestMethod.GET)
     public ResponseEntity<Boolean> isCompensated(@RequestParam(value = "referenced_document_id") Integer id) {
         Boolean isCompensated;
         try {
@@ -63,7 +63,9 @@ public class DocumentRestController {
         } catch (DocumentNotFoundException e) {
             isCompensated = false;
         }
-        return ok().header("isCompensated", isCompensated.toString())
+        return ok()
+                .header("Access-Control-Expose-Headers", "isCompensated")
+                .header("isCompensated", isCompensated.toString())
                 .build();
 
     }
