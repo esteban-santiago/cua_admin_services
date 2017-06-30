@@ -55,8 +55,8 @@ public class DocumentRestController {
         }
     }
 
-    @RequestMapping(value = "/is_compensated", params = {"referenced_document_id"}, method = RequestMethod.GET)
-    public ResponseEntity<Boolean> isCompensated(@RequestParam(value = "referenced_document_id") Integer id) {
+    @RequestMapping(value = "/is_compensated", params = {"referenced_document_id"}, method = RequestMethod.GET,produces = "text/html")
+    public ResponseEntity<String> isCompensated(@RequestParam(value = "referenced_document_id") Integer id) {
         Boolean isCompensated;
         try {
             isCompensated = documentService.getByReferencedDocumentId(id).isCompensated();
@@ -64,15 +64,16 @@ public class DocumentRestController {
             isCompensated = false;
         }
         return ok()
-                .header("Access-Control-Expose-Headers", "isCompensated")
-                .header("isCompensated", isCompensated.toString())
-                .build();
+                .header("Access-Control-Expose-Headers", "compensated")
+                .header("compensated", isCompensated.toString())
+                .body("");
 
     }
 
     @RequestMapping(value = "/is_compensable", method = RequestMethod.POST, produces = "application/json", consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public <T extends Document> ResponseEntity<String> isCompensable(@RequestBody T document) throws Throwable {
         return ok()
+                .header("Access-Control-Expose-Headers", "isCompensable")
                 .header("isCompensable", financeService.isCompensable(document).toString())
                 .body("");
     }
