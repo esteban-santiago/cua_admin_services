@@ -35,7 +35,6 @@ INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, i
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (102, '1974-08-02', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Guillermo', 'ACTIVE',NULL, NULL, 102, 101,1);
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (103, '1987-01-27', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Gustavo', 'ACTIVE',NULL, NULL, 103, 102,2);
 
-
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');
 INSERT INTO users (id, name, password, profile, status) VALUES (101,'psantiago','passwd','ADMINISTRATOR','ACTIVE');
@@ -87,6 +86,7 @@ INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'A
 INSERT INTO template_entry (id, document_type, description) VALUES(101,'RCI', 'Asiento automático de Recibo');
 INSERT INTO template_entry (id, document_type, description) VALUES(102,'CNI', 'Asiento automático de Nota de Crédito');
 INSERT INTO template_entry (id, document_type, description) VALUES(103,'DNI', 'Asiento automático de Nota de Dédito');
+
 --Template Entry Line FRI
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(100, 'ENTRY_LINE_DOCUMENT_TYPE','DEBIT','FRI',1,2100,100);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(101, 'ENTRY_LINE_DOCUMENT_TYPE','CREDIT','FRI',1,8500,100);
