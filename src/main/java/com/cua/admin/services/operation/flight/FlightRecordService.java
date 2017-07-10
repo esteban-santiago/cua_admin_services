@@ -8,6 +8,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -63,5 +65,10 @@ public class FlightRecordService {
         flightRecordRepository.save(flightRecord);
         //Genero el documento financiero
         financeService.save(flightRecord);
+    }
+    
+        public Page<FlightRecord> getAllByPage(Integer number, Integer size) {
+        PageRequest page = new PageRequest(number - 1, size);
+        return flightRecordRepository.findAll(page);
     }
 }

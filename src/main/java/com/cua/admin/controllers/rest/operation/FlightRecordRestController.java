@@ -5,12 +5,14 @@ import com.cua.admin.services.operation.flight.FlightRecordService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -49,5 +51,13 @@ public class FlightRecordRestController {
         flightRecordService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @RequestMapping(value = "", 
+            params = { "page", "size" }, 
+            method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Page<FlightRecord>> getAllPaginated(
+            @RequestParam(value = "page") Integer page, 
+            @RequestParam(value = "size") Integer size) {
+        return ResponseEntity.ok(flightRecordService.getAllByPage(page, size));
+    }   
 
 }
