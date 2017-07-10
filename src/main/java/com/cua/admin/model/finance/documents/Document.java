@@ -98,14 +98,14 @@ public abstract class Document implements Serializable {
     private DocumentStatus status = DocumentStatus.OPENED;
 
     @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
+    @OneToMany(mappedBy = "compensatedBy")
+    //@OneToMany
+    private List<Document> compensatedDocuments; //Documento compensados
+    
+    @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
     @ManyToOne
     @JoinColumn(name = "compensated_by", foreignKey = @ForeignKey(name = "document_id_fk"))
-    private Document compensatedBy; //Documento de compensación
-
-
-    @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
-    @OneToMany(mappedBy = "compensatedBy")
-    private List<Document> compensatedDocuments; //Documento compensados
+    private Document compensatedBy; //Documento compensador
 
     public Float getAmount() {
         try {

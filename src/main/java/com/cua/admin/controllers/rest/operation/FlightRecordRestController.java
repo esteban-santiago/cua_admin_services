@@ -43,7 +43,7 @@ public class FlightRecordRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", headers = "content-type=application/x-www-form-urlencoded")
     public ResponseEntity<FlightRecord> save(@RequestBody FlightRecord flightRecord) throws Throwable {
         flightRecordService.save(flightRecord);
-        return new ResponseEntity<>(flightRecord, HttpStatus.OK);
+        return ResponseEntity.ok(flightRecord);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
