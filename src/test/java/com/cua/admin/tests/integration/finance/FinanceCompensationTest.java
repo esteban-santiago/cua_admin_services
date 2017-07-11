@@ -111,10 +111,10 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         rci = new ReceiptIssued();
         Payment credit = new Payment();
 
-        rci.setCompensatedDocuments(new ArrayList<>());
-        rci.getCompensatedDocuments().add(fri1);
-        rci.getCompensatedDocuments().add(fri2);
-        rci.getCompensatedDocuments().add(fri3);
+        //rci.setCompensatedDocuments(new ArrayList<>());
+        //rci.getCompensatedDocuments().add(fri1);
+        //rci.getCompensatedDocuments().add(fri2);
+        //rci.getCompensatedDocuments().add(fri3);
 
         credit.setMethod(paymentMethodService.get(4)); //Tarjeta de Crédito
         credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
@@ -152,6 +152,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
 
     
     //Validar si un documento es compensable = true
+    //Usa friId_1
     @Test
     public void compensationTC_0() throws Exception {
         //Una de las magias del cabezón -> lo toma del archivo receipt.json
@@ -180,6 +181,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     }
 
     //Validar si un documento es compensable = false
+    //Usa friId_1
     @Test
     public void compensationTC_0_1() throws Exception {
         Map<Object, Object> context = new HashMap<>();
@@ -204,12 +206,12 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
 
     /*
     ** Valor del Recibo = Valor de la ficha
-    ** 
+    ** Usa friId_2
      */
     @Test
     public void compensationTC_1() throws Exception {
         Map<Object, Object> context = new HashMap<>();
-        context.put("compensatedDocumentId", friId_1);
+        context.put("compensatedDocumentId", friId_2);
         String json = mustacheCompiler
                 .compile(templateLoader.getTemplate("receipt_tc1"))
                 .execute(context);
@@ -231,11 +233,12 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     /*
     ** Valor del Recibo = Valor de la ficha
     ** metodo de pago con recargo
+    ** Usa friId_3
      */
     @Test
     public void compensationTC_1_1() throws Exception {
         Map<Object, Object> context = new HashMap<>();
-        context.put("compensatedDocumentId", friId_1);
+        context.put("compensatedDocumentId", friId_3);
         String json = mustacheCompiler
                 .compile(templateLoader.getTemplate("receipt_tc1_1"))
                 .execute(context);
@@ -256,6 +259,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
     /*
     ** Valor del Recibo = Valor de la suma de las fichas 
     **  compensadas
+    ** Usa friId_1 y friId_2
      */
     @Test
     public void compensationTC_2() throws Exception {
@@ -293,14 +297,15 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
                         .andExpect(jsonPath("$.[5].id").isNumber())
                         .andReturn();
                 
-                System.out.println("Viene");
-                System.out.println(resultGet.getResponse().getContentAsString());
+                //System.out.println("Viene");
+                //System.out.println(resultGet.getResponse().getContentAsString());
 
     }
 
     /*
     ** Valor del Recibo = Valor de la suma de los documentos 
     **  compensados
+    ** Usa friId_2
      */
     @Test
     public void compensationTC_3() throws Exception {

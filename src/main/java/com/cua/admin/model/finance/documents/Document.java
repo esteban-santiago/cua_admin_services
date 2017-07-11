@@ -98,8 +98,8 @@ public abstract class Document implements Serializable {
     private DocumentStatus status = DocumentStatus.OPENED;
 
     @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
-    @OneToMany(mappedBy = "compensatedBy")
-    //@OneToMany
+    //@OneToMany(mappedBy = "compensatedBy")
+    @OneToMany
     private List<Document> compensatedDocuments; //Documento compensados
     
     @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
