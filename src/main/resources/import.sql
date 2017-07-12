@@ -113,23 +113,26 @@ INSERT INTO product_group (description, id) VALUES ('Servicios de vuelo', 100);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C150', 100,100);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('PA-11', 100,101);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C152', 100, 102);
+INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('PA-28', 100, 103);
 
 --Product
 INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 1150, 'Cessna 150', 100, 100,'SERVICE', 100);
 INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 1152,'Cessna 152', 100, 102,'SERVICE', 101);
 INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 911,'PA-11', 100, 101,'SERVICE', 102);
+INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 2100,'PA-28', 100, 103,'SERVICE', 103);
 
 --Product Profile
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (100,100,100,100);
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (101,100,102,101);
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (102,100,102,101);
-INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (103,100,101,102);
+INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (103,100,101,103);
 
 --Aircrafts
-INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (100,'Cessna','152','LV-OEE','ACTIVE', 101);
-INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (101,'Cessna','152','LV-AMS','ACTIVE', 102);
-INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (102,'Cessna','150','LV-LGF','ACTIVE',100);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (100,'Cessna','C-152','LV-OEE','ACTIVE', 101);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (101,'Cessna','C-152','LV-AMS','ACTIVE', 102);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (102,'Cessna','C-150','LV-LGF','ACTIVE',100);
 INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (103,'Pipper','PA-11','LV-YMV','OUT_OF_ORDER', 103);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (104,'Pipper','PA-28','LV-AXH','ACTIVE', 103);
 
 --Aircrafts Components
 INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (100,'Motor 100HP',TRUE,'1MOTOR100HP','ENGINE',101);

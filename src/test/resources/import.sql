@@ -44,7 +44,6 @@ INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, i
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (102, '1974-08-02', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Guillermo', 'ACTIVE',NULL, NULL, 102, 101,1);
 INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (103, '1987-01-27', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Gustavo', 'ACTIVE',NULL, NULL, 103, 102,2);
 
-
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');
 INSERT INTO users (id, name, password, profile, status) VALUES (101,'psantiago','passwd','ADMINISTRATOR','ACTIVE');
@@ -96,6 +95,7 @@ INSERT INTO template_entry (id, document_type, description) VALUES(100,'FRI', 'A
 INSERT INTO template_entry (id, document_type, description) VALUES(101,'RCI', 'Asiento automático de Recibo');
 INSERT INTO template_entry (id, document_type, description) VALUES(102,'CNI', 'Asiento automático de Nota de Crédito');
 INSERT INTO template_entry (id, document_type, description) VALUES(103,'DNI', 'Asiento automático de Nota de Dédito');
+
 --Template Entry Line FRI
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(100, 'ENTRY_LINE_DOCUMENT_TYPE','DEBIT','FRI',1,2100,100);
 INSERT INTO template_entry_line (id, entry_line_discriminator, accounting_entry_item_type, document_type, factor, account_id, template_entry_id) VALUES(101, 'ENTRY_LINE_DOCUMENT_TYPE','CREDIT','FRI',1,8500,100);
@@ -122,23 +122,26 @@ INSERT INTO product_group (description, id) VALUES ('Servicios de vuelo', 100);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C150', 100,100);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('PA-11', 100,101);
 INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('C152', 100, 102);
+INSERT INTO product_group_subgroup (description, group_id, id) VALUES ('PA-28', 100, 103);
 
 --Product
 INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 1150, 'Cessna 150', 100, 100,'SERVICE', 100);
 INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 1152,'Cessna 152', 100, 102,'SERVICE', 101);
 INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 911,'PA-11', 100, 101,'SERVICE', 102);
+INSERT INTO product (currency, price, description, group_id, subgroup_id, type, id) VALUES('ARS', 2100,'PA-28', 100, 103,'SERVICE', 103);
 
 --Product Profile
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (100,100,100,100);
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (101,100,102,101);
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (102,100,102,101);
-INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (103,100,101,102);
+INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (103,100,101,103);
 
 --Aircrafts
-INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (100,'Cessna','152','LV-OEE','ACTIVE', 101);
-INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (101,'Cessna','152','LV-AMS','ACTIVE', 102);
-INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (102,'Cessna','150','LV-LGF','ACTIVE',100);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (100,'Cessna','C-152','LV-OEE','ACTIVE', 101);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (101,'Cessna','C-152','LV-AMS','ACTIVE', 102);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (102,'Cessna','C-150','LV-LGF','ACTIVE',100);
 INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (103,'Pipper','PA-11','LV-YMV','OUT_OF_ORDER', 103);
+INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (104,'Pipper','PA-28','LV-AXH','ACTIVE', 103);
 
 --Aircrafts Components
 INSERT INTO aircraft_component (id, description,relocable,serial, type, aircraft_id) VALUES (100,'Motor 100HP',TRUE,'1MOTOR100HP','ENGINE',101);
@@ -167,11 +170,15 @@ INSERT INTO crew_member(id,crew_member_role,person_id,flight_record_id) VALUES (
 --INSERT INTO flight_record_issued (id, amount, compensation_date, compensated_by, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (100, 2400,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,100);
 --INSERT INTO flight_record_issued (id, amount, compensation_date, compensated_by, creation_date, currency, document_type, expiration_date, referenced_document_id, person_id, payment_method_id, user_id) VALUES (101, 2401,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',100,100,3,101);
 --INSERT INTO flight_record_issued (id, amount, compensation_date, compensation_document_id, creation_date, currency, document_type, expiration_date, referenced_document_id, member_id, payment_method_id, user_id) VALUES (102, 4110,NULL,NULL,'2017-01-09','ARS','FRI','2017-02-09',101,100,3,101);
+--INSERT INTO flight_record_issued (id, compensation_date, creation_date, document_type, expiration_date, referenced_document_id, status, compensated_by, person_id, user_id, legal_id) VALUES 
+--                                 (100, '2017-01-09',    '2017-01-09',   'FRI',         '2017-01-09' , 101,                    'COMPENSATED', 101, 100,NULL, 7000000);
 
 --Receipt Issued
 --INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensated_by, person_id, payment_method_id, payment_term_id, user_id) VALUES (200, -2400,NULL,'2017-01-09','ARS','RCI','2017-01-09', 0, 'OPENED' ,NULL, 100,1, NULL,100);
 --INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensated_by, person_id, payment_method_id, payment_term_id, user_id) VALUES (201, -3400,NULL,'2017-01-09','ARS','RCI','2017-01-09', 0, 'OPENED' ,NULL, 100,4, 3,100);
---INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensated_by, person_id, payment_method_id, payment_term_id, user_id) VALUES (202, -4110,NULL,'2017-01-09','ARS','RCI','2017-01-09', 0, 'OPENED' ,NULL, 100,5, NULL,100);
+--INSERT INTO receipt_issued (id, amount, compensation_date, creation_date, currency, document_type, expiration_date, referenced_document_id, status, compensated_by, person_id, payment_method_id, payment_term_id, user_id) VALUES 
+--INSERT INTO receipt_issued (id, compensation_date, creation_date, document_type, expiration_date, referenced_document_id, status, compensated_by, person_id, user_id, legal_id) VALUES(102,'2017-01-09','2017-01-09','RCI','2017-01-09',0,                      'CLOSED' ,102,          100,        NULL,nextval('document_credit_note_issued_id_seq'));
+--INSERT INTO receipt_issued (id, compensation_date, creation_date, document_type, expiration_date, referenced_document_id, status, compensated_by, person_id, user_id, legal_id) VALUES(101,'2017-01-09','2017-01-09','RCI','2017-01-09',0,'COMPENSATED' ,NULL,          100,        NULL,1000000);
 
 --Airfields
 INSERT INTO airfield (id, iata_code, name) VALUES(1,'ACB','Coronel Bogado Agroservicios');
