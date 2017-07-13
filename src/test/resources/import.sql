@@ -134,7 +134,7 @@ INSERT INTO product (currency, price, description, group_id, subgroup_id, type, 
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (100,100,100,100);
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (101,100,102,101);
 INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (102,100,102,101);
-INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (103,100,101,103);
+INSERT INTO product_profile (id, group_id, subgroup_id,  product_id) VALUES (103,100,103,103);
 
 --Aircrafts
 INSERT INTO aircraft(id,brand,model,registration,status, product_profile_id) VALUES (100,'Cessna','C-152','LV-OEE','ACTIVE', 101);
