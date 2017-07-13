@@ -46,3 +46,13 @@ security:
   user:
     name: user
     password: password
+    
+mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pepe@gmail.com
+    password: <login password to smtp server>
+    properties:
+        mail.smtp:
+                auth: true
+                starttls.enable: true
