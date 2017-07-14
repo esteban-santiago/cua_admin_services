@@ -45,7 +45,7 @@ public class AircraftTests extends SpringIntegrationTest {
     public void transferComponent() {        
         Aircraft c152 = aircraftService.getByRegistration("LV-OEE");
         Aircraft c152_2 = aircraftService.getByRegistration("LV-AMS");
-        AircraftComponent component = aircraftComponentRepository.findBySerial("1MOTOR100HP");
+        AircraftComponent component = aircraftComponentRepository.findBySerial("1MOTOR100HP").get();
         System.out.println(c152);
         System.out.println(c152_2);
         //--Trasfer engine

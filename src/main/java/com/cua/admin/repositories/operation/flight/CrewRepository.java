@@ -4,12 +4,13 @@ import com.cua.admin.model.core.Person;
 import com.cua.admin.model.operation.flight.CrewMember;
 import com.cua.admin.model.operation.flight.CrewMemberRole;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CrewRepository extends JpaRepository<CrewMember, Integer> {
 
-    List<CrewMember> findByCrewMemberRole(CrewMemberRole crewMemeberRole);
-    CrewMember findByPerson(Person person);
-    CrewMember findByPersonAndCrewMemberRole(Person person, CrewMemberRole crewMemberRole);
+    Optional<List<CrewMember>> findByCrewMemberRole(CrewMemberRole crewMemeberRole);
+    Optional<CrewMember> findByPerson(Person person);
+    Optional<CrewMember> findByPersonAndCrewMemberRole(Person person, CrewMemberRole crewMemberRole);
   
 }

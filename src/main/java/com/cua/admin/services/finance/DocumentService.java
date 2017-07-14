@@ -47,19 +47,19 @@ public class DocumentService {
     }
 
     public List<Document> getAllCompensated() {
-        return this.documentRepository.findByStatus(DocumentStatus.COMPENSATED).get();
+        return this.documentRepository.findByStatus(DocumentStatus.COMPENSATED);
     }
 
     public List<Document> getAllOpened() {
-        return this.documentRepository.findByStatus(DocumentStatus.OPENED).get();
+        return this.documentRepository.findByStatus(DocumentStatus.OPENED);
     }
 
     public List<Document> getAllCompensables() {
-        return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensables()).get();
+        return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensables());
     }
 
     public List<Document> getAllCompensators() {
-        return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensators()).get();
+        return this.documentRepository.findByDocumentTypeIn(DocumentType.getCompensators());
     }
 
     public List<Document> getAll() {

@@ -19,7 +19,7 @@ public interface DocumentRepository<T extends Document> extends JpaRepository<T,
 
     List<T> findByDocumentType(DocumentType documentType);
 
-    Optional<List<T>> findByDocumentTypeIn(Set<DocumentType> documentTypes);
+    List<T> findByDocumentTypeIn(Set<DocumentType> documentTypes);
 
     //Optional<T> findById(Long id);
 
@@ -27,7 +27,7 @@ public interface DocumentRepository<T extends Document> extends JpaRepository<T,
 
     Optional<T> findByReferencedDocumentId(Integer id);
     
-    Optional<List<T>> findByStatus(DocumentStatus status);
+    List<T> findByStatus(DocumentStatus status);
 
     //Optional<List<T>> findByIsOpened();
 
