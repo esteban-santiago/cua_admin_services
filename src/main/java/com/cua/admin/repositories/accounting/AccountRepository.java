@@ -8,7 +8,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     List<Account> findByDescription(String description);
 
-    Account findById(Integer id);
+    //Account findOne(Integer id);
 
     List<Account> findByFirstOrderGrouperNot(Integer firstOrder);
 

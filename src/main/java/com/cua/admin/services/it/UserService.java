@@ -15,15 +15,16 @@ import org.springframework.stereotype.Service;
 @Transactional
 @RequiredArgsConstructor
 public class UserService {
+    
     @Autowired //No es obligatorio
     private final UserRepository userRepository;
 
     public void lock(Integer id) {
-        this.lock(userRepository.findById(id));
+        this.lock(userRepository.findById(id).get());
     }
 
     public void unlock(Integer id) {
-        this.unlock(userRepository.findById(id));
+        this.unlock(userRepository.findById(id).get());
     }
 
     public void lock(User user) {
@@ -41,7 +42,7 @@ public class UserService {
     }
 
     public User get(Integer id) {
-        return userRepository.findById(id);
+        return userRepository.findById(id).get();
     }
 
     public User save(User user) {
@@ -49,7 +50,7 @@ public class UserService {
     }
 
     public void delete(Integer id) {
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
 
     public List<User> getAll() {

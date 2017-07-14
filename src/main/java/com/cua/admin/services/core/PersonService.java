@@ -39,11 +39,11 @@ public class PersonService {
     }
 
     public void delete(Integer id) {
-        this.personRepository.delete(id);
+        this.personRepository.deleteById(id);
     }
 
     public void delete(Person person) {
-        this.personRepository.delete(person.getId());
+        this.delete(person.getId());
     }
 
     public List<Person> getAll() {

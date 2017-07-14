@@ -117,7 +117,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         //rci.getCompensatedDocuments().add(fri3);
 
         credit.setMethod(paymentMethodService.get(4)); //Tarjeta de Crédito
-        credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
+        credit.setTerm(paymentTermRepository.findById(3).get()); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
 
         credit.setAmount(3456F);
@@ -137,7 +137,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         rci2 = new ReceiptIssued();
         credit = new Payment();
         credit.setMethod(paymentMethodService.get(4)); //Tarjeta de Crédito
-        credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
+        credit.setTerm(paymentTermRepository.findById(3).get()); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
         credit.setAmount(152F);
         credit.setCharge(credit.getAmount() * credit.getTerm().getCharge());

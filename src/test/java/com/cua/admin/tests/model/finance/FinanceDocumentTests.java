@@ -173,7 +173,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         ReceiptIssued rci = new ReceiptIssued();
         Payment bank_check = new Payment();
         bank_check.setMethod(paymentMethodRepository.findById(2).get()); //Cheque Bancario
-        bank_check.setTerm(paymentTermRepository.findById(6)); //Cheque de más de 30 dias
+        bank_check.setTerm(paymentTermRepository.findById(6).get()); //Cheque de más de 30 dias
         bank_check.setCurrency(Currency.ARS);
 
         rci.getPayments().add(bank_check);
@@ -210,7 +210,7 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         ReceiptIssued rci = new ReceiptIssued();
         Payment credit = new Payment();
         credit.setMethod(paymentMethodRepository.findById(4).get()); //Tarjeta de Crédito
-        credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
+        credit.setTerm(paymentTermRepository.findById(3).get()); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
 
         rci.getPayments().add(credit);
@@ -249,13 +249,13 @@ public class FinanceDocumentTests extends SpringIntegrationTest {
         //Creo una instancia de Pago con un Cheque
         Payment bank_check = new Payment();
         bank_check.setMethod(paymentMethodRepository.findById(2).get()); //Cheque Bancario
-        bank_check.setTerm(paymentTermRepository.findById(6)); //Cheque de más de 30 dias
+        bank_check.setTerm(paymentTermRepository.findById(6).get()); //Cheque de más de 30 dias
         bank_check.setCurrency(Currency.ARS);
 
         //Creo una instancia de Pago con tarjeta de crédito
         Payment credit = new Payment();
         credit.setMethod(paymentMethodRepository.findById(4).get()); //Tarjeta de Crédito
-        credit.setTerm(paymentTermRepository.findById(3)); //Pago en una cuota
+        credit.setTerm(paymentTermRepository.findById(3).get()); //Pago en una cuota
         credit.setCurrency(Currency.ARS);
 
 

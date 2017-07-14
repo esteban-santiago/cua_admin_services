@@ -76,7 +76,7 @@ public class DocumentService {
     }
 
     public void delete(Long id) {
-        this.documentRepository.delete(id);
+        this.documentRepository.deleteById(id);
     }
 
     public void delete(Document document) {

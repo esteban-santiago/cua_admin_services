@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PaymentMethodRepository extends JpaRepository<PaymentMethod, Integer> {
 
-    Optional<PaymentMethod> findById(Integer id);
+    //Optional<PaymentMethod> findOne(Integer id);
     
     
 }

@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SaleOrderRepository extends JpaRepository<SaleOrder, Long> {
 
-    SaleOrder findById(Long id);
+    //SaleOrder findOne(Long id);
 
 }

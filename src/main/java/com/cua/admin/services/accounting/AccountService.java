@@ -23,7 +23,7 @@ public class AccountService {
     ** Account Basic Services
     */
     public Account get(Integer id) {
-        return this.accountRepository.findById(id);
+        return this.accountRepository.findById(id).get();
     }
 
     public Account get(Account account) {

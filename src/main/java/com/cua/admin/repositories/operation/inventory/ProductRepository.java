@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    Product findById(Integer id);
+    //Product findOne(Integer id);
     Set<Product> findByGroup(ProductGroup group);
     Set<Product> findBySubGroup(ProductSubGroup subGroup);
     Set<Product> findByType(ProductType productType);

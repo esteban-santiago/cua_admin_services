@@ -10,6 +10,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByName(String name);
 
-    User findById(Integer id);
+    //User findById(Integer id);
    
 }

@@ -10,5 +10,5 @@ public interface ContactWayRepository extends JpaRepository<ContactWay, Integer>
 
     List<ContactWay> findByIdentificator(String description);
 
-    ContactWay findById(Integer id);
+    //ContactWay findOne(Integer id);
 }

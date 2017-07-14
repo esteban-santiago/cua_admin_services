@@ -33,7 +33,7 @@ public class FlightRecordService {
     }
 
     public void delete(Integer id) throws Throwable {
-        flightRecordRepository.delete(id);
+        flightRecordRepository.deleteById(id);
     }
 
     public void delete(FlightRecord flightRecord) throws Throwable {

@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductGroupRepository extends JpaRepository<ProductGroup, Integer> {
 
-    ProductGroup findById(Integer id);
+    //ProductGroup findOne(Integer id);
     Set<Product>  findBySubGroups(ProductSubGroup subGroup);
 }

@@ -58,10 +58,10 @@ public class MemberTests extends SpringIntegrationTest {
         partner.addContactWay(new ContactWay("M", "esteban.san@gmail.com"));
 
         partner.setIdentityCard(new IdentityCard(IdentityCardType.DNI, "24036873"));
-        partner.setNationality(nationalityRepository.findById(1));
+        partner.setNationality(nationalityRepository.findById(1).get());
         //Es socio
         partner.setMemberProfile(new Member());
-        partner.getMemberProfile().setCategory(categoryReposity.findById(1));
+        partner.getMemberProfile().setCategory(categoryReposity.findById(1).get());
         //Es piloto
         partner.setPilotProfile(new Pilot());
         partner.getPilotProfile().setRatings(new HashSet<>());

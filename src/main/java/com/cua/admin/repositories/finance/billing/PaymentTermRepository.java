@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PaymentTermRepository extends JpaRepository<PaymentTerm, Integer> {
 
-    PaymentTerm findById(Integer id);
+    //PaymentTerm findOne(Integer id);
     
 }

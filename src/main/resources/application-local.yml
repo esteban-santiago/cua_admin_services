@@ -51,7 +51,7 @@ mail:
     host: smtp.gmail.com
     port: 587
     username: pepe@gmail.com
-    password: <login password to smtp server>
+    password: <login_password_to_smtp_server>
     properties:
         mail.smtp:
                 auth: true

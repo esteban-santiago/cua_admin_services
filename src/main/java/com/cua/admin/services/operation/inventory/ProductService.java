@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 @RequiredArgsConstructor
 public class ProductService {
-    @Autowired //No es obligatorio
+    @Autowired //No es obligatorio si es final
     private final ProductRepository productRepository;
 } 

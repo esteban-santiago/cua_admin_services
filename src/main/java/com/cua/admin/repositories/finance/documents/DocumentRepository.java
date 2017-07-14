@@ -21,7 +21,7 @@ public interface DocumentRepository<T extends Document> extends JpaRepository<T,
 
     Optional<List<T>> findByDocumentTypeIn(Set<DocumentType> documentTypes);
 
-    Optional<T> findById(Long id);
+    //Optional<T> findById(Long id);
 
     Optional<FlightRecordIssued> findFlightRecordIssuedByLegalId(Long id);
 

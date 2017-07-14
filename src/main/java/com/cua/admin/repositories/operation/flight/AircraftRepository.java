@@ -9,7 +9,7 @@ public interface AircraftRepository extends JpaRepository<Aircraft, Integer> {
 
     Optional<Aircraft> findByRegistration(String description);
 
-    Optional<Aircraft> findById(Integer id);
+    //Optional<Aircraft> findById(Integer id);
     
     Optional<Aircraft> findByComponents(AircraftComponent component);
 }

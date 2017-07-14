@@ -93,7 +93,7 @@ public class AccountingTests extends SpringIntegrationTest {
         entry.setCreationDate(LocalDateTime.now());
         entry.setDescription("Asiento de prueba de Cuota");
         entry.setFiscalYear(LocalDate.now().getYear());
-        entry.setUser(userRepository.findById(1002));
+        entry.setUser(userRepository.findById(100).get());
         accountingEntryService.save(entry);
         AccountingEntryItem item1 = new AccountingEntryItem();
         AccountingEntryItem item2 = new AccountingEntryItem();
