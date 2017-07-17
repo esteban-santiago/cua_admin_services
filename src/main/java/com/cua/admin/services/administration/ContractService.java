@@ -1,7 +1,9 @@
 package com.cua.admin.services.administration;
 
 import com.cua.admin.model.administration.Contract;
+import com.cua.admin.model.core.Person;
 import com.cua.admin.repositories.administration.ContractRepository;
+import java.time.LocalDate;
 import java.util.List;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +22,9 @@ public class ContractService {
     private final ContractRepository contractRepository;
 
     /*
-    ** Account Basic Services
+    ** Contract Basic Services
     */
-    public Contract get(Integer id) {
+    public Contract get(Long id) {
         return this.contractRepository.findById(id).get();
     }
     
@@ -34,5 +36,12 @@ public class ContractService {
         return this.contractRepository.findAll();
     }
     
+    public List<Contract> getByPerson(Person person) {
+        return this.contractRepository.findByPersonId(person);
+    }
+    
+    public List<Contract> getByValidity(LocalDate now) {
+        return this.contractRepository.findByValidityFromAfterAndValidityToBefore(now, now);
+    }
     
 }

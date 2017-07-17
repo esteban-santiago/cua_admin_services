@@ -1,27 +1,26 @@
 package com.cua.admin.model.core.building;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Data
-@Entity
-@Table(name = "position")
+//@Entity
+//@Table(name = "location")
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Position implements Serializable {
+public abstract class Location implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",
@@ -34,10 +33,9 @@ public class Position implements Serializable {
     )
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
-    @NonNull
-    private Integer sideOne;
+    private Integer id;
 
     @NonNull
-    private Integer sideTwo;
+    private String description;
 
 }

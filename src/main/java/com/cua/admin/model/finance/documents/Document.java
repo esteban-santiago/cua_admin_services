@@ -31,9 +31,12 @@ import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "documentType")
 @JsonSubTypes({
-    @Type(name = "FRI", value = FlightRecordIssued.class)
-    ,
-    @Type(name = "RCI", value = ReceiptIssued.class)
+    @Type(name = "FRI", value = FlightRecordIssued.class),
+    @Type(name = "RCI", value = ReceiptIssued.class),
+    @Type(name = "CNI", value = CreditNoteIssued.class),
+    @Type(name = "DNI", value = DebitNoteIssued.class),
+    @Type(name = "MFI", value = MembershipFeeIssued.class)
+    
 })
 
 //@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
@@ -43,7 +46,7 @@ public abstract class Document implements Serializable {
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "accounting_document_id_seq"),
+                @Parameter(name = "sequence_name", value = "finance_document_id_seq"),
                 @Parameter(name = "initial_value", value = "1"),
                 @Parameter(name = "increment_size", value = "1")
             }
