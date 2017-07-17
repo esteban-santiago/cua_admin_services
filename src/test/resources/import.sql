@@ -20,6 +20,9 @@ INSERT INTO nationality(id, description) VALUES (9,'Ecuatoriana');
 INSERT INTO nationality(id, description) VALUES (10,'Venezolana');
 INSERT INTO nationality(id, description) VALUES (11,'Mexicana');
 
+--Organization
+INSERT INTO organization (id, name, status, tax_id) VALUES(1,'Centro Universitario de Aviación','ACTIVE','30-12345678-2');
+
 --Category
 INSERT INTO category(id, description) VALUES (1,'Socio');
 INSERT INTO category(id, description) VALUES (2,'Vitalicio');
@@ -39,10 +42,10 @@ INSERT INTO pilot_profile (id, licence) VALUES(101, '28036873');
 INSERT INTO pilot_profile (id, licence) VALUES(102, '28036873');
 
 --Person
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (100, '1974-08-02', '2017-02-03', '24036873', 'DNI', 'SANTIAGO, Esteban', 'ACTIVE',NULL, NULL, 100, 100,1);
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (101, '1987-01-27', '2017-02-03', '32036874', 'DNI', 'SANTIAGO, Pablo', 'ACTIVE',NULL, NULL, 101, NULL,2);
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (102, '1974-08-02', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Guillermo', 'ACTIVE',NULL, NULL, 102, 101,1);
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (103, '1987-01-27', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Gustavo', 'ACTIVE',NULL, NULL, 103, 102,2);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, organization_id,status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (100, '1974-08-02', '2017-02-03', '24036873', 'DNI', 'SANTIAGO, Esteban', 1,'ACTIVE',NULL, NULL, 100, 100,1);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, organization_id,status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (101, '1987-01-27', '2017-02-03', '32036874', 'DNI', 'SANTIAGO, Pablo', 1,'ACTIVE',NULL, NULL, 101, NULL,2);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, organization_id,status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (102, '1974-08-02', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Guillermo', 1,'ACTIVE',NULL, NULL, 102, 101,1);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, organization_id,status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (103, '1987-01-27', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Gustavo', 1, 'ACTIVE',NULL, NULL, 103, 102,2);
 
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');

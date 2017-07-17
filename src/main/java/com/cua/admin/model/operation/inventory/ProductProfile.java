@@ -1,8 +1,5 @@
-package com.cua.admin.model.operation.flight.profiles;
+package com.cua.admin.model.operation.inventory;
 
-import com.cua.admin.model.operation.inventory.Product;
-import com.cua.admin.model.operation.inventory.ProductGroup;
-import com.cua.admin.model.operation.inventory.ProductSubGroup;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

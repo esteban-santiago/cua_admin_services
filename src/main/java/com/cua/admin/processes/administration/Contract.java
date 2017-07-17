@@ -1,4 +1,4 @@
-package com.cua.admin.processes.accounting;
+package com.cua.admin.processes.administration;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
  * @author esteban_santiago
  */
 @Service
-public class Accounting {
+public class Contract {
 
     @Scheduled(fixedDelay=500000000)
     public void doSomething() {
-        System.out.println("Accounting Process");
+        System.out.println("Contract Process");
     }  
 }

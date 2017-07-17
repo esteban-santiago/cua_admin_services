@@ -36,7 +36,7 @@ public class UserServiceTest {
         //user.setId(id);
         userRepository.save(user);   
         id = user.getId();
-        System.out.println(user.getId());
+        //System.out.println(user.getId());
     }
 
     @After
@@ -47,7 +47,8 @@ public class UserServiceTest {
     @Test
     public void lockById() throws Exception {
         // Given
-        System.out.println("Hola: " + userRepository.findById(id));
+        System.out.println("UserServiceTest: Sin implementar");
+        //System.out.println("Hola: " + userRepository.findById(id));
         //when(userRepository.findById(id).get()).thenReturn(user);
 
         // When

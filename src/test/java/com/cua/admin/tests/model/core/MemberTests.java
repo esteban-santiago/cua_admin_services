@@ -5,12 +5,14 @@ import com.cua.admin.model.core.ContactWay;
 import com.cua.admin.model.core.IdentityCard;
 import com.cua.admin.model.core.IdentityCardType;
 import com.cua.admin.model.core.Person;
+import com.cua.admin.model.core.organization.Organization;
 import com.cua.admin.model.core.profiles.Member;
 import com.cua.admin.model.core.profiles.Pilot;
 import com.cua.admin.model.core.profiles.PilotRating;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
 import com.cua.admin.repositories.core.PersonRepository;
+import com.cua.admin.repositories.core.organization.OrganizationRepository;
 import com.cua.admin.repositories.operation.flight.FlightRecordRepository;
 import com.cua.admin.services.core.PersonService;
 import java.util.HashSet;
@@ -24,7 +26,7 @@ public class MemberTests extends SpringIntegrationTest {
     private PersonService personService;
 
     @Autowired
-    private PersonRepository personRepository;
+    private OrganizationRepository organizationRepository;
     
     @Autowired
     private CategoryRepository categoryReposity;
@@ -37,6 +39,7 @@ public class MemberTests extends SpringIntegrationTest {
 
     @Test
     public void createMember() throws Throwable {
+        Organization organization = organizationRepository.findById(1).get();
         Address address = new Address();
         address.setStreet("Av. Berlin 729");
         address.setCity("Longchamps");
@@ -49,6 +52,8 @@ public class MemberTests extends SpringIntegrationTest {
 
         Person partner = new Person();
 
+        partner.setOrganization(organization);
+        
         partner.setName("Socio 1");
         partner.setAddresses(new HashSet<>());
         partner.addAddress(address);
@@ -92,9 +97,9 @@ public class MemberTests extends SpringIntegrationTest {
                 );
         
         
-        flightRecordRepository.findAll()
-                .stream().forEach(
-                        aRecord -> System.out.println(aRecord)
-                );
+        //flightRecordRepository.findAll()
+        //        .stream().forEach(
+        //                aRecord -> System.out.println(aRecord)
+        //        );
     }   
 }

@@ -1,8 +1,7 @@
-package com.cua.admin.model.core;
+package com.cua.admin.model.administration;
 
+import com.cua.admin.model.core.Person;
 import java.io.Serializable;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,7 +9,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,18 +22,17 @@ import org.hibernate.annotations.Parameter;
  * @author esantiago
  */
 @Data
-//@Entity
-//@Table(name = "organization")
-//@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Organization implements Serializable {
+@Entity
+@Table(name = "short_term_contract")
+public class ShortTermContract implements Serializable {
 
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "organization_id_seq")
+                @Parameter(name = "sequence_name", value = "short_contract_id_seq")
                 ,
                 @Parameter(name = "initial_value", value = "1")
                 ,
@@ -46,19 +44,14 @@ public class Organization implements Serializable {
     private Integer id;
 
     private String name;
-
-    private String taxId; //CUIT
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(name = "organization_address_id_fk"))
-    private Set<Address> addresses;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(name = "organization_way_to_contact_id_fk"))
-    private Set<ContactWay> contactWays;
+    
+    
+    @OneToOne
+    @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "person_short_term_contract_id_fk"))
+    Person person;
 
     @Enumerated(EnumType.STRING)
-    private Organization.Status status = Organization.Status.ACTIVE;
+    private ShortTermContract.Status status = ShortTermContract.Status.ACTIVE;
 
     private enum Status {
         ACTIVE(),
@@ -66,22 +59,22 @@ public class Organization implements Serializable {
     }
 
     public void activate() {
-        this.status = Organization.Status.ACTIVE;
+        this.status = ShortTermContract.Status.ACTIVE;
     }
 
     public Boolean isActive() {
-        return this.status == Organization.Status.ACTIVE;
+        return this.status == ShortTermContract.Status.ACTIVE;
     }
 
     public void deactivate() {
-        this.status = Organization.Status.INACTIVE;
+        this.status = ShortTermContract.Status.INACTIVE;
     }
 
-    public void addAddress(Address address) {
-        this.addresses.add(address);
-    }
+    //public void addAddress(Address address) {
+    //    this.addresses.add(address);
+    //}
 
-    public void addContactWay(ContactWay contactWay) {
-        this.contactWays.add(contactWay);
-    }
+    //public void addContactWay(ContactWay contactWay) {
+    //    this.contactWays.add(contactWay);
+    //}
 }

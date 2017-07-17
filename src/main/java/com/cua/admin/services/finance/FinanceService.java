@@ -76,11 +76,15 @@ public class FinanceService {
 
     private <T extends Document> T saveAndCreateEntry(T document) throws Throwable {
         //Graba el documento
-        return documentService.save(document);
-
+        document = documentService.save(document);
+        
         // Lo saco hasta tener el modelo Ok
         //Contabiliza el documento (crea el asiento)
+        //Tira un NullPointerException en la compensación
         //accountingEntryService.saveAccountingEntryUsingTemplate(document);
+
+        return document;
+
     }
 
     //public <T extends Document> T compensate(T document) {

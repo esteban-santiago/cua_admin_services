@@ -11,6 +11,9 @@ INSERT INTO nationality(id, description) VALUES (9,'Ecuatoriana');
 INSERT INTO nationality(id, description) VALUES (10,'Venezolana');
 INSERT INTO nationality(id, description) VALUES (11,'Mexicana');
 
+--Organization
+INSERT INTO organization (id, name, status, tax_id) VALUES(1,'Centro Universitario de Aviación','ACTIVE','30-12345678-2');
+
 --Category
 INSERT INTO category(id, description) VALUES (1,'Socio');
 INSERT INTO category(id, description) VALUES (2,'Vitalicio');
@@ -30,10 +33,10 @@ INSERT INTO pilot_profile (id, licence) VALUES(101, '28036873');
 INSERT INTO pilot_profile (id, licence) VALUES(102, '28036873');
 
 --Person
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (100, '1974-08-02', '2017-02-03', '24036873', 'DNI', 'SANTIAGO, Esteban', 'ACTIVE',NULL, NULL, 100, 100,1);
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (101, '1987-01-27', '2017-02-03', '32036874', 'DNI', 'SANTIAGO, Pablo', 'ACTIVE',NULL, NULL, 101, NULL,2);
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (102, '1974-08-02', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Guillermo', 'ACTIVE',NULL, NULL, 102, 101,1);
-INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (103, '1987-01-27', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Gustavo', 'ACTIVE',NULL, NULL, 103, 102,2);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, organization_id,status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (100, '1974-08-02', '2017-02-03', '24036873', 'DNI', 'SANTIAGO, Esteban', 1,'ACTIVE',NULL, NULL, 100, 100,1);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, organization_id,status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (101, '1987-01-27', '2017-02-03', '32036874', 'DNI', 'SANTIAGO, Pablo', 1,'ACTIVE',NULL, NULL, 101, NULL,2);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, organization_id,status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (102, '1974-08-02', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Guillermo', 1,'ACTIVE',NULL, NULL, 102, 101,1);
+INSERT INTO person (id, date_of_birth, date_of_creation, identity_card_number, identity_card_type, name, organization_id,status, customer_id, employee_id, member_id, pilot_id, nationality_id) VALUES (103, '1987-01-27', '2017-02-03', '28036873', 'DNI', 'SANTIAGO, Gustavo', 1, 'ACTIVE',NULL, NULL, 103, 102,2);
 
 --Users
 INSERT INTO users (id, name, password, profile, status) VALUES (100,'esantiago','passwd','USER','ACTIVE');
@@ -54,10 +57,10 @@ INSERT INTO payment_method(id, description) VALUES (5,'Tarjeta de Débito');
 --Payment Terms
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (1, 0,'Contado', 0,1);
 INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (2, 0,'Hasta 30 dias', 0,2);
-INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (3, 0.10,'1 Cuota', 0,4);
-INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (4, 0.10,'3 Cuotas', 0,4);
-INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0,'1 Cuota', 0,5);
-INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (6, 0.15,'Entre 31 y 60 dias', 0,2);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (3, 0.15,'Entre 31 y 60 dias', 0,2);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (4, 0.10,'1 Cuota', 0,4);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (5, 0.10,'3 Cuotas', 0,4);
+INSERT INTO  payment_term (id, charge, description, discount, payment_method_id) VALUES (6, 0,'1 Pago', 0,5);
 
 --Account
 INSERT INTO account (id,first_order_grouper, second_order_grouper, third_order_grouper, fourth_order_grouper,description) VALUES(100,1,0,0,0,'Activo');

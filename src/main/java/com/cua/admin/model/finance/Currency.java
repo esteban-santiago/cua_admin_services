@@ -10,10 +10,11 @@ import lombok.RequiredArgsConstructor;
 public enum Currency {
     
     ARS("Pesos Argentinos"),
-    USD("Dólares Estadounidenses"),
     BRL("Reales Brasileros"),
     CLP("Peso Chileno"),
-    EUR("Euro");
+    CUA("Peso CUA"),
+    EUR("Euro"),
+    USD("Dólares Estadounidenses");
 
     private final String description;
 

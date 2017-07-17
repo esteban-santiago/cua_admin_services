@@ -42,6 +42,10 @@ public class AccountingEntryItem implements Serializable {
     @JoinColumn(name = "account_id", nullable = false,foreignKey = @ForeignKey(name = "account_accounting_entry_item_id_fk"))
     private Account account;
 
+    @Override
+    public String toString() {
+        return this.itemType.getDescription();
+    }
 /*    
 Año fiscal
 Periodo Fiscal

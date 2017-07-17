@@ -1,5 +1,6 @@
 package com.cua.admin.model.core;
 
+import com.cua.admin.model.core.organization.Organization;
 import com.cua.admin.model.core.profiles.Member;
 import com.cua.admin.model.core.profiles.Pilot;
 import com.cua.admin.model.hr.profiles.Employee;
@@ -56,6 +57,10 @@ public class Person implements Serializable {
 
     private LocalDate dateOfBirth; //Fecha de nacimiento
     
+    @OneToOne
+    @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(name = "person_organization_id_fk"))
+    private Organization organization;
+
     @OneToOne
     @JoinColumn(name = "nationality_id", nullable = false, foreignKey = @ForeignKey(name = "person_nationality_id_fk"))
     private Nationality nationality;
