@@ -1,6 +1,5 @@
 package com.cua.admin.controllers.rest.operation.inventory;
 
-import com.cua.admin.model.operation.flight.Airfield;
 import com.cua.admin.model.operation.inventory.Product;
 import com.cua.admin.services.operation.inventory.ProductService;
 import java.util.List;
@@ -26,12 +25,18 @@ public class InventoryRestController {
         return new ResponseEntity<>(productService.get(id), HttpStatus.OK);
     }
     
-    /*
+    
     @RequestMapping(value = "/product/group/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public ResponseEntity<Product> getByGroup(@PathVariable("id") Integer id) {
+    public ResponseEntity<List<Product>> getByGroup(@PathVariable("id") Integer id) {
         return new ResponseEntity<>(productService.getByGroup(productService.getGroup(id)), HttpStatus.OK);
     }
+    
+    @RequestMapping(value = "/product/subgroup/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public ResponseEntity<List<Product>> getBySubGroup(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(productService.getBySubGroup(productService.getSubGroup(id)), HttpStatus.OK);
+    }
 
+    /*
     @RequestMapping(value = "/product/group/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Airfield>> get() {
         return new ResponseEntity<>(airfieldService.getAll(), HttpStatus.OK);

@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class FlightRecordToPayment extends SpringIntegrationTest {

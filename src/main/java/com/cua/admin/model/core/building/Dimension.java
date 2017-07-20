@@ -1,35 +1,29 @@
-package com.cua.admin.model.operation.inventory;
+package com.cua.admin.model.core.building;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-/**
- *
- * @author esteban_santiago
- */
 @Data
 @Entity
-@Table(name = "product_group")
+@Table(name = "dimension")
 @NoArgsConstructor
-public class ProductGroup implements Serializable {
+@RequiredArgsConstructor
+public class Dimension implements Serializable {
+
     @GenericGenerator(
             name = "SequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "product_group_id_seq"),
+                @Parameter(name = "sequence_name", value = "dimension_id_seq"),
                 @Parameter(name = "initial_value", value = "1"),
                 @Parameter(name = "increment_size", value = "1")
             }
@@ -37,12 +31,14 @@ public class ProductGroup implements Serializable {
     @GeneratedValue(generator = "SequenceGenerator")
     @Id
     private Integer id;
+
+    @NonNull
+    private String description;
     
-    private String description;    
-    
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)    
-    @JoinColumn(name = "group_id", nullable = false, foreignKey = @ForeignKey(name = "product_group_subgroup_id_fk"))
-    private Set<ProductSubGroup> subGroups;
+    @NonNull
+    private Integer sideOne;
+
+    @NonNull
+    private Integer sideTwo;
 
 }

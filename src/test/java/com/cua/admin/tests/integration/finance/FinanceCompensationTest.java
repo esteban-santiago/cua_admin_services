@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
 import com.cua.admin.model.finance.Currency;
 import com.cua.admin.model.finance.billing.Payment;
@@ -20,11 +19,8 @@ import com.cua.admin.services.finance.billing.PaymentMethodService;
 import com.cua.admin.tests.model.core.SpringIntegrationTest;
 import com.samskivert.mustache.Mustache.Compiler;
 import com.samskivert.mustache.Mustache.TemplateLoader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import org.hamcrest.Matchers;
-import static org.hamcrest.Matchers.is;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,7 +158,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         Map<Object, Object> context = new HashMap<>();
         context.put("compensatedDocumentId", friId_1);
         String json = mustacheCompiler
-                .compile(templateLoader.getTemplate("receipt_tc0"))
+                .compile(templateLoader.getTemplate("compensation/receipt_tc0"))
                 .execute(context);
 
         mockMvc.perform(
@@ -187,7 +183,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         Map<Object, Object> context = new HashMap<>();
         context.put("compensatedDocumentId", friId_1);
         String json = mustacheCompiler
-                .compile(templateLoader.getTemplate("receipt_tc0_1"))
+                .compile(templateLoader.getTemplate("compensation/receipt_tc0_1"))
                 .execute(context);
 
         mockMvc.perform(
@@ -213,7 +209,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         Map<Object, Object> context = new HashMap<>();
         context.put("compensatedDocumentId", friId_2);
         String json = mustacheCompiler
-                .compile(templateLoader.getTemplate("receipt_tc1"))
+                .compile(templateLoader.getTemplate("compensation/receipt_tc1"))
                 .execute(context);
 
         MvcResult resultPost = mockMvc.perform(
@@ -240,7 +236,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         Map<Object, Object> context = new HashMap<>();
         context.put("compensatedDocumentId", friId_3);
         String json = mustacheCompiler
-                .compile(templateLoader.getTemplate("receipt_tc1_1"))
+                .compile(templateLoader.getTemplate("compensation/receipt_tc1_1"))
                 .execute(context);
 
         MvcResult resultPost = mockMvc.perform(
@@ -267,7 +263,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         context.put("compensatedDocumentId_1", friId_1);
         context.put("compensatedDocumentId_2", friId_2);
         String json = mustacheCompiler
-                .compile(templateLoader.getTemplate("receipt_tc2"))
+                .compile(templateLoader.getTemplate("compensation/receipt_tc2"))
                 .execute(context);
 
         MvcResult resultPost = mockMvc.perform(
@@ -313,7 +309,7 @@ public class FinanceCompensationTest extends SpringIntegrationTest {
         context.put("compensatedDocumentId_1", rciId_2);
         context.put("compensatedDocumentId_2", friId_2);
         String json = mustacheCompiler
-                .compile(templateLoader.getTemplate("receipt_tc3"))
+                .compile(templateLoader.getTemplate("compensation/receipt_tc3"))
                 .execute(context);
 
         MvcResult resultPost = mockMvc.perform(

@@ -2,9 +2,7 @@ package com.cua.admin.services.accounting;
 
 import com.cua.admin.model.accounting.entries.AccountingEntry;
 import com.cua.admin.model.accounting.entries.TemplateEntry;
-import com.cua.admin.model.accounting.entries.exceptions.TemplateEntryNotFoundException;
 import com.cua.admin.model.finance.documents.Document;
-import com.cua.admin.repositories.accounting.AccountRepository;
 import com.cua.admin.repositories.accounting.entry.AccountingEntryRepository;
 import com.cua.admin.repositories.accounting.entry.TemplateEntryRepository;
 import java.util.List;

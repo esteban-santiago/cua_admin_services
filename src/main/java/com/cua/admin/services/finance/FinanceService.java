@@ -4,14 +4,12 @@ import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.FlightRecordIssued;
-import com.cua.admin.model.operation.flight.Aircraft;
 import com.cua.admin.model.operation.flight.CrewMemberRole;
 import com.cua.admin.model.operation.flight.FlightRecord;
 import com.cua.admin.repositories.operation.flight.AircraftRepository;
 import com.cua.admin.services.accounting.AccountingEntryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

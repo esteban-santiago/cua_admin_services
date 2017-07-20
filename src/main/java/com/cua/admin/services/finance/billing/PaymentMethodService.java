@@ -1,10 +1,7 @@
 package com.cua.admin.services.finance.billing;
 
 import com.cua.admin.model.finance.billing.exceptions.PaymentMethodNotFoundException;
-import com.cua.admin.model.core.Person;
 import com.cua.admin.model.finance.billing.PaymentMethod;
-import com.cua.admin.model.hr.exceptions.EmployeeNotFoundException;
-import com.cua.admin.repositories.core.PersonRepository;
 import com.cua.admin.repositories.finance.billing.PaymentMethodRepository;
 import java.util.List;
 import javax.transaction.Transactional;

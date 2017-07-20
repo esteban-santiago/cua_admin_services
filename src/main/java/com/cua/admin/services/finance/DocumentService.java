@@ -5,18 +5,12 @@ import com.cua.admin.model.finance.documents.DocumentStatus;
 import com.cua.admin.model.finance.documents.DocumentType;
 import com.cua.admin.model.finance.documents.exceptions.DocumentNotFoundException;
 import com.cua.admin.repositories.finance.documents.DocumentRepository;
-import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import static java.util.stream.Collectors.toList;
-import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 @Transactional

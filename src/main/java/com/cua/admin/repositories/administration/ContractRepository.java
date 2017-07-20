@@ -1,6 +1,6 @@
 package com.cua.admin.repositories.administration;
 
-import com.cua.admin.model.administration.Contract;
+import com.cua.admin.model.administration.contract.Contract;
 import com.cua.admin.model.core.Person;
 import java.time.LocalDate;
 import java.util.List;

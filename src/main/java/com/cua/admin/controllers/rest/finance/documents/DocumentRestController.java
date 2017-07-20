@@ -2,7 +2,6 @@ package com.cua.admin.controllers.rest.finance.documents;
 
 import com.cua.admin.model.finance.documents.Document;
 import com.cua.admin.model.finance.documents.DocumentType;
-import com.cua.admin.model.finance.documents.ReceiptIssued;
 import com.cua.admin.model.finance.documents.exceptions.DocumentNotFoundException;
 import com.cua.admin.services.finance.DocumentService;
 import com.cua.admin.services.finance.FinanceService;

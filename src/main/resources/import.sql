@@ -204,3 +204,29 @@ INSERT INTO airfield (id, iata_code, name) VALUES(18,'AME','Ameghino Sigfrido Ro
 INSERT INTO airfield (id, iata_code, name) VALUES(19,'AMG','Ameghino');
 INSERT INTO airfield (id, iata_code, name) VALUES(20,'ANA','Parana Aeroclub');
 INSERT INTO airfield (id, iata_code, name) VALUES(21,'MAT','Matanza');
+
+--Contracts
+
+--Hangars
+INSERT INTO hangar(id, description) VALUES(1,'Hangar A');
+INSERT INTO hangar(id, description) VALUES(2,'Hangar B');
+
+--Dimensions
+INSERT INTO dimension(id, description, side_one, side_two) VALUES(1, 'Avión ala baja', 4,4);
+INSERT INTO dimension(id, description, side_one, side_two) VALUES(2, 'Avión ala alta', 4,4);
+INSERT INTO dimension(id, description, side_one, side_two) VALUES(3, 'Helicóptero', 2,4);
+INSERT INTO dimension(id, description, side_one, side_two) VALUES(4, 'Avión ala baja', 4,4);
+
+--Positions
+--(id, dimension_id, hangar_id , position_id
+INSERT INTO position (id, dimension_id, hangar_id) VALUES(3,1,1);
+INSERT INTO position (id, dimension_id, hangar_id) VALUES(4,1,1);
+--INSERT INTO position (id, dimension_id, hangar_id) VALUES(5,1,1);
+--INSERT INTO position (id, dimension_id, hangar_id, position_id) VALUES(3,1,1,3); 
+
+
+--Hangar Positions
+INSERT INTO hangar_positions (hangar_id, positions_id) VALUES(1,3);
+INSERT INTO hangar_positions (hangar_id, positions_id) VALUES(1,4);
+--INSERT INTO hangar_positions (hangar_id, positions_id) VALUES(1,4);
+--INSERT INTO hangar_positions (hangar_id, positions_id) VALUES(1,5);

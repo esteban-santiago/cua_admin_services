@@ -1,7 +1,6 @@
 package com.cua.admin.repositories.operation.flight;
 
 import com.cua.admin.model.operation.flight.Airfield;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AirfieldRepository extends JpaRepository<Airfield, Integer> {

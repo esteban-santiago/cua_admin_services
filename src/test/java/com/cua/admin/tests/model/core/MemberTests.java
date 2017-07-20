@@ -11,7 +11,6 @@ import com.cua.admin.model.core.profiles.Pilot;
 import com.cua.admin.model.core.profiles.PilotRating;
 import com.cua.admin.repositories.core.CategoryRepository;
 import com.cua.admin.repositories.core.NationalityRepository;
-import com.cua.admin.repositories.core.PersonRepository;
 import com.cua.admin.repositories.core.organization.OrganizationRepository;
 import com.cua.admin.repositories.operation.flight.FlightRecordRepository;
 import com.cua.admin.services.core.PersonService;

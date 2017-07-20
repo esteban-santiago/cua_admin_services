@@ -1,6 +1,6 @@
 package com.cua.admin.services.administration;
 
-import com.cua.admin.model.administration.Contract;
+import com.cua.admin.model.administration.contract.Contract;
 import com.cua.admin.model.core.Person;
 import com.cua.admin.repositories.administration.ContractRepository;
 import java.time.LocalDate;
@@ -28,8 +28,8 @@ public class ContractService {
         return this.contractRepository.findById(id).get();
     }
     
-    public void save(Contract contract) {
-        this.contractRepository.save(contract);
+    public Contract save(Contract contract) {
+        return this.contractRepository.save(contract);
     }
     
     public List<Contract> getAll() {

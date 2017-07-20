@@ -5,7 +5,6 @@ import com.cua.admin.model.finance.billing.Payment;
 import com.cua.admin.model.finance.billing.Promotion;
 import com.cua.admin.model.it.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
