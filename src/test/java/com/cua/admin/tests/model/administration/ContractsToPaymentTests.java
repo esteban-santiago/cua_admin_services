@@ -1,4 +1,4 @@
-package com.cua.admin.tests.model.core.administration;
+package com.cua.admin.tests.model.administration;
 
 import com.cua.admin.services.administration.ContractService;
 import com.cua.admin.services.administration.building.LocationService;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class ContractsToPayment extends SpringIntegrationTest {
+public class ContractsToPaymentTests extends SpringIntegrationTest {
     @Autowired
     private ContractService contractService;
 
@@ -41,20 +41,16 @@ public class ContractsToPayment extends SpringIntegrationTest {
 
     @Autowired
     private TemplateLoader templateLoader;
-    
-    @Before
-    public void createContracts() {
 
-    }
     
     
     @Test
-    public void paidWithCash() throws Throwable {
+    public void shortTermContract() throws Throwable {
         Map<Object, Object> context = new HashMap<>();
-        //context.put("compensatedDocumentId_1", friId_1);
-        //context.put("compensatedDocumentId_2", friId_2);
+        context.put("contractType", "STC");
+        context.put("validTo", "2017-12-31");
         String json = mustacheCompiler
-                .compile(templateLoader.getTemplate("contracts/contractSTC"))
+                .compile(templateLoader.getTemplate("contracts/basicContract"))
                 .execute(context);
 
         MvcResult resultPost = mockMvc.perform(
@@ -70,12 +66,27 @@ public class ContractsToPayment extends SpringIntegrationTest {
                 .andReturn();
     }
     
-    //@Test
-    public void paidWithCreditCard() {
+    @Test
+    public void longTermContract() throws Throwable {
+        Map<Object, Object> context = new HashMap<>();
+        context.put("contractType", "LTC");
+        context.put("validTo", "2040-12-31");
+        String json = mustacheCompiler
+                .compile(templateLoader.getTemplate("contracts/basicContract"))
+                .execute(context);
+
+        MvcResult resultPost = mockMvc.perform(
+                post("/sapi/administration/contract")
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                //.andExpect(jsonPath("documentType").value("RCI"))
+                //.andExpect(jsonPath("compensatedDocuments", hasSize(2)))
+                //.andExpect(jsonPath("status").value("COMPENSATED"))
+                .andReturn();
         
     }
     
-    @After
-    public void list() {
-    }
 }

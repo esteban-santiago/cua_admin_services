@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/sapi/core/administration/building")
+@RequestMapping("/sapi/administration/building")
 @RequiredArgsConstructor
 public class LocationRestController {
 

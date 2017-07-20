@@ -35,7 +35,7 @@ public class DocumentRestController {
         return ResponseEntity.ok(documentService.get(id));
     }
 
-    @RequestMapping(value = "/", params = {"person_id"}, method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(params = {"person_id"}, method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<? extends Document>> getByPerson(@RequestParam(value = "person_id") Integer id) {
         return ResponseEntity.ok(documentService.getAllByPerson(id));
     }
@@ -45,7 +45,7 @@ public class DocumentRestController {
         return ResponseEntity.ok(documentService.getAll());
     }
 
-    @RequestMapping(value = "/", params = {"referenced_document_id"}, method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(params = {"referenced_document_id"}, method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<? extends Document> getByReferencedDocument(@RequestParam(value = "referenced_document_id") Integer id) {
         try {
             return ResponseEntity.ok(documentService.getByReferencedDocumentId(id));
