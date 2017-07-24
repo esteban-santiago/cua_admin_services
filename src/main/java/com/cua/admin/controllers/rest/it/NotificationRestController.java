@@ -17,12 +17,15 @@ import reactor.util.function.Tuple2;
  */
 @RestController
 public class NotificationRestController {
-    @GetMapping("/sapi/it/notification/{id}")
+    
+    private final String baseUrl = "/sapi/it";
+    
+    @GetMapping(baseUrl + "/notification/{id}")
     Mono<Notification> notificationById(@PathVariable Long id) {
         return Mono.just(new Notification(id, 1, "Contenido"));
     }
     
-    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE,value = "/sap/it/notification")
+    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE,value = baseUrl + "/notification")
     Flux<Notification> notifications() {
         Flux<Notification> notificationFlux = 
                 Flux.fromStream(Stream.generate(() -> new Notification(System.currentTimeMillis(), 1, "Evento generado")));
