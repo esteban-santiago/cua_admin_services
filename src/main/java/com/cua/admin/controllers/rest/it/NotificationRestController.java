@@ -29,7 +29,7 @@ public class NotificationRestController {
     Flux<Notification> notifications() {
         Flux<Notification> notificationFlux = 
                 Flux.fromStream(Stream.generate(() -> new Notification(System.currentTimeMillis(), 1, "Evento generado")));
-        Flux<Long> durationFlux = Flux.interval(Duration.ofSeconds(1));
+        Flux<Long> durationFlux = Flux.interval(Duration.ofDays(1));
         return Flux.zip(notificationFlux, durationFlux)
                 .map(Tuple2::getT1);
     }
