@@ -1,6 +1,6 @@
 package com.cua.admin.repositories.administration;
 
-import com.cua.admin.model.administration.MembershipFee;
+import com.cua.admin.model.administration.membership.MembershipFee;
 import com.cua.admin.model.core.Person;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

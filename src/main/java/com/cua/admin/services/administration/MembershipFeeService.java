@@ -1,6 +1,6 @@
 package com.cua.admin.services.administration;
 
-import com.cua.admin.model.administration.MembershipFee;
+import com.cua.admin.model.administration.membership.MembershipFee;
 import com.cua.admin.model.core.Person;
 import com.cua.admin.repositories.administration.MembershipFeeRepository;
 import java.util.List;

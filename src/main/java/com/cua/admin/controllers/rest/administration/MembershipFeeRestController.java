@@ -1,6 +1,6 @@
 package com.cua.admin.controllers.rest.administration;
 
-import com.cua.admin.model.administration.MembershipFee;
+import com.cua.admin.model.administration.membership.MembershipFee;
 import com.cua.admin.model.core.Person;
 import com.cua.admin.services.administration.MembershipFeeService;
 import com.cua.admin.services.core.PersonService;

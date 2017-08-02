@@ -1,4 +1,4 @@
-package com.cua.admin.model.administration;
+package com.cua.admin.model.administration.membership;
 
 import com.cua.admin.model.core.Person;
 import com.cua.admin.model.operation.inventory.ProductProfile;
